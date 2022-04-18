@@ -4,7 +4,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
-
+@layer base{
+  h1{
+    @apply text-4xl font-semibold;
+  }
+  h2{
+    @apply font-semibold text-2xl my-6;
+  }
+}
+@layer components {
+  .input-form{
+    @apply w-full h-[35px] rounded-md bg-soft-gray p-5;
+  }
+  .primary-btn{
+    @apply text-white bg-orange rounded-md w-full h-[47px];
+  }
+  .secondary-btn{
+    @apply text-orange border-2 border-orange w-full rounded-md  h-[47px];
+  }
+  .label{
+    @apply text-left text-sm font-semibold block mb-2 text-black;
+  }
+  .center{
+    @apply flex justify-center items-center;
+  }
+}
 body{
   font-family: 'Poppins', sans-serif
 }
