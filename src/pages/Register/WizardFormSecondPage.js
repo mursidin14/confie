@@ -32,10 +32,9 @@ export default function WizardFormSecondPage(props) {
       label: "Password",
       type: "password",
       name: "password",
-      errorMessage:
-        "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
       pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
+      optional :  "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
     },
     {
       name: "confirm_password",
@@ -64,13 +63,13 @@ export default function WizardFormSecondPage(props) {
               />
             ))}
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
-              <button onClick={props.previousPage} className="secondary-btn ">
+              <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 w-full">
                 PREVIOUS
               </button>
               <button
                 type="submit"
                 onClick={props.onSubmit}
-                className="primary-btn"
+                className="primary-btn lg:w-[150px] px-6 w-full"
               >
                 CONTINUE
               </button>

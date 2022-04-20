@@ -12,7 +12,8 @@ export default function Register() {
   function nextPage() {
     setPage(page + 1)
   }
-  function previousPage() {
+  function previousPage(e) {
+    console.log(e)
     setPage(page - 1)
     
   }

@@ -21,10 +21,10 @@ export default function WizardFormFirstPage(props) {
           <h2>Choose Account Type</h2>
           <form action="">
             <div className="flex flex-col lg:flex-row gap-5">
-              <div className="flex">
+              <div className="flex ">
                 <input
                   checked='checked'
-                  className="invisible peer"
+                  className="hidden peer"
                   type="radio"
                   name="type_account"
                   id="personal"
@@ -61,7 +61,7 @@ export default function WizardFormFirstPage(props) {
               </div>
               <div className="flex">
                 <input
-                  className="invisible"
+                  className="hidden"
                   type="radio"
                   name="type_account"
                   id="business"
@@ -100,7 +100,7 @@ export default function WizardFormFirstPage(props) {
             </div>
 
             <div className="flex justify-end">
-              <button onClick={props.onSubmit} type="submit" className="primary-btn my-10 lg:w-fit px-6 w-full">
+              <button onClick={props.onSubmit} type="submit" className="primary-btn my-10 lg:w-[150px] px-6 w-full">
                 CONTINUE
               </button>
             </div>

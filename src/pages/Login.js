@@ -1,12 +1,13 @@
 import React from 'react';
+import InputField from 'components/InputField';
 export default function Login() {
   return (
     <main className="min-h-screen lg:flex">
       <section className="bg-pale-orange px-10 py-10 sm:px-14 sm:py-10 lg:w-7/12">
-        <img src="/logo.png" alt="" />
+        <img className='m-auto lg:m-0' src="/logo.png" alt="" />
         <div className="mt-10 text-left sm:mt-28 sm:ml-9">
-          <h1 >Confie.id</h1>
-          <p className="mt-3 lg:w-9/12">
+          <h1 className='hidden lg:block'>Confie.id</h1>
+          <p className="mt-3 lg:w-9/12 hidden lg:block">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -17,16 +18,11 @@ export default function Login() {
           </p>
         </div>
       </section>
-      <section className="items-center justify-center lg:p-10 px-10 py-5 sm:flex lg:w-5/12">
-        <div className="w-full px-4">
-          <h2>Login to your Account</h2>
+      <section className="relative items-center justify-center p-5 sm:flex lg:w-5/12 bg-pale-orange lg:bg-white lg:pb-5 pb-32">
+        <div className="lg:static relative bottom-10 z-10 w-full px-4 bg-white py-8 rounded-md">
+          <h3 className='lg:text-2xl text-lg font-semibold mb-4'>Login to your Account</h3>
           <form className="" action="">
-          <label
-                className="text-left mb-2 block text-sm font-semibold text-dark-blue"
-                for=""
-              >Email</label>
-            <input required className="input-form " type="email" />
-
+            <InputField label={'Email'} type={'email'} />
             <div className="mt-5 flex justify-between">
               <label
                 className="mb-2 block text-sm font-semibold text-dark-blue"
@@ -55,6 +51,7 @@ export default function Login() {
             REGISTER
           </a>
         </div>
+        <img className='lg:hidden block absolute bottom-0 sm:w-[400px] w-[300px] right-0' src="/blob.png" alt=""/>
       </section>
     </main>
   );

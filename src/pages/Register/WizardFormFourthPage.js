@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import LayoutRegister from './LayoutRegister';
+import InputTag from 'components/InputTag';
 
 export default function WizardFormFourthPage(props) {
   const [skills, setSkills] = useState(['C++', 'Java', 'Python']);
   return (
     <LayoutRegister pageNumber={4}>
       <div className="mt-10 flex px-7 ">
-        <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
+        <div className="sm:m-auto mb-5 lg:mb-0 lg:w-8/12 w-full">
           <h2 className="my-6 text-2xl font-semibold">
             Add Your Skill And Passion
           </h2>
-          <form action="">
             <label for="" className="label">
               About Me:
             </label>
             <textarea
-              className="h-[150px] w-full bg-[#F5F8FA] p-5 lg:h-[200px]"
+              className="h-[150px] w-full bg-[#F5F8FA] sm:p-5 p-4 lg:h-[200px]"
               type="text"
               name="about_me"
             />
@@ -23,35 +23,20 @@ export default function WizardFormFourthPage(props) {
               My Skills:
             </label>
             
-            <input
-              onKeyDown={(e) => {
-                if (e.code === 'Space') {
-                  setSkills([...skills, e.target.value]);
-                  e.target.value = '';
-                }
-              }}
-              className="w-full bg-[#F5F8FA] px-5  py-3 "
-              type="text"
-              name="skill"
-            />
-            <div className='mt-2 flex gap-2 flex-wrap'>
-              {skills.map((skill) => (
-               <span className='bg-[#A1A5B7] text-white px-2 py-1 rounded-lg'>{skill}</span> 
-              ))}
-            </div>
-            <div className="mt-5 flex flex-col justify-between gap-3 lg:flex-row">
-              <button onClick={props.previousPage} className="secondary-btn">
+            <InputTag></InputTag>
+            
+            <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
+            <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 w-full">
                 PREVIOUS
               </button>
               <button
-                type="submit"
+                type='button'
                 onClick={props.onSubmit}
-                className="primary-btn"
+                className="primary-btn lg:w-[150px] px-6 w-full"
               >
                 CONTINUE
               </button>
             </div>
-          </form>
         </div>
       </div>
     </LayoutRegister>

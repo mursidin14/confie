@@ -24,7 +24,7 @@ export default function WizardFormThirdPage(props) {
   return (
     <LayoutRegister pageNumber={3}>
       <div className="mt-10 flex px-7 ">
-        <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
+        <div className="m-auto mb-5 lg:mb-0 lg:w-8/12 w-full">
           <h2>
             Set Up Your Account Setting
           </h2>
@@ -65,14 +65,14 @@ export default function WizardFormThirdPage(props) {
                 type={input.type}
               />
             ))}
-            <div className="flex flex-col justify-between gap-3 lg:flex-row">
-              <button onClick={props.previousPage} className="secondary-btn ">
+            <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
+            <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 w-full">
                 PREVIOUS
               </button>
               <button
-                type="submit"
+                type='button'
                 onClick={props.onSubmit}
-                className="primary-btn"
+                className="primary-btn lg:w-[150px] px-6 w-full"
               >
                 CONTINUE
               </button>
