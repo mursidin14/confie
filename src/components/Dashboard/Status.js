@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from 'components/ProgressBar';
+import ProgressBar from 'components/Widgets/ProgressBar';
 
 export default function Status(params) {
   let status = [

@@ -1,8 +1,8 @@
 import React from 'react';
 import LayoutRegister from './LayoutRegister';
-export default function WizardComplete() {
+export default function WizardComplete({data}) {
   return (
-    <LayoutRegister pageNumber={5}>
+    <LayoutRegister data={data} pageNumber={5}>
       <div className="mt-10 px-7">
         <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
           <div className='lg:text-left text-center'>

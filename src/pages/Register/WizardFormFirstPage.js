@@ -15,7 +15,7 @@ export default function WizardFormFirstPage(props) {
     }
     
   return (
-    <LayoutRegister pageNumber={1}>
+    <LayoutRegister data={data} pageNumber={1}>
       <div className="flex justify-center lg:items-center lg:min-h-screen lg:w-[700px] m-auto px-7 lg:mt-0 mt-4">
         <div>
           <h2>Choose Account Type</h2>

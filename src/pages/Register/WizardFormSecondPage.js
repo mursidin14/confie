@@ -5,12 +5,15 @@ export default function WizardFormSecondPage(props) {
   let { data, onChange } = props;
   let inputs = [
     {
-      label: 'Full Name',
+      label:  `${
+        data.type_account === 'personal' ? 'Full Name' : 'Company Name'
+      }`,
       type: 'text',
-      name: 'full_name',
+      name: `${
+        data.type_account === 'personal' ? 'full_name' : 'company_name'
+      }`,
       errorMessage:
         "Name should be 3-16 characters and shouldn't include any special character!",
-      pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
@@ -47,7 +50,7 @@ export default function WizardFormSecondPage(props) {
   ];
 
   return (
-    <LayoutRegister pageNumber={2}>
+    <LayoutRegister data={data} pageNumber={2}>
       <div className="mt-10 flex px-7 ">
         <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
           <h2 className="my-6 text-2xl font-semibold">

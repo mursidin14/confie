@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-import "./InputFields.css";
 
 export default function InputField(props) {
   const { label,data, onChange, errorMessage, ...inputProps } = props;
@@ -20,14 +19,11 @@ export default function InputField(props) {
         {label}
       </label>
       <input
-        onBlur={handleFocus}
         onChange={handleChange}
         className="input-form peer mb-3"
         {...inputProps}
-        focused={focused.toString()}
       />
-      <span className='error'>{errorMessage}</span>
-      <p className='text-left text-gray-400 text-xs'>{props?.optional}</p>
+      <p className={`text-left text-gray-400 text-xs ${props?.optional ? "mb-3" : "mb-0"}`}>{props?.optional}</p>
     </>
   );
 }

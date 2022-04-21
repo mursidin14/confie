@@ -7,7 +7,7 @@ import WizardComplete from './WizardComplete'
 export default function Register() {
   const [page, setPage] = useState(1)
   const [dataAccount, setDataAccount] = useState({
-    type_account: '',
+    type_account: 'personal',
   })
   function nextPage() {
     setPage(page + 1)
@@ -17,14 +17,15 @@ export default function Register() {
     setPage(page - 1)
     
   }
+  console.log(dataAccount)
   return (
     
     <>
       {page === 1 && <WizardFormFirstPage onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
       {page === 2 && <WizardFormSecondPage previousPage={previousPage} onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
-      {page === 3 && <WizardFormThirdPage previousPage={previousPage} onSubmit={nextPage}/>}
-      {page === 4 && <WizardFormFourthPage previousPage={previousPage} onSubmit={nextPage}/>}
-      {page === 5 && <WizardComplete previousPage={previousPage} onSubmit={nextPage}/>}
+      {page === 3 && <WizardFormThirdPage previousPage={previousPage} onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
+      {page === 4 && <WizardFormFourthPage previousPage={previousPage} onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
+      {page === 5 && <WizardComplete previousPage={previousPage} onSubmit={nextPage} data={dataAccount}/>}
     </>
   )
 }
