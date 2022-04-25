@@ -1,31 +1,85 @@
-import React, {useState} from 'react'
-import WizardFormFirstPage from './WizardFormFirstPage'
-import WizardFormSecondPage from './WizardFormSecondPage'
-import WizardFormThirdPage from './WizardFormThirdPage'
-import WizardFormFourthPage from './WizardFormFourthPage'
-import WizardComplete from './WizardComplete'
+import React, { useState } from 'react';
+import WizardFormFirstPage from './WizardFormFirstPage';
+import WizardFormSecondPage from './WizardFormSecondPage';
+import WizardFormThirdPage from './WizardFormThirdPage';
+import WizardFormFourthPage from './WizardFormFourthPage';
+import WizardComplete from './WizardComplete';
 export default function Register() {
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
   const [dataAccount, setDataAccount] = useState({
-    type_account: 'personal',
-  })
+    role: 'personal',
+    gender: 'L',
+  });
+  async function sendRegistration(){
+      let transform_date = dataAccount['date_of_birth'].split('-');
+      let new_date = '';
+      for (var i = 2; i >= 0; i--) {
+        new_date += transform_date[i];
+      }
+      dataAccount['date_of_birth'] = parseInt(new_date);
+      const res = await fetch(
+        'https://confie.upanastudio.com/backend/api/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataAccount),
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+  }
   function nextPage() {
-    setPage(page + 1)
+    if (page === 4){
+      sendRegistration();
+    }
+    setPage(page + 1);
   }
   function previousPage(e) {
-    console.log(e)
-    setPage(page - 1)
-    
+    console.log(e);
+    setPage(page - 1);
   }
-  console.log(dataAccount)
   return (
-    
     <>
-      {page === 1 && <WizardFormFirstPage onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
-      {page === 2 && <WizardFormSecondPage previousPage={previousPage} onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
-      {page === 3 && <WizardFormThirdPage previousPage={previousPage} onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
-      {page === 4 && <WizardFormFourthPage previousPage={previousPage} onSubmit={nextPage} onChange={setDataAccount} data={dataAccount}/>}
-      {page === 5 && <WizardComplete previousPage={previousPage} onSubmit={nextPage} data={dataAccount}/>}
+      {page === 1 && (
+        <WizardFormFirstPage
+          onSubmit={nextPage}
+          onChange={setDataAccount}
+          data={dataAccount}
+        />
+      )}
+      {page === 2 && (
+        <WizardFormSecondPage
+          previousPage={previousPage}
+          onSubmit={nextPage}
+          onChange={setDataAccount}
+          data={dataAccount}
+        />
+      )}
+      {page === 3 && (
+        <WizardFormThirdPage
+          previousPage={previousPage}
+          onSubmit={nextPage}
+          onChange={setDataAccount}
+          data={dataAccount}
+        />
+      )}
+      {page === 4 && (
+        <WizardFormFourthPage
+          previousPage={previousPage}
+          onSubmit={nextPage}
+          onChange={setDataAccount}
+          data={dataAccount}
+        />
+      )}
+      {page === 5 && (
+        <WizardComplete
+          previousPage={previousPage}
+          onSubmit={nextPage}
+          data={dataAccount}
+        />
+      )}
     </>
-  )
+  );
 }

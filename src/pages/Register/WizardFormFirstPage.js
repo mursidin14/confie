@@ -11,7 +11,6 @@ export default function WizardFormFirstPage(props) {
             [e.target.name]: e.target.value
         })
         setTypeAccount(e.target.value)
-        console.log(data)
     }
     
   return (
@@ -26,7 +25,7 @@ export default function WizardFormFirstPage(props) {
                   checked='checked'
                   className="hidden peer"
                   type="radio"
-                  name="type_account"
+                  name="role"
                   id="personal"
                   value="personal"
                   onChange={handleChange}
@@ -63,7 +62,7 @@ export default function WizardFormFirstPage(props) {
                 <input
                   className="hidden"
                   type="radio"
-                  name="type_account"
+                  name="role"
                   id="business"
                   value="business"
                   onChange={handleChange}

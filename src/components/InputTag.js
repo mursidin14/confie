@@ -29,8 +29,8 @@ export default function InputTag({data, onChange}) {
             ))}
         </ul>
         <input 
-        name={data.type_account === 'personal' ? 'skill' : 'field'}
-        placeholder={data.type_account === 'personal' ? 'Add your skill' : 'Add field'}
+        name={data.role === 'personal' ? 'skill' : 'field'}
+        placeholder={data.role === 'personal' ? 'Add your skill' : 'Add field'}
         onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
         className='bg-soft-gray focus:border-0 focus:outline-none px-3' type="text"/>
     </div>    

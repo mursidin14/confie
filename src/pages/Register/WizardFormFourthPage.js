@@ -14,19 +14,19 @@ export default function WizardFormFourthPage(props) {
       <div className="mt-10 flex px-7 ">
         <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
           <h2 className="my-6 text-2xl font-semibold">
-            Add Your {data.type_account === 'personal' ? 'Skill And Passion' : 'Business Detail'}
+            Add Your {data.role === 'personal' ? 'Skill And Passion' : 'Business Detail'}
           </h2>
             <label for="" className="label">
-            {data.type_account === 'personal' ? 'About Me:' : 'About the Company:'}
+            {data.role === 'personal' ? 'About Me:' : 'About the Company:'}
             </label>
             <textarea
               className="h-[150px] w-full bg-[#F5F8FA] p-5 lg:h-[200px]"
               type="text"
-              name="about_me"
+              name="about"
               onChange={handleChange}
             />
             <label for="" className="label">
-            {data.type_account === 'personal' ? 'My Skill:' : 'Business Field:'}
+            {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
 
             </label>
             

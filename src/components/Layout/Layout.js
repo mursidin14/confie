@@ -9,7 +9,7 @@ export default function Layout({PageName, children}) {
     setOffCanvas(!offCanvas);
   }
   return (
-    <main className="flex ">
+    <main className="flex">
       <ASideBar
         offCanvas={offCanvas}
         handleNav={handleNav}
@@ -26,7 +26,7 @@ export default function Layout({PageName, children}) {
         } min-h-full bg-[#E5E5E5]`}
       >
         <Header handleNav={handleNav} PageName={PageName} />
-        <div className="my-4 lg:mx-10 mx-3 main-layout">{children}</div>
+        <div className="my-4 lg:mx-7 mx-3 main-layout">{children}</div>
       </section>
     </main>
   );

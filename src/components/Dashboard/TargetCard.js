@@ -1,30 +1,31 @@
 import React from 'react';
 
 export default function TargetCard() {
-  
-    function getQuarter() {
-      let today = new Date();
-      let month = today.getMonth();
-      let quarter;
-      if (month < 3) {
-        quarter = 1;
-      } else if (month < 6) {
-        quarter = 2;
-      } else if (month < 9) {
-        quarter = 3;
-      } else {
-        quarter = 4;
-      }
-      return quarter;
+  function getQuarter() {
+    let today = new Date();
+    let month = today.getMonth();
+    let quarter;
+    if (month < 3) {
+      quarter = 1;
+    } else if (month < 6) {
+      quarter = 2;
+    } else if (month < 9) {
+      quarter = 3;
+    } else {
+      quarter = 4;
     }
+    return quarter;
+  }
   let quarter = getQuarter();
 
   return (
-    <div className="mt-4 lg:w-6/12 rounded-md bg-white py-7 px-8 text-left shadow-md ">
-      <div className="flex justify-between">
-        <div className='flex gap-4 items-center'>
+    <div className="mt-4 rounded-md bg-white py-7  text-left shadow-md lg:w-6/12 ">
+      <div className="flex justify-between px-8 pb-2">
+        <div className="flex items-center gap-4 ">
           <h3 className="py- text-base">Target Tahunan</h3>
-          <p className='bg-[#FFF8DD] px-4 py-1 rounded-md text-[#FFC700] text-xs'>Quarter {quarter}</p>
+          <p className="rounded-md bg-[#FFF8DD] px-4 py-1 text-xs text-[#FFC700]">
+            Quarter {quarter}
+          </p>
         </div>
         <svg
           width="20"
@@ -44,11 +45,17 @@ export default function TargetCard() {
           />
         </svg>
       </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-3">
+      <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
+      <div className='bg-[#F5F8FA] py-5 px-8'>
+        <p className=''>Membaca 50 Buku</p>
+      </div>
+      <div className="my-3 px-8">
         <div className="flex items-center gap-3">
-          <div className="rounded bg-[#3F4254]/20 p-3"></div>
-          <p className="text-sm">Baca Buku</p>
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
+            />
+          <p className="text-sm">Baca 15 Buku</p>
         </div>
       </div>
     </div>

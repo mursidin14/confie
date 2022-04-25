@@ -5,7 +5,7 @@ return (
     <main className="min-h-screen lg:flex">
       <AsideRegister
         numberPage={pageNumber}
-        type_account={data.type_account}
+        type_account={data.role}
       />
       <section className="lg:w-7/12">{children}</section>
     </main>

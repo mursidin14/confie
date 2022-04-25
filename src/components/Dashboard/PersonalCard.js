@@ -2,10 +2,10 @@ import React from 'react';
 import Status from './Status';
 export default function PersonalCard({}) {
   return (
-    <div className="rounded-md bg-white py-7 px-3 shadow-md sm:px-5 ">
-      <div className="flex items-start gap-3 lg:items-center">
+    <div className="rounded-md bg-white py-7 px-3 shadow-md sm:px-8 ">
+      <div className="flex items-start gap-3 lg:items-stretch">
         <img
-          className="w-28  rounded-md object-cover md:w-fit"
+          className="w-28 rounded-md object-cover md:w-48"
           src="/person.png"
           alt=""
         />
@@ -85,7 +85,7 @@ function EmploymentStatus({}) {
 function JobStatus({}) {
   return (
     <div className="">
-      <div className="mb-2 flex items-center gap-3">
+      <div className="mb-3 flex items-center gap-3">
         <svg
           width="18"
           height="18"

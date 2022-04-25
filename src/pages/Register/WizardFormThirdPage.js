@@ -13,12 +13,12 @@ export default function WizardFormThirdPage(props) {
   let inputs = [
     {
       label: `${
-        data.type_account === 'personal'
+        data.role === 'personal'
           ? 'Date of Birth'
           : 'Company Founding Date'
       }`,
       type: 'date',
-      name: 'date',
+      name: 'date_of_birth',
     },
     {
       label: 'Country',
@@ -42,7 +42,7 @@ export default function WizardFormThirdPage(props) {
         <div className="m-auto mb-5 w-full lg:mb-0 lg:w-8/12">
           <h2>Set Up Your Account Setting</h2>
           <form action="">
-            {data.type_account === 'personal' && (
+            {data.role === 'personal' && (
               <div>
                 <p className="label">Gender</p>
 
@@ -80,7 +80,7 @@ export default function WizardFormThirdPage(props) {
               </div>
             )}
 
-            {data.type_account !== 'personal' && (
+            {data.role !== 'personal' && (
               <div>
                 <label className="label" for="">
                   Company Address

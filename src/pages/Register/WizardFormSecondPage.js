@@ -6,11 +6,11 @@ export default function WizardFormSecondPage(props) {
   let inputs = [
     {
       label:  `${
-        data.type_account === 'personal' ? 'Full Name' : 'Company Name'
+        data.role === 'personal' ? 'Full Name' : 'Company Name'
       }`,
       type: 'text',
       name: `${
-        data.type_account === 'personal' ? 'full_name' : 'company_name'
+        data.role === 'personal' ? 'full_name' : 'company_name'
       }`,
       errorMessage:
         "Name should be 3-16 characters and shouldn't include any special character!",
@@ -40,7 +40,7 @@ export default function WizardFormSecondPage(props) {
       optional :  "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
     },
     {
-      name: "confirm_password",
+      name: "password_confirmation",
       type: "password",
       errorMessage: "Passwords don't match!",
       label: "Confirm Password",
