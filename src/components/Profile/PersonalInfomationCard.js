@@ -50,7 +50,7 @@ export default function PersonalInfomationCard() {
           <div className="px-8">
             <div className="mb-5 lg:flex">
               <div className="w-5/12">
-                <label className="text-xs lg:text-base" for="">
+                <label className="text-xs lg:text-base" >
                   Avatar
                 </label>
               </div>
@@ -59,7 +59,7 @@ export default function PersonalInfomationCard() {
               </div>
             </div>
             {inputs.map((input, index) => (
-              <DataPersonal {...input} />
+              <DataPersonal key={index} {...input} />
             ))}
           </div>
         </div>
@@ -73,7 +73,7 @@ function DataPersonal({ label }) {
   return (
     <div className=" items-center lg:flex ">
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" >
           {label}
         </label>
       </div>
@@ -88,7 +88,7 @@ function InputFormProfile({ label, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" >
           {label}
         </label>
       </div>
@@ -176,7 +176,7 @@ function Modal({isOpen, handleClick}) {
         <div className="px-8">
           <div className="mb-5 lg:flex">
             <div className="w-5/12">
-              <label className="text-xs lg:text-base" for="">
+              <label className="text-xs lg:text-base">
                 Avatar
               </label>
             </div>
@@ -185,7 +185,7 @@ function Modal({isOpen, handleClick}) {
             </div>
           </div>
           {inputs.map((input, index) => (
-            <InputFormProfile {...input} />
+            <InputFormProfile key={index} {...input} />
           ))}
         </div>
       </div>

@@ -7,8 +7,10 @@ import WorkExperienceCard from 'components/Profile/WorkExperienceCard';
 import InternExperienceCard from 'components/Profile/InternExperienceCard';
 import EducationCard from 'components/Profile/EducationCard';
 import CertificationCard from 'components/Profile/CertificationCard';
+import { useParams } from "react-router-dom";
 export default function Profile() {
-
+  const { id } = useParams();
+  console.log(id)
   return (
     <Layout PageName={'Profile'}>
       <PersonalInfomationCard/>
