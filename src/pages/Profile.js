@@ -12,7 +12,7 @@ export default function Profile() {
   const { id } = useParams();
   console.log(id)
   return (
-    <Layout PageName={'Profile'}>
+    <Layout userId={id} PageName={'Profile'}>
       <PersonalInfomationCard/>
       <AboutMeCard/>
       <SkillCard/>

@@ -1,26 +1,26 @@
 import React from 'react'
 
-export default function NavBar({page, offCanvas}) {
+export default function NavBar({page, offCanvas, userId}) {
     let pageName = page.toLowerCase();
     let menu = [
       {
         alias: 'dashboard',
         name: 'Dashboard',
-        link: '/dashboard',
+        link: `/dashboard/${userId}`,
         icon_active: '/nav_icon/dashboard.png',
         icon_inactive: '/nav_icon/i_dashboard.png',
       },
       {
         alias: 'profile',
         name: 'Profile',
-        link: '/profile',
+        link: `/profile/${userId}`,
         icon_active: '/nav_icon/profile.png',
         icon_inactive: '/nav_icon/i_profile.png',
       },
       {
         alias: 'personal development plan',
         name: 'Personal Development Plan',
-        link: '/pdp',
+        link: `/pdp/${userId}`,
         icon_active: '/nav_icon/plan.png',
         icon_inactive: '/nav_icon/i_plan.png',
       },

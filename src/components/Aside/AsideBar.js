@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from 'components/NavBar';
 
-export default function ASideBar({ offCanvas, handleNav, PageName }) {
+export default function ASideBar({ offCanvas, handleNav, PageName, userId }) {
     return (
       <aside
         className={`bg-[#1E1E2D] transition-all hidden lg:block  ${
@@ -41,7 +41,7 @@ export default function ASideBar({ offCanvas, handleNav, PageName }) {
           </button>
         </div>
         <div className='pl-6'>
-          <NavBar page={PageName} offCanvas={offCanvas}  />
+          <NavBar page={PageName} offCanvas={offCanvas} userId={userId} />
   
         </div>
         </div>

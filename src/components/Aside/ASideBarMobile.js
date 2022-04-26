@@ -1,18 +1,18 @@
 import React from 'react'
 
-export default function ASideBarMobile({ offCanvas, handleNav, PageName }) {
+export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId }) {
     let menu = [
       {
         alias: 'dashboard',
         name: 'Dashboard',
-        link: '/dashboard',
+        link: `/dashboard/${userId}`,
         icon_active: '/nav_icon/dashboard.png',
         icon_inactive: '/nav_icon/i_dashboard.png',
       },
       {
         alias: 'profile',
         name: 'Profile',
-        link: '/profile',
+        link: `/profile/${userId}`,
         icon_active: '/nav_icon/profile.png',
         icon_inactive: '/nav_icon/i_profile.png',
       },

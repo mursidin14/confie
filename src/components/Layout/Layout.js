@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from 'components/Layout/Header';
 import ASideBar from 'components/Aside/AsideBar';
 import ASideBarMobile from 'components/Aside/ASideBarMobile';
-export default function Layout({PageName, children}) {
+export default function Layout({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
 
   function handleNav() {
@@ -14,11 +14,13 @@ export default function Layout({PageName, children}) {
         offCanvas={offCanvas}
         handleNav={handleNav}
         PageName={PageName}
+        userId={userId}
       ></ASideBar>
       <ASideBarMobile
         offCanvas={offCanvas}
         handleNav={handleNav}
         PageName={PageName}
+        userId={userId}
       ></ASideBarMobile>
       <section
         className={`${
