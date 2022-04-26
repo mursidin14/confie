@@ -30,6 +30,8 @@ export default function PersonalInfomationCard() {
   ];
   function handleClick() {
     setModal(!modal);
+    let body = document.querySelector('.main-layout')
+    {!modal ? body.classList.add('enableBlur'): body.classList.remove('enableBlur')}
   }
 
 
@@ -166,7 +168,7 @@ function Modal({isOpen, handleClick}) {
     <div
       className={`${
         isOpen ? 'top-3' : '-top-[1200px]'
-      } absolute inset-0 mt-4 h-fit rounded-md bg-white pt-7 pb-2 text-left shadow-md max-w-4xl lg:mx-auto z-50 transition-all duration-[1000ms] mx-2`}
+      } absolute inset-0 mt-4 h-fit rounded-md bg-white pt-7 pb-2 text-left shadow-md max-w-4xl lg:mx-auto z-50 transition-all duration-[1000ms] mx-2 disableBlur`}
     >
       <div className="flex items-center justify-between px-8">
         <h3 className="text-base font-semibold ">Personal Infomation</h3>

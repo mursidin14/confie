@@ -2,8 +2,8 @@ import React from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
 export default function ClassCard() {
   return (
-    <div className='rounded-md bg-white py-7 px-8 shadow-md lg:w-6/12 mt-4 text-left'>
-      <div className='flex justify-between pb-2'>
+    <div className='rounded-md bg-white py-7  shadow-md lg:w-6/12 mt-4 text-left'>
+      <div className='flex justify-between pb-2 px-8'>
         <h3 className="text-base py-">Kelas Aktif</h3>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path opacity="0.5" d="M5.35703 10.8333L14.2749 10.8333C14.7227 10.8333 15.0856 10.4602 15.0856 9.99998C15.0856 9.53974 14.7227 9.16665 14.2749 9.16665L5.35703 9.16665C4.90928 9.16665 4.54631 9.53974 4.54631 9.99998C4.54631 10.4602 4.90928 10.8333 5.35703 10.8333Z" fill="#A1A5B7"/>
@@ -12,18 +12,19 @@ export default function ClassCard() {
       </div>
       <hr className=' my-2 border-b-[1px] w-full border-[#3F4254]/10'/>
 
-      <div className='flex items-center justify-between text-[#3F4254] my-3 py-2 border-b-2 border-[#3F4254]/20 border-dashed'>
-        <div className='w-6/12'>
-          <h3 className="text-base font-semibold">Digital Marketing</h3>
-          <p className="text-[13px]">Ahmad Rifandi</p>
-          <p className="text-[9px] ">15 Chapter</p>
+      <section className='px-8'>
+        <div className='flex items-center justify-between text-[#3F4254] my-3 py-2 border-b-2 border-[#3F4254]/20 border-dashed '>
+          <div className='w-6/12'>
+            <h3 className="text-base font-semibold">Digital Marketing</h3>
+            <p className="text-[13px]">Ahmad Rifandi</p>
+            <p className="text-[9px] ">15 Chapter</p>
+          </div>
+          <div className='w-5/12 flex items-center gap-3'>
+            <ProgressBar progressPercentage={50} />
+            <p className="text-xs ">50%</p>
+          </div>
         </div>
-        <div className='w-5/12 flex items-center gap-3'>
-
-          <ProgressBar progressPercentage={50} />
-          <p className="text-xs ">50%</p>
-        </div>
-      </div>
+      </section>
      
      
     </div>

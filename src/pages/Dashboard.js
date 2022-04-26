@@ -12,7 +12,7 @@ export default function Dashboard() {
       <PersonalCard />
       <div className="gap-5 lg:flex">
         <ClassCard />
-        <TargetCard />
+        <TargetCard userId={id}/>
       </div>
     </Layout>
   );
