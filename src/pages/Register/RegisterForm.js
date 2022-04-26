@@ -10,6 +10,7 @@ export default function Register() {
     "role": "personal",
     "gender": "L",
   });
+  console.log(dataAccount)
   // FUNCTION FOR REQUEST REGISTER 
   async function sendRegistration(){
       let transform_date = dataAccount['date_of_birth'].split('-').reverse().join("");
@@ -32,10 +33,9 @@ export default function Register() {
         console.log(err)
       }
   }
-
-
   function nextPage() {
     if (page === 4){
+      sendRegistration()
     }
     setPage(page + 1);
   }

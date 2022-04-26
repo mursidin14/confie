@@ -5,6 +5,7 @@ import ProgressBar from 'components/Widgets/ProgressBar';
 export default function PersonalDevelopment() {
   const { id } = useParams();
   const [modal, setModal] = useState(false);
+  const [target, setTarget] = useState([]);
   function handleClick() {
     setModal(!modal);
     let body = document.querySelector('.main-layout');
@@ -14,16 +15,17 @@ export default function PersonalDevelopment() {
         : body.classList.remove('enableBlur');
     }
   }
-  let target = [
-    {
-      id_target: 1,
-      target: 'Ngaji 30 jus',
-      start_date: 'Jun 2022',
-      progress: 10,
-      delete: './delete.png',
-      edit: './edit.png',
-    },
-  ];
+ 
+  useEffect(() => {
+    async function getTarget(){
+      let response = await fetch(`https://62624ee3327d3896e28498e5.mockapi.io/api/v1/target`);
+      let data = await response.json();
+      setTarget(data);
+    }
+    getTarget()
+  },[])
+  
+
   return (
     <Layout userId={id} PageName={'Personal Development Plan'}>
       <div className="lg:relative">
@@ -48,24 +50,46 @@ export default function PersonalDevelopment() {
     </Layout>
   );
 }
-function InputFormProfile({ label, ...inputProps }) {
+function InputFormProfile({ handleChange, label, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
         <label className="text-xs lg:text-base">{label}</label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input onChange={handleChange} {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
       </div>
     </div>
   );
 }
 function Modal({ isOpen, handleClick }) {
+  const [plan, setPlan] = useState({
+    target_name: '',
+    start_date: '',
+    progress: 0,
+  })
+  function handleChange(e) {
+    setPlan({
+      ...plan,
+      [e.target.name]: e.target.value,
+    });
+    
+  }
+  async function submitData() {
+    const req = await fetch('https://62624ee3327d3896e28498e5.mockapi.io/api/v1/target', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(plan),
+    });
+    window.location.reload()
+  }
   let inputs = [
     {
       label: 'Target',
       type: 'text',
-      name: 'target',
+      name: 'target_name',
       required: true,
     },
     {
@@ -89,7 +113,7 @@ function Modal({ isOpen, handleClick }) {
       <div className="my-5">
         <div className="px-8">
           {inputs.map((input, index) => (
-            <InputFormProfile key={index} {...input} />
+            <InputFormProfile handleChange={handleChange} key={index} {...input} />
           ))}
         </div>
       </div>
@@ -100,7 +124,7 @@ function Modal({ isOpen, handleClick }) {
         >
           Cancel
         </button>
-        <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+        <button onClick={submitData} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
           Submit
         </button>
       </div>
@@ -109,6 +133,7 @@ function Modal({ isOpen, handleClick }) {
 }
 
 function Table({ items }) {
+  
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
@@ -125,7 +150,7 @@ function Table({ items }) {
             className="mt-3 h-20 border-b-2 border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
           >
-            <td className="w-[10%] pl-10 text-left ">{item.target}</td>
+            <td className="w-[10%] pl-10 text-left ">{item.target_name}</td>
             <td className="w-[10%] ">{item.start_date}</td>
             <td className="w-[6%] relative bottom-2 text-[#A1A5B7] ">
               <p className='text-left mb-2'>{item.progress}%</p>
@@ -157,34 +182,45 @@ function Table({ items }) {
                     />
                   </svg>
                 </a>
-                <a href="">
-                  <svg
-                    className="w-11"
-                    width="34"
-                    height="34"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
-                      fill="#FFF5F8"
-                    />
-                    <path
-                      d="M11.75 14.75C11.75 14.3358 12.0858 14 12.5 14H21.5C21.9142 14 22.25 14.3358 22.25 14.75V21.5C22.25 22.7427 21.2427 23.75 20 23.75H14C12.7574 23.75 11.75 22.7427 11.75 21.5V14.75Z"
-                      fill="#F1416C"
-                    />
-                    <path
-                      opacity="0.5"
-                      d="M11.75 11.75C11.75 11.3358 12.0858 11 12.5 11H21.5C21.9142 11 22.25 11.3358 22.25 11.75C22.25 12.1642 21.9142 12.5 21.5 12.5H12.5C12.0858 12.5 11.75 12.1642 11.75 11.75Z"
-                      fill="#F1416C"
-                    />
-                    <path
-                      opacity="0.5"
-                      d="M14.75 11C14.75 10.5858 15.0858 10.25 15.5 10.25H18.5C18.9142 10.25 19.25 10.5858 19.25 11H14.75Z"
-                      fill="#F1416C"
-                    />
-                  </svg>
-                </a>
+               
+                  <button onClick={
+                    async function() {
+                      const res = await fetch(`https://62624ee3327d3896e28498e5.mockapi.io/api/v1/target/${item.id}`, {
+                        method: 'DELETE',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        }
+                      })
+                      window.location.reload()
+                    }
+                  }>
+                    <svg
+                      className="w-11"
+                      width="34"
+                      height="34"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
+                        fill="#FFF5F8"
+                      />
+                      <path
+                        d="M11.75 14.75C11.75 14.3358 12.0858 14 12.5 14H21.5C21.9142 14 22.25 14.3358 22.25 14.75V21.5C22.25 22.7427 21.2427 23.75 20 23.75H14C12.7574 23.75 11.75 22.7427 11.75 21.5V14.75Z"
+                        fill="#F1416C"
+                      />
+                      <path
+                        opacity="0.5"
+                        d="M11.75 11.75C11.75 11.3358 12.0858 11 12.5 11H21.5C21.9142 11 22.25 11.3358 22.25 11.75C22.25 12.1642 21.9142 12.5 21.5 12.5H12.5C12.0858 12.5 11.75 12.1642 11.75 11.75Z"
+                        fill="#F1416C"
+                      />
+                      <path
+                        opacity="0.5"
+                        d="M14.75 11C14.75 10.5858 15.0858 10.25 15.5 10.25H18.5C18.9142 10.25 19.25 10.5858 19.25 11H14.75Z"
+                        fill="#F1416C"
+                      />
+                    </svg>
+                  </button>
               </div>
             </td>
           </tr>
