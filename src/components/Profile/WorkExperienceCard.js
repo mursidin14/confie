@@ -1,42 +1,56 @@
-import React from 'react'
-
+import React, { useState } from 'react';
+import Pagination from 'components/Widgets/Pagination';
 export default function WorkExperienceCard() {
-    let workExperience = [
-        {
-          id: 1,
-          posisi: 'Frontend Developer',
-          company: 'PT. Bintang Jaya',
-          start: 'Jan 2021',
-          end: 'Mar 2021',
-          des: 'Managed complex projects from start to finish, Collaborated with other designers, Translated requirements intopolished, high-level designs',
-          delete: './delete.png',
-          edit: './edit.png',
-        },
-      ];
+  const [modal, setModal] = useState(false);
+
+  let workExperience = [
+    {
+      id: 1,
+      posisi: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      start: 'Jan 2021',
+      end: 'Mar 2021',
+      des: 'Managed complex projects from start to finish, Collaborated with other designers, Translated requirements intopolished, high-level designs',
+      delete: './delete.png',
+      edit: './edit.png',
+    },
+  ];
+  function handleClick() {
+    setModal(!modal);
+  }
   return (
-    <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
-      <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">Pengalaman Kerja</h3>
-        <button className="primary-btn h-fit w-fit px-6 py-2 text-xs">
-          Tambah
-        </button>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-      <div className="overflow-auto">
-          <Table items={workExperience}></Table>
+    <div className="lg:relative">
+      <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
+        <div className="flex items-center justify-between px-8">
+          <h3 className="text-base font-semibold ">Pengalaman Kerja</h3>
+          <button
+            onClick={handleClick}
+            className="primary-btn h-fit w-fit px-6 py-2 text-xs"
+          >
+            Tambah
+          </button>
+        </div>
+        <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+        <div className="my-5">
+          <div className="overflow-auto">
+            <Table items={workExperience}></Table>
+          </div>
+        </div>
+        <div className='flex justify-center'>
+          <Pagination />
         </div>
       </div>
+      <Modal isOpen={modal} handleClick={handleClick} />
     </div>
-  )
+  );
 }
 
-function Table({items}) {
-    return (
-    <table className="table-fixed text-xs sm:text-base min-w-[700px] w-full text-center">
+function Table({ items }) {
+  return (
+    <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
         <tr className="h-[60px] text-sm text-[#181C32]">
-          <th className="pl-10 w-[10%] text-left">Posisi</th>
+          <th className="w-[10%] pl-10 text-left">Posisi</th>
           <th className="w-[10%] ">Instansi</th>
           <th className="w-[6%]">Tahun Mulai</th>
           <th className="w-[6%]">Tahun Selesai</th>
@@ -47,14 +61,16 @@ function Table({items}) {
       <tbody>
         {items.map((item, index) => (
           <tr
-            className="mt-3 h-20 border-b-2 border-gray-300/50 text-[#7E8299]"
+            className="mt-3 border-b-2 border-gray-300/50 text-sm text-[#7E8299] sm:h-32 "
             key={index}
           >
-            <td className="pl-10 w-[10%] text-left">{item.posisi}</td>
+            <td className="w-[10%] pl-10 text-left">{item.posisi}</td>
             <td className="w-[10%] ">{item.company}</td>
             <td className="w-[6%] ">{item.start}</td>
             <td className="w-[6%] ">{item.end}</td>
-            <td className="w-[16%] text-left lg:px-3 px-8">{item.des}</td>
+            <td className="w-[16%] px-8 py-4 text-left lg:py-1 lg:px-3">
+              {item.des}
+            </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
                 <a href="">
@@ -115,5 +131,117 @@ function Table({items}) {
         ))}
       </tbody>
     </table>
-    );
+  );
+}
+
+function InputFormProfile({ label, ...inputProps }) {
+  return (
+    <div className=" items-center lg:flex">
+      <div className="w-5/12">
+        <label className="text-xs lg:text-base" for="">
+          {label}
+        </label>
+      </div>
+      <div className="lg:w-7/12">
+        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+      </div>
+    </div>
+  );
+}
+
+function Modal({ isOpen, handleClick }) {
+  let inputs = [
+    {
+      label: 'Posisi',
+      type: 'text',
+      name: 'position',
+      errorMessage:
+        "Name should be 3-16 characters and shouldn't include any special character!",
+      pattern: '^[A-Za-z0-9]{3,16}$',
+      required: true,
+    },
+    {
+      name: 'institute',
+      label: 'Instansi',
+      type: 'text',
+      errorMessage: 'It should be a valid phone number!',
+      required: true,
+    },
+    
+  ];
+  let inputs_2 = [
+    {
+      name: 'start_date',
+      type: 'date',
+      errorMessage: 'It should be a valid email address!',
+      label: 'Tahun Mulai',
+      required: true,
+    },
+    {
+      name: 'end_date',
+      type: 'date',
+      errorMessage: 'It should be a valid email address!',
+      label: 'Tahun Selesai',
+      required: true,
+    },
+  ];
+  return (
+    <div
+      className={`${
+        isOpen ? 'lg:top-3 top-[1000px]' : '-top-[2400px]'
+      } absolute inset-0 z-50 mx-2 mt-4 h-fit max-w-4xl rounded-md bg-white pt-7 pb-2 text-left shadow-md transition-all duration-[1000ms] sm:mx-auto`}
+    >
+      <div className="flex items-center justify-between px-8">
+        <h3 className="text-base font-semibold ">Tambah Pengalaman Kerja</h3>
+      </div>
+      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+      <div className="my-5">
+        <div className="px-8">
+          {inputs.map((input, index) => (
+            <InputFormProfile {...input} />
+          ))}
+           <div className="mt-4 lg:flex">
+            <div className="w-5/12">
+              <label className="text-xs lg:text-base" for="">
+                Pekerjaan saat ini
+              </label>
+            </div>
+            <div className="lg:w-7/12 flex gap-3 items-center">
+              <input type="checkbox"/>
+              <label for="">Ya</label>
+            </div>
+          </div>
+          {inputs.map((input, index) => (
+            <InputFormProfile {...input} />
+          ))}
+          <div className="mt-4 lg:flex">
+            <div className="w-5/12">
+              <label className="text-xs lg:text-base" for="">
+                Deskripsi
+              </label>
+            </div>
+            <div className="lg:w-7/12">
+              <textarea
+                name="description"
+                id=""
+                className="w-full rounded-md bg-soft-gray p-5"
+                rows="10"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="my-5 flex justify-end gap-4 px-8">
+        <button
+          onClick={handleClick}
+          className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
+        >
+          Cancel
+        </button>
+        <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+          Submit
+        </button>
+      </div>
+    </div>
+  );
 }

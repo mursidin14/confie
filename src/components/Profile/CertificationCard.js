@@ -1,6 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Pagination from 'components/Widgets/Pagination';
 
 export default function CertificationCard() {
+  const [modal, setModal] = useState(false);
+
+  function handleClick() {
+    setModal(!modal);
+  }
   let certification = [
     {
       id: 1,
@@ -12,19 +18,26 @@ export default function CertificationCard() {
     },
   ];
   return (
-    <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
-      <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">Sertifikasi & Penghargaan</h3>
-        <button className="primary-btn h-fit w-fit px-6 py-2 text-xs">
-          Tambah
-        </button>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="overflow-auto">
-          <Table items={certification}></Table>
+    <div className='lg:relative'>
+      <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
+        <div className="flex items-center justify-between px-8">
+          <h3 className="text-base font-semibold ">Sertifikasi & Penghargaan</h3>
+          <button onClick={handleClick} className="primary-btn h-fit w-fit px-6 py-2 text-xs">
+            Tambah
+          </button>
+        </div>
+        <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+        <div className="my-5">
+          <div className="overflow-auto">
+            <Table items={certification}></Table>
+          </div>
+        </div>
+        <div className='flex justify-center'>
+          <Pagination />
         </div>
       </div>
+      <Modal isOpen={modal} handleClick={handleClick} />
+
     </div>
   );
 }
@@ -43,7 +56,7 @@ function Table({ items }) {
       <tbody>
         {items.map((item, index) => (
           <tr
-            className="mt-3 h-20 border-b-2 border-gray-300/50 text-[#7E8299]"
+            className="mt-3 h-20 text-sm border-b-2 border-gray-300/50 text-[#7E8299]"
             key={index}
           >
             <td className="w-[10%] pl-10 text-left ">{item.nama}</td>
@@ -109,5 +122,80 @@ function Table({ items }) {
         ))}
       </tbody>
     </table>
+  );
+}
+
+function Modal({ isOpen, handleClick }) {
+  let inputs = [
+    {
+      label: 'Nama Penghargaan/Sertifikasi',
+      type: 'text',
+      name: 'certification_name',
+      errorMessage:
+        "Name should be 3-16 characters and shouldn't include any special character!",
+      pattern: '^[A-Za-z0-9]{3,16}$',
+      required: true,
+    },
+    {
+      name: 'certification_intansi',
+      label: 'Instansi Pemberi',
+      type: 'text',
+      errorMessage: 'It should be a valid phone number!',
+      required: true,
+    },
+    {
+      name: 'date_certification',
+      type: 'date',
+      errorMessage: 'It should be a valid email address!',
+      label: 'Tahun',
+      required: true,
+    },
+  
+  ];
+  return (
+    <div
+      className={`${
+        isOpen ? 'lg:-top-64 top-[2100px]' : '-top-[3000px]'
+      } absolute inset-0 z-50 mx-2 mt-4 h-fit max-w-4xl rounded-md bg-white pt-7 pb-2 text-left shadow-md transition-all duration-[1000ms] sm:mx-auto`}
+    >
+      <div className="flex items-center justify-between px-8">
+        <h3 className="text-base font-semibold ">Tambah Sertifikat/Penghargaan</h3>
+      </div>
+      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+      <div className="my-5">
+        <div className="px-8">
+          {inputs.map((input, index) => (
+            <InputFormProfile {...input} />
+          ))}
+         
+        </div>
+      </div>
+      <div className="my-5 flex justify-end gap-4 px-8">
+        <button
+          onClick={handleClick}
+          className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
+        >
+          Cancel
+        </button>
+        <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function InputFormProfile({ label, ...inputProps }) {
+  return (
+    <div className=" items-center lg:flex">
+      <div className="w-5/12">
+        <label className="text-xs lg:text-base" for="">
+          {label}
+        </label>
+      </div>
+      <div className="lg:w-7/12">
+        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+      </div>
+    </div>
   );
 }

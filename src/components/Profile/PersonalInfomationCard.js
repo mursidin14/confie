@@ -156,7 +156,7 @@ function Modal({isOpen, handleClick}) {
       name: 'city',
       type: 'text',
       errorMessage: 'It should be a valid email address!',
-      label: 'Province',
+      label: 'City',
       required: true,
     },
     
@@ -165,8 +165,8 @@ function Modal({isOpen, handleClick}) {
   return (
     <div
       className={`${
-        isOpen ? 'top-3' : '-top-[1000px]'
-      } absolute inset-0 mt-4 h-fit rounded-md bg-white pt-7 pb-2 text-left shadow-md max-w-4xl mx-auto z-50 transition-all duration-[1000ms]`}
+        isOpen ? 'top-3' : '-top-[1200px]'
+      } absolute inset-0 mt-4 h-fit rounded-md bg-white pt-7 pb-2 text-left shadow-md max-w-4xl lg:mx-auto z-50 transition-all duration-[1000ms] mx-2`}
     >
       <div className="flex items-center justify-between px-8">
         <h3 className="text-base font-semibold ">Personal Infomation</h3>

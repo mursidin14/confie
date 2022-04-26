@@ -58,7 +58,7 @@ export default function WizardFormThirdPage(props) {
                   />
                   <label
                     className="mr-5 text-sm font-semibold text-black"
-                    for="male"
+                    htmlFor="male"
                   >
                     Male
                   </label>
@@ -72,7 +72,7 @@ export default function WizardFormThirdPage(props) {
                   />
                   <label
                     className="mr-5 text-sm font-semibold text-black"
-                    for="female"
+                    htmlFor="female"
                   >
                     Female
                   </label>
@@ -82,7 +82,7 @@ export default function WizardFormThirdPage(props) {
 
             {data.role !== 'personal' && (
               <div>
-                <label className="label" for="">
+                <label className="label" htmlFor="">
                   Company Address
                 </label>
                 <input

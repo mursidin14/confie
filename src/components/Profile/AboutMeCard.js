@@ -35,8 +35,8 @@ function Modal({isOpen, handleClick}) {
     <div
       id='modal-content'
       className={`${
-        isOpen ? 'top-3' : '-top-[1500px]'
-      } absolute inset-0 mt-4 h-fit rounded-md bg-white pt-7 pb-2 text-left shadow-md max-w-4xl mx-auto z-50 transition-all duration-[1000ms]`}
+        isOpen ? 'lg:top-3 top-[950px]' : '-top-[1500px]'
+      } absolute inset-0 mt-4 h-fit rounded-md bg-white pt-7 pb-2 text-left shadow-md max-w-4xl sm:mx-auto mx-3 z-50 transition-all duration-[1000ms]`}
     >
       <div className="flex items-center justify-between px-8">
         <h3 className="text-base font-semibold ">About Me</h3>

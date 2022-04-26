@@ -7,32 +7,35 @@ import WizardComplete from './WizardComplete';
 export default function Register() {
   const [page, setPage] = useState(1);
   const [dataAccount, setDataAccount] = useState({
-    role: 'personal',
-    gender: 'L',
+    "role": "personal",
+    "gender": "L",
   });
+  // FUNCTION FOR REQUEST REGISTER 
   async function sendRegistration(){
-      let transform_date = dataAccount['date_of_birth'].split('-');
-      let new_date = '';
-      for (var i = 2; i >= 0; i--) {
-        new_date += transform_date[i];
+      let transform_date = dataAccount['date_of_birth'].split('-').reverse().join("");
+      dataAccount['date_of_birth'] = parseInt(transform_date);
+      try{
+        const res = await fetch(
+          'https://confie.upanastudio.com/backend/api/register',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(dataAccount),
+          }
+        );
+        const data = await res.json();
+        console.log(data)
+      }catch(err){
+        console.log(err)
       }
-      dataAccount['date_of_birth'] = parseInt(new_date);
-      const res = await fetch(
-        'https://confie.upanastudio.com/backend/api/register',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataAccount),
-        }
-      );
-      const data = await res.json();
-      console.log(data);
   }
+
+
   function nextPage() {
     if (page === 4){
-      sendRegistration();
     }
     setPage(page + 1);
   }

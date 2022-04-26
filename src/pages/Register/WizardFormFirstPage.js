@@ -33,7 +33,7 @@ export default function WizardFormFirstPage(props) {
                 <label
                   className={`${typeAccount === 'personal' ? active_element : inactive_element}`}
                   
-                  for="personal"
+                  htmlFor="personal"
                 >
                   <svg
                     width="39"
@@ -70,7 +70,7 @@ export default function WizardFormFirstPage(props) {
                 />
                 <label
                   className={`${typeAccount === 'business' ? active_element : inactive_element}`}
-                  for="business"
+                  htmlFor="business"
                 >
                   <svg
                     width="39"

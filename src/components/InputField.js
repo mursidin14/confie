@@ -15,7 +15,7 @@ export default function InputField(props) {
   };
   return (
     <>
-      <label className="label" for="">
+      <label className="label">
         {label}
       </label>
       <input

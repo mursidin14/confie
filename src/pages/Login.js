@@ -13,7 +13,6 @@ export default function Login() {
             <div className="mt-5 flex justify-between">
               <label
                 className="mb-2 block text-sm font-semibold text-dark-blue"
-                for=""
               >
                 Password
               </label>
