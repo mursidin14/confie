@@ -10,12 +10,16 @@ export default function Register() {
     "role": "personal",
     "gender": "L",
   });
-  console.log(dataAccount)
   // FUNCTION FOR REQUEST REGISTER 
   async function sendRegistration(){
-      let transform_date = dataAccount['date_of_birth'].split('-').reverse().join("");
+      
+  }
+  async function nextPage() {
+    if (page === 4){
+      if (typeof dataAccount['date_of_birth'] !== 'number') {
+        let transform_date = dataAccount['date_of_birth'].split('-').reverse().join("");
       dataAccount['date_of_birth'] = parseInt(transform_date);
-      try{
+      }
         const res = await fetch(
           'https://confie.upanastudio.com/backend/api/register',
           {
@@ -27,15 +31,10 @@ export default function Register() {
             body: JSON.stringify(dataAccount),
           }
         );
+        console.log(res)
+        if(res.ok === false) return alert(`GAGAL LOGIN BANH😥`);
         const data = await res.json();
-        console.log(data)
-      }catch(err){
-        console.log(err)
-      }
-  }
-  function nextPage() {
-    if (page === 4){
-      sendRegistration()
+
     }
     setPage(page + 1);
   }

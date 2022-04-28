@@ -4,6 +4,7 @@ import Register from 'pages/Register/RegisterForm';
 import Dashboard from 'pages/Dashboard';
 import Profile from 'pages/Profile';
 import PersonalDevelopment from 'pages/PersonalDevelopment';
+import PersonalDevelopmentDetail from 'pages/PersonalDevelopmentDetail';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/pdp/:id" element={<PersonalDevelopment />} />
+        <Route path="/pdp/:id/detail/:idDetail" element={<PersonalDevelopmentDetail />} />
       </Routes>
     </div>
   );

@@ -8,17 +8,11 @@ export default function PersonalDevelopment() {
   const [target, setTarget] = useState([]);
   function handleClick() {
     setModal(!modal);
-    let body = document.querySelector('.main-layout');
-    {
-      !modal
-        ? body.classList.add('enableBlur')
-        : body.classList.remove('enableBlur');
-    }
   }
  
   useEffect(() => {
     async function getTarget(){
-      let response = await fetch(`https://62624ee3327d3896e28498e5.mockapi.io/api/v1/target`);
+      let response = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target`);
       let data = await response.json();
       setTarget(data);
     }
@@ -41,10 +35,9 @@ export default function PersonalDevelopment() {
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-          <Table items={target}></Table>
+            <Table userId={id} items={target}></Table>
           </div>
         </div>
-
         <Modal isOpen={modal} handleClick={handleClick} />
       </div>
     </Layout>
@@ -76,7 +69,7 @@ function Modal({ isOpen, handleClick }) {
     
   }
   async function submitData() {
-    const req = await fetch('https://62624ee3327d3896e28498e5.mockapi.io/api/v1/target', {
+    const req = await fetch('https://6267fd9b01dab900f1c82b3d.mockapi.io/target', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -132,7 +125,7 @@ function Modal({ isOpen, handleClick }) {
   );
 }
 
-function Table({ items }) {
+function Table({ items, userId }) {
   
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
@@ -158,7 +151,7 @@ function Table({ items }) {
             </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
-                <a href="">
+                <a href={`/pdp/${userId}/detail/${item.id}`}>
                   <svg
                     className="w-11"
                     width="34"
@@ -185,7 +178,7 @@ function Table({ items }) {
                
                   <button onClick={
                     async function() {
-                      const res = await fetch(`https://62624ee3327d3896e28498e5.mockapi.io/api/v1/target/${item.id}`, {
+                      const res = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${item.id}`, {
                         method: 'DELETE',
                         headers: {
                           'Content-Type': 'application/json',
