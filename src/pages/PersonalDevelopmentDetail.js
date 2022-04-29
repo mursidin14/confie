@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Layout from 'components/Layout/Layout';
 import ProgressBar from 'components/Widgets/ProgressBar';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { useParams } from 'react-router-dom';
-
+import ModalMilestone from 'components/Modal/ModalMilestone';
 export default function PersonalDevelopmentDetail() {
   const [targetMilestone, setTargetMilestone] = useState([]);
   const [target, setTarget] = useState({});
   const [progress, setProgress] = useState(0)
   const { id, idDetail } = useParams();
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(true)
+
 
   useEffect(() => {
     async function getTargetDetail() {
@@ -23,6 +27,7 @@ export default function PersonalDevelopmentDetail() {
       setTarget(dataTarget);
       setProgress(dataTarget.progress);
       setTargetMilestone(data);
+      setLoading(false)
     }
 
     getTargetDetail();
@@ -47,18 +52,17 @@ export default function PersonalDevelopmentDetail() {
                 progress: percentage
             })
         })
-        window.location.reload();
     }
     updateTarget();
   }
   return (
-    <Layout userId={id} PageName={'Personal Development Plan Detail'}>
+    <Layout userId={id} PageName={'Personal Development Plan'}>
       <div className="lg:relative">
         <div className="mt-4 rounded-md bg-white py-5 text-left shadow-md ">
           <div className="flex items-center justify-between px-8">
             <div>
               <h3 className="text-2xl font-semibold text-[#181C32]">
-                {target.target_name}
+                {target.target_name || <Skeleton width={100} />}
               </h3>
               <div className="flex items-center gap-3 py-3">
                 <svg
@@ -84,7 +88,7 @@ export default function PersonalDevelopmentDetail() {
                   />
                 </svg>
 
-                <p className="text-sm text-[#B5B5C3]">{target.start_date}</p>
+                <p className="text-sm text-[#B5B5C3]">{target.start_date || <Skeleton width={100} />}</p>
               </div>
             </div>
             <div className="w-5/12">
@@ -101,14 +105,10 @@ export default function PersonalDevelopmentDetail() {
         <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
           <div className="flex items-center justify-between px-8">
             <h3 className="text-base font-semibold ">Milestone</h3>
-            <button
-              onClick={handleClick}
-              className="primary-btn h-fit w-fit px-6 py-2 text-xs"
-            >
-              Tambah
-            </button>
+            <ModalMilestone idDetail={idDetail}></ModalMilestone>
           </div>
           <hr className="mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
+          {loading && <p className="text-sm text-center py-3">Loading...</p>}
           {targetMilestone.map(({ target_milestone, quarter, id }, index) => (
             <MilestoneTarget
               target_milestone={target_milestone}
@@ -119,102 +119,11 @@ export default function PersonalDevelopmentDetail() {
             />
           ))}
         </div>
-        <Modal isOpen={modal} handleClick={handleClick} idDetail={idDetail} />
       </div>
     </Layout>
   );
 }
 
-function Modal({ isOpen, handleClick, idDetail }) {
-  const [milestone, setMilestone] = useState({});
-  function handleChange(e) {
-    setMilestone({
-      ...milestone,
-      [e.target.name]: e.target.value,
-    });
-  }
-  async function submitData() {
-    const req = await fetch(
-      `https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}/target_milestone`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(milestone),
-      }
-    );
-    window.location.reload();
-  }
-  let inputs = [
-    {
-      label: 'Quarter',
-      type: 'text',
-      name: 'quarter',
-      required: true,
-    },
-    {
-      label: 'Target milestone',
-      type: 'text',
-      name: 'target_milestone',
-      required: true,
-    },
-  ];
-  return (
-    <div
-      className={`${
-        isOpen ? 'top-3' : '-top-[1200px]'
-      } disableBlur absolute inset-0 z-50 mx-2 mt-4 h-fit max-w-4xl rounded-md bg-white pt-7 pb-2 text-left shadow-md transition-all duration-[1000ms] lg:mx-auto`}
-    >
-      <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">Tambah Milestone</h3>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="px-8">
-          {inputs.map((input, index) => (
-            <InputFormProfile
-              handleChange={handleChange}
-              key={index}
-              {...input}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="my-5 flex justify-end gap-4 px-8">
-        <button
-          onClick={handleClick}
-          className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={submitData}
-          className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
-        >
-          Submit
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function InputFormProfile({ handleChange, label, ...inputProps }) {
-  return (
-    <div className=" items-center lg:flex">
-      <div className="w-5/12">
-        <label className="text-xs lg:text-base">{label}</label>
-      </div>
-      <div className="lg:w-7/12">
-        <input
-          onChange={handleChange}
-          {...inputProps}
-          className="input-form my-2 lg:my-5 lg:py-3 "
-        />
-      </div>
-    </div>
-  );
-}
 
 function MilestoneTarget({ target_milestone, quarter, idDetail, id, handleChange }) {
   return (

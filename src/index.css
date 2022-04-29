@@ -32,3 +32,8 @@
 body{
   font-family: 'Poppins', sans-serif
 }
+
+.image-upload>input {
+  display: none;
+}
+

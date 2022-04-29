@@ -6,6 +6,7 @@ export default function Layout({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
 
   function handleNav() {
+    
     setOffCanvas(!offCanvas);
   }
   return (

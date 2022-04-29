@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Pagination from 'components/Widgets/Pagination';
+import ModalEducation from 'components/Modal/ModalEducation';
 export default function EducationCard() {
   const [modal, setModal] = useState(false);
 
@@ -23,9 +24,7 @@ export default function EducationCard() {
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">Riwayat Pendidikan</h3>
-          <button onClick={handleClick} className="primary-btn h-fit w-fit px-6 py-2 text-xs">
-            Tambah
-          </button>
+          <ModalEducation/>
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
@@ -37,7 +36,6 @@ export default function EducationCard() {
           <Pagination />
         </div>
       </div>
-          <Modal isOpen={modal} handleClick={handleClick} />
     </div>
 
   );
@@ -130,97 +128,3 @@ function Table({ items }) {
   );
 }
 
-function Modal({ isOpen, handleClick }) {
-  let inputs = [
-    {
-      label: 'Sekolah/Universitats',
-      type: 'text',
-      name: 'school',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
-      pattern: '^[A-Za-z0-9]{3,16}$',
-      required: true,
-    },
-    {
-      name: 'major',
-      label: 'Jurusan',
-      type: 'text',
-      errorMessage: 'It should be a valid phone number!',
-      required: true,
-    },
-    {
-      name: 'start_date',
-      type: 'date',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Tahun Mulai',
-      required: true,
-    },
-    {
-      name: 'end_date',
-      type: 'date',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Tahun Selesai',
-      required: true,
-    },
-  ];
-  return (
-    <div
-      className={`${
-        isOpen ? 'lg:-top-64 top-[1800px]' : '-top-[3000px]'
-      } absolute inset-0 z-50 mx-2 mt-4 h-fit max-w-4xl rounded-md bg-white pt-7 pb-2 text-left shadow-md transition-all duration-[1000ms] sm:mx-auto`}
-    >
-      <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">Tambah Riwayat Sekolah</h3>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="px-8">
-          {inputs.map((input, index) => (
-            <InputFormProfile {...input} />
-          ))}
-          <div className="mt-4 lg:flex">
-            <div className="w-5/12">
-              <label className="text-xs lg:text-base" for="">
-                Deskripsi
-              </label>
-            </div>
-            <div className="lg:w-7/12">
-              <textarea
-                name="description"
-                id=""
-                className="w-full rounded-md bg-soft-gray p-5"
-                rows="10"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="my-5 flex justify-end gap-4 px-8">
-        <button
-          onClick={handleClick}
-          className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
-        >
-          Cancel
-        </button>
-        <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
-          Submit
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function InputFormProfile({ label, ...inputProps }) {
-  return (
-    <div className=" items-center lg:flex">
-      <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
-          {label}
-        </label>
-      </div>
-      <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
-      </div>
-    </div>
-  );
-}

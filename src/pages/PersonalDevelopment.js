@@ -2,130 +2,42 @@ import Layout from 'components/Layout/Layout';
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
+import ModalTarget from 'components/Modal/ModalTarget';
+
 export default function PersonalDevelopment() {
   const { id } = useParams();
-  const [modal, setModal] = useState(false);
   const [target, setTarget] = useState([]);
-  function handleClick() {
-    setModal(!modal);
-  }
- 
+  const [loading, setLoading] = useState(true)
+  
   useEffect(() => {
     async function getTarget(){
       let response = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target`);
       let data = await response.json();
       setTarget(data);
+      setLoading(false)
     }
     getTarget()
   },[])
   
-
   return (
     <Layout userId={id} PageName={'Personal Development Plan'}>
       <div className="lg:relative">
         <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
           <div className="flex items-center justify-between px-8">
             <h3 className="text-base font-semibold ">Target Tahunan</h3>
-            <button
-              onClick={handleClick}
-              className="primary-btn h-fit w-fit px-6 py-2 text-xs"
-            >
-              Tambah
-            </button>
+            <ModalTarget></ModalTarget>
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-            <Table userId={id} items={target}></Table>
+            <Table userId={id} items={target} loading={loading}></Table>
           </div>
         </div>
-        <Modal isOpen={modal} handleClick={handleClick} />
       </div>
     </Layout>
   );
 }
-function InputFormProfile({ handleChange, label, ...inputProps }) {
-  return (
-    <div className=" items-center lg:flex">
-      <div className="w-5/12">
-        <label className="text-xs lg:text-base">{label}</label>
-      </div>
-      <div className="lg:w-7/12">
-        <input onChange={handleChange} {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
-      </div>
-    </div>
-  );
-}
-function Modal({ isOpen, handleClick }) {
-  const [plan, setPlan] = useState({
-    target_name: '',
-    start_date: '',
-    progress: 0,
-  })
-  function handleChange(e) {
-    setPlan({
-      ...plan,
-      [e.target.name]: e.target.value,
-    });
-    
-  }
-  async function submitData() {
-    const req = await fetch('https://6267fd9b01dab900f1c82b3d.mockapi.io/target', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(plan),
-    });
-    window.location.reload()
-  }
-  let inputs = [
-    {
-      label: 'Target',
-      type: 'text',
-      name: 'target_name',
-      required: true,
-    },
-    {
-      name: 'start_date',
-      label: 'Tanggal Mulai',
-      type: 'date',
-      required: true,
-    },
-   
-  ];
-  return (
-    <div
-      className={`${
-        isOpen ? 'top-3' : '-top-[1200px]'
-      } disableBlur absolute inset-0 z-50 mx-2 mt-4 h-fit max-w-4xl rounded-md bg-white pt-7 pb-2 text-left shadow-md transition-all duration-[1000ms] lg:mx-auto`}
-    >
-      <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">Tambah Target</h3>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="px-8">
-          {inputs.map((input, index) => (
-            <InputFormProfile handleChange={handleChange} key={index} {...input} />
-          ))}
-        </div>
-      </div>
-      <div className="my-5 flex justify-end gap-4 px-8">
-        <button
-          onClick={handleClick}
-          className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
-        >
-          Cancel
-        </button>
-        <button onClick={submitData} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
-          Submit
-        </button>
-      </div>
-    </div>
-  );
-}
 
-function Table({ items, userId }) {
+function Table({ items, userId, loading}) {
   
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
@@ -138,7 +50,8 @@ function Table({ items, userId }) {
         </tr>
       </thead>
       <tbody>
-        {items.map((item, index) => (
+        {loading && <tr><td colSpan="4" className="text-sm text-center py-3">Loading...</td></tr>}
+        {!loading && items.map((item, index) => (
           <tr
             className="mt-3 h-20 border-b-2 border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
