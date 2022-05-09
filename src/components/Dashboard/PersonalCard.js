@@ -1,5 +1,7 @@
 import React from 'react';
 import Status from './Status';
+import Pdf from 'react-to-pdf';
+import CurriculumVitae from 'pages/CurriculumVitae';
 export default function PersonalCard({}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-md sm:px-8 ">
@@ -57,20 +59,34 @@ export default function PersonalCard({}) {
 }
 
 function ButtonDashboard({}) {
+  const cv = React.createRef();
+
   return (
-    <div className="my-3 flex w-full">
-      <div className="flex w-full md:block md:w-fit">
-        <a
-          className="secondary-btn center mr-3 border-[1px] px-2 py-2 text-xs md:inline"
-          href=""
-        >
-          Download CV
-        </a>
-        <a className="primary-btn center px-2 py-2 text-xs md:inline " href="/profile">
-          Edit Profile
+    <>
+    <div className='absolute -top-[1500px]' ref={cv}>
+        <CurriculumVitae></CurriculumVitae>
+      </div>
+      <div className="my-3 flex w-full">
+      <div className="flex items-center w-full ">
+      <Pdf targetRef={cv} filename="cv.pdf">
+        {({ toPdf }) => (
+          <button
+            onClick={toPdf}
+            className="secondary-btn center mr-3 border-[1px] px-2 py-2 text-xs md:w-fit "
+            href=""
+
+          >
+            Download CV
+          </button>
+        )}
+      </Pdf>
+        
+        <a className="primary-btn center mr-3 border-[1px] px-2 py-2 text-xs md:w-fit " href="/profile">
+          <p>Edit Profile</p>
         </a>
       </div>
     </div>
+    </>
   );
 }
 

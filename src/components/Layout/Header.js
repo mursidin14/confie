@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Header({ offCanvas, handleNav, PageName }) {
   return (
-    <header className="flex items-center justify-between bg-white px-9 shadow-md">
+    <header className="flex items-center justify-between bg-white px-9 shadow-md ">
       <button onClick={handleNav} className="lg:hidden block"> 
         <svg
           className="block"

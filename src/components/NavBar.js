@@ -27,7 +27,7 @@ export default function NavBar({page, offCanvas, userId}) {
       {
         alias: 'lowongan kerja',
         name: 'Lowongan Kerja',
-        link: '/lowongan',
+        link: `/lowongan/${userId}`,
         icon_active: '/nav_icon/job_offer.png',
         icon_inactive: '/nav_icon/i_job_offer.png',
       },
