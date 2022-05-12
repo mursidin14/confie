@@ -19,28 +19,28 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
       {
         alias: 'personal development plan',
         name: 'Personal Development Plan',
-        link: '/pdp',
+        link: `/pdp/${userId}`,
         icon_active: '/nav_icon/plan.png',
         icon_inactive: '/nav_icon/i_plan.png',
       },
       {
         alias: 'lowongan kerja',
         name: 'Lowongan Kerja',
-        link: '/lowongan',
+        link:  `/lowongan/${userId}`,
         icon_active: '/nav_icon/job_offer.png',
         icon_inactive: '/nav_icon/i_job_offer.png',
       },
       {
         alias: 'lamaran saya',
         name: 'Lamaran Saya',
-        link: '/lamaran',
+        link: `/lamaran/${userId}`,
         icon_active: '/nav_icon/applicant.png',
         icon_inactive: '/nav_icon/i_applicant.png',
       },
       {
         alias: 'kelas online',
         name: 'Kelas Online',
-        link: '/kelas',
+        link: `/kelas/${userId}`,
         icon_active: '/nav_icon/class.png',
         icon_inactive: '/nav_icon/i_class.png',
       },
@@ -48,7 +48,7 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
     let page = PageName.toLowerCase();
     return (
       <aside
-        className={` fixed block min-h-screen w-8/12 bg-[#1E1E2D] transition-all md:w-4/12 lg:hidden ${
+        className={` fixed block min-h-screen w-8/12 bg-[#1E1E2D] transition-all md:w-4/12 lg:hidden z-10 ${
           !offCanvas ? '-left-full' : 'left-0'
         }`}
       >
@@ -57,7 +57,7 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
           className="absolute top-9 right-4 font-bold text-white"
         >
           <svg
-          className='w-5 h-5'
+          className='w-4 h-4'
             width="6"
             height="6"
             viewBox="0 0 6 6"

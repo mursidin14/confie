@@ -19,7 +19,7 @@ export default function TargetCard({userId}) {
   let quarter = getQuarter();
 
   return (
-    <div className="mt-4 rounded-md bg-white py-7  text-left shadow-md lg:w-6/12 ">
+    <div className="mt-4 rounded-md bg-white py-7  text-left shadow-mine lg:w-6/12 ">
       <div className="flex justify-between px-8 pb-2">
         <div className="flex items-center gap-4 ">
           <h3 className="py- text-base">Target Tahunan</h3>

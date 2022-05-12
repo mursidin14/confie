@@ -12,6 +12,9 @@ export default function WizardFormFirstPage(props) {
         })
         setTypeAccount(e.target.value)
     }
+    function handleContinue() {
+        props.onSubmit()
+    }
     
   return (
     <LayoutRegister data={data} pageNumber={1}>
@@ -99,7 +102,7 @@ export default function WizardFormFirstPage(props) {
             </div>
 
             <div className="flex justify-end">
-              <button onClick={props.onSubmit} type="submit" className="primary-btn my-10 lg:w-[150px] px-6 w-full">
+              <button onClick={handleContinue} type="submit" className="primary-btn my-10 lg:w-[150px] px-6 py-3 w-full">
                 CONTINUE
               </button>
             </div>

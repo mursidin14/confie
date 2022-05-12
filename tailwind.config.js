@@ -15,7 +15,10 @@ module.exports = {
         'soft-gray': '#F5F8FA',
         'pale-orange': '#FFF5E5',
       },
+      boxShadow: {
+        'mine': '0px 1px 10px 2px rgba(0,0,0,0.17);',
+      }
     },
   },
-  plugins: [],
+  plugins: [],  
 }

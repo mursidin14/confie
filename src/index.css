@@ -17,10 +17,10 @@
     @apply w-full h-[35px] rounded-md bg-soft-gray p-5;
   }
   .primary-btn{
-    @apply text-white bg-orange rounded-md w-full h-[47px];
+    @apply text-white bg-orange rounded-md w-full;
   }
   .secondary-btn{
-    @apply text-orange border-2 border-orange w-full rounded-md  h-[47px];
+    @apply text-orange border-2 border-orange rounded-md w-full ;
   }
   .label{
     @apply text-left text-sm font-semibold block mb-2 text-black;
@@ -35,5 +35,9 @@ body{
 
 .image-upload>input {
   display: none;
+}
+
+.requirments{
+  list-style-type: '\2212';
 }
 

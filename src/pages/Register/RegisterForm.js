@@ -11,9 +11,7 @@ export default function Register() {
     "gender": "L",
   });
   // FUNCTION FOR REQUEST REGISTER 
-  async function sendRegistration(){
-      
-  }
+ 
   async function nextPage() {
     if (page === 4){
       if (typeof dataAccount['date_of_birth'] !== 'number') {
@@ -33,7 +31,6 @@ export default function Register() {
         );
         console.log(res)
         if(res.ok === false) return alert(`GAGAL LOGIN BANH😥`);
-        const data = await res.json();
 
     }
     setPage(page + 1);

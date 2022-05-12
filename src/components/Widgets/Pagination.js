@@ -16,7 +16,7 @@ export default function Pagination() {
   return (
     <div className="my-4 flex items-center gap-7">
       <svg
-        className={`${page === 1 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'} cursor-pointer transform: rotate-180`}
+        className={`${page === 1 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'} cursor-pointer transform: rotate-180 `}
         onClick={handleDecrement}
         width="6"
         height="10"

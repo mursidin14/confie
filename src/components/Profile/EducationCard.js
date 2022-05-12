@@ -2,11 +2,6 @@ import React, {useState} from 'react';
 import Pagination from 'components/Widgets/Pagination';
 import ModalEducation from 'components/Modal/ModalEducation';
 export default function EducationCard() {
-  const [modal, setModal] = useState(false);
-
-  function handleClick() {
-    setModal(!modal);
-  }
   let educationHistory = [
     {
       id: 1,

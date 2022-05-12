@@ -15,6 +15,7 @@ export default function PersonalDevelopment() {
       let data = await response.json();
       setTarget(data);
       setLoading(false)
+      console.log(data)
     }
     getTarget()
   },[])
@@ -29,7 +30,7 @@ export default function PersonalDevelopment() {
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-            <Table userId={id} items={target} loading={loading}></Table>
+          <Table userId={id} items={target} loading={loading}></Table>
           </div>
         </div>
       </div>
@@ -40,7 +41,9 @@ export default function PersonalDevelopment() {
 function Table({ items, userId, loading}) {
   
   return (
-    <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
+    <div>
+    {items == "Not found" ? <div className='text-center'>There's No Plan</div> :
+      <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
         <tr className="h-[60px] text-sm text-[#181C32]">
           <th className="w-[5%] pl-10 text-left">Nama</th>
@@ -133,5 +136,7 @@ function Table({ items, userId, loading}) {
         ))}
       </tbody>
     </table>
+    }
+   </div>
   );
 }

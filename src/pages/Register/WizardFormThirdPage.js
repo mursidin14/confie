@@ -103,17 +103,13 @@ export default function WizardFormThirdPage(props) {
               />
             ))}
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
-              <button
-                type="button"
-                onClick={props.previousPage}
-                className="secondary-btn w-full px-6 lg:w-[150px]"
-              >
+              <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 py-3 w-full">
                 PREVIOUS
               </button>
               <button
-                type="button"
+                type="submit"
                 onClick={props.onSubmit}
-                className="primary-btn w-full px-6 lg:w-[150px]"
+                className="primary-btn lg:w-[150px] px-6 py-3 w-full"
               >
                 CONTINUE
               </button>

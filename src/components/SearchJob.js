@@ -3,11 +3,11 @@ import SalaryFilter from 'components/SalaryFilter';
 
 export default function SearchJob() {
   return (
-    <div className="flex justify-between gap-7 rounded-md bg-white py-7 px-7 shadow-md">
-    <input className="w-full bg-[#F5F8FA] px-5 placeholder:italic rounded-md" type="text" placeholder='Developer...'/>
-    <input className="w-full bg-[#F5F8FA] px-5 placeholder:italic rounded-md" type="text" placeholder='Makassar...'/>
+    <div className="flex justify-between sm:gap-7 gap-3 rounded-md bg-white sm:p-7 p-3 shadow-mine flex-col sm:flex-row lg:text-sm text-xs">
+    <input className="w-full bg-[#F5F8FA] sm:px-5 p-3 placeholder:italic rounded-md" type="text" placeholder='Developer...'/>
+    <input className="w-full bg-[#F5F8FA] sm:px-5 p-3 placeholder:italic rounded-md" type="text" placeholder='Makassar...'/>
     <SalaryFilter></SalaryFilter>
-    <button className="flex items-center justify-center gap-2 rounded-md bg-[#FE9A00] px-5 py-2 text-white">
+    <button className="flex items-center justify-center gap-2 rounded-md primary-btn w-fit px-5 py-2">
       <svg
         width="15"
         height="15"

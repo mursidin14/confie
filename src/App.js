@@ -3,11 +3,15 @@ import Login from 'pages/Login';
 import Register from 'pages/Register/RegisterForm';
 import Dashboard from 'pages/Dashboard';
 import Profile from 'pages/Profile';
-import PersonalDevelopment from 'pages/PersonalDevelopment';
-import PersonalDevelopmentDetail from 'pages/PersonalDevelopmentDetail';
-import CurriculumVitae from 'pages/CurriculumVitae';
-import { Routes, Route } from 'react-router-dom';
-import JobApplication from 'pages/JobApplication';
+import PersonalDevelopment from 'pages/DevelopmentPlan/PersonalDevelopment';
+import PersonalDevelopmentDetail from 'pages/DevelopmentPlan/PersonalDevelopmentDetail';
+import CurriculumVitae from 'components/CurriculumVitae';
+import Jobs from 'pages/Job/Jobs';
+import JobDetail from 'pages/Job/JobDetail';
+import Application from 'pages/Application/Application';
+import ApplicationDetail from 'pages/Application/ApplicationDetail';
+import NotFound from 'pages/NotFound';
+import { Routes, Route, Router } from 'react-router-dom';
 
 function App() {
   return (
@@ -20,7 +24,11 @@ function App() {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/pdp/:id" element={<PersonalDevelopment />} />
         <Route path="/pdp/:id/detail/:idDetail" element={<PersonalDevelopmentDetail />} />
-        <Route path="/lowongan/:id" element={<JobApplication />} />
+        <Route path="/lowongan/:id" element={<Jobs />}/>
+        <Route path="/lowongan/:id/detailJob/:idDetail" element={<JobDetail />} />
+        <Route path="/lamaran/:id" element={<Application />} />
+        <Route path="/detailApplication" element={<ApplicationDetail />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

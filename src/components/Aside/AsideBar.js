@@ -5,10 +5,10 @@ export default function ASideBar({ offCanvas, handleNav, PageName, userId }) {
     return (
       <aside
         className={`bg-[#1E1E2D] transition-all hidden lg:block  ${
-          offCanvas ? 'flex flex-col items-center min-h-screen w-24 ' : 'min-h-screen w-[310px]'
+          offCanvas ? 'flex flex-col items-center min-h-screen w-24 ' : 'min-h-screen w-[340px]'
         }`}
       >
-        <div className={offCanvas ? 'w-20 fixed' : 'w-[230px] fixed'}>
+        <div className={offCanvas ? 'w-20 fixed' : 'w-[250px] fixed'}>
         <div className="pt-5 flex items-center justify-between pl-2">
           <img
             className={offCanvas ? 'w-9' : 'w-24'}

@@ -25,13 +25,13 @@ export default function Login() {
             </div>
             <input required className="input-form " type="password" />
 
-            <button type="submit" className="primary-btn mt-10 text-center">
+            <button type="submit" className="primary-btn mt-10 text-center px-5 py-3">
               LOGIN
             </button>
           </form>
           <p className="my-3 font-semibold">OR</p>
           <a
-            className="secondary-btn flex items-center justify-center"
+            className="secondary-btn flex items-center justify-center px-5 py-3"
             href="/register"
           >
             REGISTER

@@ -34,14 +34,14 @@ export default function NavBar({page, offCanvas, userId}) {
       {
         alias: 'lamaran saya',
         name: 'Lamaran Saya',
-        link: '/lamaran',
+        link: `/lamaran/${userId}`,
         icon_active: '/nav_icon/applicant.png',
         icon_inactive: '/nav_icon/i_applicant.png',
       },
       {
         alias: 'kelas online',
         name: 'Kelas Online',
-        link: '/kelas',
+        link: `/kelas/${userId}`,
         icon_active: '/nav_icon/class.png',
         icon_inactive: '/nav_icon/i_class.png',
       },
@@ -50,10 +50,10 @@ export default function NavBar({page, offCanvas, userId}) {
       <nav className="bg-[#1E1E2D] py-2  w-fit">
         <ul className={`${offCanvas ? 'flex flex-col' : 'block'}`}>
           {menu.map((item, index) => (
-            <li key={index} className={`${offCanvas ? 'my-3' : 'my-4'}`}>
+            <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
               <a href={item.link} className="flex items-center gap-5">
                 <img
-                  className="w-4"
+                  className="sm:w-5 w-4"
                   src={
                     item.alias === pageName
                       ? item.icon_active
@@ -63,7 +63,7 @@ export default function NavBar({page, offCanvas, userId}) {
                 />
                 <p
                   className={ 
-                    `text-xs ${offCanvas ? 'hidden' : 'block'} ${item.alias === pageName ? 'text-white' : 'text-white/40'}`
+                    `sm:text-[13px] text-xs ${offCanvas ? 'hidden' : 'block'} ${item.alias === pageName ? 'text-white' : 'text-white/40'}`
                   }
                 >
                   {item.name}

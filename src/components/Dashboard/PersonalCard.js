@@ -1,10 +1,10 @@
 import React from 'react';
 import Status from './Status';
 import Pdf from 'react-to-pdf';
-import CurriculumVitae from 'pages/CurriculumVitae';
+import CurriculumVitae from 'components/CurriculumVitae';
 export default function PersonalCard({}) {
   return (
-    <div className="rounded-md bg-white py-7 px-3 shadow-md sm:px-8 ">
+    <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
         <img
           className="w-28 rounded-md object-cover md:w-48"
@@ -15,7 +15,7 @@ export default function PersonalCard({}) {
           <div className="items-center justify-between lg:flex">
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
-                <h3 className="text-left text-xl font-semibold">
+                <h3 className="text-left sm:text-xl text-lg font-semibold">
                   Rahmat Hidayat
                 </h3>
                 <svg
@@ -63,16 +63,16 @@ function ButtonDashboard({}) {
 
   return (
     <>
-    <div className='absolute -top-[1500px]' ref={cv}>
+      <div className='absolute -top-[1500px]' ref={cv}>
         <CurriculumVitae></CurriculumVitae>
       </div>
       <div className="my-3 flex w-full">
-      <div className="flex items-center w-full ">
+      <div className="flex items-center sm:justify-start justify-between w-full gap-3">
       <Pdf targetRef={cv} filename="cv.pdf">
         {({ toPdf }) => (
           <button
             onClick={toPdf}
-            className="secondary-btn center mr-3 border-[1px] px-2 py-2 text-xs md:w-fit "
+            className="secondary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
             href=""
 
           >
@@ -81,7 +81,7 @@ function ButtonDashboard({}) {
         )}
       </Pdf>
         
-        <a className="primary-btn center mr-3 border-[1px] px-2 py-2 text-xs md:w-fit " href="/profile">
+        <a className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit " href="/profile">
           <p>Edit Profile</p>
         </a>
       </div>

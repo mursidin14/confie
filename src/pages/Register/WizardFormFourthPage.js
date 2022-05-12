@@ -33,15 +33,15 @@ export default function WizardFormFourthPage(props) {
             <InputTag data={data} onChange={onChange}></InputTag>
             
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
-            <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 w-full">
+              <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 py-3 w-full">
                 PREVIOUS
               </button>
               <button
-                type='button'
+                type="submit"
                 onClick={props.onSubmit}
-                className="primary-btn lg:w-[150px] px-6 w-full"
+                className="primary-btn lg:w-[150px] px-6 py-3 w-full"
               >
-                SUBMIT
+                CONTINUE
               </button>
             </div>
         </div>

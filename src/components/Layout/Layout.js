@@ -26,10 +26,10 @@ export default function Layout({PageName, children, userId}) {
       <section
         className={`${
           !offCanvas ? 'w-full' : 'w-full'
-        } min-h-screen bg-[#E5E5E5]`}
+        } min-h-screen bg-[#FFFFFF]`}
       >
         <Header handleNav={handleNav} PageName={PageName} />
-        <div className="my-4 lg:mx-7 mx-3 main-layout">{children}</div>
+        <div className="my-4 lg:mx-7 mx-3 main-layout py-5">{children}</div>
       </section>
     </main>
   );

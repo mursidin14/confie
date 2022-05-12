@@ -2,7 +2,7 @@ import React from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
 export default function ClassCard() {
   return (
-    <div className='rounded-md bg-white py-7  shadow-md lg:w-6/12 mt-4 text-left'>
+    <div className='rounded-md bg-white py-7  shadow-mine lg:w-6/12 mt-4 text-left'>
       <div className='flex justify-between pb-2 px-8'>
         <h3 className="text-base py-">Kelas Aktif</h3>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
