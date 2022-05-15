@@ -2,7 +2,7 @@ import React from 'react';
 export default function CurriculumVitae() {
   return (
     <main className="flex ">
-      <section className="sm:w-[35%] bg-dark-blue py-10 px-7 text-white">
+      <section className="sm:w-[35%] bg-dark-blue py-10 px-7 text-white h-[2480px]">
         <div className="mx-auto w-fit ">
           <img className="rounded-full" src="/person.png" alt="" />
           <div className="mt-5 flex items-center gap-3">
@@ -27,12 +27,11 @@ export default function CurriculumVitae() {
           </div>
           <p className="mt-1 text-center text-sm">Teknik Informatika</p>
         </div>
-        <EmploymentStatus />
         <BasicInformation />
         <SkillInfomation />
         <CertificationInformation />
       </section>
-      <section className='text-[#7E8299] w-[500px]'>
+      <section className='text-[#7E8299] w-[500px]   '>
           <AboutMe></AboutMe>
           <WorkExperience></WorkExperience>
           <IntershipExperience></IntershipExperience>
@@ -174,11 +173,11 @@ function AboutMe({}) {
   return (
     <article className="mt-10">
       <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left text-xl font-semibold text-white">
+        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
           About Me
         </p>
       </div>
-      <p className='text-sm text-left pl-8 my-6 sm:w-[500px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod expedita ut, est voluptate voluptatibus nulla doloremque temporibus obcaecati, deserunt accusantium ad fuga aspernatur! Libero culpa, velit illum nulla quas debitis.</p>
+      <p className='sm:text-sm text-xs text-left pl-8 my-6  sm:w-[500px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod expedita ut, est voluptate voluptatibus nulla doloremque temporibus obcaecati, deserunt accusantium ad fuga aspernatur! Libero culpa, velit illum nulla quas debitis.</p>
     </article>
   );
 }
@@ -187,14 +186,14 @@ function WorkExperience({}) {
   return (
     <article>
       <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left text-xl font-semibold text-white">
+        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
           Work Experience
         </p>
       </div>
       <div className="my-8 pl-8 text-left">
         <p className="text-xl text-[#3F4254]">Junior React Developer</p>
         <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="text-sm">
+        <p className="sm:text-sm text-xs">
           First, a disclaimer – the entire process of writing a blog post often
           takes more than a couple of hours, even if you can type eighty words
           as per minute and your writing skills are sharp.
@@ -203,7 +202,7 @@ function WorkExperience({}) {
       <div className="my-8 pl-8 text-left">
         <p className="text-xl text-[#3F4254]">Junior React Developer</p>
         <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="text-sm">
+        <p className="sm:text-sm text-xs">
           First, a disclaimer – the entire process of writing a blog post often
           takes more than a couple of hours, even if you can type eighty words
           as per minute and your writing skills are sharp.
@@ -217,14 +216,14 @@ function IntershipExperience({}) {
   return (
     <article>
       <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left text-xl font-semibold text-white">
+        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
           Internship Experience
         </p>
       </div>
       <div className="my-8 pl-8 text-left">
         <p className="text-xl text-[#3F4254]">Junior React Developer</p>
         <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="text-sm">
+        <p className="sm:text-sm text-xs">
           First, a disclaimer – the entire process of writing a blog post often
           takes more than a couple of hours, even if you can type eighty words
           as per minute and your writing skills are sharp.
@@ -239,14 +238,14 @@ function EducationHistory({}) {
   return (
     <article>
       <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left text-xl font-semibold text-white">
+        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
           Education History
         </p>
       </div>
       <div className="my-8 pl-8 text-left">
         <p className="text-xl text-[#3F4254]">Junior React Developer</p>
         <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="text-sm">
+        <p className="sm:text-sm text-xs">
           First, a disclaimer – the entire process of writing a blog post often
           takes more than a couple of hours, even if you can type eighty words
           as per minute and your writing skills are sharp.

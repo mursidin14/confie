@@ -3,6 +3,7 @@ import Login from 'pages/Login';
 import Register from 'pages/Register/RegisterForm';
 import Dashboard from 'pages/Dashboard';
 import Profile from 'pages/Profile';
+import ProfileCandidate from 'pages/ProfileCandidate';
 import PersonalDevelopment from 'pages/DevelopmentPlan/PersonalDevelopment';
 import PersonalDevelopmentDetail from 'pages/DevelopmentPlan/PersonalDevelopmentDetail';
 import CurriculumVitae from 'components/CurriculumVitae';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route path="/cv" element={<CurriculumVitae />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/:id" element={<ProfileCandidate />} />
         <Route path="/pdp/:id" element={<PersonalDevelopment />} />
         <Route path="/pdp/:id/detail/:idDetail" element={<PersonalDevelopmentDetail />} />
         <Route path="/lowongan/:id" element={<Jobs />}/>

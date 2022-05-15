@@ -12,7 +12,7 @@ export default function WizardFormFourthPage(props) {
   return (
     <LayoutRegister data={data} pageNumber={4}>
       <div className="mt-10 flex px-7 ">
-        <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
+        <div className="m-auto mb-5 w-full lg:mb-0 lg:w-8/12">
           <h2 className="my-6 text-2xl font-semibold">
             Add Your {data.role === 'personal' ? 'Skill And Passion' : 'Business Detail'}
           </h2>
@@ -27,7 +27,6 @@ export default function WizardFormFourthPage(props) {
             />
             <label className="label">
             {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
-
             </label>
             
             <InputTag data={data} onChange={onChange}></InputTag>
