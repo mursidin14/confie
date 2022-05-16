@@ -48,7 +48,21 @@ export default function WizardFormSecondPage(props) {
       required: true,
     },
   ];
+  function generateValidation() {
+    let validation = data?.full_name && data?.full_name !== ''
+    inputs.forEach((input) => {
+      if (input.required) {
+        validation = validation && data[input.name] && data[input.name] !== ''
+    }})
+    return validation ;
+  }
 
+  function handleSubmit() {
+    if(generateValidation() && data.password === data.password_confirmation){
+      props.onSubmit()
+    }  
+   
+  }
   return (
     <LayoutRegister data={data} pageNumber={2}>
       <div className="mt-10 flex px-7 ">
@@ -71,7 +85,7 @@ export default function WizardFormSecondPage(props) {
               </button>
               <button
                 type="submit"
-                onClick={props.onSubmit}
+                onClick={handleSubmit}
                 className="primary-btn lg:w-[150px] px-6 py-3 w-full"
               >
                 CONTINUE

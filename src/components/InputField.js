@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 export default function InputField(props) {
   const { label,data, onChange, errorMessage, ...inputProps } = props;
   const [focused, setFocused] = useState(false);
-
+  console.log(data)
   function handleChange(e) {
     onChange({
       ...data,
@@ -15,10 +15,11 @@ export default function InputField(props) {
   };
   return (
     <>
-      <label className="label">
+      <label className="label after:content-['*'] after:text-pink-500 after:ml-1">
         {label}
       </label>
       <input
+        value={data[inputProps.name]}
         onChange={handleChange}
         className="input-form peer mb-3"
         {...inputProps}

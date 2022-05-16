@@ -1,15 +1,9 @@
 import React from 'react';
-import Layout from 'components/Layout/Layout';
-import Header from 'components/Layout/Header';
 import { useParams } from 'react-router-dom';
 
 export default function ProfileCandidate() {
-  const { id } = useParams();
 
   return (
-  
-
-   
       <main className="flex lg:p-5 md:w-fit md:mx-auto shadow-mine">
         <section className="bg-dark-blue py-10 sm:px-7 px-3 text-white ">
           <div className="">

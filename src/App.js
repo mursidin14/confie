@@ -1,16 +1,20 @@
 import './App.css';
 import Login from 'pages/Login';
 import Register from 'pages/Register/RegisterForm';
-import Dashboard from 'pages/Dashboard';
-import Profile from 'pages/Profile';
-import ProfileCandidate from 'pages/ProfileCandidate';
-import PersonalDevelopment from 'pages/DevelopmentPlan/PersonalDevelopment';
-import PersonalDevelopmentDetail from 'pages/DevelopmentPlan/PersonalDevelopmentDetail';
-import CurriculumVitae from 'components/CurriculumVitae';
-import Jobs from 'pages/Job/Jobs';
-import JobDetail from 'pages/Job/JobDetail';
-import Application from 'pages/Application/Application';
-import ApplicationDetail from 'pages/Application/ApplicationDetail';
+import Dashboard from 'pages/Candidate/Dashboard';
+import Profile from 'pages/Candidate/Profile';
+import ProfileCandidate from 'pages/Candidate/ProfileCandidate';
+import PersonalDevelopment from 'pages/Candidate/DevelopmentPlan/PersonalDevelopment';
+import PersonalDevelopmentDetail from 'pages/Candidate/DevelopmentPlan/PersonalDevelopmentDetail';
+import Jobs from 'pages/Candidate/Job/Jobs';
+import JobDetail from 'pages/Candidate/Job/JobDetail';
+import Application from 'pages/Candidate/Application/Application';
+import ApplicationDetail from 'pages/Candidate/Application/ApplicationDetail';
+
+import Business from 'pages/Business/Index';
+import BusinessProfile from 'pages/Business/Profile';
+
+
 import NotFound from 'pages/NotFound';
 import { Routes, Route, Router } from 'react-router-dom';
 
@@ -21,7 +25,6 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard/:id" element={<Dashboard />} />
-        <Route path="/cv" element={<CurriculumVitae />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/:id" element={<ProfileCandidate />} />
         <Route path="/pdp/:id" element={<PersonalDevelopment />} />
@@ -30,6 +33,10 @@ function App() {
         <Route path="/lowongan/:id/detailJob/:idDetail" element={<JobDetail />} />
         <Route path="/lamaran/:id" element={<Application />} />
         <Route path="/detailApplication" element={<ApplicationDetail />} />
+
+        <Route path="/business/:id" element={<Business />} />
+        <Route path="/business/profile/:id" element={<BusinessProfile />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

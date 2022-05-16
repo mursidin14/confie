@@ -19,23 +19,43 @@ export default function WizardFormThirdPage(props) {
       }`,
       type: 'date',
       name: 'date_of_birth',
+      required: true
     },
     {
       label: 'Country',
       type: 'text',
       name: 'country',
+      required: true
     },
     {
       label: 'Province',
       type: 'text',
       name: 'province',
+      required: true
     },
     {
       label: 'City',
       type: 'text',
       name: 'city',
+      required: true
     },
   ];
+  function generateValidation() {
+    let validation = data?.date_of_birth && data?.date_of_birth !== ''
+    inputs.forEach((input) => {
+      if (input.required) {
+        validation = validation && data[input.name] && data[input.name] !== ''
+    }})
+    return validation ;
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if(generateValidation()){
+      props.onSubmit()
+    }
+    
+  }
   return (
     <LayoutRegister data={data} pageNumber={3}>
       <div className="mt-10 flex px-7 ">
@@ -96,8 +116,7 @@ export default function WizardFormThirdPage(props) {
               <InputField
                 key={input.label}
                 label={input.label}
-                type={input.type}
-                name={input.name}
+                {...input}
                 data={data}
                 onChange={onChange}
               />
@@ -108,7 +127,7 @@ export default function WizardFormThirdPage(props) {
               </button>
               <button
                 type="submit"
-                onClick={props.onSubmit}
+                onClick={handleSubmit}
                 className="primary-btn lg:w-[150px] px-6 py-3 w-full"
               >
                 CONTINUE

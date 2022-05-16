@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 export default function InputTag({data, onChange}) {
-    const [tags, setTags] = useState([]);
+    const [tags, setTags] = useState(data.skill ?? []);
     let propertiesName = data.type_account === 'personal' ? 'skill' : 'field'
 	const removeTags = indexToRemove => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);

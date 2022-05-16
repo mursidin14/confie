@@ -32,7 +32,7 @@ export default function PersonalInfomationCard() {
 
 
   return (
-      <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
+      <div className="mt-4 rounded-md bg-white pt-7 pb-2 text-left shadow-md ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">Personal Infomation</h3>
          <ModalProfile></ModalProfile>

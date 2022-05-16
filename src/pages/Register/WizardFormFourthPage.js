@@ -20,6 +20,7 @@ export default function WizardFormFourthPage(props) {
             {data.role === 'personal' ? 'About Me:' : 'About the Company:'}
             </label>
             <textarea
+              value={data.about}
               className="h-[150px] w-full bg-[#F5F8FA] p-5 lg:h-[200px] box-border"
               type="text"
               name="about"

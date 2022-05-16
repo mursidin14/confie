@@ -2,6 +2,8 @@ import React from 'react';
 import Layout from 'components/Layout/Layout';
 import Pagination from 'components/Widgets/Pagination';
 import SelectBox from 'components/SelecBox';
+import { useParams } from "react-router-dom";
+
 export default function Application() {
   let educationHistory = [
     {
@@ -30,8 +32,10 @@ export default function Application() {
     { name: 'Wawancara' },
     { name: 'SELESAI' },
   ];
+  const { id } = useParams();
+
   return (
-    <Layout userId={'1'} PageName={'Lamaran Saya'}>
+    <Layout userId={id} PageName={'Lamaran Saya'}>
       <div className="rounded-md bg-white p-6 shadow-mine">
         <div className="lg:flex w-full items-center justify-between">
           <div className="flex items-center justify-between gap-3 rounded-md border-2 border-dashed border-[#009EF7] bg-[#F1FAFF] lg:p-3 p-2 w-fit">

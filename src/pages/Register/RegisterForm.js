@@ -10,8 +10,8 @@ export default function Register() {
     "role": "personal",
     "gender": "L",
   });
+  
   // FUNCTION FOR REQUEST REGISTER 
- 
   async function nextPage() {
     if (page === 4){
       if (typeof dataAccount['date_of_birth'] !== 'number') {
