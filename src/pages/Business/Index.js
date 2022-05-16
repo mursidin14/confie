@@ -244,8 +244,8 @@ function PersonalCard({id}) {
 function ProfileCompletion({}) {
   return (
     <div className="mt-3 w-full ">
-      <div className="flex justify-between">
-        <p className="mb-2 text-left text-base text-[#B5B5C3]">
+      <div className="flex justify-between text-xs sm:text-base">
+        <p className="mb-2 text-left  text-[#B5B5C3]">
           Company Completion
         </p>
         <p>80%</p>

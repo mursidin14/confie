@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from 'components/Layout/Header';
 import ASideBarBusiness from 'components/Aside/AsideBarBusiness';
-import ASideBarMobile from 'components/Aside/ASideBarMobile';
+import ASideBarMobileBusiness from 'components/Aside/ASideBarMobileBusiness';
 export default function LayoutBusiness({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
 
@@ -17,12 +17,12 @@ export default function LayoutBusiness({PageName, children, userId}) {
         PageName={PageName}
         userId={userId}
       ></ASideBarBusiness>
-      <ASideBarMobile
+      <ASideBarMobileBusiness
         offCanvas={offCanvas}
         handleNav={handleNav}
         PageName={PageName}
         userId={userId}
-      ></ASideBarMobile>
+      ></ASideBarMobileBusiness>
       <section
         className={`${
           !offCanvas ? 'w-full' : 'w-full'

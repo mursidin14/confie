@@ -1,46 +1,46 @@
 import React from 'react'
 
-export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId }) {
+export default function ASideBarMobileBusiness({ offCanvas, handleNav, PageName , userId }) {
     let menu = [
       {
         alias: 'dashboard',
         name: 'Dashboard',
-        link: `/dashboard/${userId}`,
+        link: `/business/${userId}`,
         icon_active: '/nav_icon/dashboard.png',
         icon_inactive: '/nav_icon/i_dashboard.png',
       },
       {
-        alias: 'profile',
-        name: 'Profile',
-        link: `/profile/${userId}`,
+        alias: 'profile perusahaan',
+        name: 'Profile Perusahaan',
+        link: `/business/profile/${userId}`,
         icon_active: '/nav_icon/profile.png',
         icon_inactive: '/nav_icon/i_profile.png',
       },
       {
-        alias: 'personal development plan',
-        name: 'Personal Development Plan',
-        link: `/pdp/${userId}`,
+        alias: 'team member',
+        name: 'Team Member',
+        link: `/notcreateyet/${userId}`,
         icon_active: '/nav_icon/plan.png',
         icon_inactive: '/nav_icon/i_plan.png',
       },
       {
         alias: 'lowongan kerja',
         name: 'Lowongan Kerja',
-        link:  `/lowongan/${userId}`,
+        link: `/notcreateyet/${userId}`,
         icon_active: '/nav_icon/job_offer.png',
         icon_inactive: '/nav_icon/i_job_offer.png',
       },
       {
-        alias: 'lamaran saya',
-        name: 'Lamaran Saya',
-        link: `/lamaran/${userId}`,
+        alias: 'kelas bisnis',
+        name: 'Kelas Bisinis',
+        link: `/notcreateyet/${userId}`,
         icon_active: '/nav_icon/applicant.png',
         icon_inactive: '/nav_icon/i_applicant.png',
       },
       {
-        alias: 'kelas online',
-        name: 'Kelas Online',
-        link: `/kelas/${userId}`,
+        alias: 'talent Pool',
+        name: 'Talent Pool',
+        link: `/notcreateyet/${userId}`,
         icon_active: '/nav_icon/class.png',
         icon_inactive: '/nav_icon/i_class.png',
       },

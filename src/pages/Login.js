@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InputField from 'components/InputField';
 import AsideLogin from 'components/Aside/AsideLogin';
 export default function Login() {
+  useEffect(() => {
+    document.title = "Login";
+  }, [])
   return (
     <main className="min-h-screen lg:flex">
       <AsideLogin />
