@@ -19,7 +19,7 @@ export default function InputTag({data, onChange}) {
 	};
   
   return (
-    <div className='flex flex-wrap bg-soft-gray rounded-md w-full h-fit py-5 px-3 border-2 border-transparent focus-within:border-black'>
+    <div className='flex flex-wrap bg-soft-gray rounded-md  h-fit py-5 px-3 border-2 border-transparent focus-within:border-black '>
         <ul className='flex flex-wrap'>
             {tags.map((tag, index) => (
                 <li className='flex items-center bg-[#A1A5B7] rounded-md px-3 py-1 m-2 gap-3 text-white' key={index}>
@@ -32,7 +32,7 @@ export default function InputTag({data, onChange}) {
         name={data.role === 'personal' ? 'skill' : 'field'}
         placeholder={data.role === 'personal' ? 'Add your skill' : 'Add field'}
         onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
-        className='bg-soft-gray focus:border-0 focus:outline-none px-3' type="text"/>
+        className='bg-soft-gray focus:border-0 focus:outline-none pl-3 w-fit' type="text"/>
     </div>    
   )
 }
