@@ -19,8 +19,11 @@ export default function Register() {
   async function nextPage() {
     if (page === 4) {
       if (typeof dataAccount['date_of_birth'] !== 'number') {
-        let transform_date = dataAccount['date_of_birth'].split('-').reverse().join("");
-      dataAccount['date_of_birth'] = parseInt(transform_date);
+        let transform_date = dataAccount['date_of_birth']
+          .split('-')
+          .reverse()
+          .join('');
+        dataAccount['date_of_birth'] = parseInt(transform_date);
       }
       const res = await fetch(
         'https://confie.upanastudio.com/backend/api/register',
@@ -120,7 +123,7 @@ export default function Register() {
                           </svg>
                         </div>
                         <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                         Register Failed!
+                          Register Failed!
                         </p>
                       </div>
                     </Dialog.Panel>
