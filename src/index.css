@@ -47,3 +47,8 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.bg-banner{
+  background: rgb(27,27,29);
+  background: linear-gradient(0deg, rgba(27,27,29,1) 0%, rgba(0,0,0,0) 100%); 
+}

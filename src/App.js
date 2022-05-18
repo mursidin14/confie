@@ -13,6 +13,7 @@ import ApplicationDetail from 'pages/Candidate/Application/ApplicationDetail';
 
 import Business from 'pages/Business/Index';
 import BusinessProfile from 'pages/Business/Profile';
+import CompanyDetail from 'pages/Business/CompanyDetail';
 
 
 import NotFound from 'pages/NotFound';
@@ -36,6 +37,7 @@ function App() {
 
         <Route path="/business/:id" element={<Business />} />
         <Route path="/business/profile/:id" element={<BusinessProfile />} />
+        <Route path="/company/:id" element={<CompanyDetail />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
