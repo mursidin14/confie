@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-export default function Pagination() {
+export default function Pagination({length}) {
+  let lengthData = length;
   const [page, setPage] = useState(1);
   let active = `bg-[#FE9A00] px-5 py-2 rounded-md text-white`;
   function handleDecrement() {
@@ -32,22 +33,22 @@ export default function Pagination() {
       </svg>
 
       <button
-        onClick={() => setPage(1)}
-        className={`${page === 1 ? active : ''}`}
+        onClick={() => setPage(page)}
+        className={`${page === page ? active : ''}`}
       >
-        1
+        {page}
       </button>
       <button
-        onClick={() => setPage(2)}
-        className={`${page === 2 ? active : ''}`}
+        onClick={() => setPage(page+1)}
+        className={`${page === page+1 ? active : ''}`}
       >
-        2
+       {page+1}
       </button>
       <button
-        onClick={() => setPage(3)}
-        className={`${page === 3 ? active : ''}`}
+        onClick={() => setPage(page+2)}
+        className={`${page === page+2 ? active : ''}`}
       >
-        3
+      {page+2}
       </button>
       <svg
         className={`${page === 3 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'} cursor-pointer`}
