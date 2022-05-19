@@ -7,11 +7,11 @@ import WizardFormFourthPage from './WizardFormFourthPage';
 import WizardComplete from './WizardComplete';
 export default function Register() {
   const [page, setPage] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
   const [dataAccount, setDataAccount] = useState({
     role: 'personal',
     gender: 'L',
   });
+  const [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
   }

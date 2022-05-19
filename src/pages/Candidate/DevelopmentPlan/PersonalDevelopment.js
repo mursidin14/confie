@@ -56,7 +56,7 @@ function Table({ items, userId, loading}) {
         {loading && <tr><td colSpan="4" className="text-sm text-center py-3">Loading...</td></tr>}
         {!loading && items.map((item, index) => (
           <tr
-            className="mt-3 h-20 border-b-2 border-gray-300/50 text-sm text-[#7E8299]"
+            className="mt-3 h-20 border-b-2 border-gray-300/50 text-sm text-[#7E8299] last:border-b-0"
             key={index}
           >
             <td className="w-[10%] pl-10 text-left ">{item.target_name}</td>

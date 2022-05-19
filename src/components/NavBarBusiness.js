@@ -20,7 +20,7 @@ export default function NavBarBusiness({ page, offCanvas, userId }) {
     {
       alias: 'team member',
       name: 'Team Member',
-      link: `/notcreateyet/${userId}`,
+      link: `/business/team/${userId}`,
       icon_active: '/nav_icon/plan.png',
       icon_inactive: '/nav_icon/i_plan.png',
     },

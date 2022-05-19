@@ -14,10 +14,10 @@ import ApplicationDetail from 'pages/Candidate/Application/ApplicationDetail';
 import Business from 'pages/Business/Index';
 import BusinessProfile from 'pages/Business/Profile';
 import CompanyDetail from 'pages/Business/CompanyDetail';
-
+import TeamMember from 'pages/Business/TeamMember';
 
 import NotFound from 'pages/NotFound';
-import { Routes, Route, Router } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -37,6 +37,7 @@ function App() {
 
         <Route path="/business/:id" element={<Business />} />
         <Route path="/business/profile/:id" element={<BusinessProfile />} />
+        <Route path="/business/team/:id" element={<TeamMember />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 
         <Route path="*" element={<NotFound />} />

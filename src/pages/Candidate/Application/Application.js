@@ -111,18 +111,18 @@ function Table({ items }) {
             className="mt-3 h-32 text-sm text-[#7E8299]"
             key={index}
           >
-            <th className="w-[5%] pl-3 text-left">{item.no}</th>
-            <th className="w-[20%] pl-10 text-left">{item.name_job}</th>
-            <th className="w-[20%]">{item.company}</th>
-            <th className="w-[20%]">{item.date_application}</th>
-            <th className="w-[20%]">
+            <td className="w-[5%] pl-3 text-left">{item.no}</td>
+            <td className="w-[20%] pl-10 text-left">{item.name_job}</td>
+            <td className="w-[20%]">{item.company}</td>
+            <td className="w-[20%]">{item.date_application}</td>
+            <td className="w-[20%]">
               <div className={`rounded w-fit mx-auto px-4 py-3 ${item.status.rejected ? 'bg-[#FFF5F8] text-[#F1416C]': 'bg-[#E8FFF3] text-[#50CD89]'}`}>
                 <p className=''>{item.status.name}</p>
               </div>
-            </th>
-            <th className="w-[15%]">
+            </td>
+            <td className="w-[15%]">
               <a className='bg-[#F5F8FA] px-5 py-3 rounded-md' href={item.detail}>View</a>
-            </th>
+            </td>
           </tr>
         ))}
       </tbody>
