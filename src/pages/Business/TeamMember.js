@@ -3,9 +3,10 @@ import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import { useParams } from 'react-router-dom';
 import BasicCard from 'components/BasicCard';
 import ModalTeamMember from 'components/Modal/ModalTeamMember';
+import Pagination from 'components/Widgets/Pagination';
 export default function TeamMember() {
   const { id } = useParams();
-  
+
   let internExperience = [
     {
       id: 1,
@@ -29,7 +30,11 @@ export default function TeamMember() {
         </section>
         <section className="my-2 overflow-y-auto">
           <Table items={internExperience}></Table>
+          <div className="flex w-full justify-end pr-8 mt-5">
+          <Pagination></Pagination>
+        </div>
         </section>
+        
       </BasicCard>
     </LayoutBusiness>
   );

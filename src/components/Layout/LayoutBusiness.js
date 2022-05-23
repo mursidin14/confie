@@ -29,7 +29,7 @@ export default function LayoutBusiness({PageName, children, userId}) {
         } min-h-screen bg-[#FFFFFF]`}
       >
         <Header handleNav={handleNav} PageName={PageName} />
-        <div className="my-4 lg:mx-7 mx-3 main-layout py-5">{children}</div>
+        <div className="my-4 lg:mx-7 mx-3 py-5">{children}</div>
       </section>
     </main>
   );

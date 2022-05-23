@@ -65,7 +65,6 @@ export default function WizardFormThirdPage(props) {
             {data.role === 'personal' && (
               <div>
                 <p className="label">Gender</p>
-
                 <div className="my-5 flex items-center">
                   <input
                     className="mr-2"
@@ -99,7 +98,6 @@ export default function WizardFormThirdPage(props) {
                 </div>
               </div>
             )}
-
             {data.role !== 'personal' && (
               <div>
                 <label className="label" htmlFor="">

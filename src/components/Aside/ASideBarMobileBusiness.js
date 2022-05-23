@@ -24,15 +24,14 @@ export default function ASideBarMobileBusiness({
     {
       alias: 'team member',
       name: 'Team Member',
-      link: `/notcreateyet/${userId}`,
+      link: `/business/team/${userId}`,
       icon_active: '/nav_icon/plan.png',
       icon_inactive: '/nav_icon/i_plan.png',
     },
     {
       alias: 'lowongan kerja',
       name: 'Lowongan Kerja',
-      link: `/business/team/${userId}`,
-
+      link: `/business/job/${userId}`,
       icon_active: '/nav_icon/job_offer.png',
       icon_inactive: '/nav_icon/i_job_offer.png',
     },

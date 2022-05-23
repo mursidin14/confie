@@ -11,9 +11,9 @@ export default function Register() {
     role: 'personal',
     gender: 'L',
   });
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpenFailed] = useState(false);
   function closeModal() {
-    setIsOpen(false);
+    setIsOpenFailed(false);
   }
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
@@ -25,6 +25,25 @@ export default function Register() {
           .join('');
         dataAccount['date_of_birth'] = parseInt(transform_date);
       }
+      // const req = await fetch('https://confie.upanastudio.com/backend/sanctum/csrf-cookie')
+      // .then(res => {
+      //   const req_register = fetch(
+      //     'https://confie.upanastudio.com/backend/api/register',
+      //     {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'text/plain',
+      //       },
+      //       body: JSON.stringify(dataAccount),
+      //     }
+      //   )
+      //   .then(res_register => {
+      //     if (!res_register.ok) {
+      //       console.log("Gagal register")
+      //       return setIsOpenFailed(true);
+      //     }
+      //   });
+      // });
       const res = await fetch(
         'https://confie.upanastudio.com/backend/api/register',
         {
@@ -36,7 +55,7 @@ export default function Register() {
         }
       );
       console.log(res);
-      if (res.ok === false) return setIsOpen(true);
+      if (res.ok === false) return setIsOpenFailed(true);
     }
     setPage(page + 1);
   }

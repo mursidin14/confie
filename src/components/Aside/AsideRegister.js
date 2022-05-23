@@ -43,7 +43,7 @@ export default function AsideRegister({numberPage, type_account}) {
           <h3 className="text-">Create an Account</h3>
           <hr className="w-8 border-t-2 border-orange" />
   
-          <div className="flex gap-4 lg:block">
+          <div className="flex gap-2 lg:block">
             {steps.map((step) => (
               <div key={step.number} className="my-8 flex">
                 <div
