@@ -77,7 +77,7 @@ export default function OpenJobVacancy() {
               </label>
             </div>
             <div className="lg:w-7/12 ">
-              <div className="my-2 flex items-center justify-between gap-2 lg:my-5 ">
+              <div className="my-2 sm:flex items-center justify-between gap-2 lg:my-5 ">
                 <div className="flex items-center rounded-md border-2 border-[#F5F8FA] bg-[#F5F8FA] focus-within:border-black">
                   <div className="flex items-center justify-center rounded-l-md bg-[#DCE5EB] p-3">
                     <svg

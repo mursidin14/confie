@@ -64,13 +64,13 @@ function CardJobVacany({archive, id, detailjob}) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-6">
-        <section className="flex items-center gap-4">
-          <div className="rounded-md bg-[#F5F8FA] px-5 py-10">
+        <section className="md:flex items-center gap-4 space-y-2">
+          <div className="rounded-md bg-[#F5F8FA] px-5 py-10 flex justify-center items-center">
             <img src="/upana_logo.png" alt="" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <a href={`/business/${id}/job/detail/${detailjob}`} className="text-xl font-semibold hover:underline">Junior React Developer</a>
+              <a href={`/business/${id}/job/detail/${detailjob}`} className="md:text-xl text-base font-semibold hover:underline">Junior React Developer</a>
               <div
                 className={`${
                   !archive ? 'bg-[#E8FFF3]' : 'bg-[#F5F8FA]'
@@ -197,10 +197,11 @@ function CardJobVacany({archive, id, detailjob}) {
 
                 <p>15 April 2022</p>
               </div>
+              <p className='md:hidden'><span className='font-bold'>Pelamar</span>: 30</p>
             </div>
           </div>
         </section>
-        <section className="flex flex-col items-center space-y-2 pr-7">
+        <section className="md:flex hidden flex-col items-center space-y-2 pr-7">
           <svg
             className="h-10 w-10"
             width="25"

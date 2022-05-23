@@ -40,15 +40,15 @@ function CardJobVacany({ archive, id, detailjob }) {
     <>
       <BasicCard>
         <div className="flex items-center justify-between px-6">
-          <section className="flex items-center gap-4">
-            <div className="rounded-md bg-[#F5F8FA] px-5 py-10">
+          <section className="md:flex items-center gap-4 space-y-2">
+            <div className="rounded-md flex items-center justify-center bg-[#F5F8FA] px-5 py-10">
               <img src="/upana_logo.png" alt="" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <a
                   href={`/business/${id}/job/detail/${detailjob}`}
-                  className="text-xl font-semibold hover:underline"
+                  className="md:text-xl text-lg font-semibold hover:underline"
                 >
                   Junior React Developer
                 </a>
@@ -65,6 +65,37 @@ function CardJobVacany({ archive, id, detailjob }) {
                     {!archive ? 'Aktif' : 'Arsip'}
                   </p>
                 </div>
+                <div className="relative flex-col items-center flex md:hidden">
+              <svg
+                onClick={() => {
+                  setOpen(!open);
+                }}
+                className="fill-[#E4E6EF] transition-all hover:fill-[#494B74]"
+                width="23"
+                height="5"
+                viewBox="0 0 23 5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="2.5" cy="2.5" r="2.5" />
+                <circle cx="11.5" cy="2.5" r="2.5" />
+                <circle cx="20.5" cy="2.5" r="2.5" />
+              </svg>
+              <div
+                className={`absolute top-3 right-1 space-y-2 rounded-md bg-white p-6 text-sm shadow-mine flex flex-col ${
+                  !open
+                    ? 'translate-y-0  opacity-0'
+                    : ' translate-y-1 opacity-100'
+                } transition-all`}
+              >
+                <button className="rounded-md bg-[#FFF5F8] px-4 py-2 text-[#F1416C]">
+                  Hapus
+                </button>
+                <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
+                  Arsipkan
+                </button>
+              </div>
+            </div>
               </div>
               <div className="mt-1 space-y-2 ">
                 <div className="flex items-center gap-3">
@@ -182,10 +213,12 @@ function CardJobVacany({ archive, id, detailjob }) {
 
                   <p>15 April 2022</p>
                 </div>
+              <p className='md:hidden'><span className='font-bold'>Pelamar</span>: 30</p>
+
               </div>
             </div>
           </section>
-          <section className="flex gap-2">
+          <section className="gap-2 hidden md:flex">
             <div className="flex flex-col items-center space-y-2 pr-7">
               <svg
                 className="h-10 w-10"
@@ -240,7 +273,7 @@ function CardJobVacany({ archive, id, detailjob }) {
                 <circle cx="20.5" cy="2.5" r="2.5" />
               </svg>
               <div
-                className={`absolute top-3 space-y-2 rounded-md bg-white p-6 text-sm shadow-mine ${
+                className={`absolute top-3 space-y-2 rounded-md bg-white p-6 text-sm shadow-mine flex flex-col ${
                   !open
                     ? 'translate-y-0  opacity-0'
                     : ' translate-y-1 opacity-100'
@@ -257,7 +290,6 @@ function CardJobVacany({ archive, id, detailjob }) {
           </section>
         </div>
       </BasicCard>
-
       <div className=" mt-7 w-full sm:px-0">
         <Tab.Group>
           <Tab.List className="flex max-w-xl space-x-1">
