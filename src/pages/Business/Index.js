@@ -31,6 +31,7 @@ export default function Index() {
   return (
     <LayoutBusiness userId={id} PageName="Dashboard">
       <PersonalCard id={id} />
+      
       <StatusApplication items={status_application} />
       <StatusClass />
     </LayoutBusiness>
