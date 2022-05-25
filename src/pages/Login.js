@@ -3,20 +3,19 @@ import AsideLogin from 'components/Aside/AsideLogin';
 import AuthService from 'services/Auth/AuthService';
 export default function Login() {
   useEffect(() => {
-    document.title = "Login";
-    console.log(AuthService)
-  }, [])
+    document.title = 'Login';
+  }, []);
   const [data, setData] = useState({
     email: '',
     password: '',
-  })
+  });
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value
-    })
-    console.log(data)
-  } 
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
   return (
     <main className="min-h-screen lg:flex">
       <AsideLogin />
@@ -26,11 +25,17 @@ export default function Login() {
             Login to your Account
           </h3>
           <form className="" action="">
-            <label className="mt-5  mb-2 block text-sm font-semibold text-dark-blue text-left">
+            <label className="mt-5  mb-2 block text-left text-sm font-semibold text-dark-blue">
               Email
             </label>
 
-            <input onChange={handleChange} required className="input-form " type="password" />
+            <input
+              onChange={handleChange}
+              required
+              className="input-form "
+              type="password"
+              name="email"
+            />
             <div className="mt-5 flex justify-between">
               <label className="mb-2 block text-sm font-semibold text-dark-blue">
                 Password
@@ -42,14 +47,20 @@ export default function Login() {
                 Forget Password?
               </a>
             </div>
-            <input onChange={handleChange} required className="input-form " type="password" />
+            <input
+              onChange={handleChange}
+              required
+              className="input-form "
+              type="password"
+              name="password"
+            />
 
             <button
               type="submit"
               className="primary-btn mt-10 px-5 py-3 text-center"
               onClick={(e) => {
-                e.preventDefault()
-                AuthService.login(data)
+                e.preventDefault();
+                AuthService.login(data);
               }}
             >
               LOGIN
