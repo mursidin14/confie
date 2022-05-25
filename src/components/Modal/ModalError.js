@@ -1,7 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import React, { useState, Fragment } from 'react';
-
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export default function ModalError({closeModal, error, error_msg }) {
   return (
