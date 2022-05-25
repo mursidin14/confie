@@ -70,7 +70,7 @@ export default function Login() {
                   window.location.href = `/dashboard/${respon.data.data.slug}`;
                 }else{
                   setError(true);
-                  console.log(respon)
+                  setError_msg(respon.data.meta.message)
                 }
               }}
             >
@@ -91,7 +91,7 @@ export default function Login() {
           alt=""
         />
       </section>
-      <ModalError closeModal={closeModal} error={error} error_msg={"Email or Password Wrong"}></ModalError>
+      <ModalError closeModal={closeModal} error={error} error_msg={error_msg}></ModalError>
     </main>
   );
 }
