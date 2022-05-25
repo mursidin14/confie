@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import AsideLogin from 'components/Aside/AsideLogin';
 import AuthService from 'services/Auth/AuthService';
+import ModalError from 'components/Modal/ModalError';
 export default function Login() {
+  const [error, setError] = useState(false)
   useEffect(() => {
     document.title = 'Login';
   }, []);
@@ -15,6 +17,9 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   };
+  function closeModal() {
+    setError(false);
+  }
   return (
     <main className="min-h-screen lg:flex">
       <AsideLogin />
@@ -63,7 +68,8 @@ export default function Login() {
                 if (respon.statusText === 'OK') {
                   window.location.href = `/dashboard/${respon.data.data.slug}`;
                 }else{
-                  alert('Email or Password is wrong')
+                  {setError(true)}
+                  <ModalError closeModal={closeModal} error={error} error_msg={"Email or Password Wrong"}></ModalError>
                 }
               }}
             >
