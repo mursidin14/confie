@@ -1,10 +1,22 @@
-import React, { useEffect } from 'react';
-import InputField from 'components/InputField';
+import React, { useEffect, useState } from 'react';
 import AsideLogin from 'components/Aside/AsideLogin';
+import AuthService from 'services/Auth/AuthService';
 export default function Login() {
   useEffect(() => {
     document.title = "Login";
+    console.log(AuthService)
   }, [])
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  })
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    })
+    console.log(data)
+  } 
   return (
     <main className="min-h-screen lg:flex">
       <AsideLogin />
@@ -18,7 +30,7 @@ export default function Login() {
               Email
             </label>
 
-            <input required className="input-form " type="password" />
+            <input onChange={handleChange} required className="input-form " type="password" />
             <div className="mt-5 flex justify-between">
               <label className="mb-2 block text-sm font-semibold text-dark-blue">
                 Password
@@ -30,11 +42,14 @@ export default function Login() {
                 Forget Password?
               </a>
             </div>
-            <input required className="input-form " type="password" />
+            <input onChange={handleChange} required className="input-form " type="password" />
 
             <button
               type="submit"
               className="primary-btn mt-10 px-5 py-3 text-center"
+              onClick={() => {
+                AuthService.login(data)
+              }}
             >
               LOGIN
             </button>

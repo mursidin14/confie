@@ -45,7 +45,7 @@ export default function Register() {
       //   });
       // });
       const res = await fetch(
-        'https://confie.upanastudio.com/backend/api/register',
+        `${process.env.REACT_APP_API_URL}/api/register`,
         {
           method: 'POST',
           headers: {
