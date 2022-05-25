@@ -14,7 +14,6 @@ export default function Login() {
       ...data,
       [e.target.name]: e.target.value,
     });
-    console.log(data);
   };
   return (
     <main className="min-h-screen lg:flex">
