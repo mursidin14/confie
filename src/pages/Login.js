@@ -60,7 +60,7 @@ export default function Login() {
               className="primary-btn mt-10 px-5 py-3 text-center"
               onClick={async (e) => {
                 e.preventDefault();
-                const respon = AuthService.login(data);
+                const respon = await AuthService.login(data);
                 console.log(respon);
               }}
             >
