@@ -33,7 +33,7 @@ export default function Login() {
               onChange={handleChange}
               required
               className="input-form "
-              type="password"
+              type="email"
               name="email"
             />
             <div className="mt-5 flex justify-between">
@@ -58,9 +58,10 @@ export default function Login() {
             <button
               type="submit"
               className="primary-btn mt-10 px-5 py-3 text-center"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                AuthService.login(data);
+                const respon = AuthService.login(data);
+                console.log(respon);
               }}
             >
               LOGIN

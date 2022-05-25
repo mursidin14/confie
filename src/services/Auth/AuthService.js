@@ -6,6 +6,8 @@ const login = (data) =>
         headers: {
             'Content-Type': 'application/json',
         },
+    }).then((response) => {
+        return response;
     })
 );
 
