@@ -9,7 +9,7 @@ const login = (data) =>
     }).then((response) => {
         return response;
     }).catch((error) => {
-        return error;
+        return error.response;
     })
 );
 

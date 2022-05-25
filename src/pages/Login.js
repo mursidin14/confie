@@ -60,7 +60,11 @@ export default function Login() {
               onClick={async (e) => {
                 e.preventDefault();
                 const respon = await AuthService.login(data);
-                console.log(respon);
+                if (respon.statusText === 'OK') {
+                  window.location.href = `/dashboard/${respon.data.data.slug}`;
+                }else{
+                  alert('Email or Password is wrong')
+                }
               }}
             >
               LOGIN
