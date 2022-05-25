@@ -4,6 +4,7 @@ import AuthService from 'services/Auth/AuthService';
 import ModalError from 'components/Modal/ModalError';
 export default function Login() {
   const [error, setError] = useState(false)
+  const [error_msg, setError_msg] = useState('')
   useEffect(() => {
     document.title = 'Login';
   }, []);
@@ -68,8 +69,8 @@ export default function Login() {
                 if (respon.statusText === 'OK') {
                   window.location.href = `/dashboard/${respon.data.data.slug}`;
                 }else{
-                  {setError(true)}
-                  <ModalError closeModal={closeModal} error={error} error_msg={"Email or Password Wrong"}></ModalError>
+                  setError(true);
+                  console.log(respon)
                 }
               }}
             >
@@ -90,6 +91,7 @@ export default function Login() {
           alt=""
         />
       </section>
+      <ModalError closeModal={closeModal} error={error} error_msg={"Email or Password Wrong"}></ModalError>
     </main>
   );
 }
