@@ -47,7 +47,8 @@ export default function Login() {
             <button
               type="submit"
               className="primary-btn mt-10 px-5 py-3 text-center"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
                 AuthService.login(data)
               }}
             >

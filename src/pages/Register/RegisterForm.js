@@ -5,6 +5,8 @@ import WizardFormSecondPage from './WizardFormSecondPage';
 import WizardFormThirdPage from './WizardFormThirdPage';
 import WizardFormFourthPage from './WizardFormFourthPage';
 import WizardComplete from './WizardComplete';
+import AuthService from 'services/Auth/AuthService';
+
 export default function Register() {
   const [page, setPage] = useState(1);
   const [dataAccount, setDataAccount] = useState({
@@ -44,18 +46,8 @@ export default function Register() {
       //     }
       //   });
       // });
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/register`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-          body: JSON.stringify(dataAccount),
-        }
-      );
-      console.log(res);
-      if (res.ok === false) return setIsOpenFailed(true);
+      
+      AuthService.register(dataAccount)
     }
     setPage(page + 1);
   }
