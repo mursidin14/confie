@@ -48,15 +48,7 @@ export default function Register() {
       //   });
       // });
       const respon = await AuthService.register(dataAccount);
-      if (respon.statusText !== 'OK') {
-        let message_error = [];
-        let msg_error = respon.data.data;
-        for (let key in msg_error) {
-          message_error.push(msg_error[key]);
-        }
-        setError_msg(message_error);
-        return setIsOpenFailed(true);
-      }
+      
     }
     setPage(page + 1);
   }

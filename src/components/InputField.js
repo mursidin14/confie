@@ -3,7 +3,6 @@ import React,{useState} from 'react';
 export default function InputField(props) {
   const { label,data, onChange, errorMessage, ...inputProps } = props;
   const [focused, setFocused] = useState(false);
-  console.log(data)
   function handleChange(e) {
     onChange({
       ...data,
