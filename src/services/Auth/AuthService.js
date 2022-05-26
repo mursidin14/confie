@@ -28,7 +28,7 @@ const register = (data) => {
         return response;
       })
       .catch((error) => {
-        return error.response;
+        return error;
       })
   );
 };
