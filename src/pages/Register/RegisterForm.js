@@ -48,7 +48,7 @@ export default function Register() {
       //   });
       // });
       const respon = await AuthService.register(dataAccount);
-      
+      console.log(respon)
     }
     setPage(page + 1);
   }
