@@ -24,13 +24,10 @@ const register = (data) =>
         },
       })
       .then((res) => {
-        console.log(res)
         return res;
       })
       .catch((err) => {
-        console.log('error')
-        console.log(err)
-        return err;
+        return err.response;
       })
   );
 
