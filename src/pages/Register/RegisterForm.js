@@ -48,6 +48,7 @@ export default function Register() {
       //   });
       // });
       const respon = await AuthService.register(dataAccount);
+      console.log(respon)
       if (respon.statusText !== 'OK') {
         let message_error = [];
         let msg_error = respon.data.data;
@@ -61,7 +62,6 @@ export default function Register() {
     setPage(page + 1);
   }
   function previousPage(e) {
-    console.log(e);
     setPage(page - 1);
   }
   return (
