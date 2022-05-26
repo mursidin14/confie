@@ -145,7 +145,7 @@ export default function Register() {
                         {error_msg.map((item, index) => (
                           <p
                             key={index}
-                            className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]"
+                            className="mx-auto w-full text-left text-xs my-1 text-[#7E8299] lg:w-[400px]"
                           >
                             {item}
                           </p>

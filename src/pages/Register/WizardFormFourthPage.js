@@ -19,7 +19,7 @@ export default function WizardFormFourthPage(props) {
             Add Your{' '}
             {data.role === 'personal' ? 'Skill And Passion' : 'Business Detail'}
           </h2>
-          <label className="label">
+          <label className="label  after:content-['*'] after:text-pink-500 after:ml-1">
             {data.role === 'personal' ? 'About Me:' : 'About the Company:'}
           </label>
           <textarea
