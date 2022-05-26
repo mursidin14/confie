@@ -48,8 +48,7 @@ export default function Register() {
       //   });
       // });
       const respon = await AuthService.register(dataAccount);
-      console.log(respon)
-      if (respon.statusText !== 'OK') {
+      if (respon.statusText !== 'Created') {
         let message_error = [];
         let msg_error = respon.data.data;
         for (let key in msg_error) {

@@ -24,8 +24,6 @@ const register = (data) =>
         },
       })
       .then((res) => {
-        console.log('bener')
-        console.log(res)
         return res;
       })
       .catch((err) => {
