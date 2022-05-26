@@ -8,6 +8,7 @@ import WizardComplete from './WizardComplete';
 import AuthService from 'services/Auth/AuthService';
 
 export default function Register() {
+  const [error_msg, setError_msg] = useState([]);
   const [page, setPage] = useState(1);
   const [dataAccount, setDataAccount] = useState({
     role: 'personal',
@@ -46,8 +47,16 @@ export default function Register() {
       //     }
       //   });
       // });
-      
-      AuthService.register(dataAccount)
+      const respon = await AuthService.register(dataAccount);
+      if (respon.statusText !== 'OK') {
+        let message_error = [];
+        let msg_error = respon.data.data;
+        for (let key in msg_error) {
+          message_error.push(msg_error[key]);
+        }
+        setError_msg(message_error);
+        return setIsOpenFailed(true);
+      }
     }
     setPage(page + 1);
   }
@@ -133,9 +142,14 @@ export default function Register() {
                             />
                           </svg>
                         </div>
-                        <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                          Register Failed!
-                        </p>
+                        {error_msg.map((item, index) => (
+                          <p
+                            key={index}
+                            className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]"
+                          >
+                            {item}
+                          </p>
+                        ))}
                       </div>
                     </Dialog.Panel>
                   </Transition.Child>

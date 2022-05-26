@@ -70,7 +70,7 @@ export default function Login() {
                   window.location.href = `/dashboard/${respon.data.data.slug}`;
                 }else{
                   setError(true);
-                  setError_msg(respon.data.meta.message)
+                  
                 }
               }}
             >
