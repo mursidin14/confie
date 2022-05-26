@@ -43,9 +43,9 @@ export default function ASideBarMobileBusiness({
       icon_inactive: '/nav_icon/i_applicant.png',
     },
     {
-      alias: 'talent Pool',
+      alias: 'talent pool',
       name: 'Talent Pool',
-      link: `/notcreateyet/${userId}`,
+      link: `/business/talent/${userId}`,
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
     },

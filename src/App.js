@@ -18,6 +18,7 @@ import TeamMember from 'pages/Business/TeamMember';
 import JobVacancy from 'pages/Business/JobVacancy';
 import OpenJobVacancy from 'pages/Business/OpenJobVacancy';
 import JobVacancyDetail from 'pages/Business/JobVacancyDetail';
+import TalentPool from 'pages/Business/TalentPool';
 
 import NotFound from 'pages/NotFound';
 import { Routes, Route } from 'react-router-dom';
@@ -44,6 +45,7 @@ function App() {
         <Route path="/business/job/:id" element={<JobVacancy />} />
         <Route path="/business/:id/job/create" element={<OpenJobVacancy />} />
         <Route path="/business/:id/job/detail/:idJob" element={<JobVacancyDetail />} />
+        <Route path="/business/talent/:id" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 
         <Route path="*" element={<NotFound />} />

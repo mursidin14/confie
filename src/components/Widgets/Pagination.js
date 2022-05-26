@@ -10,9 +10,8 @@ export default function Pagination({length}) {
     }
   }
   function handleIncrement() {
-    if (page < 3) {
+   
       setPage(page + 1);
-    }
   }
   return (
     <div className="my-4 flex items-center gap-7">

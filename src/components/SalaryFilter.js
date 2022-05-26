@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useState } from 'react';
 
 export default function SalaryFilter() {
