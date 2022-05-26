@@ -16,22 +16,23 @@ const login = (data) =>
       })
   );
 
-const register = (data) => {
+const register = (data) => 
   registerClient.get('/sanctum/csrf-cookie').then((response) =>
-    registerClient
-      .post('/api/register', data, {
+    registerClient.post('/api/register', data, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      .then((response) => {
-        return response;
+      .then((res) => {
+        console.log(res)
+        return res;
       })
-      .catch((error) => {
-        return error;
+      .catch((err) => {
+        console.log('error')
+        console.log(err)
+        return err;
       })
   );
-};
 
 const AuthService = {
   login,
