@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import SearchTalent from 'components/SearchTalent';
-import BasicCard from 'components/BasicCard';
 import Pagination from 'components/Widgets/Pagination';
 export default function TalentPool() {
   const { id } = useParams();
@@ -22,7 +21,7 @@ export default function TalentPool() {
   );
 }
 
-function TalentCard({}) {
+function TalentCard() {
   return (
     <div className="my-3 flex flex-col items-center justify-center gap-3 rounded-md bg-white py-7 shadow-mine">
       <img className="w-20 rounded-full" src="/person.png" alt="" />
