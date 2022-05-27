@@ -6,6 +6,7 @@ import WizardFormThirdPage from './WizardFormThirdPage';
 import WizardFormFourthPage from './WizardFormFourthPage';
 import WizardComplete from './WizardComplete';
 import AuthService from 'services/Auth/AuthService';
+import { makeCapital } from 'utils/utils';
 
 export default function Register() {
   const [error_msg, setError_msg] = useState([]);

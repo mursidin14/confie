@@ -18,7 +18,7 @@ export default function PersonalCard({data_profile : {full_name}}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                   {full_name ? makeCapital(full_name) : <SkeletonLoading width={100} />}
+                   {full_name ? full_name : <SkeletonLoading width={100} />}
                 </h3>
                 <svg
                   className="h-5 w-5"
