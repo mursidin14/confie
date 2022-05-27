@@ -4,6 +4,7 @@ import PersonalCard from 'components/Dashboard/PersonalCard';
 import ClassCard from 'components/Dashboard/ClassCard';
 import TargetCard from 'components/Dashboard/TargetCard';
 import DashboardService from 'services/Dashboard/Dashboard';
+import ProfileService from 'services/Profile/ProfileService';
 import { useParams } from "react-router-dom";
 
 export default function Dashboard() {
@@ -12,7 +13,11 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchData() {
         const response = await DashboardService.getDashboardData();
+        const response_profile = await ProfileService.getProfileData();
+        const response_online_profile = await ProfileService.getOnlineProfileData();
         console.log(response)
+        console.log(response_profile)
+        console.log(response_online_profile)
     }
     fetchData();
   }, [])

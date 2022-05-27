@@ -2,7 +2,7 @@ import { httpClient } from 'utils/http-common';
 
 const getDashboardData = () =>
   httpClient
-    .get('/api/profile')
+    .get('/api/dashboard')
     .then((response) => response)
     .catch((error) => error);
 
