@@ -12,12 +12,12 @@ export default function Dashboard() {
   const [data, setData] = useState({});
   useEffect(() => {
     async function fetchData() {
-        const response = await DashboardService.getDashboardData();
+        const response_dashboard = await DashboardService.getDashboardData();
         const response_profile = await ProfileService.getProfileData();
         const response_online_profile = await ProfileService.getOnlineProfileData();
-        console.log(response)
-        console.log(response_profile)
-        console.log(response_online_profile)
+        console.log('dashboard_online',response_dashboard)
+        console.log('profile_data',response_profile)
+        console.log('profile_onlie',response_online_profile)
     }
     fetchData();
   }, [])

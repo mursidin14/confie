@@ -8,7 +8,7 @@ const getProfileData = () =>
 
 const getOnlineProfileData = () =>
   httpClient
-    .get('/api/onlineprofile')
+    .get('/api/onlineprofile/4')
     .then((response) => response)
     .catch((error) => error);
 
