@@ -17,7 +17,7 @@ export default function PersonalCard({data_profile}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                  {data_profile.full_name}
+                  {makeCapital(data_profile.full_name)}
                 </h3>
                 <svg
                   className="h-5 w-5"
