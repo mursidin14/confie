@@ -3,7 +3,8 @@ import Status from './Status';
 import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
 import { makeCapital } from 'utils/utils';
-export default function PersonalCard({data_profile}) {
+import SkeletonLoading from 'components/SkeletonLoading';
+export default function PersonalCard({data_profile : {full_name}}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
@@ -17,7 +18,7 @@ export default function PersonalCard({data_profile}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                  {makeCapital(data_profile.full_name)}
+                   {full_name ? makeCapital(full_name) : <SkeletonLoading width={100} />}
                 </h3>
                 <svg
                   className="h-5 w-5"
