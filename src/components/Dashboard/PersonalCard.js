@@ -2,8 +2,19 @@ import React from 'react';
 import Status from './Status';
 import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
-import { makeCapital } from 'utils/utils';
-import SkeletonLoading from 'components/SkeletonLoading';
+
+function makeCapital(name) {
+  let nameArray = name.split(' ');
+  if (nameArray.length > 1) {
+    let capitalName = '';
+    nameArray.forEach((name) => {
+      capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
+    });
+    return capitalName;
+  }
+  return name.slice(0, 1).toUpperCase() + name.slice(1);
+}
+
 export default function PersonalCard({data_profile : {full_name}}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
@@ -18,7 +29,7 @@ export default function PersonalCard({data_profile : {full_name}}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                   {full_name ? full_name : <SkeletonLoading width={100} />}
+                  {makeCapital(full_name)}
                 </h3>
                 <svg
                   className="h-5 w-5"
