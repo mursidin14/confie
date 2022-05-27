@@ -17,14 +17,15 @@ export default function Dashboard() {
         const response_online_profile = await ProfileService.getOnlineProfileData();
         console.log('dashboard_online',response_dashboard)
         console.log('profile_data',response_profile)
-        console.log('profile_onlie',response_online_profile)
+        console.log('profile_online',response_online_profile)
+        setData(response_profile.data.data)
     }
     fetchData();
   }, [])
   
   return (
     <Layout userId={id} PageName={"Dashboard"}>
-      <PersonalCard />
+      <PersonalCard data_profile={data} />
       <div className="gap-5 lg:flex">
         <ClassCard />
         <TargetCard userId={id}/>

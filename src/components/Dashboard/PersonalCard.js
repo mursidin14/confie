@@ -2,7 +2,8 @@ import React from 'react';
 import Status from './Status';
 import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
-export default function PersonalCard({}) {
+import { makeCapital } from 'utils/utils';
+export default function PersonalCard({data_profile}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
@@ -16,7 +17,7 @@ export default function PersonalCard({}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                  Rahmat Hidayat
+                  {makeCapital(data_profile.full_name)}
                 </h3>
                 <svg
                   className="h-5 w-5"
