@@ -4,6 +4,7 @@ import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
 
 function makeCapital(name) {
+  console.log(name)
   let nameArray = name.split(' ');
   if (nameArray.length > 1) {
     let capitalName = '';
@@ -16,6 +17,7 @@ function makeCapital(name) {
 }
 
 export default function PersonalCard({data_profile : {full_name}}) {
+  console.log(full_name);
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
