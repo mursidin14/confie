@@ -6,27 +6,28 @@ import TargetCard from 'components/Dashboard/TargetCard';
 import DashboardService from 'services/Dashboard/Dashboard';
 import ProfileService from 'services/Profile/ProfileService';
 import SkeletonLoading from 'components/SkeletonLoading';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { useParams } from 'react-router-dom';
 
 export default function Dashboard() {
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
-      const response_dashboard = await DashboardService.getDashboardData();
       const response_profile = await ProfileService.getProfileData();
-      const response_online_profile =
-        await ProfileService.getOnlineProfileData();
-      setData(response_profile.data.data);
+      // const response_dashboard = await DashboardService.getDashboardData();
+      // const response_online_profile = await ProfileService.getOnlineProfileData();
+      setData(response_profile);
+      setLoading(false);
     }
     fetchData();
   }, []);
 
   return (
     <Layout userId={id} PageName={'Dashboard'}>
-      {data ? <PersonalCard data_profile={data} /> : <SkeletonCard />}
+      {loading ? <SkeletonCard /> : <PersonalCard data_profile={data} />}
       <div className="gap-5 lg:flex">
         <ClassCard />
         <TargetCard userId={id} />
@@ -40,10 +41,15 @@ function SkeletonCard() {
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
         <Skeleton width={200} height={150} />
-        <div className='flex flex-col justify-between'>
-          <Skeleton width={200} height={20}/>
-          <Skeleton width={200} height={100}/>
-          <Skeleton width={200} height={50}/>
+        <div className="hidden flex-col justify-between sm:flex">
+          <Skeleton width={200} height={20} />
+          <Skeleton width={200} height={100} />
+          <Skeleton width={200} height={50} />
+        </div>
+        <div className="flex flex-col justify-between sm:hidden">
+          <Skeleton width={100} height={20} />
+          <Skeleton width={100} height={100} />
+          <Skeleton width={100} height={50} />
         </div>
       </div>
     </div>
