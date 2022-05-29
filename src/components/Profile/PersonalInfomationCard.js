@@ -4,11 +4,21 @@ import React, { useEffect, useState } from 'react';
 
 
 export default function PersonalInfomationCard({data_profile}) {
-
+  function makeCapital(name) {
+    let nameArray = name.split(' ');
+    if (nameArray.length > 1) {
+      let capitalName = '';
+      nameArray.forEach((name) => {
+        capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
+      });
+      return capitalName;
+    }
+    return name.slice(0, 1).toUpperCase() + name.slice(1);
+  }
   let inputs = [
     {
       label: 'Full Name',
-      value: data_profile.full_name,
+      value: makeCapital(data_profile.full_name),
     },
     {
       label: 'Phone Number',
@@ -28,15 +38,15 @@ export default function PersonalInfomationCard({data_profile}) {
     },
     {
       label: 'Country',
-      value: data_profile.country,
+      value: makeCapital(data_profile.country),
     },
     {
       label: 'Province',
-      value: data_profile.province,
+      value: makeCapital(data_profile.province),
     },
     {
       label: 'City',
-      value: data_profile.city,
+      value: makeCapital(data_profile.city),
     },
   ];
 
@@ -73,21 +83,10 @@ function DataPersonal({ label, value }) {
         <label className="text-xs lg:text-base">{label}</label>
       </div>
       <div className="lg:w-7/12">
-        <p className="input-form my-2 lg:my-5 lg:py-3 ">{value}</p>
+        <p className="w-full rounded-md bg-soft-gray px-5 py-3 my-2 lg:my-5 ">{value}</p>
       </div>
     </div>
   );
 }
 
 
-function makeCapital(name) {
-  let nameArray = name.split(' ');
-  if (nameArray.length > 1) {
-    let capitalName = '';
-    nameArray.forEach((name) => {
-      capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
-    });
-    return capitalName;
-  }
-  return name.slice(0, 1).toUpperCase() + name.slice(1);
-}
