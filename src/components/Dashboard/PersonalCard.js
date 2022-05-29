@@ -15,7 +15,7 @@ function makeCapital(name) {
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
 
-export default function PersonalCard({data_profile}) {
+export default function PersonalCard({data_profile, id}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
@@ -52,7 +52,7 @@ export default function PersonalCard({data_profile}) {
               <EmploymentStatus />
             </div>
             <div className="hidden md:block">
-              <ButtonDashboard />
+              <ButtonDashboard id={id} />
             </div>
           </div>
           <JobStatus />
@@ -65,13 +65,13 @@ export default function PersonalCard({data_profile}) {
         <Status />
       </div>
       <div className="block md:hidden">
-        <ButtonDashboard />
+        <ButtonDashboard id={id} />
       </div>
     </div>
   );
 }
 
-function ButtonDashboard({}) {
+function ButtonDashboard({id}) {
   const cv = React.createRef();
 
   return (
@@ -94,7 +94,7 @@ function ButtonDashboard({}) {
         )}
       </Pdf>
         
-        <a className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit " href="/profile">
+        <a className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit " href={`/profile/${id}`}>
           <p>Edit Profile</p>
         </a>
       </div>
