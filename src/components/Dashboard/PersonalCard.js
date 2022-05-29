@@ -4,7 +4,6 @@ import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
 
 function makeCapital(name) {
-  console.log(name)
   let nameArray = name.split(' ');
   if (nameArray.length > 1) {
     let capitalName = '';

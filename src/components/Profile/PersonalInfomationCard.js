@@ -1,8 +1,10 @@
 import ModalProfile from 'components/Modal/ModalProfile';
 import React, { useEffect, useState } from 'react';
 
-export default function PersonalInfomationCard(data_profile) {
-  console.log(data_profile);
+
+
+export default function PersonalInfomationCard({data_profile}) {
+
   let inputs = [
     {
       label: 'Full Name',
@@ -10,31 +12,31 @@ export default function PersonalInfomationCard(data_profile) {
     },
     {
       label: 'Phone Number',
-      value: data_profile.full_name,
+      value: data_profile.phone_number,
     },
     {
       label: 'Email',
-      value: data_profile.full_name,
+      value: data_profile.email,
     },
     {
       label: 'Gender',
-      value: data_profile.full_name,
+      value: data_profile.gender,
     },
     {
       label: 'Date of Birth',
-      value: data_profile.full_name,
+      value: data_profile.date_of_birth,
     },
     {
       label: 'Country',
-      value: data_profile.full_name,
+      value: data_profile.country,
     },
     {
       label: 'Province',
-      value: data_profile.full_name,
+      value: data_profile.province,
     },
     {
       label: 'City',
-      value: data_profile.full_name,
+      value: data_profile.city,
     },
   ];
 
@@ -75,4 +77,17 @@ function DataPersonal({ label, value }) {
       </div>
     </div>
   );
+}
+
+
+function makeCapital(name) {
+  let nameArray = name.split(' ');
+  if (nameArray.length > 1) {
+    let capitalName = '';
+    nameArray.forEach((name) => {
+      capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
+    });
+    return capitalName;
+  }
+  return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
