@@ -2,8 +2,19 @@ import React from 'react';
 import Status from './Status';
 import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
-import { makeCapital } from 'utils/utils';
 
+function makeCapital(name) {
+  console.log(name)
+  let nameArray = name.split(' ');
+  if (nameArray.length > 1) {
+    let capitalName = '';
+    nameArray.forEach((name) => {
+      capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
+    });
+    return capitalName;
+  }
+  return name.slice(0, 1).toUpperCase() + name.slice(1);
+}
 
 export default function PersonalCard({data_profile}) {
   return (
