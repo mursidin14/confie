@@ -109,10 +109,10 @@ function InputTag() {
           ))}
         </ul>
         <input
-          name="skill"
+          name="skills"
           placeholder="Add Skill"
           onKeyUp={(event) => (event.key === 'Enter' ? addTags(event) : null)}
-          className="bg-soft-gray px-3 focus:border-0 focus:outline-none"
+          className="bg-soft-gray px-3 w-[100px] focus:border-0 focus:outline-none text-sm"
           type="text"
         />
       </div>

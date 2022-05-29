@@ -1,10 +1,52 @@
 import ModalProfile from 'components/Modal/ModalProfile';
 import React, { useEffect, useState } from 'react';
 
-
-
 export default function PersonalInfomationCard({data_profile}) {
-  
+  function makeCapital(name) {
+    let nameArray = name.split(' ');
+    if (nameArray.length > 1) {
+      let capitalName = '';
+      nameArray.forEach((name) => {
+        capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
+      });
+      return capitalName;
+    }
+    return name.slice(0, 1).toUpperCase() + name.slice(1);
+  }
+  let inputs = [
+    {
+      label: 'Full Name',
+      value: makeCapital(data_profile.full_name),
+    },
+    {
+      label: 'Phone Number',
+      value: data_profile.phone_number,
+    },
+    {
+      label: 'Email',
+      value: data_profile.email,
+    },
+    {
+      label: 'Gender',
+      value: data_profile.gender,
+    },
+    {
+      label: 'Date of Birth',
+      value: data_profile.date_of_birth,
+    },
+    {
+      label: 'Country',
+      value: makeCapital(data_profile.country),
+    },
+    {
+      label: 'Province',
+      value: makeCapital(data_profile.province),
+    },
+    {
+      label: 'City',
+      value: makeCapital(data_profile.city),
+    },
+  ];
 
   return (
     <div className="rounded-md bg-white pt-7 pb-2 text-left shadow-mine ">
@@ -23,7 +65,9 @@ export default function PersonalInfomationCard({data_profile}) {
               <img className="w-20 sm:w-32" src="/person.png" alt="" />
             </div>
           </div>
-         
+          {inputs.map((input, index) => (
+            <DataPersonal key={index} {...input} />
+          ))}
         </div>
       </div>
     </div>
