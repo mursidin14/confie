@@ -16,8 +16,8 @@ function makeCapital(name) {
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
 
-export default function PersonalCard({data_profile : {full_name}}) {
-  console.log(full_name);
+export default function PersonalCard({data_profile}) {
+  console.log(data_profile)
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
@@ -31,7 +31,7 @@ export default function PersonalCard({data_profile : {full_name}}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                  {full_name ? makeCapital(full_name) : ''}
+                  {data_profile.full_name ? makeCapital(data_profile.full_name) : ''}
                 </h3>
                 <svg
                   className="h-5 w-5"
