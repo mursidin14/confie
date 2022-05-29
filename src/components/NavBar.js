@@ -55,18 +55,19 @@ export default function NavBar({ page, offCanvas, userId }) {
   ];
   async function handleClick(item) {
     if (item.name !== 'Logout') {
-      window.location = item.link;
+      const response = await ProfileService.LogoutProfile;
+      console.log(response);
+      window.location = '/';
+      return;
     }
-    const response = await ProfileService.LogoutProfile;
-    console.log(response)
-    window.location = '/';
+    window.location = item.link;
   }
   return (
     <nav className="w-fit bg-[#1E1E2D]  py-2">
       <ul className={`${offCanvas ? 'flex flex-col' : 'block'}`}>
         {menu.map((item, index) => (
           <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
-            <a
+            <button
               onClick={() => handleClick(item)}
               className="flex cursor-pointer items-center gap-5"
             >
@@ -86,7 +87,7 @@ export default function NavBar({ page, offCanvas, userId }) {
               >
                 {item.name}
               </p>
-            </a>
+            </button>
           </li>
         ))}
       </ul>
