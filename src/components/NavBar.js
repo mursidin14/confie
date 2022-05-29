@@ -57,7 +57,7 @@ export default function NavBar({page, offCanvas, userId}) {
         <ul className={`${offCanvas ? 'flex flex-col' : 'block'}`}>
           {menu.map((item, index) => (
             <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
-              <a href={item.link} className="flex items-center gap-5">
+              <a href={item.link} className="flex items-center gap-5 group">
                 <img
                   className="sm:w-5 w-4"
                   src={
@@ -69,7 +69,7 @@ export default function NavBar({page, offCanvas, userId}) {
                 />
                 <p
                   className={ 
-                    `sm:text-[13px] text-xs ${offCanvas ? 'hidden' : 'block'} ${item.alias === pageName ? 'text-white' : 'text-white/40'}`
+                    `sm:text-[13px] text-xs ${offCanvas ? 'hidden' : 'block'} ${item.alias === pageName ? 'text-white' : 'text-white/40'} group-hover:text-white transition-all`
                   }
                 >
                   {item.name}
