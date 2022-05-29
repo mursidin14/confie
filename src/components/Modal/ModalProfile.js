@@ -77,7 +77,7 @@ export default function ModalProfile() {
     setDataProfile({ ...dataProfile, [name]: value });
   }
   async function handleClick() {
-    const response = await ProfileService.updateProfile(dataProfile);
+    const response = await ProfileService.updateProfileData(dataProfile);
     console.log(response)
   }
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileService from 'services/Profile/ProfileService';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 export default function ModalSkill() {
@@ -10,6 +11,7 @@ export default function ModalSkill() {
   function openModal() {
     setIsOpen(true);
   }
+  
   return (
     <>
       <div className="flex items-center justify-center">
