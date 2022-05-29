@@ -77,8 +77,9 @@ export default function ModalProfile() {
     setDataProfile({ ...dataProfile, [name]: value });
   }
   async function handleClick() {
+    let new_date = new Date(dataProfile['date_of_birth']).getTime();
+    dataProfile['date_of_birth'] = parseInt(new_date);
     const response = await ProfileService.updateProfileData(dataProfile);
-    console.log(response)
   }
   return (
     <>
@@ -165,7 +166,11 @@ export default function ModalProfile() {
                         </div>
                       </div>
                       {inputs.map((input, index) => (
-                        <InputFormProfile handleOnChange={handleOnChange} key={index} {...input} />
+                        <InputFormProfile
+                          handleOnChange={handleOnChange}
+                          key={index}
+                          {...input}
+                        />
                       ))}
                     </div>
                   </div>
@@ -177,7 +182,10 @@ export default function ModalProfile() {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleClick} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleClick}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>

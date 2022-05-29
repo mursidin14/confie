@@ -24,7 +24,7 @@ export default function Register() {
     if (page === 4) {
       if (typeof dataAccount['date_of_birth'] !== 'number') {
         let new_date = new Date(dataAccount['date_of_birth']).getTime()
-        dataAccount['date_of_birth'] = new_date;
+        dataAccount['date_of_birth'] = parseInt(new_date);
       }
       const respon = await AuthService.register(dataAccount);
       if (respon.statusText !== 'Created') {
