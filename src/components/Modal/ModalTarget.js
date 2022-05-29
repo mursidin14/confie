@@ -12,7 +12,7 @@ export default function ModalTarget() {
     setIsOpen(true);
   }
   const [plan, setPlan] = useState({
-    target_name: '',
+    title: '',
     start_date: '',
     progress: 0,
   });
@@ -23,14 +23,16 @@ export default function ModalTarget() {
     });
   }
   async function submitData() {
+    let new_date = new Date(plan['start_date']).getTime();
+    plan['start_date'] = new_date;
     const response = await PersonalPlanService.addPersonalPlanData(plan);
-    console.log(response)
+    console.log(response);
   }
   let inputs = [
     {
       label: 'Target',
       type: 'text',
-      name: 'target_name',
+      name: 'title',
       required: true,
     },
     {
@@ -101,7 +103,10 @@ export default function ModalTarget() {
                     >
                       Cancel
                     </button>
-                    <button onClick={submitData} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={submitData}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -116,14 +121,18 @@ export default function ModalTarget() {
 }
 
 function InputFormProfile({ handleChange, label, ...inputProps }) {
-    return (
-      <div className=" items-center lg:flex">
-        <div className="w-5/12">
-          <label className="text-xs lg:text-base">{label}</label>
-        </div>
-        <div className="lg:w-7/12">
-          <input onChange={handleChange} {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
-        </div>
+  return (
+    <div className=" items-center lg:flex">
+      <div className="w-5/12">
+        <label className="text-xs lg:text-base">{label}</label>
       </div>
-    );
-  }
+      <div className="lg:w-7/12">
+        <input
+          onChange={handleChange}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3 "
+        />
+      </div>
+    </div>
+  );
+}

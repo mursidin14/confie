@@ -18,35 +18,14 @@ export default function Register() {
   function closeModal() {
     setIsOpenFailed(false);
   }
+
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
     if (page === 4) {
       if (typeof dataAccount['date_of_birth'] !== 'number') {
-        let transform_date = dataAccount['date_of_birth']
-          .split('-')
-          .reverse()
-          .join('');
-        dataAccount['date_of_birth'] = parseInt(transform_date);
+        let new_date = new Date(dataAccount['date_of_birth']).getTime()
+        dataAccount['date_of_birth'] = new_date;
       }
-      // const req = await fetch('https://confie.upanastudio.com/backend/sanctum/csrf-cookie')
-      // .then(res => {
-      //   const req_register = fetch(
-      //     'https://confie.upanastudio.com/backend/api/register',
-      //     {
-      //       method: 'POST',
-      //       headers: {
-      //         'Content-Type': 'text/plain',
-      //       },
-      //       body: JSON.stringify(dataAccount),
-      //     }
-      //   )
-      //   .then(res_register => {
-      //     if (!res_register.ok) {
-      //       console.log("Gagal register")
-      //       return setIsOpenFailed(true);
-      //     }
-      //   });
-      // });
       const respon = await AuthService.register(dataAccount);
       if (respon.statusText !== 'Created') {
         let message_error = [];

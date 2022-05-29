@@ -1,7 +1,7 @@
 import ModalProfile from 'components/Modal/ModalProfile';
 import React, { useEffect, useState } from 'react';
 
-export default function PersonalInfomationCard({data_profile}) {
+export default function PersonalInfomationCard({ data_profile }) {
   function makeCapital(name) {
     let nameArray = name.split(' ');
     if (nameArray.length > 1) {
@@ -12,6 +12,13 @@ export default function PersonalInfomationCard({data_profile}) {
       return capitalName;
     }
     return name.slice(0, 1).toUpperCase() + name.slice(1);
+  }
+  function formatDate(date) {
+    return new Date(date).toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   }
   let inputs = [
     {
@@ -32,7 +39,7 @@ export default function PersonalInfomationCard({data_profile}) {
     },
     {
       label: 'Date of Birth',
-      value: data_profile.date_of_birth,
+      value: formatDate(data_profile.date_of_birth),
     },
     {
       label: 'Country',
@@ -81,10 +88,10 @@ function DataPersonal({ label, value }) {
         <label className="text-xs lg:text-base">{label}</label>
       </div>
       <div className="lg:w-7/12">
-        <p className="w-full rounded-md bg-soft-gray px-5 py-3 my-2 lg:my-5 ">{value}</p>
+        <p className="my-2 w-full rounded-md bg-soft-gray px-5 py-3 lg:my-5 ">
+          {value}
+        </p>
       </div>
     </div>
   );
 }
-
-
