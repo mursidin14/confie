@@ -6,6 +6,16 @@ const getProfileData = () =>
     .then((response) => response)
     .catch((error) => error);
 
+const updateProfileData = (data) =>
+  httpClient
+    .put('/api/profile', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error);
+
 const getOnlineProfileData = () =>
   httpClient
     .get('/api/onlineprofile')
@@ -20,6 +30,7 @@ const LogoutProfile = () =>
 
 const ProfileService = {
   getProfileData,
+  updateProfileData,
   getOnlineProfileData,
   LogoutProfile,
 };

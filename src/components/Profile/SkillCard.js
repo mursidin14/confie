@@ -18,7 +18,7 @@ export default function SkillCard() {
                 key={index}
                 className="rounded-md bg-[#A1A5B7] px-5 py-1 text-xs text-white md:text-base"
               >
-                {skill}
+                {skill.toUpperCase()}
               </p>
             ))}
           </div>

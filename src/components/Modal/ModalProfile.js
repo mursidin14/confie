@@ -1,8 +1,10 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
 export default function ModalProfile() {
   let [isOpen, setIsOpen] = useState(false);
+  let [dataProfile, setDataProfile] = useState({});
   function closeModal() {
     setIsOpen(false);
   }
@@ -70,6 +72,14 @@ export default function ModalProfile() {
       required: true,
     },
   ];
+  function handleOnChange(e) {
+    let { name, value } = e.target;
+    setDataProfile({ ...dataProfile, [name]: value });
+  }
+  async function handleClick() {
+    const response = await ProfileService.updateProfile(dataProfile);
+    console.log(response)
+  }
   return (
     <>
       <div className="flex items-center justify-center">
@@ -155,7 +165,7 @@ export default function ModalProfile() {
                         </div>
                       </div>
                       {inputs.map((input, index) => (
-                        <InputFormProfile key={index} {...input} />
+                        <InputFormProfile handleOnChange={handleOnChange} key={index} {...input} />
                       ))}
                     </div>
                   </div>
@@ -167,7 +177,7 @@ export default function ModalProfile() {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleClick} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>
@@ -181,14 +191,18 @@ export default function ModalProfile() {
   );
 }
 
-function InputFormProfile({ label, ...inputProps }) {
+function InputFormProfile({ label, handleOnChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
         <label className="text-xs lg:text-base">{label}</label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input
+          onChange={handleOnChange}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3 "
+        />
       </div>
     </div>
   );
