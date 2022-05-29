@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   return (
     <Layout userId={id} PageName={'Dashboard'}>
-      {loading ? <SkeletonCard /> : <PersonalCard  data_profile={data} />}
+      {loading ? <SkeletonCard /> : <PersonalCard  data_profile={data.data.data} />}
       <div className="gap-5 lg:flex">
         <ClassCard />
         <TargetCard userId={id} />
