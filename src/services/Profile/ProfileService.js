@@ -8,13 +8,20 @@ const getProfileData = () =>
 
 const getOnlineProfileData = () =>
   httpClient
-    .get('/api/onlineprofile/4')
+    .get('/api/onlineprofile')
+    .then((response) => response)
+    .catch((error) => error);
+
+const LogoutProfile = () =>
+  httpClient
+    .post('/api/logout')
     .then((response) => response)
     .catch((error) => error);
 
 const ProfileService = {
-    getProfileData,
-    getOnlineProfileData
+  getProfileData,
+  getOnlineProfileData,
+  LogoutProfile,
 };
 
 export default ProfileService;
