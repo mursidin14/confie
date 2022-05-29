@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 export default function ModalTarget() {
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -22,17 +23,8 @@ export default function ModalTarget() {
     });
   }
   async function submitData() {
-    const req = await fetch(
-      'https://6267fd9b01dab900f1c82b3d.mockapi.io/target',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(plan),
-      }
-    );
-    window.location.reload();
+    const response = await PersonalPlanService.addPersonalPlanData(plan);
+    console.log(response)
   }
   let inputs = [
     {

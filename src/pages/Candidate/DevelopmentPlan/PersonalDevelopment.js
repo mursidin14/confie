@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import ModalTarget from 'components/Modal/ModalTarget';
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 
 export default function PersonalDevelopment() {
   const { id } = useParams();
@@ -11,11 +12,10 @@ export default function PersonalDevelopment() {
   
   useEffect(() => {
     async function getTarget(){
-      let response = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target`);
-      let data = await response.json();
-      setTarget(data);
+      const response = await PersonalPlanService.getPersonalPlanData();
+      console.log(response)
+      setTarget(response.data.data);
       setLoading(false)
-      console.log(data)
     }
     getTarget()
   },[])
