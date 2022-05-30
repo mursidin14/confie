@@ -18,16 +18,19 @@ export default function Register() {
   function closeModal() {
     setIsOpenFailed(false);
   }
-  async function getLocation() {
-    const response = await AuthService.location();
-    console.log(response)
-  }
-  getLocation()
+  useEffect(() => {
+    async function getLocation() {
+      const response = await AuthService.location();
+      console.log(response);
+    }
+    getLocation();
+  }, []);
+
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
     if (page === 4) {
       if (typeof dataAccount['date_of_birth'] !== 'number') {
-        let new_date = new Date(dataAccount['date_of_birth']).getTime()
+        let new_date = new Date(dataAccount['date_of_birth']).getTime();
         dataAccount['date_of_birth'] = parseInt(new_date);
       }
       const respon = await AuthService.register(dataAccount);
@@ -127,7 +130,7 @@ export default function Register() {
                         {error_msg.map((item, index) => (
                           <p
                             key={index}
-                            className="mx-auto w-full text-left text-xs my-1 text-[#7E8299] lg:w-[400px]"
+                            className="mx-auto my-1 w-full text-left text-xs text-[#7E8299] lg:w-[400px]"
                           >
                             {item}
                           </p>
