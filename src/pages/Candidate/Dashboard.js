@@ -17,7 +17,7 @@ export default function Dashboard() {
       const response_profile = await ProfileService.getProfileData();
       // const response_dashboard = await DashboardService.getDashboardData();
       // const response_online_profile = await ProfileService.getOnlineProfileData();
-      console.log(response_profile)
+      console.log(response_profile.response.meta)
       setData(response_profile);
       setLoading(false);
     }
