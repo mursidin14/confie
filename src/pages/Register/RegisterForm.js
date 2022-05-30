@@ -22,7 +22,7 @@ export default function Register() {
     const response = await AuthService.location();
     console.log(response)
   }
-  getLocation
+  getLocation()
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
     if (page === 4) {
