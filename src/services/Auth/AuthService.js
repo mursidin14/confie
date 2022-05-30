@@ -1,4 +1,4 @@
-import loginClient, { registerClient } from 'utils/http-common';
+import loginClient, { httpClient, registerClient } from 'utils/http-common';
 
 const login = (data) =>
   loginClient.get('/sanctum/csrf-cookie').then((response) =>
@@ -31,9 +31,19 @@ const register = (data) =>
       })
   );
 
+const location = () => {
+    httpClient.get('/api/location').then((res) => {
+      return res;
+    }
+  ).catch((err) => {
+    return err;
+  });
+}
+
 const AuthService = {
   login,
   register,
+  location
 };
 
 export default AuthService;
