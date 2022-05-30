@@ -17,6 +17,7 @@ export default function Dashboard() {
       const response_profile = await ProfileService.getProfileData();
       // const response_dashboard = await DashboardService.getDashboardData();
       // const response_online_profile = await ProfileService.getOnlineProfileData();
+      console.log(response_profile.data.meta.status)
       if (response_profile.data.meta.status === 'error') {
           window.location.href = '/';        
       }
