@@ -33,7 +33,7 @@ const register = (data) =>
   );
 
   const logout = () =>
-  loginClient.get('/api/logout').then((response) => {
+  loginClient.post('/api/logout').then((response) => {
     return response;
   });
       
