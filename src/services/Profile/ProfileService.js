@@ -14,7 +14,7 @@ const updateProfileData = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const getOnlineProfileData = () =>
   httpClient

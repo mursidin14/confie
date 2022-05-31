@@ -5,7 +5,7 @@ import ProfileService from 'services/Profile/ProfileService';
 export default function ModalProfile() {
   let [isOpen, setIsOpen] = useState(false);
   let [dataProfile, setDataProfile] = useState({});
-  const [error, setError] = useState([])
+  const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
@@ -76,8 +76,11 @@ export default function ModalProfile() {
   function handleOnChange(e) {
     let { name, value } = e.target;
     if (name === 'date_of_birth') {
-      setDataProfile({ ...dataProfile, [name]: new Date(value).getTime() / 1000 });
-    }else{
+      setDataProfile({
+        ...dataProfile,
+        [name]: new Date(value).getTime() / 1000,
+      });
+    } else {
       setDataProfile({ ...dataProfile, [name]: value });
     }
   }
@@ -85,7 +88,16 @@ export default function ModalProfile() {
     let new_date = new Date(dataProfile['date_of_birth']).getTime();
     dataProfile['date_of_birth'] = parseInt(new_date);
     const response = await ProfileService.updateProfileData(dataProfile);
-    console.log(response)
+    if (response.data.meta.status == 'error') {
+      let errors = []
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return
+    }
+    window.location.reload();
   }
   return (
     <>
@@ -180,8 +192,10 @@ export default function ModalProfile() {
                       ))}
                     </div>
                   </div>
-                  <section className='text-sm text-left text-red-500'>
-
+                  <section className="text-left text-sm text-red-500">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
                   </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button

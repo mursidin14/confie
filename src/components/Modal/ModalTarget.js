@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 export default function ModalTarget() {
   let [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
@@ -17,14 +18,29 @@ export default function ModalTarget() {
     progress: 0,
   });
   function handleChange(e) {
-    setPlan({
-      ...plan,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'start_date') {
+      onChange({
+        ...plan,
+        [e.target.name]: new Date(e.target.value).getTime() / 1000,
+      });
+    } else {
+      setPlan({
+        ...plan,
+        [e.target.name]: e.target.value,
+      });
+    }
   }
   async function submitData() {
-    plan['start_date'] = new Date(plan['start_date']).getTime() / 1000;
     const response = await PersonalPlanService.addPersonalPlanData(plan);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
     console.log(response);
   }
   let inputs = [
@@ -94,7 +110,11 @@ export default function ModalTarget() {
                       ))}
                     </div>
                   </div>
-
+                  <section className="text-left text-sm text-red-500">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}

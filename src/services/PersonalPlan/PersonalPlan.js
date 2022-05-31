@@ -10,7 +10,12 @@ const addPersonalPlanData = (data) =>
   httpClient
     .post('/api/pdp', data)
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
+
+const deletePersonalPlanData = () =>
+  httpClient
+    .delete(`/api/pdp`)
+    .then((response) => response)
 
 const getDetailPersonalPlanData = (id) =>
   httpClient

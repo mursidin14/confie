@@ -94,12 +94,7 @@ function Table({ items, userId, loading}) {
                
                   <button onClick={
                     async function() {
-                      const res = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${item.id}`, {
-                        method: 'DELETE',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        }
-                      })
+                      await PersonalPlanService.deletePersonalPlan()
                       window.location.reload()
                     }
                   }>
