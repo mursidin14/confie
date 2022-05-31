@@ -32,7 +32,7 @@ const register = (data) =>
   );
 
 const location = (id) => {
-    httpClient.get(`api/location/provinsi=${id}`).then((res) => {
+    httpClient.get(`api/location?provinsi=${id}`).then((res) => {
       return res;
     }
   ).catch((err) => {
