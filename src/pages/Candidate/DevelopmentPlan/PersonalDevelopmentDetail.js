@@ -115,9 +115,9 @@ export default function PersonalDevelopmentDetail() {
           </div>
           <hr className="mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
           {loading && <p className="text-sm text-center py-3">Loading...</p>}
-          {targetMilestone.map(({ target_milestone, quarter, id }, index) => (
+          {targetMilestone.map(({target_title, quarter, id }, index) => (
             <MilestoneTarget
-              target_milestone={target_milestone}
+              target_milestone={target_title}
               quarter={quarter}
               id={id}
               idDetail={idDetail}
