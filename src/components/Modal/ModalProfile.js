@@ -183,13 +183,13 @@ export default function ModalProfile() {
                       <div className="relative z-10">
                         <SearchRegion
                           data={dataProfile}
-                          onChange={handleOnChange}
+                          onChange={setDataProfile}
                           setCity={setCity}
                         ></SearchRegion>
                       </div>
                       <SearchRegionCity
                         data={dataProfile}
-                        onChange={handleOnChange}
+                        onChange={setDataProfile}
                         city={city}
                       ></SearchRegionCity>
                     </div>

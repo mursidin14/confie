@@ -66,6 +66,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
     });
 
     const response = await httpClient.get(`api/location?provinsi=${id}`);
+    console.log(utils.getCity(response.data.data))
     setCity(utils.getCity(response.data.data))
   }
 
@@ -133,6 +134,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
   );
 }
 export function SearchRegionCity({ data, onChange, city}) {
+  console.log(city)
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const people = city
@@ -154,7 +156,6 @@ export function SearchRegionCity({ data, onChange, city}) {
       ...data,
       city: id,
     });
-    console.log(data);
   }
 
   return (
