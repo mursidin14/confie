@@ -4,6 +4,7 @@ import PersonalCard from 'components/Dashboard/PersonalCard';
 import ClassCard from 'components/Dashboard/ClassCard';
 import TargetCard from 'components/Dashboard/TargetCard';
 import ProfileService from 'services/Profile/ProfileService';
+import DashboardService from 'services/Dashboard/Dashboard';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useParams } from 'react-router-dom';
@@ -15,9 +16,13 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
-      // const response_dashboard = await DashboardService.getDashboardData();
-      // const response_online_profile = await ProfileService.getOnlineProfileData();
-      console.log(response_profile.response.meta)
+      const response_dashboard = await DashboardService.getDashboardData();
+      const response_online_profile = await ProfileService.getOnlineProfileData();
+      console.log(response_dashboard, 'dashboard')
+      console.log(response_online_profile, 'online')
+      if(response_profile.data.meta.status == 'error'){
+        window.location.href = '/';
+      }
       setData(response_profile);
       setLoading(false);
     }

@@ -4,10 +4,26 @@ export default function InputField(props) {
   const { label,data, onChange, errorMessage, ...inputProps } = props;
   const [focused, setFocused] = useState(false);
   function handleChange(e) {
-    onChange({
-      ...data,
-      [e.target.name]: e.target.value
-    })
+    if (e.target.name === 'date_of_birth') {
+      onChange({
+        ...data,
+        [e.target.name]: new Date(e.target.value).getTime(),
+      });
+    } else {
+      onChange({
+        ...data,
+        [e.target.name]: e.target.value,
+      });
+    }
+    console.log(data)
+    
+  }
+  const convertDate = (date) => {
+    // yyyy-mm-dd
+    if (date) {
+      return new Date(date).toISOString().slice(0, 10)
+    }
+    return
   }
   const handleFocus = (e) => {
     setFocused(true);
@@ -18,7 +34,7 @@ export default function InputField(props) {
         {label}
       </label>
       <input
-        value={data[inputProps.name]}
+        value={inputProps.name !== 'date_of_birth' ? data[inputProps.name] : convertDate(data[inputProps.name])}
         onChange={handleChange}
         className="input-form peer mb-3"
         {...inputProps}

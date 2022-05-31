@@ -4,7 +4,7 @@ const getProfileData = () =>
   httpClient
     .get('/api/profile')
     .then((response) => response)
-    .catch((error) => error.response.data.meta.status);
+    .catch((error) => error.response);
 
 const updateProfileData = (data) =>
   httpClient
