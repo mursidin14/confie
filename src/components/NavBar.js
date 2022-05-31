@@ -1,4 +1,5 @@
 import React from 'react'
+import AuthService from 'services/Auth/AuthService';
 
 export default function NavBar({page, offCanvas, userId}) {
     let pageName = page.toLowerCase();
@@ -45,13 +46,13 @@ export default function NavBar({page, offCanvas, userId}) {
         icon_active: '/nav_icon/class.png',
         icon_inactive: '/nav_icon/i_class.png',
       },
-      {
-        name: 'Logout',
-        link: `/`,
-        icon_active: '/nav_icon/logout.png',
-        icon_inactive: '/nav_icon/i_logout.png',
-      },
     ];
+
+    async function clickLogout() {
+      await AuthService.logout();
+      window.location.href = '/';
+    }
+
     return (
       <nav className="bg-[#1E1E2D] py-2  w-fit">
         <ul className={`${offCanvas ? 'flex flex-col' : 'block'}`}>
@@ -77,6 +78,22 @@ export default function NavBar({page, offCanvas, userId}) {
               </a>
             </li>
           ))}
+          <li className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
+              <button onClick={clickLogout}  className="flex items-center gap-5 group">
+                <img
+                  className="sm:w-5 w-4"
+                  src="/nav_icon/i_logout.png"
+                  alt=""
+                />
+                <p
+                  className={ 
+                    `sm:text-[13px] text-xs ${offCanvas ? 'hidden' : 'block'} text-white/40 group-hover:text-white transition-all`
+                  }
+                >
+                  Logout
+                </p>
+              </button>
+            </li>
         </ul>
       </nav>
     );

@@ -1,4 +1,5 @@
 import React from 'react'
+import AuthService from 'services/Auth/AuthService';
 
 export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId }) {
     let menu = [
@@ -52,6 +53,10 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
       },
     ];
     let page = PageName.toLowerCase();
+    async function clickLogout() {
+      await AuthService.logout();
+      window.location.href = '/';
+    }
     return (
       <aside
         className={` fixed block min-h-screen w-8/12 bg-[#1E1E2D] transition-all md:w-4/12 lg:hidden z-10 ${
@@ -98,6 +103,22 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
                 </a>
               </li>
             ))}
+            <li className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
+              <button onClick={clickLogout}  className="flex items-center gap-5 group">
+                <img
+                  className="sm:w-5 w-4"
+                  src="/nav_icon/i_logout.png"
+                  alt=""
+                />
+                <p
+                  className={ 
+                    `sm:text-[13px] text-xs ${offCanvas ? 'hidden' : 'block'} text-white/40 group-hover:text-white transition-all`
+                  }
+                >
+                  Logout
+                </p>
+              </button>
+            </li>
           </ul>
         </nav>
       </aside>

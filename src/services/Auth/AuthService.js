@@ -32,11 +32,18 @@ const register = (data) =>
       })
   );
 
+  const logout = () =>
+  loginClient.get('/api/logout').then((response) => {
+    return response;
+  });
+      
+
 
 
 const AuthService = {
   login,
   register,
+  logout,
 };
 
 export default AuthService;
