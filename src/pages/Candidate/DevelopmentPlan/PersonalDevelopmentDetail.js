@@ -32,7 +32,8 @@ export default function PersonalDevelopmentDetail() {
       // setLoading(false)
 
       const response = await PersonalPlanService.getDetailPersonalPlanData(idDetail);
-      console.log(response)
+      setTarget(response.data.data)
+      setTargetMilestone(response.data.data.milestone)
     }
 
     getTargetDetail();
@@ -67,7 +68,7 @@ export default function PersonalDevelopmentDetail() {
           <div className="flex items-center justify-between px-8">
             <div>
               <h3 className="text-2xl font-semibold text-[#181C32]">
-                {target.target_name || <Skeleton width={100} />}
+                {target.title || <Skeleton width={100} />}
               </h3>
               <div className="flex items-center gap-3 py-3">
                 <svg

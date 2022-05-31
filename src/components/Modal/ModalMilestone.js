@@ -32,7 +32,7 @@ export default function ModalMilestone({ idDetail }) {
     {
       label: 'Target milestone',
       type: 'text',
-      name: 'target_milestone',
+      name: 'target_title',
       required: true,
     },
   ];
