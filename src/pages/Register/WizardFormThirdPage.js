@@ -1,6 +1,8 @@
 import React from 'react';
 import LayoutRegister from './LayoutRegister';
 import InputField from 'components/InputField';
+import SearchRegion from 'components/SearchRegion';
+import { SearchRegionCity } from 'components/SearchRegion';
 
 export default function WizardFormThirdPage(props) {
   let { data, onChange } = props;
@@ -13,48 +15,34 @@ export default function WizardFormThirdPage(props) {
   let inputs = [
     {
       label: `${
-        data.role === 'personal'
-          ? 'Date of Birth'
-          : 'Company Founding Date'
+        data.role === 'personal' ? 'Date of Birth' : 'Company Founding Date'
       }`,
       type: 'date',
       name: 'date_of_birth',
-      required: true
+      required: true,
     },
     {
       label: 'Country',
       type: 'text',
       name: 'country',
-      required: true
-    },
-    {
-      label: 'Province',
-      type: 'text',
-      name: 'province',
-      required: true
-    },
-    {
-      label: 'City',
-      type: 'text',
-      name: 'city',
-      required: true
+      required: true,
     },
   ];
   function generateValidation() {
-    let validation = data?.date_of_birth && data?.date_of_birth !== ''
+    let validation = data?.date_of_birth && data?.date_of_birth !== '';
     inputs.forEach((input) => {
       if (input.required) {
-        validation = validation && data[input.name] && data[input.name] !== ''
-    }})
-    return validation ;
+        validation = validation && data[input.name] && data[input.name] !== '';
+      }
+    });
+    return validation;
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
-    if(generateValidation()){
-      props.onSubmit()
+    e.preventDefault();
+    if (generateValidation()) {
+      props.onSubmit();
     }
-    
   }
   return (
     <LayoutRegister data={data} pageNumber={3}>
@@ -119,14 +107,23 @@ export default function WizardFormThirdPage(props) {
                 onChange={onChange}
               />
             ))}
+            <div className='relative z-10'>
+            <SearchRegion data={data} onChange={onChange}></SearchRegion>
+            </div>
+            <SearchRegionCity data={data} onChange={onChange}></SearchRegionCity>
+
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
-              <button type='button' onClick={props.previousPage} className="secondary-btn lg:w-[150px] px-6 py-3 w-full">
+              <button
+                type="button"
+                onClick={props.previousPage}
+                className="secondary-btn w-full px-6 py-3 lg:w-[150px]"
+              >
                 PREVIOUS
               </button>
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="primary-btn lg:w-[150px] px-6 py-3 w-full"
+                className="primary-btn w-full px-6 py-3 lg:w-[150px]"
               >
                 CONTINUE
               </button>

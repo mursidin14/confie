@@ -19,13 +19,8 @@ export default function Register() {
     setIsOpenFailed(false);
   }
   useEffect(() => {
-    async function getLocation() {
-      const response = await AuthService.location();
-      console.log(response);
-    }
-    getLocation();
-  }, []);
 
+  }, []);
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
     if (page === 4) {
