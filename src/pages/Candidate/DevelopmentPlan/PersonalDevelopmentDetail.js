@@ -29,11 +29,11 @@ export default function PersonalDevelopmentDetail() {
       // setTarget(dataTarget);
       // setProgress(dataTarget.progress);
       // setTargetMilestone(data);
-      // setLoading(false)
 
       const response = await PersonalPlanService.getDetailPersonalPlanData(idDetail);
       setTarget(response.data.data)
       setTargetMilestone(response.data.data.milestone)
+      setLoading(false)
     }
 
     getTargetDetail();
