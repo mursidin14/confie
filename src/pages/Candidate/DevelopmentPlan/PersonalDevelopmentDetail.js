@@ -5,6 +5,8 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useParams } from 'react-router-dom';
 import ModalMilestone from 'components/Modal/ModalMilestone';
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
+
 export default function PersonalDevelopmentDetail() {
   const [targetMilestone, setTargetMilestone] = useState([]);
   const [target, setTarget] = useState({});
@@ -16,18 +18,21 @@ export default function PersonalDevelopmentDetail() {
 
   useEffect(() => {
     async function getTargetDetail() {
-      let response = await fetch(
-        `https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}/target_milestone`
-      );
-      let data = await response.json();
-      let res = await fetch(
-        `https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}`
-      );
-      let dataTarget = await res.json();
-      setTarget(dataTarget);
-      setProgress(dataTarget.progress);
-      setTargetMilestone(data);
-      setLoading(false)
+      // let response = await fetch(
+      //   `https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}/target_milestone`
+      // );
+      // let data = await response.json();
+      // let res = await fetch(
+      //   `https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}`
+      // );
+      // let dataTarget = await res.json();
+      // setTarget(dataTarget);
+      // setProgress(dataTarget.progress);
+      // setTargetMilestone(data);
+      // setLoading(false)
+
+      const response = await PersonalPlanService.getDetailPersonalPlanData(idDetail);
+      console.log(response)
     }
 
     getTargetDetail();

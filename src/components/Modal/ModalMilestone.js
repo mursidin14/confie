@@ -1,7 +1,8 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-export default function ModalMilestone({idDetail}) {
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
+export default function ModalMilestone({ idDetail }) {
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
@@ -18,16 +19,8 @@ export default function ModalMilestone({idDetail}) {
     });
   }
   async function submitData() {
-    const req = await fetch(
-      `https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}/target_milestone`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(milestone),
-      }
-    );
+    const response = await PersonalPlanService.addQuarterlyPlanData(idDetail, milestone);
+    console.log(response);
     window.location.reload();
   }
   let inputs = [
@@ -82,21 +75,23 @@ export default function ModalMilestone({idDetail}) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">Tambah Milestone</h3>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="px-8">
-          {inputs.map((input, index) => (
-            <InputFormProfile
-              handleChange={handleChange}
-              key={index}
-              {...input}
-            />
-          ))}
-        </div>
-      </div>
+                  <div className="flex items-center justify-between px-8">
+                    <h3 className="text-base font-semibold ">
+                      Tambah Milestone
+                    </h3>
+                  </div>
+                  <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+                  <div className="my-5">
+                    <div className="px-8">
+                      {inputs.map((input, index) => (
+                        <InputFormProfile
+                          handleChange={handleChange}
+                          key={index}
+                          {...input}
+                        />
+                      ))}
+                    </div>
+                  </div>
 
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
@@ -105,7 +100,10 @@ export default function ModalMilestone({idDetail}) {
                     >
                       Cancel
                     </button>
-                    <button onClick={submitData} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={submitData}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -120,14 +118,18 @@ export default function ModalMilestone({idDetail}) {
 }
 
 function InputFormProfile({ handleChange, label, ...inputProps }) {
-    return (
-      <div className=" items-center lg:flex">
-        <div className="w-5/12">
-          <label className="text-xs lg:text-base">{label}</label>
-        </div>
-        <div className="lg:w-7/12">
-          <input onChange={handleChange} {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
-        </div>
+  return (
+    <div className=" items-center lg:flex">
+      <div className="w-5/12">
+        <label className="text-xs lg:text-base">{label}</label>
       </div>
-    );
-  }
+      <div className="lg:w-7/12">
+        <input
+          onChange={handleChange}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3 "
+        />
+      </div>
+    </div>
+  );
+}
