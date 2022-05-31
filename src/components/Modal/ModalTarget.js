@@ -41,7 +41,7 @@ export default function ModalTarget() {
       setError(errors);
       return;
     }
-    console.log(response);
+    window.location.reload()
   }
   let inputs = [
     {
@@ -110,7 +110,7 @@ export default function ModalTarget() {
                       ))}
                     </div>
                   </div>
-                  <section className="text-left text-sm text-red-500">
+                  <section className="text-left text-sm text-red-500 px-8">
                     {error.map((err, index) => (
                       <p key={index}>{err}</p>
                     ))}

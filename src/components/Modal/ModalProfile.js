@@ -192,7 +192,7 @@ export default function ModalProfile() {
                       ))}
                     </div>
                   </div>
-                  <section className="text-left text-sm text-red-500">
+                  <section className="text-left text-sm text-red-500 px-8">
                     {error.map((err, index) => (
                       <p key={index}>{err}</p>
                     ))}
