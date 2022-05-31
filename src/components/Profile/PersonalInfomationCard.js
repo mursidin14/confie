@@ -39,7 +39,7 @@ export default function PersonalInfomationCard({ data_profile }) {
     },
     {
       label: 'Date of Birth',
-      value: formatDate(data_profile.date_of_birth),
+      value: formatDate(data_profile.date_of_birth * 1000),
     },
     {
       label: 'Country',

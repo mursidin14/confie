@@ -15,7 +15,6 @@ export default function InputField(props) {
         [e.target.name]: e.target.value,
       });
     }
-    console.log(data)
     
   }
   const convertDate = (date) => {
@@ -34,7 +33,7 @@ export default function InputField(props) {
         {label}
       </label>
       <input
-        value={inputProps.name !== 'date_of_birth' ? data[inputProps.name] : convertDate(data[inputProps.name])}
+        value={inputProps.name !== 'date_of_birth' ? data[inputProps.name] : convertDate(data[inputProps.name] * 1000)}
         onChange={handleChange}
         className="input-form peer mb-3"
         {...inputProps}
