@@ -98,22 +98,19 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
                 </a>
               </li>
             ))}
-            <li className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
-              <button onClick={clickLogout}  className="flex items-center gap-5 group">
-                <img
-                  className="sm:w-5 w-4"
-                  src="/nav_icon/i_logout.png"
-                  alt=""
-                />
-                <p
-                  className={ 
-                    `sm:text-[13px] text-xs ${offCanvas ? 'hidden' : 'block'} text-white/40 group-hover:text-white transition-all`
-                  }
-                >
-                  Logout
-                </p>
-              </button>
-            </li>
+            <li className={`${!offCanvas ? 'my-3' : 'my-4'}`}>
+                <button className="flex items-center gap-5">
+                  <img
+                    className="w-4"
+                    src='/nav_icon/i_logout.png'
+                  />
+                  <p
+                    className={`text-xs text-white/40 ${!offCanvas ? 'hidden' : 'block'}`}
+                  >
+                    Logout
+                  </p>
+                </button>
+              </li>
           </ul>
         </nav>
       </aside>
