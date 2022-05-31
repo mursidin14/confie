@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import LayoutRegister from './LayoutRegister';
 import InputField from 'components/InputField';
 import SearchRegion from 'components/SearchRegion';
@@ -6,6 +6,7 @@ import { SearchRegionCity } from 'components/SearchRegion';
 
 export default function WizardFormThirdPage(props) {
   let { data, onChange } = props;
+  const [city, setCity] = useState([])
   function handleChange(e) {
     onChange({
       ...data,
@@ -108,9 +109,9 @@ export default function WizardFormThirdPage(props) {
               />
             ))}
             <div className='relative z-10'>
-            <SearchRegion data={data} onChange={onChange}></SearchRegion>
+            <SearchRegion data={data} onChange={onChange} setCity={setCity}></SearchRegion>
             </div>
-            <SearchRegionCity data={data} onChange={onChange}></SearchRegionCity>
+            <SearchRegionCity data={data} onChange={onChange} city={city}></SearchRegionCity>
 
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
               <button

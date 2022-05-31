@@ -1,4 +1,4 @@
-export async function makeCapital(name) {
+function makeCapital(name) {
     let nameArray = name.split(' ');
     if (nameArray.length > 1) {
       let capitalName = '';
@@ -9,3 +9,21 @@ export async function makeCapital(name) {
     }
     return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
+
+const getCity = (data) => {
+  let city = [];
+  data.forEach((element) => {
+    let city_data = {};
+    city_data.id = element.kode;
+    city_data.name = element.kabkota;
+    city.push(city_data);
+  });
+  return city;
+};
+
+const utils = {
+  makeCapital,
+  getCity,
+};
+
+export default utils;

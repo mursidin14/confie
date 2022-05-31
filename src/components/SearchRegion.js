@@ -1,7 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import AuthService from 'services/Auth/AuthService';
+import { httpClient } from 'utils/http-common';
+import utils from 'utils/utils';
 
 const people = [
   { id: '11', name: 'ACEH' },
@@ -40,9 +41,9 @@ const people = [
   { id: '92', name: 'PAPUA BARAT' },
 ];
 
-let city = []
 
-export default function SearchRegion({ data, onChange }) {
+
+export default function SearchRegion({ data, onChange, setCity }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const filteredPeople =
@@ -63,9 +64,9 @@ export default function SearchRegion({ data, onChange }) {
       ...data,
       province: id,
     });
-    let response = await AuthService.location(id);
-    console.log(response)
-    console.log(data);
+
+    const response = await httpClient.get(`api/location?provinsi=${id}`);
+    setCity(utils.getCity(response.data.data))
   }
 
   return (
@@ -131,10 +132,10 @@ export default function SearchRegion({ data, onChange }) {
     </Combobox>
   );
 }
-export function SearchRegionCity({ data, onChange }) {
+export function SearchRegionCity({ data, onChange, city}) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
-  const [city, setCity] = useState([])
+  const people = city
   const filteredPeople =
     query === ''
       ? people
