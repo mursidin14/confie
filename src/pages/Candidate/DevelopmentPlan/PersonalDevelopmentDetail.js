@@ -94,7 +94,7 @@ export default function PersonalDevelopmentDetail() {
                   />
                 </svg>
 
-                <p className="text-sm text-[#B5B5C3]">{target.start_date || <Skeleton width={100} />}</p>
+                <p className="text-sm text-[#B5B5C3]">{target.start_date ? formatDate(target.start_date) : <Skeleton width={100} />}</p>
               </div>
             </div>
             <div className="w-5/12">
@@ -213,4 +213,12 @@ function MilestoneTarget({ target_milestone, quarter, idDetail, id, handleChange
       </div>
     </>
   );
+}
+
+function formatDate(date) {
+  return new Date(date).toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 }

@@ -60,7 +60,7 @@ function Table({ items, userId, loading}) {
             key={index}
           >
             <td className="w-[10%] pl-10 text-left ">{item.title}</td>
-            <td className="w-[10%] ">{item.start_date}</td>
+            <td className="w-[10%] ">{formatDate(item.start_date)}</td>
             <td className="w-[6%] relative bottom-2 text-[#A1A5B7] ">
               <p className='text-left mb-2'>{item.progress}%</p>
               <ProgressBar progressPercentage={item.progress}></ProgressBar>
@@ -139,4 +139,12 @@ function Table({ items, userId, loading}) {
     }
    </div>
   );
+}
+
+function formatDate(date) {
+  return new Date(date).toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 }
