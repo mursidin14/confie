@@ -23,8 +23,7 @@ export default function ModalTarget() {
     });
   }
   async function submitData() {
-    let new_date = new Date(plan['start_date']).getTime();
-    plan['start_date'] = new_date;
+    plan['start_date'] = new Date(plan['start_date']).getTime() / 1000;
     const response = await PersonalPlanService.addPersonalPlanData(plan);
     console.log(response);
   }
