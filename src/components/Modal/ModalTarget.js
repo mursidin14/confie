@@ -19,7 +19,7 @@ export default function ModalTarget() {
   });
   function handleChange(e) {
     if (e.target.name === 'start_date') {
-      onChange({
+      setPlan({
         ...plan,
         [e.target.name]: new Date(e.target.value).getTime() / 1000,
       });
