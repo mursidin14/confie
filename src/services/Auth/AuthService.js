@@ -31,8 +31,8 @@ const register = (data) =>
       })
   );
 
-const location = () => {
-    httpClient.get('/api/location').then((res) => {
+const location = (id) => {
+    httpClient.get(`api/location/provinsi=${id}`).then((res) => {
       return res;
     }
   ).catch((err) => {

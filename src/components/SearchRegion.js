@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import AuthService from 'services/Auth/AuthService';
 
 const people = [
   { id: '11', name: 'ACEH' },
@@ -39,10 +40,11 @@ const people = [
   { id: '92', name: 'PAPUA BARAT' },
 ];
 
+let city = []
+
 export default function SearchRegion({ data, onChange }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
-
   const filteredPeople =
     query === ''
       ? people
@@ -55,12 +57,14 @@ export default function SearchRegion({ data, onChange }) {
   function handleChange(event) {
     setQuery(event.target.value);
   }
-  function handleClick(e) {
+  async function handleClick(e) {
     const id = people.find((person) => person.name === e.target.innerText).id;
     onChange({
       ...data,
       province: id,
     });
+    let response = await AuthService.location(id);
+    console.log(response)
     console.log(data);
   }
 
@@ -130,7 +134,7 @@ export default function SearchRegion({ data, onChange }) {
 export function SearchRegionCity({ data, onChange }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
-
+  const [city, setCity] = useState([])
   const filteredPeople =
     query === ''
       ? people
