@@ -7,7 +7,7 @@ export default function InputField(props) {
     if (e.target.name === 'date_of_birth') {
       onChange({
         ...data,
-        [e.target.name]: new Date(e.target.value).getTime(),
+        [e.target.name]: new Date(e.target.value).getTime() / 1000,
       });
     } else {
       onChange({

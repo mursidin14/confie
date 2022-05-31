@@ -29,10 +29,6 @@ export default function Register() {
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
     if (page === 4) {
-      if (typeof dataAccount['date_of_birth'] !== 'number') {
-        let new_date = new Date(dataAccount['date_of_birth']).getTime();
-        dataAccount['date_of_birth'] = parseInt(new_date) / 1000;
-      }
       const respon = await AuthService.register(dataAccount);
       if (respon.statusText !== 'Created') {
         let message_error = [];
