@@ -59,7 +59,7 @@ export default function SearchRegion({ data, onChange }) {
     const id = people.find((person) => person.name === e.target.innerText).id;
     onChange({
       ...data,
-      provinsi: id,
+      province: id,
     });
     console.log(data);
   }
