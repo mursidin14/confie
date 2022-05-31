@@ -30,8 +30,8 @@ export default function Register() {
   async function nextPage() {
     if (page === 4) {
       if (typeof dataAccount['date_of_birth'] !== 'number') {
-        let new_date = new Date(dataAccount['date_of_birth']).getTime() / 1000;
-        dataAccount['date_of_birth'] = parseInt(new_date);
+        let new_date = new Date(dataAccount['date_of_birth']).getTime();
+        dataAccount['date_of_birth'] = parseInt(new_date) / 1000;
       }
       const respon = await AuthService.register(dataAccount);
       if (respon.statusText !== 'Created') {
