@@ -94,7 +94,7 @@ function Table({ items, userId, loading}) {
                
                   <button onClick={
                     async function() {
-                      await PersonalPlanService.deletePersonalPlan()
+                      await PersonalPlanService.deletePersonalPlanData()
                       window.location.reload()
                     }
                   }>

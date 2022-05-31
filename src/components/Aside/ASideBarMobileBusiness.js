@@ -49,6 +49,12 @@ export default function ASideBarMobileBusiness({
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
     },
+    {
+      name: 'Logout',
+      link: `/`,
+      icon_active: '/nav_icon/logout.png',
+      icon_inactive: '/nav_icon/i_logout.png',
+    },
   ];
   let page = PageName.toLowerCase();
   return (
