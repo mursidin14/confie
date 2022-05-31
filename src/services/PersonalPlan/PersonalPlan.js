@@ -32,6 +32,7 @@ const addQuarterlyPlanData = (id, data) =>
 const PersonalPlanService = {
   getPersonalPlanData,
   addPersonalPlanData,
+  deletePersonalPlanData,
   getDetailPersonalPlanData,
   addQuarterlyPlanData,
 };

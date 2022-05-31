@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function PersonalInfomationCard({ data_profile }) {
   function makeCapital(name) {
+    name = name.toLowerCase()
     let nameArray = name.split(' ');
     if (nameArray.length > 1) {
       let capitalName = '';
@@ -47,11 +48,11 @@ export default function PersonalInfomationCard({ data_profile }) {
     },
     {
       label: 'Province',
-      value: makeCapital(data_profile.province),
+      value: makeCapital(data_profile.province_name),
     },
     {
       label: 'City',
-      value: makeCapital(data_profile.city),
+      value: makeCapital(data_profile.city_name),
     },
   ];
 

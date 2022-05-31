@@ -112,7 +112,6 @@ export default function WizardFormThirdPage(props) {
             <SearchRegion data={data} onChange={onChange} setCity={setCity}></SearchRegion>
             </div>
             <SearchRegionCity data={data} onChange={onChange} city={city}></SearchRegionCity>
-
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
               <button
                 type="button"

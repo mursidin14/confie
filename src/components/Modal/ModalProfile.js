@@ -2,9 +2,13 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
+import SearchRegion from 'components/SearchRegion';
+import { SearchRegionCity } from 'components/SearchRegion';
+
 export default function ModalProfile() {
   let [isOpen, setIsOpen] = useState(false);
   let [dataProfile, setDataProfile] = useState({});
+  const [city, setCity] = useState([])
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
@@ -58,20 +62,6 @@ export default function ModalProfile() {
       label: 'Country',
       required: true,
     },
-    {
-      name: 'province',
-      type: 'text',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Province',
-      required: true,
-    },
-    {
-      name: 'city',
-      type: 'text',
-      errorMessage: 'It should be a valid email address!',
-      label: 'City',
-      required: true,
-    },
   ];
   function handleOnChange(e) {
     let { name, value } = e.target;
@@ -89,13 +79,13 @@ export default function ModalProfile() {
     dataProfile['date_of_birth'] = parseInt(new_date);
     const response = await ProfileService.updateProfileData(dataProfile);
     if (response.data.meta.status == 'error') {
-      let errors = []
+      let errors = [];
       let error = response.data.data;
       for (let key in error) {
         errors.push(error[key][0]);
       }
       setError(errors);
-      return
+      return;
     }
     window.location.reload();
   }
@@ -190,9 +180,21 @@ export default function ModalProfile() {
                           {...input}
                         />
                       ))}
+                      <div className="relative z-10">
+                        <SearchRegion
+                          data={dataProfile}
+                          onChange={handleOnChange}
+                          setCity={setCity}
+                        ></SearchRegion>
+                      </div>
+                      <SearchRegionCity
+                        data={dataProfile}
+                        onChange={handleOnChange}
+                        city={city}
+                      ></SearchRegionCity>
                     </div>
                   </div>
-                  <section className="text-left text-sm text-red-500 px-8">
+                  <section className="px-8 text-left text-sm text-red-500">
                     {error.map((err, index) => (
                       <p key={index}>{err}</p>
                     ))}
