@@ -16,9 +16,9 @@ const updateProfileData = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const getOnlineProfileData = () =>
+const getOnlineProfileData = (id) =>
   httpClient
-    .get('/api/onlineprofile')
+    .get(`/api/profile/${id}`)
     .then((response) => response)
     .catch((error) => error);
 

@@ -18,7 +18,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
-      const response_profile = await ProfileService.getProfileData();
+      const response_profile = await ProfileService.getOnlineProfileData(id);
       // const response_dashboard = await DashboardService.getDashboardData();
       // const response_online_profile = await ProfileService.getOnlineProfileData();
       setData(response_profile.data.data);
