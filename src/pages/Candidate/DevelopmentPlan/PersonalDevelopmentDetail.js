@@ -47,19 +47,19 @@ export default function PersonalDevelopmentDetail() {
     let checkbox_checked = document.querySelectorAll('.target_checkbox:checked').length;
     let percentage = (checkbox_checked / target_checkbox ) * 100;
     setProgress(percentage);
-    async function updateTarget() {
-        let res = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                ...target,
-                progress: percentage
-            })
-        })
-    }
-    updateTarget();
+    // async function updateTarget() {
+    //     let res = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             ...target,
+    //             progress: percentage
+    //         })
+    //     })
+    // }
+    // updateTarget();
   }
   return (
     <Layout userId={id} PageName={'Personal Development Plan'}>

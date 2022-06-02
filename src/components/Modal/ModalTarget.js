@@ -15,7 +15,6 @@ export default function ModalTarget() {
   const [plan, setPlan] = useState({
     title: '',
     start_date: '',
-    progress: 0,
   });
   function handleChange(e) {
     if (e.target.name === 'start_date') {

@@ -12,9 +12,9 @@ const addPersonalPlanData = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const deletePersonalPlanData = () =>
+const deletePersonalPlanData = (id) =>
   httpClient
-    .delete(`/api/pdp`)
+    .delete(`/api/pdp/${id}`)
     .then((response) => response)
 
 const getDetailPersonalPlanData = (id) =>

@@ -20,7 +20,7 @@ export default function ModalMilestone({ idDetail }) {
   }
   async function submitData() {
     const response = await PersonalPlanService.addQuarterlyPlanData(idDetail, milestone);
-    console.log(response);
+    window.location.reload()
   }
   let inputs = [
     {

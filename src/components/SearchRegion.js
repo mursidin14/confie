@@ -196,7 +196,7 @@ export function SearchRegionCity({ data, onChange, city}) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="absolute mt-1 max-h-[100px]  w-full overflow-auto rounded-md bg-white shadow-lg">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
