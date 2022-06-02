@@ -8,10 +8,7 @@ export default function ProfileCandidate() {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     async function fetchData() {
-      const response_profile = await ProfileService.getProfileData();
-      if(response_profile.data.meta.status == 'error'){
-        window.location.href = '/';
-      }
+      const response_profile = await ProfileService.getOnlineProfileData(id);
       setDataProfile(response_profile);
       setLoading(false);
     }
