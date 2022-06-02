@@ -13,7 +13,7 @@ export default function ProfileCandidate() {
       setLoading(false);
     }
     fetchData();
-    
+    console.log(dataProfile)
     
   }, [])
   
