@@ -99,7 +99,7 @@ export default function ASideBarMobile({ offCanvas, handleNav, PageName , userId
               </li>
             ))}
             <li className={`${!offCanvas ? 'my-3' : 'my-4'}`}>
-                <button className="flex items-center gap-5">
+                <button onClick={clickLogout} className="flex items-center gap-5">
                   <img
                     className="w-4"
                     src='/nav_icon/i_logout.png'
