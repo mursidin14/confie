@@ -1,14 +1,36 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
+
 export default function ModalAboutMe() {
+  const [dataProfile, setDataProfile] = useState({});
   let [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState([]);
+
+  function handleChange(e) {
+    setDataProfile({ ...dataProfile, [e.target.name]: e.target.value });
+  }
+
   function closeModal() {
     setIsOpen(false);
   }
 
   function openModal() {
     setIsOpen(true);
+  }
+  async function handleClick() {
+    const response = await ProfileService.updateProfileData(dataProfile);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
+    window.location.reload();
   }
   return (
     <>
@@ -54,11 +76,15 @@ export default function ModalAboutMe() {
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="my-5">
         <div className="px-8">
-         <textarea className='w-full bg-[#F5F8FA] p-5 lg:h-[200px]' name="about_me"></textarea> 
+         <textarea onChange={handleChange} className='w-full bg-[#F5F8FA] p-5 lg:h-[200px]' name="about_me"></textarea> 
          
         </div>
       </div>
-
+      <section className="px-8 text-left text-sm text-red-500">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}
@@ -66,7 +92,7 @@ export default function ModalAboutMe() {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleClick} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>

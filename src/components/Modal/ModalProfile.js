@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import ProfileService from 'services/Profile/ProfileService';
-import SearchRegion from 'components/SearchRegion';
 import { SearchRegionCity } from 'components/SearchRegion';
+import SearchRegion from 'components/SearchRegion';
+import ProfileService from 'services/Profile/ProfileService';
 
 export default function ModalProfile() {
   let [isOpen, setIsOpen] = useState(false);
