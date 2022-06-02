@@ -64,11 +64,19 @@ export default function SearchRegion({ data, onChange, setCity }) {
       ...data,
       province: id,
     });
-
     const response = await httpClient.get(`api/location?provinsi=${id}`);
-    console.log(utils.getCity(response.data.data))
     setCity(utils.getCity(response.data.data))
   }
+  async function handleEnter(name) {
+    const id = people.find((person) => person.name === name).id;
+    onChange({
+      ...data,
+      province: id,
+    });
+    const response = await httpClient.get(`api/location?provinsi=${id}`);
+    setCity(utils.getCity(response.data.data))
+  }
+
 
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -79,8 +87,12 @@ export default function SearchRegion({ data, onChange, setCity }) {
           </label>
           <Combobox.Input
             className="input-form peer mb-3"
-            displayValue={(person) => person.name}
+            displayValue={(person) => {
+              handleEnter(person.name);
+              return person.name
+            }}
             onChange={handleChange}
+            
           />
           <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
             <SelectorIcon
@@ -199,6 +211,10 @@ export function SearchRegionCity({ data, onChange, city}) {
                     }`
                   }
                   value={person}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleClick(e);
+                    }}}
                 >
                   {({ selected, active }) => (
                     <>
