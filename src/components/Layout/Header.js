@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AuthService from 'services/Auth/AuthService';
 
 export default function Header({ offCanvas, handleNav, PageName }) {
+  const [open, setOpen] = useState(false);
+  function clickProfile() {
+    setOpen(!open);
+  }
+  async function clickLogout() {
+    await AuthService.logout();
+    window.location.href = '/';
+  }
   return (
     <header className="flex items-center justify-between bg-white px-9 shadow-md ">
-      <button onClick={handleNav} className="lg:hidden block"> 
+      <button onClick={handleNav} className="block lg:hidden">
         <svg
           className="block"
-        
           width="19"
           height="13"
           viewBox="0 0 19 13"
@@ -20,8 +28,8 @@ export default function Header({ offCanvas, handleNav, PageName }) {
         </svg>
       </button>
 
-      <h4 className="text-[18px] font-semibold hidden lg:block">{PageName}</h4>
-      <img className='w-24 block lg:hidden' src="/logo.png" alt=""/>
+      <h4 className="hidden text-[18px] font-semibold lg:block">{PageName}</h4>
+      <img className="block w-24 lg:hidden" src="/logo.png" alt="" />
       <div className="flex items-center gap-6 py-3">
         <svg
           width="23"
@@ -71,7 +79,22 @@ export default function Header({ offCanvas, handleNav, PageName }) {
           />
           <rect x="9" width="6" height="6" rx="3" fill="#50CD89" />
         </svg>
-        <img className="w-10" src="/person.png" alt="" />
+
+        <div className="relative">
+          <img
+            onClick={clickProfile}
+            className="w-10 cursor-pointer"
+            src="/person.png"
+            alt=""
+          />
+          <section
+            className={`absolute right-1 rounded-md bg-white px-5 py-2 shadow-mine top-12 ${
+              !open ? 'translate-y-0  opacity-0' : ' translate-y-1 opacity-100'
+            } transition-all `}
+          >
+            <button onClick={clickLogout} className='hover:text-gray-400 text-sm transition-all'>Logout</button>
+          </section>
+        </div>
       </div>
     </header>
   );

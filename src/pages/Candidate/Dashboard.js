@@ -20,9 +20,9 @@ export default function Dashboard() {
       const response_online_profile = await ProfileService.getOnlineProfileData();
       console.log(response_dashboard, 'dashboard')
       console.log(response_online_profile, 'online')
-      if(response_profile.data.meta.status == 'error'){
-        window.location.href = '/';
-      }
+      // if(response_profile.data.meta.status == 'error'){
+      //   window.location.href = '/';
+      // }
       setData(response_profile);
       setLoading(false);
     }
