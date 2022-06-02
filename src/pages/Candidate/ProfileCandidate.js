@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ProfileService from 'services/Profile/ProfileService';
 
 export default function ProfileCandidate() {
+  const { id } = useParams();
+  const [dataProfile, setDataProfile] = useState({})
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    async function fetchData() {
+      const response_profile = await ProfileService.getProfileData();
+      if(response_profile.data.meta.status == 'error'){
+        window.location.href = '/';
+      }
+      setDataProfile(response_profile);
+      setLoading(false);
+    }
+    fetchData();
+    
+    
+  }, [])
+  
+
 
   return (
       <main className="flex lg:p-5 md:w-fit md:mx-auto shadow-mine">
