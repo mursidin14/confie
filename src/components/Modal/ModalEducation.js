@@ -22,7 +22,7 @@ export default function ModalEducation() {
     let data = {
       skills: dataEducation
     }
-    let res = await ProfileService.addSkill(data);
+    let res = await ProfileService.addEducation(data);
     console.log(res)
   }
 
