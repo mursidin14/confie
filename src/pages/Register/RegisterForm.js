@@ -18,6 +18,7 @@ export default function Register() {
   function closeModal() {
     setIsOpenFailed(false);
   }
+  console.log(dataAccount)
   useEffect(() => {
 
   }, []);

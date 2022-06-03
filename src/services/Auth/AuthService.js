@@ -32,6 +32,13 @@ const register = (data) =>
       })
   );
 
+  const getListSkill = () => {
+    return httpClient
+      .get('/api/listskill')
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
+
   const logout = () =>
   loginClient.post('/api/logout').then((response) => {
     return response;
@@ -43,6 +50,7 @@ const register = (data) =>
 const AuthService = {
   login,
   register,
+  getListSkill,
   logout,
 };
 

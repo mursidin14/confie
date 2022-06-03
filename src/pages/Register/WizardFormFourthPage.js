@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import LayoutRegister from './LayoutRegister';
 import InputTag from 'components/InputTag';
+import InputSkill from 'components/InputSkill';
 import { Dialog, Transition } from '@headlessui/react';
 
 export default function WizardFormFourthPage(props) {
@@ -33,8 +34,7 @@ export default function WizardFormFourthPage(props) {
             {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
           </label>
 
-          <InputTag data={data} onChange={onChange}></InputTag>
-
+          <InputSkill data={data} onChange={onChange}></InputSkill>
           <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
             <button
               type="button"
