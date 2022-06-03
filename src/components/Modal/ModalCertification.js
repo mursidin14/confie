@@ -42,9 +42,9 @@ export default function ModalCertification() {
   }
   let inputs = [
     {
-      label: 'name',
+      label: 'Nama Sertifikasi/Penghargaan',
       type: 'text',
-      name: 'certification_name',
+      name: 'name',
       errorMessage:
         "Name should be 3-16 characters and shouldn't include any special character!",
       pattern: '^[A-Za-z0-9]{3,16}$',
