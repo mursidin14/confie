@@ -47,7 +47,7 @@ export default function Dashboard() {
         {loading ? (
           <SkeletonCardSmall />
         ) : (
-          <TargetCard userId={id} data_plan={data.profile} />
+          <TargetCard userId={id} data_plan={data.personal_plan} />
         )}
       </div>
     </Layout>
