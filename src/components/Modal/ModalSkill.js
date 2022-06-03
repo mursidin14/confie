@@ -18,7 +18,7 @@ export default function ModalSkill() {
     let data = {
       skills: tags
     }
-    let res = await ProfileService.updateProfile(data);
+    let res = await ProfileService.updateSkill(data);
     console.log(res)
   }
   
