@@ -47,6 +47,10 @@ const people =  [
               return person.name;
             }}
             onChange={handleChange}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                addTags(selected.name, selected.id)
+              }}}
             placeholder="Add Skill"
           />
           

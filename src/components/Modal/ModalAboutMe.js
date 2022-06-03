@@ -18,6 +18,7 @@ export default function ModalAboutMe({data_profile}) {
 
   function handleChange(e) {
     setDataProfile({ ...dataProfile, [e.target.name]: e.target.value });
+    console.log(dataProfile)
   }
 
   function closeModal() {
