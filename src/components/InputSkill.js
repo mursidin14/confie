@@ -42,7 +42,7 @@ const people =  [
     <Combobox value={selected} onChange={setSelected}>
       <div className="mt-1">
           <Combobox.Input
-            className="input-form peer mb-3 focus:outline-none"
+            className="bg-soft-gray focus:outline-none"
             displayValue={(person) => {
               return person.name;
             }}
@@ -57,7 +57,7 @@ const people =  [
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute text-left mt-1 max-w-[400px] h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="absolute text-left mt-1 sm:max-w-[400px] max-w-[240px] h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative z-10 cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
@@ -116,7 +116,7 @@ export default function InputSkill({data, onChange}) {
   };
   
   return (
-    <div className='flex flex-wrap bg-soft-gray rounded-md  h-fit py-5 px-3 border-2 border-transparent focus-within:border-black overflow-hidden'>
+    <div className='flex flex-wrap items-center gap-2 bg-soft-gray rounded-md  h-fit py-5 px-3 border-2 border-transparent focus-within:border-black overflow-hidden'>
         <ul className='flex flex-wrap'>
             {tags.map((tag, index) => (
                 <li className='flex items-center bg-[#A1A5B7] rounded-md px-3 py-1 m-2 gap-3 text-white' key={index}>
