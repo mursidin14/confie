@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Layout from 'components/Layout/Layout';
 import ProgressBar from 'components/Widgets/ProgressBar';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { useParams } from 'react-router-dom';
 import ModalMilestone from 'components/Modal/ModalMilestone';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
@@ -10,11 +10,10 @@ import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 export default function PersonalDevelopmentDetail() {
   const [targetMilestone, setTargetMilestone] = useState([]);
   const [target, setTarget] = useState({});
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(0);
   const { id, idDetail } = useParams();
   const [modal, setModal] = useState(false);
-  const [loading, setLoading] = useState(true)
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getTargetDetail() {
@@ -30,22 +29,26 @@ export default function PersonalDevelopmentDetail() {
       // setProgress(dataTarget.progress);
       // setTargetMilestone(data);
 
-      const response = await PersonalPlanService.getDetailPersonalPlanData(idDetail);
-      setTarget(response.data.data)
-      setTargetMilestone(response.data.data.milestone)
-      setLoading(false)
+      const response = await PersonalPlanService.getDetailPersonalPlanData(
+        idDetail
+      );
+      setTarget(response.data.data);
+      setTargetMilestone(response.data.data.milestone);
+      setLoading(false);
     }
 
     getTargetDetail();
   }, []);
-  
+
   function handleClick() {
     setModal(!modal);
   }
   function handleChange(e) {
     let target_checkbox = document.querySelectorAll('.target_checkbox').length;
-    let checkbox_checked = document.querySelectorAll('.target_checkbox:checked').length;
-    let percentage = (checkbox_checked / target_checkbox ) * 100;
+    let checkbox_checked = document.querySelectorAll(
+      '.target_checkbox:checked'
+    ).length;
+    let percentage = (checkbox_checked / target_checkbox) * 100;
     setProgress(percentage);
     // async function updateTarget() {
     //     let res = await fetch(`https://6267fd9b01dab900f1c82b3d.mockapi.io/target/${idDetail}`, {
@@ -94,15 +97,19 @@ export default function PersonalDevelopmentDetail() {
                   />
                 </svg>
 
-                <p className="text-sm text-[#B5B5C3]">{target.start_date ? formatDate(target.start_date * 1000) : <Skeleton width={100} />}</p>
+                <p className="text-sm text-[#B5B5C3]">
+                  {target.start_date ? (
+                    formatDate(target.start_date * 1000)
+                  ) : (
+                    <Skeleton width={100} />
+                  )}
+                </p>
               </div>
             </div>
             <div className="w-5/12">
               <div className="flex items-center justify-between">
                 <p className="text-[#181C32]">Progress</p>
-                <p className="pb-3 text-sm text-[#181C32]">
-                  {progress}%
-                </p>
+                <p className="pb-3 text-sm text-[#181C32]">{progress}%</p>
               </div>
               <ProgressBar progressPercentage={progress}></ProgressBar>
             </div>
@@ -114,15 +121,74 @@ export default function PersonalDevelopmentDetail() {
             <ModalMilestone idDetail={idDetail}></ModalMilestone>
           </div>
           <hr className="mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-          {loading && <p className="text-sm text-center py-3">Loading...</p>}
-          {targetMilestone.map(({target_title, quarter, id }, index) => (
-            <MilestoneTarget
-              target_milestone={target_title}
-              quarter={quarter}
-              id={id}
-              idDetail={idDetail}
-              handleChange={handleChange}
-            />
+          {loading && <p className="py-3 text-center text-sm">Loading...</p>}
+          {targetMilestone.map(({ target_title, quarter, id }, index) => (
+            <>
+              {quarter == '1' && (
+                <>
+                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
+                    <p className="font-bold text-[#A1A5B7]">
+                      Quarter {quarter}
+                    </p>
+                  </div>
+                  <MilestoneTarget
+                    target_milestone={target_title}
+                    quarter={quarter}
+                    id={id}
+                    idDetail={idDetail}
+                    handleChange={handleChange}
+                  />
+                </>
+              )}
+              {quarter == '2' && (
+                <>
+                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
+                    <p className="font-bold text-[#A1A5B7]">
+                      Quarter {quarter}
+                    </p>
+                  </div>
+                  <MilestoneTarget
+                    target_milestone={target_title}
+                    quarter={quarter}
+                    id={id}
+                    idDetail={idDetail}
+                    handleChange={handleChange}
+                  />
+                </>
+              )}
+              {quarter == '3' && (
+                <>
+                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
+                    <p className="font-bold text-[#A1A5B7]">
+                      Quarter {quarter}
+                    </p>
+                  </div>
+                  <MilestoneTarget
+                    target_milestone={target_title}
+                    quarter={quarter}
+                    id={id}
+                    idDetail={idDetail}
+                    handleChange={handleChange}
+                  />
+                </>
+              )}
+              {quarter == '4' && (
+                <>
+                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
+                    <p className="font-bold text-[#A1A5B7]">
+                      Quarter {quarter}
+                    </p>
+                  </div>
+                  <MilestoneTarget
+                    target_milestone={target_title}
+                    quarter={quarter}
+                    id={id}
+                    idDetail={idDetail}
+                    handleChange={handleChange}
+                  />
+                </>
+              )}
+            </>
           ))}
         </div>
       </div>
@@ -130,16 +196,23 @@ export default function PersonalDevelopmentDetail() {
   );
 }
 
-
-function MilestoneTarget({ target_milestone, quarter, idDetail, id, handleChange }) {
+function MilestoneTarget({
+  target_milestone,
+  quarter,
+  idDetail,
+  id,
+  handleChange,
+}) {
   return (
     <>
-      <div className="w-full bg-[#F5F8FA] py-5 px-10">
-        <p className="font-bold text-[#A1A5B7]">Quarter {quarter}</p>
-      </div>
       <div className="flex items-center justify-between gap-3 py-5 px-10">
         <div className="flex items-center gap-3">
-          <input className='target_checkbox' name={target_milestone} type="checkbox" onChange={handleChange} />
+          <input
+            className="target_checkbox"
+            name={target_milestone}
+            type="checkbox"
+            onChange={handleChange}
+          />
           <p>{target_milestone}</p>
         </div>
         <div className="flex justify-center gap-2">
