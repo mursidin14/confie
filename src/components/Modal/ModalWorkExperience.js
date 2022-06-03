@@ -125,7 +125,7 @@ export default function ModalWorkExperience() {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile {...input} />
+                        <InputFormProfile handleChange={handleChange} {...input} />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">

@@ -21,6 +21,7 @@ export default function ModalInternship() {
       value = utils.timeEpoch(value);
     }
     setDataInternship({ ...dataInternship, [name]: value });
+    console.log(dataInternship)
   }
   async function handleSubmit() {
     let data = {

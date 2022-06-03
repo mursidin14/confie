@@ -26,6 +26,7 @@ export default function ModalEducation() {
     } else {
       setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
     }
+    console.log(dataEducation)
   }
 
   async function handleSubmit() {
