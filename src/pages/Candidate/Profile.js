@@ -19,10 +19,21 @@ export default function Profile() {
   useEffect(() => {
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
-      // const response_dashboard = await DashboardService.getDashboardData();
-      // const response_online_profile = await ProfileService.getOnlineProfileData();
-      setData(response_profile.data.data);
-      console.log(response_profile.data.data)
+      const response_skill = await ProfileService.getSkill();
+      const response_job_experience = await ProfileService.getJobExpreience();
+      const response_intern_experience = await ProfileService.getIntershipExperience();
+      const response_education = await ProfileService.getEducation();
+      const response_certificate = await ProfileService.getCertificate();
+      const response_about_me = await ProfileService.getOnlineProfileData();
+      setData({
+        profile: response_profile.data.data,
+        skill: response_skill.data,
+        job_experience: response_job_experience.data,
+        intern_experience: response_intern_experience.data,
+        education: response_education.data,
+        certificate: response_certificate.data,
+        about_me: response_about_me.data,
+      });
       setLoading(false);
     }
     fetchData();
