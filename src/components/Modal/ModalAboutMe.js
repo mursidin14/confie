@@ -3,8 +3,16 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 
-export default function ModalAboutMe() {
-  const [dataProfile, setDataProfile] = useState({});
+export default function ModalAboutMe({data_profile}) {
+  const [dataProfile, setDataProfile] = useState({
+    full_name: data_profile.full_name,
+    email: data_profile.email,
+    phone_number: data_profile.phone_number,
+    province: data_profile.province,
+    city: data_profile.city,
+    date_of_birth: data_profile.date_of_birth,
+    country: data_profile.country,
+  });
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([]);
 

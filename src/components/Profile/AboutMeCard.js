@@ -7,7 +7,7 @@ export default function AboutMeCard({ data_profile }) {
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">About Me</h3>
-          <ModalAboutMe></ModalAboutMe>
+          <ModalAboutMe data_profile={data_profile}></ModalAboutMe>
         </div>
         <hr className="my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
