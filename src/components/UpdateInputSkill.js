@@ -99,7 +99,7 @@ const people =  [
   );
 }
 
-export default function InputSkill({setTagss, tagss}) {
+export default function UpdateInputSkill({data, onChange}) {
     const [tags, setTags] = useState([]);
     const [idTags, setIdTags] = useState([]);
     const removeTags = indexToRemove => {
@@ -109,7 +109,12 @@ export default function InputSkill({setTagss, tagss}) {
     if (value !== "") {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
-      setTagss([...tagss, id])
+      onChange(
+        {
+            ...data,
+            skills: [...idTags, id]
+        }
+      )
     }
     return
   };

@@ -2,10 +2,11 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
+import UpdateInputSkill from 'components/InputSkill';
 export default function ModalSkill() {
   let [isOpen, setIsOpen] = useState(false);
-  const [tags, setTags] = useState([])
-  const [error, setError] = useState([])
+  const [tags, setTags] = useState([]);
+  const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
@@ -16,8 +17,8 @@ export default function ModalSkill() {
 
   async function handleSubmit() {
     let data = {
-      skills: tags
-    }
+      skills: tags,
+    };
     const response = await ProfileService.addSkill(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -30,7 +31,7 @@ export default function ModalSkill() {
     }
     window.location.reload();
   }
-  
+
   return (
     <>
       <div className="flex items-center justify-center">
@@ -69,16 +70,16 @@ export default function ModalSkill() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">My Skill</h3>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="px-8">
-          <InputTag tags={tags} setTags={setTags}/>
-        </div>
-      </div>
-      <section className="px-8 text-left text-sm text-red-500">
+                  <div className="flex items-center justify-between px-8">
+                    <h3 className="text-base font-semibold ">My Skill</h3>
+                  </div>
+                  <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+                  <div className="my-5">
+                    <div className="px-8">
+                      <UpdateInputSkill setTagss={setTags} tagss={tags}></UpdateInputSkill>
+                    </div>
+                  </div>
+                  <section className="px-8 text-left text-sm text-red-500">
                     {error.map((err, index) => (
                       <p key={index}>{err}</p>
                     ))}
@@ -90,7 +91,10 @@ export default function ModalSkill() {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleSubmit}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -104,42 +108,3 @@ export default function ModalSkill() {
   );
 }
 
-
-
-
-function InputTag({tags, setTags}) {
-  
-    const removeTags = indexToRemove => {
-          setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-      };
-    const addTags = (event) => {
-      if (event.target.value !== '') {
-        setTags([...tags, event.target.value]);
-        event.target.value = '';
-      }
-    };
-    return (
-      <div className="flex h-fit w-full flex-wrap rounded-md border-2 border-transparent bg-soft-gray py-5 px-3 focus-within:border-black">
-        <ul className="flex flex-wrap">
-          {tags.map((tag, index) => (
-            <li
-              className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
-              key={index}
-            >
-              <span>{tag}</span>
-              <button className="" onClick={() => removeTags(index)}>
-                x
-              </button>
-            </li>
-          ))}
-        </ul>
-        <input
-          name="skills"
-          placeholder="Add Skill"
-          onKeyUp={(event) => (event.key === 'Enter' ? addTags(event) : null)}
-          className="bg-soft-gray px-3 w-[100px] focus:border-0 focus:outline-none text-sm"
-          type="text"
-        />
-      </div>
-    );
-  }
