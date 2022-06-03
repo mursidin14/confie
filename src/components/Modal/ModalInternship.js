@@ -2,19 +2,29 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
 export default function ModalInternship() {
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([])
-  const [dataIntership, setDataIntership] = useState({})
+  const [dataInternship, setDataInternship] = useState({
+    is_current: false,
+  })
   function closeModal() {
     setIsOpen(false);
   }
   function openModal() {
     setIsOpen(true);
   }
+  function handleChange(e) {
+    let { name, value } = e.target;
+    if (name == 'start_date' || name == 'end_date') {
+      value = utils.timeEpoch(value);
+    }
+    setDataInternship({ ...dataInternship, [name]: value });
+  }
   async function handleSubmit() {
     let data = {
-      ...dataIntership,
+      ...dataInternship,
     };
     const response = await ProfileService.addIntershipExperience(data);
     if (response.data.meta.status == 'error') {
@@ -39,7 +49,7 @@ export default function ModalInternship() {
       required: true,
     },
     {
-      name: 'institute',
+      name: 'agency',
       label: 'Instansi',
       type: 'text',
       errorMessage: 'It should be a valid phone number!',
@@ -107,7 +117,7 @@ export default function ModalInternship() {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile {...input} />
+                        <InputFormProfile {...input} handleChange={handleChange} />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -122,6 +132,26 @@ export default function ModalInternship() {
                             className="w-full rounded-md bg-soft-gray p-5"
                             rows="10"
                           ></textarea>
+                        </div>
+                      </div>
+                      <div className="mt-4 lg:flex">
+                        <div className="sm:w-5/12">
+                          <label className="text-xs lg:text-base" for="">
+                            Magang Saat Ini
+                          </label>
+                        </div>
+                        <div className="flex items-center gap-3 lg:w-7/12">
+                          <input
+                            type="checkbox"
+                            id="current_school"
+                            onChange={() => {
+                              setDataInternship({
+                                ...dataInternship,
+                                is_current: !dataInternship.is_current,
+                              });
+                            }}
+                          />
+                          <label for="current_school">Ya</label>
                         </div>
                       </div>
                     </div>
@@ -152,7 +182,7 @@ export default function ModalInternship() {
   );
 }
 
-function InputFormProfile({ label, ...inputProps }) {
+function InputFormProfile({ label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -161,7 +191,7 @@ function InputFormProfile({ label, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3" onChange={handleChange} />
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export default function ModalEducation() {
   }
 
   function handleChange(e) {
-    if (e.target.name === 'start_date') {
+    if (e.target.name === 'start_date' || e.target.name === 'end_date') {
       setDataEducation({
         ...dataEducation,
         [e.target.name]: utils.timeEpoch(e.target.value),
