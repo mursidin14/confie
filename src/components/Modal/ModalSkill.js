@@ -14,11 +14,10 @@ export default function ModalSkill() {
   }
 
   async function handleSubmit() {
-    console.log(tags)
     let data = {
       skills: tags
     }
-    let res = await ProfileService.updateSkill(data);
+    let res = await ProfileService.addSkill(data);
     console.log(res)
   }
   

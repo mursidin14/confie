@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default function TargetCard({userId}) {
+export default function TargetCard({userId, data_plan}) {
+  console.log(data_plan)
   function getQuarter() {
     let today = new Date();
     let month = today.getMonth();

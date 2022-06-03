@@ -1,8 +1,11 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
 export default function ModalEducation() {
   let [isOpen, setIsOpen] = useState(false);
+  const [dataEducation, setDataEducation] = useState({})
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -10,6 +13,19 @@ export default function ModalEducation() {
   function openModal() {
     setIsOpen(true);
   }
+
+  function handleChange(e) {
+    setDataEducation({ ...dataEducation, [e.target.name]: e.target.value })
+  }
+
+  async function handleSubmit() {
+    let data = {
+      skills: dataEducation
+    }
+    let res = await ProfileService.addSkill(data);
+    console.log(res)
+  }
+
   let inputs = [
     {
       label: 'Sekolah/Universitats',
@@ -89,7 +105,7 @@ export default function ModalEducation() {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile {...input} />
+                        <InputFormProfile handleChange={handleChange} {...input} />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -116,7 +132,7 @@ export default function ModalEducation() {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>
@@ -130,7 +146,7 @@ export default function ModalEducation() {
   );
 }
 
-function InputFormProfile({ label, ...inputProps }) {
+function InputFormProfile({ label, handleChange, ...inputProps}) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -139,7 +155,7 @@ function InputFormProfile({ label, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input onChange={handleChange} {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
       </div>
     </div>
   );

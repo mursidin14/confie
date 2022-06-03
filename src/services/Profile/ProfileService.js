@@ -22,6 +22,16 @@ const getOnlineProfileData = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
+const addSkill = (data) =>
+  httpClient
+    .post('/api/profile/skills', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error);
+
 const updateSkill = (data) =>
   httpClient
     .put('/api/profile/skills', data, {
@@ -35,6 +45,16 @@ const updateSkill = (data) =>
 const deleteSkill = (id) =>
   httpClient
     .delete(`/api/profile/skills/${id}`)
+    .then((response) => response)
+    .catch((error) => error);
+
+const addJobExperience = (data) =>
+  httpClient
+    .post('/api/profile/experiences', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     .then((response) => response)
     .catch((error) => error);
 
@@ -54,6 +74,16 @@ const deleteJobExperience = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
+const addIntershipExperience = (data) =>
+  httpClient
+    .post('/api/profile/internships', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error);
+
 const updateIntershipExperience = (data) =>
   httpClient
     .put('/api/profile/internships', data, {
@@ -70,6 +100,16 @@ const deleteIntershipExperience = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
+const addEducation = (data) =>
+  httpClient
+    .post('/api/profile/educations', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error);
+
 const updateEducation = (data) =>
   httpClient
     .put('/api/profile/educations', data, {
@@ -83,6 +123,16 @@ const updateEducation = (data) =>
 const deleteEducation = (id) =>
   httpClient
     .delete(`/api/profile/educations/${id}`)
+    .then((response) => response)
+    .catch((error) => error);
+
+const addCertificate = (data) =>
+  httpClient
+    .post('/api/profile/certificates', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     .then((response) => response)
     .catch((error) => error);
 
@@ -112,14 +162,18 @@ const ProfileService = {
   getProfileData,
   updateProfileData,
   getOnlineProfileData,
+  addSkill,
   updateSkill,
   deleteSkill,
+  addJobExperience,
   updateJobExperience,
   deleteJobExperience,
+  addIntershipExperience,
   updateIntershipExperience,
   deleteIntershipExperience,
   updateEducation,
   deleteEducation,
+  addEducation,
   updateCertificate,
   deleteCertificate,
   LogoutProfile,
