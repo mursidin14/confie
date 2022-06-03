@@ -17,8 +17,11 @@ export default function ModalWorkExperience() {
     let { name, value } = e.target;
     if (name == 'start_date' || name == 'end_date') {
       value = utils.timeEpoch(value);
+      setDataWorkExperience({ ...dataWorkExperience, [name]: value });
+    }else{
+      setDataWorkExperience({ ...dataWorkExperience, [name]: value });
     }
-    setDataWorkExperience({ ...dataWorkExperience, [name]: value });
+    console.log(dataWorkExperience);
   }
 
 
