@@ -21,9 +21,24 @@ const getCity = (data) => {
   return city;
 };
 
+const timeEpoch = (time) => {
+  let date = new Date(time);
+  return date.getTime() / 1000;
+};
+
+const getDate = (time) => {
+  return new Date(time * 1000).toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 const utils = {
   makeCapital,
   getCity,
+  timeEpoch,
+  getDate,
 };
 
 export default utils;

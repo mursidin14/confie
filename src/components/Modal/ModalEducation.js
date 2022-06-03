@@ -2,11 +2,12 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
 export default function ModalEducation() {
   let [isOpen, setIsOpen] = useState(false);
   const [dataEducation, setDataEducation] = useState({
     is_current: false,
-  })
+  });
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
@@ -17,13 +18,20 @@ export default function ModalEducation() {
   }
 
   function handleChange(e) {
-    setDataEducation({ ...dataEducation, [e.target.name]: e.target.value })
+    if (e.target.name === 'start_date') {
+      setDataEducation({
+        ...dataEducation,
+        [e.target.name]: utils.timeEpoch(e.target.value),
+      });
+    } else {
+      setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
+    }
   }
 
   async function handleSubmit() {
     let data = {
-     ...dataEducation
-    }
+      ...dataEducation,
+    };
     const response = await ProfileService.addEducation(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -116,7 +124,10 @@ export default function ModalEducation() {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile handleChange={handleChange} {...input} />
+                        <InputFormProfile
+                          handleChange={handleChange}
+                          {...input}
+                        />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -140,9 +151,16 @@ export default function ModalEducation() {
                           </label>
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
-                          <input type="checkbox" id='current_school' onChange={()=> {
-                            setDataEducation({...dataEducation, is_current: !dataEducation.is_current})
-                          }} />
+                          <input
+                            type="checkbox"
+                            id="current_school"
+                            onChange={() => {
+                              setDataEducation({
+                                ...dataEducation,
+                                is_current: !dataEducation.is_current,
+                              });
+                            }}
+                          />
                           <label for="current_school">Ya</label>
                         </div>
                       </div>
@@ -160,7 +178,10 @@ export default function ModalEducation() {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleSubmit}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -174,7 +195,7 @@ export default function ModalEducation() {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps}) {
+function InputFormProfile({ label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -183,7 +204,11 @@ function InputFormProfile({ label, handleChange, ...inputProps}) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input onChange={handleChange} {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input
+          onChange={handleChange}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3 "
+        />
       </div>
     </div>
   );
