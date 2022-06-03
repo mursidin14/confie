@@ -6,7 +6,7 @@ import utils from 'utils/utils';
 export default function ModalWorkExperience() {
   let [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
-    status: false,
+    is_current: false,
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -21,16 +21,6 @@ export default function ModalWorkExperience() {
     setDataWorkExperience({ ...dataWorkExperience, [name]: value });
   }
 
-  function handleChange(e) {
-    if (e.target.name === 'start_date' || e.target.name === 'end_date') {
-      setDataWorkExperience({
-        ...dataWorkExperience,
-        [e.target.name]: utils.timeEpoch(e.target.value),
-      });
-    } else {
-      setDataWorkExperience({ ...dataWorkExperience, [e.target.name]: e.target.value });
-    }
-  }
 
   function openModal() {
     setIsOpen(true);
@@ -142,7 +132,7 @@ export default function ModalWorkExperience() {
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
                           <input onChange={()=>{
-                            setDataWorkExperience({...dataWorkExperience, status: !dataWorkExperience['status']})
+                            setDataWorkExperience({...dataWorkExperience, is_current: !dataWorkExperience['is_current']})
                           }} type="checkbox" />
                           <label for="">Ya</label>
                         </div>
