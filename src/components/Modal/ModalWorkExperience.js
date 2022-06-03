@@ -6,11 +6,19 @@ import utils from 'utils/utils';
 export default function ModalWorkExperience() {
   let [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
-    is_current: false,
+    status: false,
   });
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
+  }
+
+  function handleChange(e) {
+    let { name, value } = e.target;
+    if (name == 'start_date' || name == 'end_date') {
+      value = utils.timeEpoch(value);
+    }
+    setDataWorkExperience({ ...dataWorkExperience, [name]: value });
   }
 
   function handleChange(e) {
@@ -54,7 +62,7 @@ export default function ModalWorkExperience() {
       required: true,
     },
     {
-      name: 'institute',
+      name: 'agency',
       label: 'Instansi',
       type: 'text',
       errorMessage: 'It should be a valid phone number!',
@@ -133,12 +141,14 @@ export default function ModalWorkExperience() {
                           </label>
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
-                          <input type="checkbox" />
+                          <input onChange={()=>{
+                            setDataWorkExperience({...dataWorkExperience, status: !dataWorkExperience['status']})
+                          }} type="checkbox" />
                           <label for="">Ya</label>
                         </div>
                       </div>
                       {inputs_2.map((input, index) => (
-                        <InputFormProfile {...input} />
+                        <InputFormProfile handleChange={handleChange} {...input} />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -148,6 +158,7 @@ export default function ModalWorkExperience() {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            onChange={handleChange}
                             name="description"
                             id=""
                             className="w-full rounded-md bg-soft-gray p-5"
@@ -183,7 +194,7 @@ export default function ModalWorkExperience() {
   );
 }
 
-function InputFormProfile({ label, ...inputProps }) {
+function InputFormProfile({ label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -192,7 +203,7 @@ function InputFormProfile({ label, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3" onChange={handleChange} />
       </div>
     </div>
   );
