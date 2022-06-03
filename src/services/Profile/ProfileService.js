@@ -30,7 +30,7 @@ const addSkill = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const updateSkill = (data) =>
   httpClient

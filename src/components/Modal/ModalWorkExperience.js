@@ -1,14 +1,47 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
 export default function ModalWorkExperience() {
   let [isOpen, setIsOpen] = useState(false);
+  const [dataWorkExperience, setDataWorkExperience] = useState({
+    is_current: false,
+  });
+  const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
 
+  function handleChange(e) {
+    if (e.target.name === 'start_date') {
+      setDataWorkExperience({
+        ...dataWorkExperience,
+        [e.target.name]: utils.timeEpoch(e.target.value),
+      });
+    } else {
+      setDataWorkExperience({ ...dataWorkExperience, [e.target.name]: e.target.value });
+    }
+  }
+
   function openModal() {
     setIsOpen(true);
+  }
+  async function handleSubmit() {
+    let data = {
+      ...dataWorkExperience
+    }
+    const response = await ProfileService.addSkill(data);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
+    window.location.reload();
   }
   let inputs = [
     {
@@ -124,7 +157,11 @@ export default function ModalWorkExperience() {
                       </div>
                     </div>  
                   </div>
-
+                  <section className="px-8 text-left text-sm text-red-500">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}
@@ -132,7 +169,7 @@ export default function ModalWorkExperience() {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleChange} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>
