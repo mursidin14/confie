@@ -18,7 +18,6 @@ export default function Layout({PageName, children, userId}) {
       setLoading(false);
     }
     fetchData();
-    console.log(data, 'layout')
   }, []);
   
   function handleNav() {

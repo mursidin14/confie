@@ -75,7 +75,7 @@ function SkeletonCard() {
 }
 function SkeletonCardSmall() {
   return (
-    <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
+    <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 mt-5 flex items-start flex-col gap-2">
       <Skeleton width={100} height={50} />
       <Skeleton width={200} height={150} />
     </div>
