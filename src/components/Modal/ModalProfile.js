@@ -1,8 +1,7 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { SearchRegionCity } from 'components/SearchRegion';
-import SearchRegion from 'components/SearchRegion';
+import { SearchRegionCityProfile, SearchRegionProfile} from 'components/SearchRegion';
 import ProfileService from 'services/Profile/ProfileService';
 
 export default function ModalProfile() {
@@ -181,17 +180,17 @@ export default function ModalProfile() {
                         />
                       ))}
                       <div className="relative z-10">
-                        <SearchRegion
+                        <SearchRegionProfile
                           data={dataProfile}
                           onChange={setDataProfile}
                           setCity={setCity}
-                        ></SearchRegion>
+                        ></SearchRegionProfile>
                       </div>
-                      <SearchRegionCity
+                      <SearchRegionCityProfile
                         data={dataProfile}
                         onChange={setDataProfile}
                         city={city}
-                      ></SearchRegionCity>
+                      ></SearchRegionCityProfile>
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">

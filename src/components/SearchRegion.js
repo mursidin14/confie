@@ -41,8 +41,6 @@ const people = [
   { id: '92', name: 'PAPUA BARAT' },
 ];
 
-
-
 export default function SearchRegion({ data, onChange, setCity }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
@@ -65,7 +63,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
       province: id,
     });
     const response = await httpClient.get(`api/location?provinsi=${id}`);
-    setCity(utils.getCity(response.data.data))
+    setCity(utils.getCity(response.data.data));
   }
   async function handleEnter(name) {
     const id = people.find((person) => person.name === name).id;
@@ -74,9 +72,8 @@ export default function SearchRegion({ data, onChange, setCity }) {
       province: id,
     });
     const response = await httpClient.get(`api/location?provinsi=${id}`);
-    setCity(utils.getCity(response.data.data))
+    setCity(utils.getCity(response.data.data));
   }
-
 
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -89,10 +86,9 @@ export default function SearchRegion({ data, onChange, setCity }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return person.name
+              return person.name;
             }}
             onChange={handleChange}
-            
           />
           <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
             <SelectorIcon
@@ -145,11 +141,11 @@ export default function SearchRegion({ data, onChange, setCity }) {
     </Combobox>
   );
 }
-export function SearchRegionCity({ data, onChange, city}) {
-  console.log(city)
+export function SearchRegionCity({ data, onChange, city }) {
+  console.log(city);
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
-  const people = city
+  const people = city;
   const filteredPeople =
     query === ''
       ? people
@@ -214,7 +210,205 @@ export function SearchRegionCity({ data, onChange, city}) {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleClick(e);
-                    }}}
+                    }
+                  }}
+                >
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        className={`block truncate ${
+                          selected ? 'font-medium' : 'font-normal'
+                        }`}
+                        onClick={handleClick}
+                      >
+                        {person.name}
+                      </span>
+                    </>
+                  )}
+                </Combobox.Option>
+              ))
+            )}
+          </Combobox.Options>
+        </Transition>
+      </div>
+    </Combobox>
+  );
+}
+export function SearchRegionProfile({ data, onChange, setCity }) {
+  const [selected, setSelected] = useState('');
+  const [query, setQuery] = useState('');
+  const filteredPeople =
+    query === ''
+      ? people
+      : people.filter((person) =>
+          person.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+  function handleChange(event) {
+    setQuery(event.target.value);
+  }
+  async function handleClick(e) {
+    const id = people.find((person) => person.name === e.target.innerText).id;
+    onChange({
+      ...data,
+      province: id,
+    });
+    const response = await httpClient.get(`api/location?provinsi=${id}`);
+    setCity(utils.getCity(response.data.data));
+  }
+  async function handleEnter(name) {
+    const id = people.find((person) => person.name === name).id;
+    onChange({
+      ...data,
+      province: id,
+    });
+    const response = await httpClient.get(`api/location?provinsi=${id}`);
+    setCity(utils.getCity(response.data.data));
+  }
+
+  return (
+    <Combobox value={selected} onChange={setSelected}>
+      <div className="relative mt-1">
+        <div className=" items-center lg:flex">
+          <div className="w-5/12">
+            <label className="text-xs lg:text-base">Quarter</label>
+          </div>
+          <div className="lg:w-7/12">
+          <Combobox.Input
+            className="input-form peer mb-3"
+            displayValue={(person) => {
+              handleEnter(person.name);
+              return person.name;
+            }}
+            onChange={handleChange}
+          />
+          <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
+            <SelectorIcon
+              className="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+          </Combobox.Button>
+          </div>
+        </div>
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+          afterLeave={() => setQuery('')}
+        >
+          <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+            {filteredPeople.length === 0 && query !== '' ? (
+              <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                Nothing found.
+              </div>
+            ) : (
+              filteredPeople.map((person) => (
+                <Combobox.Option
+                  key={person.id}
+                  className={({ active }) =>
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      active ? 'bg-orange text-white' : 'text-gray-900'
+                    }`
+                  }
+                  value={person}
+                >
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        className={`block truncate ${
+                          selected ? 'font-medium' : 'font-normal'
+                        }`}
+                        onClick={handleClick}
+                      >
+                        {person.name}
+                      </span>
+                    </>
+                  )}
+                </Combobox.Option>
+              ))
+            )}
+          </Combobox.Options>
+        </Transition>
+      </div>
+    </Combobox>
+  );
+}
+export function SearchRegionCityProfile({ data, onChange, city }) {
+  console.log(city);
+  const [selected, setSelected] = useState('');
+  const [query, setQuery] = useState('');
+  const people = city;
+  const filteredPeople =
+    query === ''
+      ? people
+      : people.filter((person) =>
+          person.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+  function handleChange(event) {
+    setQuery(event.target.value);
+  }
+  function handleClick(e) {
+    const id = people.find((person) => person.name === e.target.innerText).id;
+    onChange({
+      ...data,
+      city: id,
+    });
+  }
+
+  return (
+    <Combobox value={selected} onChange={setSelected}>
+      <div className="relative mt-1">
+      <div className=" items-center lg:flex">
+          <div className="w-5/12">
+            <label className="text-xs lg:text-base">City</label>
+          </div>
+          <div className="lg:w-7/12">
+          <Combobox.Input
+            className="input-form peer mb-3"
+            displayValue={(person) => person.name}
+            onChange={handleChange}
+          />
+          <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
+            <SelectorIcon
+              className="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+          </Combobox.Button>
+          </div>
+        </div>
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+          afterLeave={() => setQuery('')}
+        >
+          <Combobox.Options className="absolute mt-1 max-h-[100px]  w-full overflow-auto rounded-md bg-white shadow-lg">
+            {filteredPeople.length === 0 && query !== '' ? (
+              <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                Nothing found.
+              </div>
+            ) : (
+              filteredPeople.map((person) => (
+                <Combobox.Option
+                  key={person.id}
+                  className={({ active }) =>
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      active ? 'bg-orange text-white' : 'text-gray-900'
+                    }`
+                  }
+                  value={person}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleClick(e);
+                    }
+                  }}
                 >
                   {({ selected, active }) => (
                     <>
