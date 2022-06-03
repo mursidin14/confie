@@ -2,6 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
+import QuarterPlan from 'components/QuarterPlan';
 export default function ModalMilestone({ idDetail }) {
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {

@@ -24,7 +24,6 @@ export default function Profile() {
       const response_intern_experience = await ProfileService.getIntershipExperience();
       const response_education = await ProfileService.getEducation();
       const response_certificate = await ProfileService.getCertificate();
-      const response_about_me = await ProfileService.getOnlineProfileData();
       setData({
         profile: response_profile.data.data,
         skill: response_skill.data,
@@ -32,7 +31,6 @@ export default function Profile() {
         intern_experience: response_intern_experience.data,
         education: response_education.data,
         certificate: response_certificate.data,
-        about_me: response_about_me.data,
       });
       setLoading(false);
     }
@@ -43,12 +41,12 @@ export default function Profile() {
       {loading ? (
         <SkeletonCard />
       ) : (
-        <PersonalInfomationCard data_profile={data} />
+        <PersonalInfomationCard data_profile={data.profile} />
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <AboutMeCard data_profile={data}/>
+        <AboutMeCard data_profile={data.profile}/>
       )}
       <SkillCard />
       <WorkExperienceCard />
