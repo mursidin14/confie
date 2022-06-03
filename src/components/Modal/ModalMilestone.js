@@ -25,12 +25,6 @@ export default function ModalMilestone({ idDetail }) {
   }
   let inputs = [
     {
-      label: 'Quarter',
-      type: 'text',
-      name: 'quarter',
-      required: true,
-    },
-    {
       label: 'Target milestone',
       type: 'text',
       name: 'target_title',
@@ -83,6 +77,7 @@ export default function ModalMilestone({ idDetail }) {
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
                     <div className="px-8">
+                      <QuarterPlan milestone={milestone} setMilestone={setMilestone}></QuarterPlan>
                       {inputs.map((input, index) => (
                         <InputFormProfile
                           handleChange={handleChange}

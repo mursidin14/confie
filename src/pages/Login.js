@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import AsideLogin from 'components/Aside/AsideLogin';
 import AuthService from 'services/Auth/AuthService';
 import ModalError from 'components/Modal/ModalError';
-import QuarterPlan from 'components/QuarterPlan';
 export default function Login() {
   const [error, setError] = useState(false)
   const [error_msg, setError_msg] = useState('')
@@ -31,7 +30,6 @@ export default function Login() {
             Login to your Account
           </h3>
           <form className="" action="">
-            <QuarterPlan></QuarterPlan>
             <label className="mt-5  mb-2 block text-left text-sm font-semibold text-dark-blue">
               Email
             </label>
