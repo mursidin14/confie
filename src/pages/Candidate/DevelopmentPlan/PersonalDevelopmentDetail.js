@@ -122,74 +122,86 @@ export default function PersonalDevelopmentDetail() {
           </div>
           <hr className="mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
           {loading && <p className="py-3 text-center text-sm">Loading...</p>}
-          {targetMilestone.map(({ target_title, quarter, id }, index) => (
-            <>
-              {quarter == '1' && (
-                <>
-                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
-                    <p className="font-bold text-[#A1A5B7]">
-                      Quarter {quarter}
-                    </p>
-                  </div>
-                  <MilestoneTarget
-                    target_milestone={target_title}
-                    quarter={quarter}
-                    id={id}
-                    idDetail={idDetail}
-                    handleChange={handleChange}
-                  />
-                </>
-              )}
-              {quarter == '2' && (
-                <>
-                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
-                    <p className="font-bold text-[#A1A5B7]">
-                      Quarter {quarter}
-                    </p>
-                  </div>
-                  <MilestoneTarget
-                    target_milestone={target_title}
-                    quarter={quarter}
-                    id={id}
-                    idDetail={idDetail}
-                    handleChange={handleChange}
-                  />
-                </>
-              )}
-              {quarter == '3' && (
-                <>
-                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
-                    <p className="font-bold text-[#A1A5B7]">
-                      Quarter {quarter}
-                    </p>
-                  </div>
-                  <MilestoneTarget
-                    target_milestone={target_title}
-                    quarter={quarter}
-                    id={id}
-                    idDetail={idDetail}
-                    handleChange={handleChange}
-                  />
-                </>
-              )}
-              {quarter == '4' && (
-                <>
-                  <div className="w-full bg-[#F5F8FA] py-5 px-10">
-                    <p className="font-bold text-[#A1A5B7]">
-                      Quarter {quarter}
-                    </p>
-                  </div>
-                  <MilestoneTarget
-                    target_milestone={target_title}
-                    quarter={quarter}
-                    id={id}
-                    idDetail={idDetail}
-                    handleChange={handleChange}
-                  />
-                </>
-              )}
-            </>
-          ))}
+          <section>
+            <div className="w-full bg-[#F5F8FA] py-5 px-10">
+              <p className="font-bold text-[#A1A5B7]">Quarter 1</p>
+            </div>
+            {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              <>
+                {quarter == '1' && (
+                  <>
+                    <MilestoneTarget
+                      target_milestone={target_title}
+                      quarter={quarter}
+                      id={id}
+                      idDetail={idDetail}
+                      handleChange={handleChange}
+                    />
+                  </>
+                )}
+              </>
+            ))}
+          </section>
+          <section>
+            <div className="w-full bg-[#F5F8FA] py-5 px-10">
+              <p className="font-bold text-[#A1A5B7]">Quarter 2</p>
+            </div>
+            {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              <>
+                {quarter == '2' && (
+                  <>
+                    <MilestoneTarget
+                      target_milestone={target_title}
+                      quarter={quarter}
+                      id={id}
+                      idDetail={idDetail}
+                      handleChange={handleChange}
+                    />
+                  </>
+                )}
+              </>
+            ))}
+          </section>
+          <section>
+            <div className="w-full bg-[#F5F8FA] py-5 px-10">
+              <p className="font-bold text-[#A1A5B7]">Quarter 3</p>
+            </div>
+            {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              <>
+                {quarter == '3' && (
+                  <>
+                    <MilestoneTarget
+                      target_milestone={target_title}
+                      quarter={quarter}
+                      id={id}
+                      idDetail={idDetail}
+                      handleChange={handleChange}
+                    />
+                  </>
+                )}
+              </>
+            ))}
+          </section>
+          <section>
+            <div className="w-full bg-[#F5F8FA] py-5 px-10">
+              <p className="font-bold text-[#A1A5B7]">Quarter 4</p>
+            </div>
+            {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              <>
+                {quarter == '4' && (
+                  <>
+                    <MilestoneTarget
+                      target_milestone={target_title}
+                      quarter={quarter}
+                      id={id}
+                      idDetail={idDetail}
+                      handleChange={handleChange}
+                    />
+                  </>
+                )}
+              </>
+            ))}
+          </section>
         </div>
       </div>
     </Layout>
