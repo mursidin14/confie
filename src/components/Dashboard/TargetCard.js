@@ -68,10 +68,19 @@ export default function TargetCard({ userId, data_plan }) {
       </div>
       <div className="my-3 px-8">
         <div className="flex items-center gap-3">
-          <input type="checkbox" class="form-checkbox h-5 w-5 bg-[#FFF8DD]" />
-          {dataMilestone.map((milestone, index) => (
-            <p className="text-sm" key={index}>{milestone.target_title}</p>
-          ))}
+          {!loading
+            ? dataMilestone.map((milestone, index) => (
+                <>
+                  <input
+                    type="checkbox"
+                    class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
+                  />
+                  <p className="text-sm" key={index}>
+                    {milestone.target_title}
+                  </p>
+                </>
+              ))
+            : 'loading'}
         </div>
       </div>
     </div>
