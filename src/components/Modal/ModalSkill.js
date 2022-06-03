@@ -15,14 +15,11 @@ export default function ModalSkill() {
 
   async function handleSubmit() {
     console.log(tags)
-    // let data = {
-    //   skills: tags
-    // }
-    // let res = await ProfileService.updateProfile(data);
-    // if (res.status === 200) {
-    //   closeModal();
-    //   window.location.reload()
-    // }
+    let data = {
+      skills: tags
+    }
+    let res = await ProfileService.updateProfile(data);
+    console.log(res)
   }
   
   return (
