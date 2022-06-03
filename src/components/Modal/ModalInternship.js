@@ -1,14 +1,32 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
 export default function ModalInternship() {
   let [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState([])
+  const [dataIntership, setDataIntership] = useState({})
   function closeModal() {
     setIsOpen(false);
   }
-
   function openModal() {
     setIsOpen(true);
+  }
+  async function handleSubmit() {
+    let data = {
+      ...dataIntership,
+    };
+    const response = await ProfileService.addIntershipExperience(data);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
+    window.location.reload();
   }
   let inputs = [
     {
@@ -108,7 +126,11 @@ export default function ModalInternship() {
                       </div>
                     </div>
                   </div>
-
+                  <section className="text-left text-sm text-red-500 px-8">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}

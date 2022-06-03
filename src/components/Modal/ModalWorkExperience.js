@@ -94,9 +94,9 @@ export default function ModalWorkExperience() {
                         <InputFormProfile {...input} />
                       ))}
                       <div className="mt-4 lg:flex">
-                        <div className="w-5/12">
+                        <div className="sm:w-5/12">
                           <label className="text-xs lg:text-base" for="">
-                            Pekerjaan saat ini
+                            Bekerja saat ini
                           </label>
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">

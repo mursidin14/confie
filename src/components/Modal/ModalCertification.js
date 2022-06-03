@@ -1,14 +1,33 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
 export default function ModalCertification() {
+  const [dataCertificate, setDataCertificate] = useState({});
   let [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
 
   function openModal() {
     setIsOpen(true);
+  }
+  async function handleSubmit() {
+    let data = {
+      ...dataCertificate,
+    };
+    const response = await ProfileService.addCertificate(data);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
+    window.location.reload();
   }
   let inputs = [
     {
@@ -34,7 +53,6 @@ export default function ModalCertification() {
       label: 'Tahun',
       required: true,
     },
-  
   ];
   return (
     <>
@@ -76,7 +94,7 @@ export default function ModalCertification() {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                    Tambah Sertifikasi & Penghargaan
+                      Tambah Sertifikasi & Penghargaan
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
@@ -102,7 +120,11 @@ export default function ModalCertification() {
                       </div>
                     </div>
                   </div>
-
+                  <section className="px-8 text-left text-sm text-red-500">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}

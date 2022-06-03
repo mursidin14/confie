@@ -56,7 +56,7 @@ const addJobExperience = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const updateJobExperience = (data) =>
   httpClient
@@ -66,13 +66,13 @@ const updateJobExperience = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const deleteJobExperience = (id) =>
   httpClient
     .delete(`/api/profile/experiences/${id}`)
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const addIntershipExperience = (data) =>
   httpClient
@@ -82,7 +82,7 @@ const addIntershipExperience = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const updateIntershipExperience = (data) =>
   httpClient
@@ -92,13 +92,13 @@ const updateIntershipExperience = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const deleteIntershipExperience = (id) =>
   httpClient
     .delete(`/api/profile/internships/${id}`)
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const addEducation = (data) =>
   httpClient
@@ -108,7 +108,7 @@ const addEducation = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const updateEducation = (data) =>
   httpClient
@@ -118,13 +118,13 @@ const updateEducation = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const deleteEducation = (id) =>
   httpClient
     .delete(`/api/profile/educations/${id}`)
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const addCertificate = (data) =>
   httpClient
@@ -134,7 +134,7 @@ const addCertificate = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const updateCertificate = (data) =>
   httpClient
@@ -144,13 +144,13 @@ const updateCertificate = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const deleteCertificate = (id) =>
   httpClient
     .delete(`/api/profile/certificates/${id}`)
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const LogoutProfile = () =>
   httpClient
@@ -171,9 +171,10 @@ const ProfileService = {
   addIntershipExperience,
   updateIntershipExperience,
   deleteIntershipExperience,
+  addEducation,
   updateEducation,
   deleteEducation,
-  addEducation,
+  addCertificate,
   updateCertificate,
   deleteCertificate,
   LogoutProfile,

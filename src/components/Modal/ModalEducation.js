@@ -4,8 +4,10 @@ import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 export default function ModalEducation() {
   let [isOpen, setIsOpen] = useState(false);
-  const [dataEducation, setDataEducation] = useState({})
-
+  const [dataEducation, setDataEducation] = useState({
+    is_current: false,
+  })
+  const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
@@ -20,10 +22,19 @@ export default function ModalEducation() {
 
   async function handleSubmit() {
     let data = {
-      skills: dataEducation
+     ...dataEducation
     }
-    let res = await ProfileService.addEducation(data);
-    console.log(res)
+    const response = await ProfileService.addEducation(data);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
+    window.location.reload();
   }
 
   let inputs = [
@@ -122,9 +133,26 @@ export default function ModalEducation() {
                           ></textarea>
                         </div>
                       </div>
+                      <div className="mt-4 lg:flex">
+                        <div className="sm:w-5/12">
+                          <label className="text-xs lg:text-base" for="">
+                            Sekolah saat ini
+                          </label>
+                        </div>
+                        <div className="flex items-center gap-3 lg:w-7/12">
+                          <input type="checkbox" id='current_school' onChange={()=> {
+                            setDataEducation({...dataEducation, is_current: !dataEducation.is_current})
+                          }} />
+                          <label for="current_school">Ya</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
+                  <section className="px-8 text-left text-sm text-red-500">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}
