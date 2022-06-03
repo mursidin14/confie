@@ -33,12 +33,19 @@ const getDate = (time) => {
     day: 'numeric',
   });
 }
+const getMonthYear = (time) => {
+  return new Date(time * 1000).toLocaleDateString('id-ID', {
+    year: 'numeric',
+    month: 'short',
+  });
+}
 
 const utils = {
   makeCapital,
   getCity,
   timeEpoch,
   getDate,
+  getMonthYear
 };
 
 export default utils;

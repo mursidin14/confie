@@ -46,22 +46,22 @@ export default function Profile() {
       {loading ? (
         <SkeletonCard />
       ) : (
-        <WorkExperienceCard data_profile={data.profile}/>
+        <WorkExperienceCard data_profile={data.profile.experiences}/>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <InternExperienceCard data_profile={data.profile}/>
+        <InternExperienceCard data_profile={data.profile.internships}/>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <EducationCard data_profile={data.profile}/>
+        <EducationCard data_profile={data.profile.educations}/>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <CertificationCard data_profile={data.profile}/>
+        <CertificationCard data_profile={data.profile.certificates}/>
       )}
     </Layout>
   );
