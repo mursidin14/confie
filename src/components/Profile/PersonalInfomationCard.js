@@ -60,7 +60,7 @@ export default function PersonalInfomationCard({ data_profile }) {
     <div className="rounded-md bg-white pt-7 pb-2 text-left shadow-mine ">
       <div className="flex items-center justify-between px-8">
         <h3 className="text-base font-semibold ">Personal Infomation</h3>
-        <ModalProfile></ModalProfile>
+        <ModalProfile data_profile={data_profile}></ModalProfile>
       </div>
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="my-5">

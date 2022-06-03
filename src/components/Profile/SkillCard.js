@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ModalSkill from 'components/Modal/ModalSkill';
-export default function SkillCard() {
-  let skills = ['Coding', 'Design', 'Marketing', 'Sales'];
+export default function SkillCard({data_skills}) {
+  let skills = data_skills;
   
   return (
     <div className="lg:relative">
@@ -18,7 +18,7 @@ export default function SkillCard() {
                 key={index}
                 className="rounded-md bg-[#A1A5B7] px-5 py-1 text-xs text-white md:text-base"
               >
-                {skill.toUpperCase()}
+                {skill.name.toUpperCase()}
               </p>
             ))}
           </div>

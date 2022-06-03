@@ -38,11 +38,31 @@ export default function Profile() {
       ) : (
         <AboutMeCard data_profile={data.profile}/>
       )}
-      <SkillCard />
-      <WorkExperienceCard />
-      <InternExperienceCard />
-      <EducationCard />
-      <CertificationCard />
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <SkillCard data_skills={data.profile.skills}/>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <WorkExperienceCard data_profile={data.profile}/>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <InternExperienceCard data_profile={data.profile}/>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <EducationCard data_profile={data.profile}/>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <CertificationCard data_profile={data.profile}/>
+      )}
     </Layout>
   );
 }

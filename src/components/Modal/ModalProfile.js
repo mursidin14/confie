@@ -4,9 +4,17 @@ import { Fragment, useState } from 'react';
 import { SearchRegionCityProfile, SearchRegionProfile} from 'components/SearchRegion';
 import ProfileService from 'services/Profile/ProfileService';
 
-export default function ModalProfile() {
+export default function ModalProfile({data_profile}) {
   let [isOpen, setIsOpen] = useState(false);
-  let [dataProfile, setDataProfile] = useState({});
+  let [dataProfile, setDataProfile] = useState({
+    full_name: data_profile.full_name,
+    email: data_profile.email,
+    phone_number: data_profile.phone_number,
+    province: data_profile.province,
+    city: data_profile.city,
+    date_of_birth: data_profile.date_of_birth,
+    country: data_profile.country,
+  });
   const [city, setCity] = useState([])
   const [error, setError] = useState([]);
   function closeModal() {
