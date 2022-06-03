@@ -2,6 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
 export default function ModalCertification() {
   const [dataCertificate, setDataCertificate] = useState({});
   let [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,16 @@ export default function ModalCertification() {
 
   function openModal() {
     setIsOpen(true);
+  }
+  function handleChange(e) {
+    if (e.target.name === 'year' || e.target.name === 'end_date') {
+      setDataCertificate({
+        ...dataCertificate,
+        [e.target.name]: utils.timeEpoch(e.target.value),
+      });
+    } else {
+      setDataCertificate({ ...dataCertificate, [e.target.name]: e.target.value });
+    }
   }
   async function handleSubmit() {
     let data = {
@@ -31,7 +42,7 @@ export default function ModalCertification() {
   }
   let inputs = [
     {
-      label: 'Nama Penghargaan/Sertifikasi',
+      label: 'name',
       type: 'text',
       name: 'certification_name',
       errorMessage:
@@ -40,14 +51,21 @@ export default function ModalCertification() {
       required: true,
     },
     {
-      name: 'certification_intansi',
+      name: 'agency',
       label: 'Instansi Pemberi',
       type: 'text',
       errorMessage: 'It should be a valid phone number!',
       required: true,
     },
     {
-      name: 'date_certification',
+      name: 'link',
+      type: 'text',
+      errorMessage: 'It should be a valid email address!',
+      label: 'Link Penghargaan/Sertifikat',
+      required: true,
+    },
+    {
+      name: 'year',
       type: 'date',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun',
@@ -101,7 +119,7 @@ export default function ModalCertification() {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile {...input} />
+                        <InputFormProfile handleChange={handleChange} {...input} />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -146,7 +164,7 @@ export default function ModalCertification() {
   );
 }
 
-function InputFormProfile({ label, ...inputProps }) {
+function InputFormProfile({ label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -155,7 +173,7 @@ function InputFormProfile({ label, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
+        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " onChange={handleChange} />
       </div>
     </div>
   );

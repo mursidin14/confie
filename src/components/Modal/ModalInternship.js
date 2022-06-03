@@ -128,6 +128,7 @@ export default function ModalInternship() {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            onChange={handleChange}
                             name="description"
                             id=""
                             className="w-full rounded-md bg-soft-gray p-5"
