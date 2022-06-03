@@ -72,7 +72,7 @@ function SkeletonCard() {
     <div className="rounded-md bg-white py-7 shadow-mine mt-4 first:mt-0 ">
       <div className="flex flex-col items-start justify-start gap-2 px-8">
         <Skeleton width={100} height={40} />
-        <Skeleton width={300} height={200} />
+        <Skeleton width={250} height={200} />
       </div>
     </div>
   );
