@@ -14,7 +14,7 @@ export default function ModalWorkExperience() {
   }
 
   function handleChange(e) {
-    if (e.target.name === 'start_date') {
+    if (e.target.name === 'start_date' || e.target.name === 'end_date') {
       setDataWorkExperience({
         ...dataWorkExperience,
         [e.target.name]: utils.timeEpoch(e.target.value),
@@ -31,7 +31,7 @@ export default function ModalWorkExperience() {
     let data = {
       ...dataWorkExperience
     }
-    const response = await ProfileService.addSkill(data);
+    const response = await ProfileService.addJobExperience(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;
