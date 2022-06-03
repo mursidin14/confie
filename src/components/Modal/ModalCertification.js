@@ -132,7 +132,7 @@ export default function ModalCertification() {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>
