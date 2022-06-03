@@ -22,12 +22,6 @@ const getOnlineProfileData = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
-const getSkill = () =>
-  httpClient
-    .get('/api/profile/skills')
-    .then((response) => response)
-    .catch((error) => error);
-
 const updateSkill = (data) =>
   httpClient
     .put('/api/profile/skills', data, {
@@ -41,12 +35,6 @@ const updateSkill = (data) =>
 const deleteSkill = (id) =>
   httpClient
     .delete(`/api/profile/skills/${id}`)
-    .then((response) => response)
-    .catch((error) => error);
-
-const getJobExpreience = () =>
-  httpClient
-    .get('/api/profile/experiences')
     .then((response) => response)
     .catch((error) => error);
 
@@ -66,12 +54,6 @@ const deleteJobExperience = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
-const getIntershipExperience = () =>
-  httpClient
-    .get('/api/profile/internships')
-    .then((response) => response)
-    .catch((error) => error);
-
 const updateIntershipExperience = (data) =>
   httpClient
     .put('/api/profile/internships', data, {
@@ -88,12 +70,6 @@ const deleteIntershipExperience = (id) =>
     .then((response) => response)
     .catch((error) => error);
 
-const getEducation = () =>
-  httpClient
-    .get('/api/profile/educations')
-    .then((response) => response)
-    .catch((error) => error);
-
 const updateEducation = (data) =>
   httpClient
     .put('/api/profile/educations', data, {
@@ -107,12 +83,6 @@ const updateEducation = (data) =>
 const deleteEducation = (id) =>
   httpClient
     .delete(`/api/profile/educations/${id}`)
-    .then((response) => response)
-    .catch((error) => error);
-
-const getCertificate = () =>
-  httpClient
-    .get('/api/profile/certificates')
     .then((response) => response)
     .catch((error) => error);
 
@@ -142,19 +112,14 @@ const ProfileService = {
   getProfileData,
   updateProfileData,
   getOnlineProfileData,
-  getSkill,
   updateSkill,
   deleteSkill,
-  getJobExpreience,
   updateJobExperience,
   deleteJobExperience,
-  getIntershipExperience,
   updateIntershipExperience,
   deleteIntershipExperience,
-  getEducation,
   updateEducation,
   deleteEducation,
-  getCertificate,
   updateCertificate,
   deleteCertificate,
   LogoutProfile,

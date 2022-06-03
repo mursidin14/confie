@@ -1,15 +1,28 @@
 import React from 'react';
-import ProfileService from 'services/Profile/ProfileService';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
 export default function ModalSkill() {
   let [isOpen, setIsOpen] = useState(false);
+  const [tags, setTags] = useState([])
   function closeModal() {
     setIsOpen(false);
   }
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  async function handleSubmit() {
+    console.log(tags)
+    // let data = {
+    //   skills: tags
+    // }
+    // let res = await ProfileService.updateProfile(data);
+    // if (res.status === 200) {
+    //   closeModal();
+    //   window.location.reload()
+    // }
   }
   
   return (
@@ -56,7 +69,7 @@ export default function ModalSkill() {
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="my-5">
         <div className="px-8">
-          <InputTag />
+          <InputTag tags={tags} setTags={setTags}/>
         </div>
       </div>
 
@@ -67,7 +80,7 @@ export default function ModalSkill() {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>
@@ -84,8 +97,8 @@ export default function ModalSkill() {
 
 
 
-function InputTag() {
-    const [tags, setTags] = useState(["Node js"]);
+function InputTag({tags, setTags}) {
+  
     const removeTags = indexToRemove => {
           setTags([...tags.filter((_, index) => index !== indexToRemove)]);
       };
