@@ -66,24 +66,20 @@ export default function TargetCard({ userId, data_plan }) {
       <div className="bg-[#F5F8FA] py-5 px-8">
         <p className="">{data.title}</p>
       </div>
-      <div className="my-3 px-8">
-        <div className="space-y-2">
+      <div className="my-3 px-8 space-y-2">
           {!loading
-            ? dataMilestone.map((milestone, index) => {
-                milestone.quarter == quarter ? (
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="checkbox"
-                      class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
-                    />
-                    <p className="text-sm" key={index}>
-                      {milestone.target_title}
-                    </p>
-                  </div>
-                ) : null;
-              })
+            ? dataMilestone.map((milestone, index) => (
+                <div className={`flex items-center gap-3 ${milestone.quarter == quarter ? '' : 'hidden'}`}>
+                  <input
+                    type="checkbox"
+                    class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
+                  />
+                  <p className="text-sm" key={index}>
+                    {milestone.target_title}
+                  </p>
+                </div>
+              ))
             : 'loading'}
-        </div>
       </div>
     </div>
   );
