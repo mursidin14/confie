@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProfileService from 'services/Profile/ProfileService';
+import BasicInformation from './OnlineProfile/BasicInformation';
+import EmploymentStatus from './OnlineProfile/EmploymentStatus';
 import utils from 'utils/utils';
 export default function ProfileCandidate() {
   const { id } = useParams();
@@ -53,8 +55,8 @@ export default function ProfileCandidate() {
                 Teknik Informatika
               </p>
             </div>
-            {/* <EmploymentStatus /> */}
-            {/* <BasicInformation data={dataProfile} /> */}
+            <EmploymentStatus />
+            <BasicInformation data={dataProfile} />
             {/* <SkillInfomation data={dataProfile.skills} /> */}
             {/* <CertificationInformation data={dataProfile.certificates} /> */}
           </section>
