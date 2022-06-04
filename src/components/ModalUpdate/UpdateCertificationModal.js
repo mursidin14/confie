@@ -28,7 +28,7 @@ export default function UpdateCertificationModal({id}) {
     let data = {
       ...dataCertificate,
     };
-    const response = await ProfileService.updateCertificate(data);
+    const response = await ProfileService.updateCertificate(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;
