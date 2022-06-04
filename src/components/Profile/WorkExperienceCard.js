@@ -13,6 +13,12 @@ export default function WorkExperienceCard({data_profile}) {
     const response = await ProfileService.deleteJobExperience(id);
     window.location.reload();
   }
+  function handleEdit(id) {
+    setOpenEdit({
+      id,
+      open: true,
+    });
+  }
   return (
     <div className="lg:relative">
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
@@ -23,7 +29,7 @@ export default function WorkExperienceCard({data_profile}) {
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
           <div className="overflow-auto">
-            <Table items={workExperience} setOpenEdit={setOpenEdit} data={openEdit} handleDelete={handleDelete}></Table>
+            <Table items={workExperience} handleDelete={handleDelete} handleEdit={handleEdit}></Table>
           </div>
         </div>
         <div className='flex justify-center'>
@@ -34,7 +40,7 @@ export default function WorkExperienceCard({data_profile}) {
   );
 }
 
-function Table({ items, handleDelete, setOpenEdit, data }) {
+function Table({ items, handleDelete, handleEdit}) {
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
@@ -64,10 +70,7 @@ function Table({ items, handleDelete, setOpenEdit, data }) {
               <div className="flex justify-center gap-2">
                 <button onClick={
                   () => {
-                    setOpenEdit({
-                      id: item.id,
-                      open: true,
-                    })
+                    handleEdit(item.id)
                   }
                 }>
                   <svg

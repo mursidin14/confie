@@ -3,7 +3,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function ModalWorkExperience({edit: {id, open}, setEdit}) {
+export default function ModalWorkExperience({edit, setEdit}) {
+  const {id, open} = edit;
   let [isOpen, setIsOpen] = useState(false || open);
   const [dataWorkExperience, setDataWorkExperience] = useState({
     status: 'onsite',
