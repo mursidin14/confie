@@ -1,13 +1,13 @@
 function makeCapital(name) {
-    let nameArray = name.split(' ');
-    if (nameArray.length > 1) {
-      let capitalName = '';
-      nameArray.forEach((name) => {
-        capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
-      });
-      return capitalName;
-    }
-    return name.slice(0, 1).toUpperCase() + name.slice(1);
+  let nameArray = name.split(' ');
+  if (nameArray.length > 1) {
+    let capitalName = '';
+    nameArray.forEach((name) => {
+      capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
+    });
+    return capitalName;
+  }
+  return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
 
 const getCity = (data) => {
@@ -32,27 +32,21 @@ const getDate = (time) => {
     month: 'long',
     day: 'numeric',
   });
-}
+};
 const getMonthYear = (time) => {
-  if (isNaN(time)) {
-    time = parseInt(time)
-    return new Date(time * 1000).toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'short',
-    });
-  }
+  time = parseInt(time);
   return new Date(time * 1000).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'short',
   });
-}
+};
 
 const utils = {
   makeCapital,
   getCity,
   timeEpoch,
   getDate,
-  getMonthYear
+  getMonthYear,
 };
 
 export default utils;

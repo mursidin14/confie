@@ -15,10 +15,10 @@ export default function ModalCertification() {
     setIsOpen(true);
   }
   function handleChange(e) {
-    if (e.target.name === 'year' || e.target.name === 'end_date') {
+    if (e.target.name === 'year' ) {
       setDataCertificate({
         ...dataCertificate,
-        [e.target.name]: utils.timeEpoch(e.target.value),
+        [e.target.name]:  parseInt(utils.timeEpoch(e.target.value)),
       });
     } else {
       setDataCertificate({ ...dataCertificate, [e.target.name]: e.target.value });

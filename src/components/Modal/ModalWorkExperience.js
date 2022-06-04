@@ -18,20 +18,18 @@ export default function ModalWorkExperience() {
     if (name == 'start_date' || name == 'end_date') {
       value = utils.timeEpoch(value);
       setDataWorkExperience({ ...dataWorkExperience, [name]: value });
-    }else{
+    } else {
       setDataWorkExperience({ ...dataWorkExperience, [name]: value });
     }
-    console.log(dataWorkExperience);
   }
-
 
   function openModal() {
     setIsOpen(true);
   }
   async function handleSubmit() {
     let data = {
-      ...dataWorkExperience
-    }
+      ...dataWorkExperience,
+    };
     const response = await ProfileService.addJobExperience(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -125,7 +123,10 @@ export default function ModalWorkExperience() {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile handleChange={handleChange} {...input} />
+                        <InputFormProfile
+                          handleChange={handleChange}
+                          {...input}
+                        />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">
@@ -134,15 +135,49 @@ export default function ModalWorkExperience() {
                           </label>
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
-                          <input onChange={()=>{
-                            setDataWorkExperience({...dataWorkExperience, is_current: !dataWorkExperience['is_current']})
-                          }} type="checkbox" />
+                          <input
+                            onChange={() => {
+                              setDataWorkExperience({
+                                ...dataWorkExperience,
+                                is_current: !dataWorkExperience['is_current'],
+                              });
+                            }}
+                            type="checkbox"
+                          />
                           <label for="">Ya</label>
                         </div>
                       </div>
                       {inputs_2.map((input, index) => (
-                        <InputFormProfile handleChange={handleChange} {...input} />
+                        <InputFormProfile
+                          handleChange={handleChange}
+                          {...input}
+                        />
                       ))}
+                      <div className="mt-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" for="">
+                            Status
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <select
+                            className="input-form"
+                            name="status"
+                            id="status"
+                            onChange={(e) => {
+                              const { name, value } = e.target;
+                              setDataWorkExperience({
+                                ...dataWorkExperience,
+                                [name]: value,
+                              });
+                            }}
+                          >
+                            <option value="onsite">On Site</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="contract">Contract</option>
+                          </select>
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" for="">
@@ -159,7 +194,7 @@ export default function ModalWorkExperience() {
                           ></textarea>
                         </div>
                       </div>
-                    </div>  
+                    </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">
                     {error.map((err, index) => (
@@ -173,7 +208,10 @@ export default function ModalWorkExperience() {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleSubmit}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -196,7 +234,11 @@ function InputFormProfile({ label, handleChange, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3" onChange={handleChange} />
+        <input
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3"
+          onChange={handleChange}
+        />
       </div>
     </div>
   );
