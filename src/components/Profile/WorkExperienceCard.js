@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import Pagination from 'components/Widgets/Pagination';
 import ModalWorkExperience from 'components/Modal/ModalWorkExperience';
-export default function WorkExperienceCard() {
+import utils from 'utils/utils';
+export default function WorkExperienceCard({data_profile}) {
   const [modal, setModal] = useState(false);
 
-  let workExperience = [
-    {
-      id: 1,
-      posisi: 'Frontend Developer',
-      company: 'PT. Bintang Jaya',
-      start: 'Jan 2021',
-      end: 'Mar 2021',
-      des: 'Managed complex projects from start to finish, Collaborated with other designers, Translated requirements intopolished, high-level designs',
-      delete: './delete.png',
-      edit: './edit.png',
-    },
-  ];
+  let workExperience = data_profile
   
   return (
     <div className="lg:relative">
@@ -57,12 +47,12 @@ function Table({ items }) {
             className="mt-3 border-b-2 border-gray-300/50 text-sm text-[#7E8299] sm:h-32 "
             key={index}
           >
-            <td className="w-[10%] pl-10 text-left">{item.posisi}</td>
-            <td className="w-[10%] ">{item.company}</td>
-            <td className="w-[6%] ">{item.start}</td>
-            <td className="w-[6%] ">{item.end}</td>
-            <td className="w-[16%] px-8 py-4 text-left lg:py-1 lg:px-3">
-              {item.des}
+            <td className="w-[10%] pl-10 text-left">{item.position}</td>
+            <td className="w-[10%] ">{item.agency}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.start)}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.end)}</td>
+            <td className="w-[16%] px-8 py-4 text-center lg:py-1 lg:px-3">
+              {item.description}
             </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
