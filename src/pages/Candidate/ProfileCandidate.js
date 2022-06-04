@@ -66,7 +66,7 @@ export default function ProfileCandidate() {
             <SkillInfomation data={dataProfile.skills} />
             <CertificationInformation data={dataProfile.certificates} />
           </section>
-          <section className="w-fit text-[#7E8299] lg:w-[500px]">
+          <section className="grow text-[#7E8299] lg:w-[500px]">
             <AboutMe data={dataProfile.about}></AboutMe>
             <WorkExperience data={dataProfile.experiences}></WorkExperience>
             <IntershipExperience
