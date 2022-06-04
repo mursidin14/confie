@@ -18,7 +18,6 @@ export default function ModalAboutMe({data_profile}) {
 
   function handleChange(e) {
     setDataProfile({ ...dataProfile, [e.target.name]: e.target.value });
-    console.log(dataProfile)
   }
 
   function closeModal() {
@@ -29,7 +28,7 @@ export default function ModalAboutMe({data_profile}) {
     setIsOpen(true);
   }
   async function handleClick() {
-    const response = await ProfileService.updateProfileData(dataProfile);
+    const response = await ProfileService.updateAbout(dataProfile);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;

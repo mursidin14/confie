@@ -161,7 +161,7 @@ export default function ModalWorkExperience() {
                         </div>
                         <div className="lg:w-7/12">
                           <select
-                            className="input-form"
+                            className="w-full h-fit bg-soft-gray rounded-md p-5 text-sm"
                             name="status"
                             id="status"
                             onChange={(e) => {
