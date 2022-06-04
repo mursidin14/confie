@@ -84,7 +84,7 @@ export default function ModalAboutMe({data_profile}) {
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="my-5">
         <div className="px-8">
-         <textarea onChange={handleChange} className='w-full bg-[#F5F8FA] p-5 lg:h-[200px]' name="about_me"></textarea> 
+         <textarea onChange={handleChange} className='w-full bg-[#F5F8FA] p-5 lg:h-[200px]' name="about"></textarea> 
          
         </div>
       </div>
