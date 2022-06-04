@@ -18,7 +18,7 @@ const updateProfileData = (data) =>
 
 const updateAbout = (data) => 
   httpClient
-    .put('/api/about', data, {
+    .put('/api/profile/about', data, {
       headers: {
         'Content-Type': 'application/json',
       },
