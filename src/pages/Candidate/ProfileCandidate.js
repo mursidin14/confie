@@ -62,7 +62,7 @@ export default function ProfileCandidate() {
             <AboutMe data={dataProfile.about}></AboutMe>
             <WorkExperience data={dataProfile.experiences}></WorkExperience>
             <IntershipExperience
-              data={dataProfile.interships}
+              data={dataProfile.internships}
             ></IntershipExperience>
             <EducationHistory data={dataProfile.educations}></EducationHistory>
           </section>
