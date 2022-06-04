@@ -1,5 +1,6 @@
 import React from 'react'
 import InformationTitle from './InformationTitle';
+import utils from 'utils/utils';
 
 export default function EducationHistory({data}) {
     let educations = data

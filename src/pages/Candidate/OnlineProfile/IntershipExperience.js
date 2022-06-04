@@ -1,5 +1,7 @@
 import React from 'react'
 import InformationTitle from './InformationTitle';
+import utils from 'utils/utils';
+
 export default function IntershipExperience({data}) {
     let interns = data
     return (

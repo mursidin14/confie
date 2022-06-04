@@ -1,4 +1,5 @@
 import React from 'react'
+import utils from 'utils/utils';
 
 export default function CertificationInformation({ data }) {
     const certificates = data;

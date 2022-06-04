@@ -1,5 +1,6 @@
 import React from 'react'
 import InformationTitle from './InformationTitle';
+import utils from 'utils/utils';
 
 export default function WorkExperience({ data }) {
     let works = data;
