@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProfileService from 'services/Profile/ProfileService';
 import BasicInformation from './OnlineProfile/BasicInformation';
 import EmploymentStatus from './OnlineProfile/EmploymentStatus';
+import SkillInfomation from './OnlineProfile/SkillInformation';
 import utils from 'utils/utils';
 export default function ProfileCandidate() {
   const { id } = useParams();
@@ -57,7 +58,7 @@ export default function ProfileCandidate() {
             </div>
             <EmploymentStatus />
             <BasicInformation data={dataProfile} />
-            {/* <SkillInfomation data={dataProfile.skills} /> */}
+            <SkillInfomation data={dataProfile.skills} />
             {/* <CertificationInformation data={dataProfile.certificates} /> */}
           </section>
           <section className="w-fit text-[#7E8299] lg:w-[500px]">
