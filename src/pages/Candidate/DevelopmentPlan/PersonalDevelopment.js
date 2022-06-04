@@ -62,8 +62,8 @@ function Table({ items, userId, loading}) {
             <td className="w-[10%] pl-10 text-left ">{item.title}</td>
             <td className="w-[10%] ">{formatDate(item.start_date * 1000)}</td>
             <td className="w-[6%] relative bottom-2 text-[#A1A5B7] ">
-              <p className='text-left mb-2'>{item.progress}%</p>
-              <ProgressBar progressPercentage={item.progress}></ProgressBar>
+              <p className='text-left mb-2'>{item.process}%</p>
+              <ProgressBar progressPercentage={item.process}></ProgressBar>
             </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
