@@ -8,7 +8,7 @@ export default function SkillInfomation({ data }) {
         </p>
         <div className="space-y-1 text-left text-xs sm:space-y-3 sm:text-sm">
           {data.map((skill, index) => (
-            <p key={index}>{skill}</p>
+            <p>{skill}</p>
           ))}
         </div>
       </section>
