@@ -35,6 +35,9 @@ export default function PersonalDevelopmentDetail() {
       '.target_checkbox:checked'
     ).length;
     let percentage = (checkbox_checked / target_checkbox) * 100;
+    const response = await PersonalPlanService.updatePersonalPlanData(idDetail, {
+      progress: percentage,
+      });
     setProgress(percentage);
   }
   return (
@@ -107,6 +110,7 @@ export default function PersonalDevelopmentDetail() {
                       <MilestoneTarget
                         target_milestone={target_title}
                         quarter={quarter}
+                        idPlan={idDetail}
                         id={id}
                         handleChange={handleChange}
                       />
@@ -126,6 +130,7 @@ export default function PersonalDevelopmentDetail() {
                       <MilestoneTarget
                         target_milestone={target_title}
                         quarter={quarter}
+                        idPlan={idDetail}
                         id={id}
                         handleChange={handleChange}
                       />
@@ -145,6 +150,7 @@ export default function PersonalDevelopmentDetail() {
                       <MilestoneTarget
                         target_milestone={target_title}
                         quarter={quarter}
+                        idPlan={idDetail}
                         id={id}
                         handleChange={handleChange}
                       />
@@ -164,6 +170,7 @@ export default function PersonalDevelopmentDetail() {
                       <MilestoneTarget
                         target_milestone={target_title}
                         quarter={quarter}
+                        idPlan={idDetail}
                         id={id}
                         handleChange={handleChange}
                       />
@@ -182,6 +189,8 @@ export default function PersonalDevelopmentDetail() {
 function MilestoneTarget({
   target_milestone,
   handleChange,
+  id,
+  idPlan,
 }) {
   return (
     <>
@@ -196,7 +205,7 @@ function MilestoneTarget({
           <p>{target_milestone}</p>
         </div>
         <div className="flex justify-center gap-2">
-          <UpdateMilestone></UpdateMilestone>
+          <UpdateMilestone idPlan={idPlan} idMilestone={id}></UpdateMilestone>
           <button
           >
             <svg

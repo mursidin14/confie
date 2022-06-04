@@ -20,10 +20,7 @@ export default function UpdateMilestone({ idPlan, idMilestone }) {
     });
   }
   async function submitData() {
-    const response = await PersonalPlanService.addQuarterlyPlanData(
-      idDetail,
-      milestone
-    );
+    // url for milestone update
     window.location.reload();
   }
   let inputs = [
