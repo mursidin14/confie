@@ -17,7 +17,7 @@ export default function ProfileCandidate() {
 
   return (
     <main className="flex shadow-mine md:mx-auto md:w-fit lg:p-5">
-      {loading && <div>Loading...</div>}
+      {loading && <div>Loading..</div>}
       {!loading && (
         <>
           <section className="bg-dark-blue py-10 px-3 text-white sm:px-7 ">
