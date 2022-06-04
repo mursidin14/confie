@@ -4,6 +4,11 @@ import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
 export default function ModalWorkExperience() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [dataWorkExperience, setDataWorkExperience] = useState({
+    is_current: false,
+    status: 'onsite',
+  });
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
