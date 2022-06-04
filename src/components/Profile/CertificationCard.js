@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import Pagination from 'components/Widgets/Pagination';
 import ModalCertification from 'components/Modal/ModalCertification';
+import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
 
-export default function CertificationCard() {
-  let certification = [
-    {
-      id: 1,
-      nama: 'Most Outstanding Employee of the Year',
-      company: 'PT. Bintang Jaya',
-      tahun: 'Jan 2021',
-      delete: './delete.png',
-      edit: './edit.png',
-    },
-  ];
+export default function CertificationCard({data_profile}) {
+  let certification = data_profile
+  async function handleDelete(id) {
+    const response = await ProfileService.deleteCertificate(id)
+    window.location.reload()
+}
   return (
     <div className="lg:relative">
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
@@ -25,7 +22,7 @@ export default function CertificationCard() {
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
           <div className="overflow-auto">
-            <Table items={certification}></Table>
+            <Table items={certification} handleDelete={handleDelete}></Table>
           </div>
         </div>
         <div className="flex justify-center">
@@ -36,7 +33,7 @@ export default function CertificationCard() {
   );
 }
 
-function Table({ items }) {
+function Table({ items, handleDelete }) {
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
@@ -53,9 +50,9 @@ function Table({ items }) {
             className="mt-3 h-20 border-b-2 border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
           >
-            <td className="w-[10%] pl-10 text-left ">{item.nama}</td>
-            <td className="w-[10%] ">{item.company}</td>
-            <td className="w-[6%] ">{item.tahun}</td>
+            <td className="w-[10%] pl-10 text-left ">{item.name}</td>
+            <td className="w-[10%] ">{item.agency}</td>
+            <td className="w-[6%] ">{item.year}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
                 <a href="">
@@ -82,7 +79,9 @@ function Table({ items }) {
                     />
                   </svg>
                 </a>
-                <a href="">
+                <button onClick={()=>{
+                  handleDelete(item.id)
+                }}>
                   <svg
                     className="w-11"
                     width="34"
@@ -109,7 +108,7 @@ function Table({ items }) {
                       fill="#F1416C"
                     />
                   </svg>
-                </a>
+                </button>
               </div>
             </td>
           </tr>

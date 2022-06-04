@@ -1,21 +1,16 @@
 import React, {useState} from 'react'
 import Pagination from 'components/Widgets/Pagination';
 import ModalInternship from 'components/Modal/ModalInternship';
-export default function InternExperienceCard() {
+import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
+export default function InternExperienceCard({data_profile}) {
 
-    let internExperience = [
-        {
-          id: 1,
-          posisi: 'Frontend Developer',
-          company: 'PT. Bintang Jaya',
-          start: 'Jan 2021',
-          end: 'Mar 2021',
-          des: 'Managed complex projects from start to finish, Collaborated with other designers, Translated requirements intopolished, high-level designs',
-          delete: './delete.png',
-          edit: './edit.png',
-        },
-      ];
-    
+  let internExperience = data_profile
+  async function handleDelete(id) {
+      const response = await ProfileService.deleteIntershipExperience(id)
+      window.location.reload()
+  }
+
   return (
     <div className='lg:relative'>
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
@@ -26,7 +21,7 @@ export default function InternExperienceCard() {
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
         <div className="overflow-auto">
-            <Table items={internExperience}></Table>
+            <Table items={internExperience} handleDelete={handleDelete}></Table>
           </div>
         </div>
         <div className='flex justify-center'>
@@ -38,7 +33,7 @@ export default function InternExperienceCard() {
   )
 }
 
-function Table({items}) {
+function Table({items, handleDelete}) {
     return (
     <table className="table-fixed text-xs sm:text-base min-w-[700px] w-full text-center">
       <thead className="bg-[#F5F8FA] ">
@@ -57,11 +52,11 @@ function Table({items}) {
             className="mt-3 text-sm h-32  border-b-2 border-gray-300/50 text-[#7E8299]"
             key={index}
           >
-            <td className="pl-10 w-[10%] text-left">{item.posisi}</td>
-            <td className="w-[10%] ">{item.company}</td>
-            <td className="w-[6%] ">{item.start}</td>
-            <td className="w-[6%] ">{item.end}</td>
-            <td className="w-[16%] text-left lg:px-3 px-8 lg:py-1 py-4">{item.des}</td>
+            <td className="pl-10 w-[10%] text-left">{item.position}</td>
+            <td className="w-[10%] ">{item.agency}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.end_date)}</td>
+            <td className="w-[16%] text-left lg:px-3 px-8 lg:py-1 py-4">{item.description}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
                 <a href="">
@@ -88,7 +83,9 @@ function Table({items}) {
                     />
                   </svg>
                 </a>
-                <a href="">
+                <button onClick={()=>{
+                  handleDelete(item.id)
+                }}>
                   <svg
                     className="w-11"
                     width="34"
@@ -115,7 +112,7 @@ function Table({items}) {
                       fill="#F1416C"
                     />
                   </svg>
-                </a>
+                </button>
               </div>
             </td>
           </tr>

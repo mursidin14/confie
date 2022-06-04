@@ -1,42 +1,36 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Pagination from 'components/Widgets/Pagination';
 import ModalEducation from 'components/Modal/ModalEducation';
-export default function EducationCard() {
-  let educationHistory = [
-    {
-      id: 1,
-      school: 'Frontend Developer',
-      major: 'PT. Bintang Jaya',
-      start: 'Jan 2021',
-      end: 'Mar 2021',
-      des: 'Managed complex projects from start to finish, Collaborated with other designers, Translated requirements intopolished, high-level designs',
-      delete: './delete.png',
-      edit: './edit.png',
-    },
-  ];
+import ProfileService from 'services/Profile/ProfileService';
+import utils from 'utils/utils';
+export default function EducationCard({ data_profile }) {
+  let educationHistory = data_profile;
+  async function handleDelete(id) {
+    const response = await ProfileService.deleteEducation(id);
+    window.location.reload();
+  }
   return (
-    <div className='lg:relative'>
+    <div className="lg:relative">
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">Riwayat Pendidikan</h3>
-          <ModalEducation/>
+          <ModalEducation />
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
           <div className="overflow-auto">
-            <Table items={educationHistory}></Table>
+            <Table items={educationHistory} handleDelete={handleDelete}></Table>
           </div>
         </div>
-        <div className='flex justify-center'>
+        <div className="flex justify-center">
           <Pagination />
         </div>
       </div>
     </div>
-
   );
 }
 
-function Table({ items }) {
+function Table({ items, handleDelete }) {
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
@@ -52,14 +46,16 @@ function Table({ items }) {
       <tbody>
         {items.map((item, index) => (
           <tr
-            className="mt-3 text-sm h-32  border-b-2 border-gray-300/50 text-[#7E8299]"
+            className="mt-3 h-32 border-b-2  border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
           >
             <td className="w-[10%] pl-10 text-left">{item.school}</td>
             <td className="w-[10%] ">{item.major}</td>
-            <td className="w-[6%] ">{item.start}</td>
-            <td className="w-[6%] ">{item.end}</td>
-            <td className="w-[16%] px-8 text-left lg:px-3 lg:py-1 py-4">{item.des}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.end_date)}</td>
+            <td className="w-[16%] px-8 py-4 text-left lg:px-3 lg:py-1">
+              {item.description}
+            </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
                 <a href="">
@@ -86,7 +82,9 @@ function Table({ items }) {
                     />
                   </svg>
                 </a>
-                <a href="">
+                <button onClick={()=>{
+                  handleDelete(item.id)
+                }}>
                   <svg
                     className="w-11"
                     width="34"
@@ -113,7 +111,7 @@ function Table({ items }) {
                       fill="#F1416C"
                     />
                   </svg>
-                </a>
+                </button>
               </div>
             </td>
           </tr>
@@ -122,4 +120,3 @@ function Table({ items }) {
     </table>
   );
 }
-

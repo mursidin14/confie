@@ -34,6 +34,13 @@ const getDate = (time) => {
   });
 }
 const getMonthYear = (time) => {
+  if (isNaN(time)) {
+    time = parseInt(time)
+    return new Date(time * 1000).toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'short',
+    });
+  }
   return new Date(time * 1000).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'short',
