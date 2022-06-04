@@ -3,9 +3,10 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function ModalWorkExperience() {
-  let [isOpen, setIsOpen] = useState(false);
+export default function ModalWorkExperience({edit: {id, open}, setEdit}) {
+  let [isOpen, setIsOpen] = useState(false || open);
   const [dataWorkExperience, setDataWorkExperience] = useState({
+    status: 'onsite',
     is_current: false,
   });
   const [error, setError] = useState([]);
@@ -27,6 +28,20 @@ export default function ModalWorkExperience() {
     setIsOpen(true);
   }
   async function handleSubmit() {
+    if (open) {
+      const response = await ProfileService.updateJobExperience(id, dataWorkExperience);
+      if (response.data.meta.status == 'error') {
+        let errors = [];
+        let error = response.data.data;
+        for (let key in error) {
+          errors.push(error[key][0]);
+        }
+        setError(errors);
+        return;
+      }
+      window.location.reload();
+      
+    }
     let data = {
       ...dataWorkExperience,
     };
@@ -116,7 +131,7 @@ export default function ModalWorkExperience() {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                      Tambah Pengalaman Kerja
+                      {open ? 'Edit' : 'Tambah'} Pengalaman Pekerjaan
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
@@ -203,7 +218,15 @@ export default function ModalWorkExperience() {
                   </section>
                   <div className="mt-4 flex justify-end gap-4 px-8">
                     <button
-                      onClick={closeModal}
+                      onClick={()=>{
+                        setEdit(
+                          {
+                            id: id,
+                            open: false,
+                          }
+                        )                        
+                        closeModal()
+                      }}
                       className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
                     >
                       Cancel
@@ -212,7 +235,7 @@ export default function ModalWorkExperience() {
                       onClick={handleSubmit}
                       className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
                     >
-                      Submit
+                      {open ? 'Edit' : 'Submit'} 
                     </button>
                   </div>
                 </Dialog.Panel>

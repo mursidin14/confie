@@ -69,9 +69,9 @@ const addJobExperience = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const updateJobExperience = (data) =>
+const updateJobExperience = (id, data) =>
   httpClient
-    .put('/api/profile/experiences', data, {
+    .put(`/api/profile/experiences/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       },

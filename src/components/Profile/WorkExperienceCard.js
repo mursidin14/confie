@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import Pagination from 'components/Widgets/Pagination';
 import ModalWorkExperience from 'components/Modal/ModalWorkExperience';
+import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
 export default function WorkExperienceCard({data_profile}) {
-  const [modal, setModal] = useState(false);
-
+  const [openEdit, setOpenEdit] = useState({
+    id: null,
+    open: false,
+  });
   let workExperience = data_profile
-  
+  async function handleDelete(id) {
+    const response = await ProfileService.deleteJobExperience(id);
+    window.location.reload();
+  }
   return (
     <div className="lg:relative">
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">Pengalaman Kerja</h3>
-          <ModalWorkExperience></ModalWorkExperience>
+          <ModalWorkExperience edit={openEdit} setEdit={setOpenEdit}></ModalWorkExperience>
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
           <div className="overflow-auto">
-            <Table items={workExperience}></Table>
+            <Table items={workExperience} setOpenEdit={setOpenEdit} data={openEdit} handleDelete={handleDelete}></Table>
           </div>
         </div>
         <div className='flex justify-center'>
@@ -28,7 +34,7 @@ export default function WorkExperienceCard({data_profile}) {
   );
 }
 
-function Table({ items }) {
+function Table({ items, handleDelete, setOpenEdit, data }) {
   return (
     <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
       <thead className="bg-[#F5F8FA] ">
@@ -49,14 +55,21 @@ function Table({ items }) {
           >
             <td className="w-[10%] pl-10 text-left">{item.position}</td>
             <td className="w-[10%] ">{item.agency}</td>
-            <td className="w-[6%] ">{utils.getMonthYear(item.start)}</td>
-            <td className="w-[6%] ">{utils.getMonthYear(item.end)}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
+            <td className="w-[6%] ">{utils.getMonthYear(item.end_date)}</td>
             <td className="w-[16%] px-8 py-4 text-center lg:py-1 lg:px-3">
               {item.description}
             </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
-                <a href="">
+                <button onClick={
+                  () => {
+                    setOpenEdit({
+                      id: item.id,
+                      open: true,
+                    })
+                  }
+                }>
                   <svg
                     className="w-11"
                     width="34"
@@ -79,8 +92,10 @@ function Table({ items }) {
                       fill="#FE9A00"
                     />
                   </svg>
-                </a>
-                <a href="">
+                </button>
+                <button onClick={()=>{
+                  handleDelete(item.id)
+                }}>
                   <svg
                     className="w-11"
                     width="34"
@@ -107,7 +122,7 @@ function Table({ items }) {
                       fill="#F1416C"
                     />
                   </svg>
-                </a>
+                </button>
               </div>
             </td>
           </tr>
