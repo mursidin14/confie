@@ -95,9 +95,9 @@ const addIntershipExperience = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const updateIntershipExperience = (data) =>
+const updateIntershipExperience = (id, data) =>
   httpClient
-    .put('/api/profile/internships', data, {
+    .put(`/api/profile/internships/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -121,9 +121,9 @@ const addEducation = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const updateEducation = (data) =>
+const updateEducation = (id, data) =>
   httpClient
-    .put('/api/profile/educations', data, {
+    .put(`/api/profile/educations/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -147,9 +147,9 @@ const addCertificate = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const updateCertificate = (data) =>
+const updateCertificate = (id, data) =>
   httpClient
-    .put('/api/profile/certificates', data, {
+    .put(`/api/profile/certificates/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       },
