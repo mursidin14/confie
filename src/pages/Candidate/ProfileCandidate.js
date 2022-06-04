@@ -167,7 +167,7 @@ function SkillInfomation({ data }) {
         Skills
       </p>
       <div className="space-y-1 text-left text-xs sm:space-y-3 sm:text-sm">
-        {data.skills.map((skill, index) => (
+        {data.map((skill, index) => (
           <p key={index}>{skill}</p>
         ))}
       </div>
