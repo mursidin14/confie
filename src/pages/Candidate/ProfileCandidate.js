@@ -4,6 +4,11 @@ import ProfileService from 'services/Profile/ProfileService';
 import BasicInformation from './OnlineProfile/BasicInformation';
 import EmploymentStatus from './OnlineProfile/EmploymentStatus';
 import SkillInfomation from './OnlineProfile/SkillInformation';
+import CertificationInformation from './OnlineProfile/CertificationInformation';
+import EducationHistory from './OnlineProfile/EducationHistory';
+import WorkExperience from './OnlineProfile/WorkExperience';
+import IntershipExperience from './OnlineProfile/IntershipExperience';
+import AboutMe from './OnlineProfile/AboutMe';
 import utils from 'utils/utils';
 export default function ProfileCandidate() {
   const { id } = useParams();
@@ -59,23 +64,18 @@ export default function ProfileCandidate() {
             <EmploymentStatus />
             <BasicInformation data={dataProfile} />
             <SkillInfomation data={dataProfile.skills} />
-            {/* <CertificationInformation data={dataProfile.certificates} /> */}
+            <CertificationInformation data={dataProfile.certificates} />
           </section>
           <section className="w-fit text-[#7E8299] lg:w-[500px]">
-            {/* <AboutMe data={dataProfile.about}></AboutMe> */}
-            {/* <WorkExperience data={dataProfile.experiences}></WorkExperience> */}
-            {/* <IntershipExperience
+            <AboutMe data={dataProfile.about}></AboutMe>
+            <WorkExperience data={dataProfile.experiences}></WorkExperience>
+            <IntershipExperience
               data={dataProfile.internships}
-            ></IntershipExperience> */}
-            {/* <EducationHistory data={dataProfile.educations}></EducationHistory> */}
+            ></IntershipExperience>
+            <EducationHistory data={dataProfile.educations}></EducationHistory>
           </section>
         </>
       )}
     </main>
   );
 }
-
-
-
-
-
