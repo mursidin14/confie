@@ -212,11 +212,12 @@ function MilestoneTarget({
       <div className="flex items-center justify-between gap-3 py-5 px-10">
         <div className="flex items-center gap-3">
           <input
+            checked={status}
             className="target_checkbox"
             name={target_milestone}
             type="checkbox"
             onChange={()=>{
-              handleChange(id, status)
+            handleChange(id, status)
             }}
           />
           <p>{target_milestone}</p>
