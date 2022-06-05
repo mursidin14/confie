@@ -29,17 +29,25 @@ export default function PersonalDevelopmentDetail() {
     getTargetDetail();
   }, []);
 
-  async function handleChange(e) {
+  async function handleChange(id, status) {
     let target_checkbox = document.querySelectorAll('.target_checkbox').length;
     let checkbox_checked = document.querySelectorAll(
       '.target_checkbox:checked'
     ).length;
     let percentage = (checkbox_checked / target_checkbox) * 100;
-    const response = await PersonalPlanService.updatePersonalPlanData(idDetail, {
-      progress: percentage,
+    const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
+      status: !status,
       });
     setProgress(percentage);
+    
   }
+
+  async function deleteMilestone(id) {
+    const response = await PersonalPlanService.deleteQuarterlyPlanData(id);
+    setTargetMilestone(response.data.data.milestone);
+    window.location.reload()
+  }
+
   return (
     <Layout userId={id} PageName={'Personal Development Plan'}>
       <div className="lg:relative">
@@ -108,6 +116,7 @@ export default function PersonalDevelopmentDetail() {
                   {quarter == '1' && (
                     <>
                       <MilestoneTarget
+                        deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
                         idPlan={idDetail}
@@ -128,6 +137,7 @@ export default function PersonalDevelopmentDetail() {
                   {quarter == '2' && (
                     <>
                       <MilestoneTarget
+                        deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
                         idPlan={idDetail}
@@ -148,6 +158,7 @@ export default function PersonalDevelopmentDetail() {
                   {quarter == '3' && (
                     <>
                       <MilestoneTarget
+                        deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
                         idPlan={idDetail}
@@ -163,15 +174,17 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 4</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
                 <>
                   {quarter == '4' && (
                     <>
                       <MilestoneTarget
+                        deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
                         idPlan={idDetail}
                         id={id}
+                        status={status}
                         handleChange={handleChange}
                       />
                     </>
@@ -187,10 +200,12 @@ export default function PersonalDevelopmentDetail() {
 }
 
 function MilestoneTarget({
+  deleteMilestone,
   target_milestone,
   handleChange,
   id,
   idPlan,
+  status
 }) {
   return (
     <>
@@ -200,13 +215,18 @@ function MilestoneTarget({
             className="target_checkbox"
             name={target_milestone}
             type="checkbox"
-            onChange={handleChange}
+            onChange={()=>{
+              handleChange(id, status)
+            }}
           />
           <p>{target_milestone}</p>
         </div>
         <div className="flex justify-center gap-2">
           <UpdateMilestone idPlan={idPlan} idMilestone={id}></UpdateMilestone>
           <button
+          onClick={()=>{
+            deleteMilestone(id)
+          }}
           >
             <svg
               className="w-11"

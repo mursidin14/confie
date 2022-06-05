@@ -33,6 +33,15 @@ const addQuarterlyPlanData = (id, data) =>
     .then((response) => response)
     .catch((error) => error);
 
+const updateQuarterlyPlanData = (id, data) =>
+  httpClient
+    .put(`/api/pdp/milestone/${id}`, data)
+    .then((response) => response)
+    .catch((error) => error);
+
+const deleteQuarterlyPlanData = (id) =>
+  httpClient.delete(`/api/pdp/milestone/${id}`).then((response) => response);
+
 const PersonalPlanService = {
   getPersonalPlanData,
   updatePersonalPlanData,
@@ -40,6 +49,8 @@ const PersonalPlanService = {
   deletePersonalPlanData,
   getDetailPersonalPlanData,
   addQuarterlyPlanData,
+  updateQuarterlyPlanData,
+  deleteQuarterlyPlanData,
 };
 
 export default PersonalPlanService;
