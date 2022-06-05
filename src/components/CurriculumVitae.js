@@ -1,5 +1,6 @@
 import React from 'react';
 import InformationTitle from 'pages/Candidate/OnlineProfile/InformationTitle';
+import utils from 'utils/utils';
 export default function CurriculumVitae({ data }) {
   return (
     <main className="flex ">
