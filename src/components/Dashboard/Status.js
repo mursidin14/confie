@@ -4,7 +4,6 @@ import ProgressBar from 'components/Widgets/ProgressBar';
 const getProfileCompletion = (my_profile) => {
   let profile_completion = 0;
   const profile = [
-    'about',
     'certificates',
     'city_name',
     'country',
