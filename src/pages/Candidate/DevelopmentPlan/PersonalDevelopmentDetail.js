@@ -245,6 +245,7 @@ function MilestoneTarget({
           <button
           onClick={()=>{
             deleteMilestone(id)
+            window.location.reload()
           }}
           >
             <svg
