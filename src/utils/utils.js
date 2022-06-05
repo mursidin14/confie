@@ -41,14 +41,35 @@ const getMonthYear = (time) => {
   });
 };
 
-const getProfileCompletion = (data) => {
+const getProfileCompletion = (my_profile) => {
+  const profile = [
+    'about',
+    'certificates',
+    'city_name',
+    'country',
+    'date_of_birth',
+    'educations',
+    'email',
+    'experiences',
+    'full_name',
+    'gender',
+    'internships',
+    'phone_number',
+    'province_name',
+    'skills',
+  ];
   let profile_completion = 0;
-  const total_data = data.length;
-  data.forEach((field) => {
-    if (field) {
+  const total_data = 14;
+  profile.forEach((item) => {
+    if (
+      (Array.isArray(my_profile[item]) && my_profile[item].length > 0) ||
+      (Array.isArray(my_profile[item]) === false && my_profile[item] !== '')
+    ) {
+      console.log(my_profile[item]);
       profile_completion += 1;
     }
   });
+
   return Math.round((profile_completion / total_data) * 100);
 };
 
