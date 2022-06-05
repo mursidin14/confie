@@ -42,7 +42,7 @@ export default function PersonalCard({data_profile, id, loading}) {
               <EmploymentStatus />
             </div>
             <div className="hidden md:block">
-              <ButtonDashboard id={id} />
+              <ButtonDashboard id={id} data={data_profile} />
             </div>
           </div>
           <JobStatus />
@@ -63,7 +63,6 @@ export default function PersonalCard({data_profile, id, loading}) {
 
 function ButtonDashboard({id, data_profile}) {
   const cv = React.createRef();
-
   return (
     <>
       <div className='absolute -top-[3000px]' ref={cv}>
