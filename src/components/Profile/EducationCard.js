@@ -53,7 +53,7 @@ function Table({ items, handleDelete }) {
             <td className="w-[10%] pl-10 text-left">{item.school}</td>
             <td className="w-[10%] ">{item.major}</td>
             <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
-            <td className="w-[6%] ">{utils.getMonthYear(item.end_date)}</td>
+            <td className="w-[6%] ">{item.is_current ? 'Sekarang' : utils.getMonthYear(item.end_date)}</td>
             <td className="w-[16%] px-8 py-4 text-center lg:px-3 lg:py-1">
               {item.description}
             </td>

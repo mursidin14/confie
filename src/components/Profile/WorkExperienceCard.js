@@ -63,7 +63,7 @@ function Table({ items, handleDelete, handleEdit}) {
             <td className="w-[10%] pl-10 text-left">{item.position}</td>
             <td className="w-[10%] ">{item.agency}</td>
             <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
-            <td className="w-[6%] ">{utils.getMonthYear(item.end_date)}</td>
+            <td className="w-[6%] ">{item.is_current ? 'Sekarang' : utils.getMonthYear(item.end_date)}</td>
             <td className="w-[16%] px-8 py-4 text-center lg:py-1 lg:px-3">
               {item.description}
             </td>

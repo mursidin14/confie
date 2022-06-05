@@ -56,7 +56,7 @@ function Table({items, handleDelete}) {
             <td className="pl-10 w-[10%] text-left">{item.position}</td>
             <td className="w-[10%] ">{item.agency}</td>
             <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
-            <td className="w-[6%] ">{utils.getMonthYear(item.end_date)}</td>
+            <td className="w-[6%] ">{item.is_current ? 'Sekarang' : utils.getMonthYear(item.end_date)}</td>
             <td className="w-[16%] text-center lg:px-3 px-8 lg:py-1 py-4">{item.description}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
