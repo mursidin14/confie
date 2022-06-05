@@ -110,11 +110,12 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 1</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
                 <>
                   {quarter == '1' && (
                     <>
                       <MilestoneTarget
+                        status={status}
                         deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
@@ -131,11 +132,12 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 2</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
                 <>
                   {quarter == '2' && (
                     <>
                       <MilestoneTarget
+                        status={status}
                         deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
@@ -152,11 +154,12 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 3</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id }, index) => (
+              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
                 <>
                   {quarter == '3' && (
                     <>
                       <MilestoneTarget
+                        status={status}
                         deleteMilestone={deleteMilestone}
                         target_milestone={target_title}
                         quarter={quarter}
@@ -173,7 +176,7 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 4</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
+              {targetMilestone.map(({ target_title, quarter, id, status}, index) => (
                 <>
                   {quarter == '4' && (
                     <>
@@ -206,13 +209,12 @@ function MilestoneTarget({
   idPlan,
   status
 }) {
-  console.log(status)
   return (
     <>
       <div className="flex items-center justify-between gap-3 py-5 px-10">
         <div className="flex items-center gap-3">
           <input
-            checked={status ? true : false}
+            checked={status}
             className="target_checkbox"
             name={target_milestone}
             type="checkbox"
