@@ -83,7 +83,7 @@ export default function TargetCard({ userId, data_plan }) {
                       type="checkbox"
                       class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
                     />
-                    <p className="text-sm" key={index}>
+                    <p className={`text-sm ${milestone.status ? 'line-through' : ''}`} key={index}>
                       {milestone.target_title}
                     </p>
                   </div>
