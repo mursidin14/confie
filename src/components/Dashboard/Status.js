@@ -1,6 +1,37 @@
 import React from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
-import utils from 'utils/utils';
+
+const getProfileCompletion = (my_profile) => {
+  let profile_completion = 0;
+  const profile = [
+    'about',
+    'certificates',
+    'city_name',
+    'country',
+    'date_of_birth',
+    'educations',
+    'email',
+    'experiences',
+    'full_name',
+    'gender',
+    'internships',
+    'phone_number',
+    'province_name',
+    'skills',
+  ];
+  const total_data = 14;
+  profile.forEach((item) => {
+    if (
+      (Array.isArray(my_profile[item]) && my_profile[item].length > 0) ||
+      (Array.isArray(my_profile[item]) === false && my_profile[item] !== '')
+    ) {
+      profile_completion += 1;
+    }
+  });
+  return Math.round((profile_completion / total_data) * 100);
+};
+
+
 export default function Status({data}) {
   let status = [
     {
@@ -40,9 +71,9 @@ function ProfileCompletion({data}) {
         <p className="mb-2 text-left text-base text-[#B5B5C3]">
           Profile Completion
         </p>
-        <p>{utils.getProfileCompletion(data)}%</p>
+        <p>{getProfileCompletion(data)}%</p>
       </div>
-      <ProgressBar progressPercentage={utils.getProfileCompletion(data)} />
+      <ProgressBar progressPercentage={getProfileCompletion(data)} />
     </div>
   );
 }

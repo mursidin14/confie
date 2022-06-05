@@ -42,6 +42,7 @@ const getMonthYear = (time) => {
 };
 
 const getProfileCompletion = (my_profile) => {
+  let profile_completion = 0;
   const profile = [
     'about',
     'certificates',
@@ -58,14 +59,12 @@ const getProfileCompletion = (my_profile) => {
     'province_name',
     'skills',
   ];
-  let profile_completion = 0;
   const total_data = 14;
   profile.forEach((item) => {
     if (
       (Array.isArray(my_profile[item]) && my_profile[item].length > 0) ||
       (Array.isArray(my_profile[item]) === false && my_profile[item] !== '')
     ) {
-      console.log(my_profile[item]);
       profile_completion += 1;
     }
   });
