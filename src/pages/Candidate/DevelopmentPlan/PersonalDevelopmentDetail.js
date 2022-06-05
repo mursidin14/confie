@@ -28,16 +28,26 @@ export default function PersonalDevelopmentDetail() {
     getTargetDetail();
   }, []);
 
+  useEffect(() => {
+    let target_checkbox = document.querySelectorAll('.target_checkbox').length;
+    let checkbox_checked = document.querySelectorAll(
+      '.target_checkbox:checked'
+    ).length;
+    let percentage = (checkbox_checked / target_checkbox) * 100;
+    setProgress(percentage);
+  })
+  
+
   async function handleChange(id, status) {
     let target_checkbox = document.querySelectorAll('.target_checkbox').length;
     let checkbox_checked = document.querySelectorAll(
       '.target_checkbox:checked'
     ).length;
     let percentage = (checkbox_checked / target_checkbox) * 100;
+    setProgress(percentage);
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
       status: !status,
       });
-    setProgress(percentage);
     
   }
 
