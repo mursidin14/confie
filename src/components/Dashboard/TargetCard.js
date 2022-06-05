@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 
 export default function TargetCard({ userId, data_plan }) {
-  const [data, setData] = useState(data_plan[0]);
+  const [data, setData] = useState([]);
   const [dataMilestone, setdataMilestone] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
-      const response_plan = await PersonalPlanService.getDetailPersonalPlanData(
-        data_plan[0].id
-      );
-      setdataMilestone(response_plan.data.data.milestone);
-      setLoading(false);
+      if (data_plan) {
+        setData(data_plan[0]);
+        const response_plan =
+          await PersonalPlanService.getDetailPersonalPlanData(data_plan[0].id);
+        setdataMilestone(response_plan.data.data.milestone);
+        setLoading(false);
+      }
     }
     fetchData();
   }, []);
@@ -63,26 +65,34 @@ export default function TargetCard({ userId, data_plan }) {
         </a>
       </div>
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="bg-[#F5F8FA] py-5 px-8">
-        <p className="">{data.title}</p>
-      </div>
-      <div className="my-3 px-8 space-y-2">
-          {!loading
-            ? dataMilestone.map((milestone, index) => (
-                <div className={`flex items-center gap-3 ${milestone.quarter == quarter ? '' : 'hidden'}`}>
-                  <input
-                    disabled
-                    checked={milestone.status}
-                    type="checkbox"
-                    class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
-                  />
-                  <p className="text-sm" key={index}>
-                    {milestone.target_title}
-                  </p>
-                </div>
-              ))
-            : 'loading'}
-      </div>
+      {data && !loading ? (
+        <>
+          <div className="bg-[#F5F8FA] py-5 px-8">
+            <p className="">{data.title}</p>
+          </div>
+          <div className="my-3 space-y-2 px-8">
+            {!loading
+              ? dataMilestone.map((milestone, index) => (
+                  <div
+                    className={`flex items-center gap-3 ${
+                      milestone.quarter == quarter ? '' : 'hidden'
+                    }`}
+                  >
+                    <input
+                      disabled
+                      checked={milestone.status}
+                      type="checkbox"
+                      class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
+                    />
+                    <p className="text-sm" key={index}>
+                      {milestone.target_title}
+                    </p>
+                  </div>
+                ))
+              : 'loading'}
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }
