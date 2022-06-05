@@ -34,6 +34,10 @@ export default function PersonalDevelopmentDetail() {
       '.target_checkbox:checked'
     ).length;
     let percentage = (checkbox_checked / target_checkbox) * 100;
+    if (isNaN(percentage)) {
+      setProgress(0);
+      return
+    }
     setProgress(percentage);
   })
   
