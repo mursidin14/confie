@@ -3,9 +3,9 @@ import React from 'react';
 export default function ProgressBar({ progressPercentage }) {
   let bg_color
   if (progressPercentage < 20) {
-    bg_color = 'bg-orange-600'
+    bg_color = 'bg-red-600'
   }else if(progressPercentage < 40) {
-    bg_color = 'bg-orange-400'
+    bg_color = 'bg-red-400'
   }else if(progressPercentage < 60){
     bg_color = 'bg-green-400'
   }else if(progressPercentage < 80){
@@ -17,7 +17,7 @@ export default function ProgressBar({ progressPercentage }) {
     <div className="h-[10px] w-full bg-gray-300 rounded-full ">
       <div
         style={{ width: `${progressPercentage}%` }}
-        className={`h-full bg-green-400 rounded-full `}
+        className={`h-full ${bg_color} rounded-full`}
       ></div>
     </div>
   );
