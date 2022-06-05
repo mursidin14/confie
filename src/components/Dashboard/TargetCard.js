@@ -17,7 +17,6 @@ export default function TargetCard({ userId, data_plan }) {
     }
     fetchData();
   }, []);
-  console.log(data_plan);
   function getQuarter() {
     let today = new Date();
     let month = today.getMonth();

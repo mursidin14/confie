@@ -36,7 +36,7 @@ export default function Dashboard() {
       {loading ? (
         <SkeletonCard />
       ) : (
-        <PersonalCard id={id} data_profile={data.profile} />
+        <PersonalCard id={id} data_profile={data.profile} loading={loading} />
       )}
       <div className="gap-5 lg:flex">
         {loading ? (

@@ -5,7 +5,7 @@ import CurriculumVitae from 'components/CurriculumVitae';
 import utils from 'utils/utils';
 
 
-export default function PersonalCard({data_profile, id}) {
+export default function PersonalCard({data_profile, id, loading}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
@@ -52,7 +52,7 @@ export default function PersonalCard({data_profile, id}) {
         </div>
       </div>
       <div className="block md:hidden">
-        <Status />
+        <Status data={data_profile} />
       </div>
       <div className="block md:hidden">
         <ButtonDashboard id={id} data={data_profile} />
