@@ -71,6 +71,8 @@ export default function TargetCard({ userId, data_plan }) {
             ? dataMilestone.map((milestone, index) => (
                 <div className={`flex items-center gap-3 ${milestone.quarter == quarter ? '' : 'hidden'}`}>
                   <input
+                    disabled
+                    checked={milestone.status}
                     type="checkbox"
                     class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
                   />
