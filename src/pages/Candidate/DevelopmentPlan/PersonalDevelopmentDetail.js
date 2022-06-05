@@ -60,7 +60,7 @@ export default function PersonalDevelopmentDetail() {
   return (
     <Layout userId={id} PageName={'Personal Development Plan'}>
       <div className="lg:relative">
-        <div className="mt-4 rounded-md bg-white py-5 text-left shadow-md ">
+        <div className="mt-4 rounded-md bg-white py-5 text-left shadow-mine ">
           <div className="flex items-center justify-between px-8">
             <div>
               <h3 className="text-2xl font-semibold text-[#181C32]">
@@ -108,7 +108,7 @@ export default function PersonalDevelopmentDetail() {
             </div>
           </div>
         </div>
-        <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
+        <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
           <div className="flex items-center justify-between px-8">
             <h3 className="text-base font-semibold ">Milestone</h3>
             <ModalMilestone idDetail={idDetail}></ModalMilestone>

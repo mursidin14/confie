@@ -14,7 +14,7 @@ export default function InternExperienceCard({data_profile}) {
 
   return (
     <div className='lg:relative'>
-      <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-md ">
+      <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">Pengalaman Magang</h3>
           <ModalInternship></ModalInternship>
