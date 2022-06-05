@@ -14,10 +14,14 @@ export default function ProgressBar({ progressPercentage }) {
     bg_color = 'bg-green-900'
   }
   return (
-    <div className="h-[10px] w-full bg-gray-300 rounded-full ">
+    <div className="relative h-[10px] w-full bg-gray-300 rounded-full ">
       <div
         style={{ width: `${progressPercentage}%` }}
-        className={`h-full ${bg_color} rounded-full`}
+        className={`h-full bg-green-400 rounded-full`}
+      ></div>
+      <div
+        style={{ width: `${progressPercentage}%` }}
+        className={`absolute top-0 h-full bg-green-400 rounded-full`}
       ></div>
     </div>
   );
