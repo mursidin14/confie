@@ -61,13 +61,13 @@ export default function PersonalCard({data_profile, id, loading}) {
   );
 }
 
-function ButtonDashboard({id}) {
+function ButtonDashboard({id, data_profile}) {
   const cv = React.createRef();
 
   return (
     <>
       <div className='absolute -top-[3000px]' ref={cv}>
-        <CurriculumVitae></CurriculumVitae>
+        <CurriculumVitae data={data_profile}></CurriculumVitae>
       </div>
       <div className="my-3 flex w-full">
       <div className="flex items-center sm:justify-start justify-between w-full gap-3">

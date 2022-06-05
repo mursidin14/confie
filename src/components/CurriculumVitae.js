@@ -1,12 +1,13 @@
 import React from 'react';
-export default function CurriculumVitae() {
+import InformationTitle from 'pages/Candidate/OnlineProfile/InformationTitle';
+export default function CurriculumVitae({ data }) {
   return (
     <main className="flex ">
-      <section className="sm:w-[35%] bg-dark-blue py-10 px-7 text-white h-[2480px]">
+      <section className="h-[2480px] bg-dark-blue py-10 px-7 text-white sm:w-[35%]">
         <div className="mx-auto w-fit ">
           <img className="rounded-full" src="/person.png" alt="" />
           <div className="mt-5 flex items-center gap-3">
-            <p className="text-lg">Rahmat Hidayat</p>
+            <p className="text-lg">{data.full_name}</p>
             <svg
               className="h-5 w-5"
               width="28"
@@ -27,15 +28,15 @@ export default function CurriculumVitae() {
           </div>
           <p className="mt-1 text-center text-sm">Teknik Informatika</p>
         </div>
-        <BasicInformation />
-        <SkillInfomation />
-        <CertificationInformation />
+        <BasicInformation data={data} />
+        <SkillInfomation data={data.skills} />
+        <CertificationInformation data={data.certificates} />
       </section>
-      <section className='text-[#7E8299] w-[500px]   '>
-          <AboutMe></AboutMe>
-          <WorkExperience></WorkExperience>
-          <IntershipExperience></IntershipExperience>
-          <EducationHistory></EducationHistory>
+      <section className="w-[500px] text-[#7E8299]   ">
+        <AboutMe data={data.about}></AboutMe>
+        <WorkExperience data={data.experiences}></WorkExperience>
+        <IntershipExperience data={data.internships}></IntershipExperience>
+        <EducationHistory data={data.educations}></EducationHistory>
       </section>
     </main>
   );
@@ -49,7 +50,7 @@ function EmploymentStatus({}) {
   );
 }
 
-function BasicInformation({}) {
+function BasicInformation({ data }) {
   return (
     <section className="mt-10 text-sm">
       <div className="my-5 flex items-center gap-5">
@@ -66,7 +67,7 @@ function BasicInformation({}) {
             fill="white"
           />
         </svg>
-        <p>Makassar</p>
+        <p>{data.city_name}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
         <svg
@@ -83,7 +84,7 @@ function BasicInformation({}) {
           />
         </svg>
 
-        <p>rahmathid@gmail.com</p>
+        <p>{data.email}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
         <svg
@@ -107,7 +108,7 @@ function BasicInformation({}) {
           />
         </svg>
 
-        <p>0850-8368-8368</p>
+        <p>{data.phone_number}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
         <svg
@@ -124,134 +125,126 @@ function BasicInformation({}) {
           />
         </svg>
 
-        <p>Rahmat</p>
+        <p>{data.url_linkedin}</p>
       </div>
     </section>
   );
 }
 
-function SkillInfomation({}) {
+function SkillInfomation({ data }) {
   return (
     <section className="mt-20">
       <p className="mb-6 text-left text-xl font-semibold">Skills</p>
       <div className="text-left text-sm">
-        <p className="my-3">Akuntansi</p>
-        <p className="my-3">Coding</p>
-        <p className="my-3">Marketing</p>
+        {data.map((skill, index) => (
+          <p>{skill.name}</p>
+        ))}
       </div>
     </section>
   );
 }
 
-function CertificationInformation({}) {
-  return (
-    <section className="mt-20">
-      <p className="mb-6 text-left text-xl font-semibold">
-        Award & Certification
-      </p>
-      <div className="text-left text-sm pr-10">
-        <div className="my-3">
-          <p>Most Outstanding Employee of the Year (2015)</p>
-          <div className="flex items-center gap-4">
-            <hr className="w-2 border-b-[0.5px] border-white" />
-            <p className="text-xs">Pixelpoint Hive</p>
-          </div>
+function CertificationInformation({data}) {
+  const certificates = data;
+    return (
+      <section className="mt-10 sm:mt-20">
+        <p className="mb-2 text-left text-sm font-semibold sm:mb-6 sm:text-xl">
+          Award & Certification
+        </p>
+        <div className="space-y-1 pr-10 text-left text-xs sm:w-[240px] sm:space-y-3 sm:text-sm">
+          {certificates.map((certificate, index) => (
+            <div key={index}>
+              <p>
+                {certificate.name} {utils.getMonthYear(certificate.year)}
+              </p>
+              <div className="flex items-center gap-4">
+                <hr className="w-2 border-b-[0.5px] border-white" />
+                <p className="mt-1 text-xs">{certificate.agency}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="my-3">
-          <p>Most Outstanding Employee of the Year (2015)</p>
-          <div className="flex items-center gap-4">
-            <hr className="w-2 border-b-[0.5px] border-white" />
-            <p className="text-xs">Pixelpoint Hive</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
 }
 
-function AboutMe({}) {
+function AboutMe({data}) {
   return (
     <article className="mt-10">
       <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
+        <p className="pl-8 text-left text-lg font-semibold text-white sm:text-xl">
           About Me
         </p>
       </div>
-      <p className='sm:text-sm text-xs text-left pl-8 my-6  sm:w-[500px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod expedita ut, est voluptate voluptatibus nulla doloremque temporibus obcaecati, deserunt accusantium ad fuga aspernatur! Libero culpa, velit illum nulla quas debitis.</p>
+      <p className="my-6 pl-8 text-left text-xs sm:w-[500px] sm:text-sm">
+        {data}
+      </p>
     </article>
   );
 }
 
-function WorkExperience({}) {
+function WorkExperience({data}) {
+  let works = data;
   return (
     <article>
-      <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
-          Work Experience
-        </p>
-      </div>
-      <div className="my-8 pl-8 text-left">
-        <p className="text-xl text-[#3F4254]">Junior React Developer</p>
-        <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="sm:text-sm text-xs">
-          First, a disclaimer – the entire process of writing a blog post often
-          takes more than a couple of hours, even if you can type eighty words
-          as per minute and your writing skills are sharp.
-        </p>
-      </div>
-      <div className="my-8 pl-8 text-left">
-        <p className="text-xl text-[#3F4254]">Junior React Developer</p>
-        <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="sm:text-sm text-xs">
-          First, a disclaimer – the entire process of writing a blog post often
-          takes more than a couple of hours, even if you can type eighty words
-          as per minute and your writing skills are sharp.
-        </p>
+      <InformationTitle title={'Work Experience'} />
+      <div className="px-3 sm:pl-8">
+        {works.map((work, index) => (
+          <div key={index} className="my-8 w-fit text-left text-xs md:text-sm">
+            <p className="text-base text-[#3F4254] sm:text-xl">
+              {work.position}
+            </p>
+            <p className="my-1 text-[#3F4254]">{work.agency} {utils.getMonthYear(work.start_date)}</p>
+            <p>
+              {work.description}
+            </p>
+          </div>
+        ))}
       </div>
     </article>
   );
 }
 
-function IntershipExperience({}) {
+function IntershipExperience({data}) {
+  let interns = data
   return (
     <article>
-      <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
-          Internship Experience
-        </p>
+      <InformationTitle title={'Intern Experience'} />
+      <div className="px-3 sm:pl-8">
+      {interns.map((intern, index) => (
+          <div key={index} className="my-8 w-fit text-left text-xs md:text-sm">
+            <p className="text-base text-[#3F4254] sm:text-xl">
+              {intern.position}
+            </p>
+            <p className="my-1 text-[#3F4254]">{intern.agency} {utils.getMonthYear(intern.start_date)}</p>
+            <p>
+              {intern.description}
+            </p>
+          </div>
+        ))}
       </div>
-      <div className="my-8 pl-8 text-left">
-        <p className="text-xl text-[#3F4254]">Junior React Developer</p>
-        <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="sm:text-sm text-xs">
-          First, a disclaimer – the entire process of writing a blog post often
-          takes more than a couple of hours, even if you can type eighty words
-          as per minute and your writing skills are sharp.
-        </p>
-      </div>
-      
     </article>
   );
 }
 
-function EducationHistory({}) {
+function EducationHistory({data}) {
+  let educations = data
   return (
     <article>
-      <div className="bg-[#7E8299] py-4">
-        <p className="pl-8 text-left sm:text-xl text-lg font-semibold text-white">
-          Education History
-        </p>
+      <InformationTitle title={'Education History'} />
+      <div className="px-3 sm:pl-8">
+      {educations.map((education, index) => (
+          <div key={index} className="my-8 w-fit text-left text-xs md:text-sm">
+            <p className="text-base text-[#3F4254] sm:text-xl">
+              {education.major}
+            </p>
+            <p className="my-1 text-[#3F4254]">{education.school} {utils.getMonthYear(education.start_date)}</p>
+            <p>
+              {education.description}
+            </p>
+          </div>
+        ))}
       </div>
-      <div className="my-8 pl-8 text-left">
-        <p className="text-xl text-[#3F4254]">Junior React Developer</p>
-        <p className="my-1 text-[#3F4254]">PT. Maju Jaya, 2010</p>
-        <p className="sm:text-sm text-xs">
-          First, a disclaimer – the entire process of writing a blog post often
-          takes more than a couple of hours, even if you can type eighty words
-          as per minute and your writing skills are sharp.
-        </p>
-      </div>
-     
     </article>
   );
 }
