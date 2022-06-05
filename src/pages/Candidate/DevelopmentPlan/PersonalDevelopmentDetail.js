@@ -13,7 +13,6 @@ export default function PersonalDevelopmentDetail() {
   const [target, setTarget] = useState({});
   const [progress, setProgress] = useState(0);
   const { id, idDetail } = useParams();
-  const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -207,12 +206,13 @@ function MilestoneTarget({
   idPlan,
   status
 }) {
+  console.log(status)
   return (
     <>
       <div className="flex items-center justify-between gap-3 py-5 px-10">
         <div className="flex items-center gap-3">
           <input
-            checked={status}
+            checked={status ? true : false}
             className="target_checkbox"
             name={target_milestone}
             type="checkbox"
