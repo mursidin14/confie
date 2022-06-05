@@ -2,18 +2,8 @@ import React from 'react';
 import Status from './Status';
 import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
+import utils from 'utils/utils';
 
-function makeCapital(name) {
-  let nameArray = name.split(' ');
-  if (nameArray.length > 1) {
-    let capitalName = '';
-    nameArray.forEach((name) => {
-      capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
-    });
-    return capitalName;
-  }
-  return name.slice(0, 1).toUpperCase() + name.slice(1);
-}
 
 export default function PersonalCard({data_profile, id}) {
   return (
@@ -29,7 +19,7 @@ export default function PersonalCard({data_profile, id}) {
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
-                  {data_profile.full_name ? makeCapital(data_profile.full_name) : ''}
+                  {data_profile.full_name ? utils.makeCapital(data_profile.full_name) : ''}
                 </h3>
                 <svg
                   className="h-5 w-5"
@@ -57,7 +47,7 @@ export default function PersonalCard({data_profile, id}) {
           </div>
           <JobStatus />
           <div className="hidden md:block">
-            <Status />
+            <Status data={data_profile}/>
           </div>
         </div>
       </div>
@@ -65,7 +55,7 @@ export default function PersonalCard({data_profile, id}) {
         <Status />
       </div>
       <div className="block md:hidden">
-        <ButtonDashboard id={id} />
+        <ButtonDashboard id={id} data={data_profile} />
       </div>
     </div>
   );

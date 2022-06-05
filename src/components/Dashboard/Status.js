@@ -1,7 +1,7 @@
 import React from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
-
-export default function Status(params) {
+import utils from 'utils/utils';
+export default function Status({data}) {
   let status = [
     {
       name: 'Kelas Aktif',
@@ -28,21 +28,21 @@ export default function Status(params) {
           </div>
         ))}
       </div>
-      <ProfileCompletion />
+      <ProfileCompletion data={data} />
     </div>
   );
 }
 
-function ProfileCompletion({}) {
+function ProfileCompletion({data}) {
   return (
     <div className="mt-3 w-full lg:mt-0 lg:w-6/12 ">
       <div className="flex justify-between">
         <p className="mb-2 text-left text-base text-[#B5B5C3]">
           Profile Completion
         </p>
-        <p>80%</p>
+        <p>{utils.getProfileCompletion(data)}%</p>
       </div>
-      <ProgressBar progressPercentage={80} />
+      <ProgressBar progressPercentage={utils.getProfileCompletion(data)} />
     </div>
   );
 }

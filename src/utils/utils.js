@@ -41,12 +41,24 @@ const getMonthYear = (time) => {
   });
 };
 
+const getProfileCompletion = (data) => {
+  let profile_completion = 0;
+  const total_data = data.length;
+  data.forEach((field) => {
+    if (field) {
+      profile_completion += 1;
+    }
+  });
+  return Math.round((profile_completion / total_data) * 100);
+};
+
 const utils = {
   makeCapital,
   getCity,
   timeEpoch,
   getDate,
   getMonthYear,
+  getProfileCompletion,
 };
 
 export default utils;
