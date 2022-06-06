@@ -36,15 +36,15 @@ export default function Status({data}) {
   let status = [
     {
       name: 'Kelas Aktif',
-      value: '2',
+      value: '0',
     },
     {
       name: 'Kelas Selesai',
-      value: '1',
+      value: '0',
     },
     {
       name: 'Lamaran Masuk',
-      value: '3',
+      value: '0',
     },
   ];
   return (

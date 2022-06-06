@@ -48,7 +48,7 @@ export default function ModalEducation() {
 
   let inputs = [
     {
-      label: 'Sekolah/Universitats',
+      label: 'Sekolah/Universitas',
       type: 'text',
       name: 'school',
       errorMessage:

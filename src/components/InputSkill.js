@@ -42,9 +42,9 @@ const people =  [
     <Combobox value={selected} onChange={setSelected}>
       <div className="mt-1">
           <Combobox.Input
-            className="bg-soft-gray w-[100px] focus:outline-none"
+            className="bg-soft-gray w-[100px] focus:outline-none pl-2"
             displayValue={(person) => {
-              return person.name;
+              
             }}
             onChange={handleChange}
             onKeyUp={(e) => {

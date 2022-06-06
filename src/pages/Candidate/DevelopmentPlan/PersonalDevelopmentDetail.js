@@ -58,6 +58,7 @@ export default function PersonalDevelopmentDetail() {
   async function deleteMilestone(id) {
     const response = await PersonalPlanService.deleteQuarterlyPlanData(id);
     setTargetMilestone(response.data.data.milestone);
+    alert("Data Milestone Berhasil Dihapus")
     window.location.reload()
   }
 

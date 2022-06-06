@@ -33,7 +33,11 @@ export default function TargetCard({ userId, data_plan }) {
     return quarter;
   }
   let quarter = getQuarter();
-
+  async function handleChange(id, status) {
+    const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
+      status: !status,
+    });
+  }
   return (
     <div className="mt-4 rounded-md bg-white py-7  text-left shadow-mine lg:w-6/12 ">
       <div className="flex justify-between px-8 pb-2">
@@ -78,7 +82,9 @@ export default function TargetCard({ userId, data_plan }) {
                     }`}
                   >
                     <input
-                      disabled
+                      onChange={()=>{
+                        handleChange(milestone.id, milestone.status)
+                      }}
                       checked={milestone.status}
                       type="checkbox"
                       class="form-checkbox h-5 w-5 bg-[#FFF8DD]"

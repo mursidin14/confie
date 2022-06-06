@@ -29,7 +29,7 @@ export default function WizardFormSecondPage(props) {
       type: "number",
       errorMessage: "It should be a valid phone number!",
       required: true,
-
+      min: 0
     },
     {
       label: "Password",
@@ -58,7 +58,7 @@ export default function WizardFormSecondPage(props) {
   }
 
   function handleSubmit() {
-    if(generateValidation() && data.password === data.password_confirmation){
+    if(generateValidation() && data.phone_number > 0 && data.password === data.password_confirmation){
       props.onSubmit()
     }  
    

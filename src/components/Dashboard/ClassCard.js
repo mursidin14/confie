@@ -12,7 +12,7 @@ export default function ClassCard() {
       </div>
       <hr className=' my-2 border-b-[1px] w-full border-[#3F4254]/10'/>
 
-      <section className='px-8'>
+      {/* <section className='px-8'>
         <div className='flex items-center justify-between text-[#3F4254] my-3 py-2 border-b-2 border-[#3F4254]/20 border-dashed '>
           <div className='w-6/12'>
             <h3 className="text-base font-semibold">Digital Marketing</h3>
@@ -24,7 +24,7 @@ export default function ClassCard() {
             <p className="text-xs ">50%</p>
           </div>
         </div>
-      </section>
+      </section> */}
      
      
     </div>
