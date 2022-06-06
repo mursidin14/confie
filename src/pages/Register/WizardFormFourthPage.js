@@ -5,7 +5,7 @@ import InputSkill from 'components/InputSkill';
 import { Dialog, Transition } from '@headlessui/react';
 
 export default function WizardFormFourthPage(props) {
-  let { data, onChange, children } = props;
+  let { data, onChange, children, skills, setSkills } = props;
   function handleChange(e) {
     onChange({
       ...data,
@@ -33,7 +33,7 @@ export default function WizardFormFourthPage(props) {
           <label className="label">
             {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
           </label>
-          <InputSkill data={data} onChange={onChange}></InputSkill>
+          <InputSkill data={data} onChange={onChange} skills={skills} setSkills={setSkills}></InputSkill>
           <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
             <button
               type="button"

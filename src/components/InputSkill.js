@@ -95,7 +95,7 @@ function InputTag({ addTags, data }) {
   );
 }
 
-export default function InputSkill({ data, onChange }) {
+export default function InputSkill({ data, onChange, skills, setSkills }) {
   const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
   const removeTags = (indexToRemove) => {
@@ -105,10 +105,7 @@ export default function InputSkill({ data, onChange }) {
     if (value !== '') {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
-      onChange({
-        ...data,
-        skills: [...idTags],
-      });
+      setSkills([...skills, id]);
     }
     return;
   };
@@ -142,7 +139,7 @@ export function UpdateInputSkill({ skills, setSkills }) {
     if (value !== '') {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
-      setSkills([skills, ...idTags]);
+      setSkills([...skills, id]);
     }
     return;
   };
