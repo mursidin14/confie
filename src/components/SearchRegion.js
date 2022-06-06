@@ -260,7 +260,8 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
     setCity(utils.getCity(response.data.data));
   }
   async function handleEnter(name) {
-    const id = people.find((person) => person.name === name).id;
+    const province_name = people.find((person) => person.name === name)
+    const id = province_name?.id;
     onChange({
       ...data,
       province: id,
