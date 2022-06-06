@@ -21,7 +21,7 @@ export default function PersonalCard({data_profile, id, loading}) {
                 <h3 className="text-left sm:text-xl text-lg font-semibold">
                   {data_profile.full_name ? utils.makeCapital(data_profile.full_name) : ''}
                 </h3>
-                <svg
+                {/* <svg
                   className="h-5 w-5"
                   width="30"
                   height="30"
@@ -37,7 +37,7 @@ export default function PersonalCard({data_profile, id, loading}) {
                     d="M18.5704 11.4878C18.8258 11.1873 19.2214 11.1731 19.5219 11.4286C19.8225 11.6841 19.7786 12.0804 19.5231 12.381L14.8288 18.3197C14.5693 18.6251 14.1095 18.6572 13.81 18.391L10.5957 15.5338C10.3009 15.2717 10.2743 14.8203 10.5364 14.5255C10.7985 14.2306 11.25 14.2041 11.5448 14.4661L14.2133 16.8381L18.5704 11.4878Z"
                     fill="white"
                   />
-                </svg>
+                </svg> */}
               </div>
               <EmploymentStatus />
             </div>

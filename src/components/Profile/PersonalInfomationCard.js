@@ -21,6 +21,9 @@ export default function PersonalInfomationCard({ data_profile }) {
       day: 'numeric',
     });
   }
+  function getGender(gender) {
+    return gender == 'L' ? 'Laki-laki' : 'Perempuan'
+  }
   let inputs = [
     {
       label: 'Full Name',
@@ -36,7 +39,7 @@ export default function PersonalInfomationCard({ data_profile }) {
     },
     {
       label: 'Gender',
-      value: data_profile.gender,
+      value: getGender(data_profile.gender),
     },
     {
       label: 'Date of Birth',

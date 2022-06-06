@@ -250,7 +250,8 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
     setQuery(event.target.value);
   }
   async function handleClick(e) {
-    const id = people.find((person) => person.name === e.target.innerText).id;
+    const province_name = people.find((person) => person.name === e.target.innerText)
+    const id = province_name?.id;
     onChange({
       ...data,
       province: id,
