@@ -1,8 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React from 'react';
 import LayoutRegister from './LayoutRegister';
-import InputTag from 'components/InputTag';
 import InputSkill from 'components/InputSkill';
-import { Dialog, Transition } from '@headlessui/react';
 
 export default function WizardFormFourthPage({ data, onChange, children, skills, setSkills, previousPage, onSubmit }) {
   function handleChange(e) {

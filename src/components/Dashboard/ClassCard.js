@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from 'components/Widgets/ProgressBar';
+// import ProgressBar from 'components/Widgets/ProgressBar';
 export default function ClassCard() {
   return (
     <div className='rounded-md bg-white py-7  shadow-mine lg:w-6/12 mt-4 text-left'>
