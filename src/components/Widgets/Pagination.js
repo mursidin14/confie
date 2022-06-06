@@ -41,19 +41,37 @@ export default function Pagination({ length, pagination, setPagination }) {
       </svg>
 
       <button
-        onClick={() => setPage(page)}
+        onClick={() => {
+          setPage(page);
+          setPagination({
+            sliceOne: pagination.sliceOne + 3 * page,
+            sliceTwo: pagination.sliceOne + 3 * page,
+          });
+        }}
         className={`${page === page ? active : ''}`}
       >
         {page}
       </button>
       <button
-        onClick={() => setPage(page + 1)}
+        onClick={() => {
+          setPage(page + 1);
+          setPagination({
+            sliceOne: pagination.sliceOne + 3 * (page + 1),
+            sliceTwo: pagination.sliceOne + 3 * (page + 1),
+          });
+        }}
         className={`${page === page + 1 ? active : ''}`}
       >
         {page + 1}
       </button>
       <button
-        onClick={() => setPage(page + 2)}
+        onClick={() => {
+          setPage(page + 2);
+          setPagination({
+            sliceOne: pagination.sliceOne + 3 * (page + 2),
+            sliceTwo: pagination.sliceOne + 3 * (page + 2),
+          });
+        }}
         className={`${page === page + 2 ? active : ''}`}
       >
         {page + 2}
