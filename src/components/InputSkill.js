@@ -105,7 +105,7 @@ export default function InputSkill({ data, onChange, skills, setSkills }) {
     if (value !== '') {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
-      setSkills([...skills, id]);
+      setSkills([...idTags, id]);
     }
     return;
   };
