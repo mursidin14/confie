@@ -12,6 +12,7 @@ export default function ModalProfile({data_profile}) {
     phone_number: data_profile.phone_number,
     province: data_profile.province,
     city: data_profile.city,
+    gender: data_profile.gender,
     date_of_birth: data_profile.date_of_birth,
     country: data_profile.country,
   });
