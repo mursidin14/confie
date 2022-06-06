@@ -4,7 +4,7 @@ import InputTag from 'components/InputTag';
 import InputSkill from 'components/InputSkill';
 import { Dialog, Transition } from '@headlessui/react';
 
-export default function WizardFormFourthPage({ data, onChange, children, skills, setSkills }) {
+export default function WizardFormFourthPage({ data, onChange, children, skills, setSkills, previousPage, onSubmit }) {
   function handleChange(e) {
     onChange({
       ...data,
@@ -32,18 +32,18 @@ export default function WizardFormFourthPage({ data, onChange, children, skills,
           <label className="label">
             {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
           </label>
-          <InputSkill data={data} onChange={onChange} skills={skills} setSkills={setSkills}></InputSkill>
+          <InputSkill data={data} onChange={onChange}></InputSkill>
           <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
             <button
               type="button"
-              onClick={props.previousPage}
+              onClick={previousPage}
               className="secondary-btn w-full px-6 py-3 lg:w-[150px]"
             >
               PREVIOUS
             </button>
             <button
               type="submit"
-              onClick={props.onSubmit}
+              onClick={onSubmit}
               className="primary-btn w-full px-6 py-3 lg:w-[150px]"
             >
               CONTINUE

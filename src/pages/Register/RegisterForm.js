@@ -9,12 +9,11 @@ import AuthService from 'services/Auth/AuthService';
 
 export default function Register() {
   const [error_msg, setError_msg] = useState([]);
-  const [page, setPage] = useState(1);
-  const [skills, setSkills] = useState([])
+  const [page, setPage] = useState(4);
   const [dataAccount, setDataAccount] = useState({
     role: 'personal',
     gender: 'L',
-    skills: skills
+    skills: []
   });
   const [isOpen, setIsOpenFailed] = useState(false);
   function closeModal() {
@@ -73,8 +72,6 @@ export default function Register() {
           onSubmit={nextPage}
           onChange={setDataAccount}
           data={dataAccount}
-          skills={skills}
-          setSkills={setSkills}
         >
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog
