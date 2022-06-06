@@ -4,8 +4,7 @@ import InputTag from 'components/InputTag';
 import InputSkill from 'components/InputSkill';
 import { Dialog, Transition } from '@headlessui/react';
 
-export default function WizardFormFourthPage(props) {
-  let { data, onChange, children, skills, setSkills } = props;
+export default function WizardFormFourthPage({ data, onChange, children, skills, setSkills }) {
   function handleChange(e) {
     onChange({
       ...data,
