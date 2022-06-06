@@ -2,10 +2,10 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
-import UpdateInputSkill from 'components/InputSkill';
+import {UpdateInputSkill} from 'components/InputSkill';
 export default function ModalSkill() {
   let [isOpen, setIsOpen] = useState(false);
-  const [tags, setTags] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
@@ -17,7 +17,7 @@ export default function ModalSkill() {
 
   async function handleSubmit() {
     let data = {
-      skills: tags,
+      skills: skills,
     };
     const response = await ProfileService.addSkill(data);
     if (response.data.meta.status == 'error') {
@@ -76,7 +76,7 @@ export default function ModalSkill() {
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
                     <div className="px-8">
-                      <UpdateInputSkill setTagss={setTags} tagss={tags}></UpdateInputSkill>
+                      <UpdateInputSkill setSkills={setSkills} skilss={skills}></UpdateInputSkill>
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">

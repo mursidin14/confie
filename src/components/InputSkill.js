@@ -1,10 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { httpClient } from 'utils/http-common';
-import utils from 'utils/utils';
 
-const people =  [
+const people = [
   { id: 1, name: 'accounting', category: 'personal' },
   { id: 2, name: 'web development', category: 'personal' },
   { id: 3, name: 'mobile development', category: 'personal' },
@@ -17,7 +15,7 @@ const people =  [
   { id: 10, name: 'python', category: 'personal' },
 ];
 
- function InputTag({addTags, data}) {
+function InputTag({ addTags, data }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const filteredPeople =
@@ -33,27 +31,25 @@ const people =  [
     setQuery(event.target.value);
   }
   async function handleClick(e) {
-      const id = people.find(person => person.name === e.target.innerText).id
-      addTags(e.target.innerText, id)
+    const id = people.find((person) => person.name === e.target.innerText).id;
+    addTags(e.target.innerText, id);
   }
- 
 
   return (
     <Combobox value={selected} onChange={setSelected}>
       <div className="mt-1">
-          <Combobox.Input
-            className="bg-soft-gray w-[100px] focus:outline-none pl-2"
-            displayValue={(person) => {
-              
-            }}
-            onChange={handleChange}
-            onKeyUp={(e) => {
-              if (e.key === 'Enter') {
-                addTags(selected.name, selected.id)
-              }}}
-            placeholder="Add Skill"
-          />
-          
+        <Combobox.Input
+          className="w-[100px] bg-soft-gray pl-2 focus:outline-none"
+          displayValue={(person) => {}}
+          onChange={handleChange}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              addTags(selected.name, selected.id);
+            }
+          }}
+          placeholder="Add Skill"
+        />
+
         <Transition
           as={Fragment}
           leave="transition ease-in duration-100"
@@ -61,7 +57,7 @@ const people =  [
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute text-left mt-1 sm:max-w-[400px] max-w-[240px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="absolute mt-1 max-h-60 w-full max-w-[240px] overflow-auto rounded-md bg-white text-left shadow-lg sm:max-w-[400px]">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative z-10 cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
@@ -99,36 +95,74 @@ const people =  [
   );
 }
 
-export default function InputSkill({data, onChange}) {
-  console.log(data)
-    const [tags, setTags] = useState([]);
-    const [idTags, setIdTags] = useState([]);
-    const removeTags = indexToRemove => {
+export default function InputSkill({ data, onChange }) {
+  const [tags, setTags] = useState([]);
+  const [idTags, setIdTags] = useState([]);
+  const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)]);
   };
   const addTags = (value, id) => {
-    if (value !== "") {
+    if (value !== '') {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
       onChange({
         ...data,
-        skills: [...idTags]
-      })
+        skills: [...idTags],
+      });
     }
-    return
+    return;
   };
-  
+
   return (
-    <div className='flex flex-wrap items-center gap-2 bg-soft-gray rounded-md  h-fit py-5 px-3 border-2 border-transparent focus-within:border-black overflow-hidden'>
-        <ul className='flex flex-wrap'>
-            {tags.map((tag, index) => (
-                <li className='flex items-center bg-[#A1A5B7] rounded-md px-3 py-1 m-2 gap-3 text-white' key={index}>
-                    <span>{tag}</span>
-                    <button className='' onClick={() => removeTags(index)}>x</button>
-                </li>
-            ))}
-        </ul>
-        <InputTag addTags={addTags}></InputTag>
-    </div>    
-  )
-  }
+    <div className="flex h-fit flex-wrap items-center gap-2 overflow-hidden  rounded-md border-2 border-transparent bg-soft-gray py-5 px-3 focus-within:border-black">
+      <ul className="flex flex-wrap">
+        {tags.map((tag, index) => (
+          <li
+            className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
+            key={index}
+          >
+            <span>{tag}</span>
+            <button className="" onClick={() => removeTags(index)}>
+              x
+            </button>
+          </li>
+        ))}
+      </ul>
+      <InputTag addTags={addTags}></InputTag>
+    </div>
+  );
+}
+export function UpdateInputSkill({ skills, setSkills }) {
+  const [tags, setTags] = useState([]);
+  const [idTags, setIdTags] = useState([]);
+  const removeTags = (indexToRemove) => {
+    setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+  };
+  const addTags = (value, id) => {
+    if (value !== '') {
+      setTags([...tags, value]);
+      setIdTags([...idTags, id]);
+      setSkills([skills, ...idTags]);
+    }
+    return;
+  };
+
+  return (
+    <div className="flex h-fit flex-wrap items-center gap-2 overflow-hidden  rounded-md border-2 border-transparent bg-soft-gray py-5 px-3 focus-within:border-black">
+      <ul className="flex flex-wrap">
+        {tags.map((tag, index) => (
+          <li
+            className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
+            key={index}
+          >
+            <span>{tag}</span>
+            <button className="" onClick={() => removeTags(index)}>
+              x
+            </button>
+          </li>
+        ))}
+      </ul>
+      <InputTag addTags={addTags}></InputTag>
+    </div>
+  );
+}
