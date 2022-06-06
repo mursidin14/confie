@@ -21,7 +21,7 @@ export default function ModalEducation() {
     if (e.target.name === 'start_date' || e.target.name === 'end_date') {
       setDataEducation({
         ...dataEducation,
-        [e.target.name]: utils.timeEpoch(e.target.value),
+        [e.target.name]: (e.target.value),
       });
     } else {
       setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
@@ -65,14 +65,14 @@ export default function ModalEducation() {
     },
     {
       name: 'start_date',
-      type: 'date',
+      type: 'number',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
-      type: 'date',
+      type: 'number',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,
