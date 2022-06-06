@@ -57,7 +57,8 @@ export default function SearchRegion({ data, onChange, setCity }) {
     setQuery(event.target.value);
   }
   async function handleClick(e) {
-    const id = people.find((person) => person.name === e.target.innerText).id;
+    const province_name = people.find((person) => person.name === e.target.innerText)
+    const id = province_name?.id;
     onChange({
       ...data,
       province: id,
@@ -66,7 +67,8 @@ export default function SearchRegion({ data, onChange, setCity }) {
     setCity(utils.getCity(response.data.data));
   }
   async function handleEnter(name) {
-    const id = people.find((person) => person.name === name).id;
+    const province_name = people.find((person) => person.name === name)
+    const id = province_name?.id;
     onChange({
       ...data,
       province: id,
@@ -275,7 +277,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
       <div className="relative mt-1">
         <div className=" items-center lg:flex">
           <div className="w-5/12">
-            <label className="text-xs lg:text-base">Quarter</label>
+            <label className="text-xs lg:text-base">Province</label>
           </div>
           <div className="lg:w-7/12">
           <Combobox.Input
@@ -339,7 +341,6 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
   );
 }
 export function SearchRegionCityProfile({ data, onChange, city }) {
-  console.log(city);
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const people = city;
