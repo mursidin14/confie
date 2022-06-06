@@ -39,7 +39,7 @@ export default function PersonalCard({data_profile, id, loading}) {
                   />
                 </svg> */}
               </div>
-              <EmploymentStatus />
+              <EmploymentStatus work={false} />
             </div>
             <div className="hidden md:block">
               <ButtonDashboard id={id} data={data_profile} />
@@ -92,10 +92,10 @@ function ButtonDashboard({id, data}) {
   );
 }
 
-function EmploymentStatus({}) {
+function EmploymentStatus({work}) {
   return (
-    <p className="my-2 w-fit rounded-md bg-[#50CD89]/20 px-2 py-1 text-[10px] text-[#50CD89]">
-      Bekerja
+    <p className={`my-2 w-fit rounded-md px-2 py-1 text-[10px] ${work ? 'text-[#50CD89] bg-[#50CD89]/20' : 'text-[#F1416C] bg-[#F1416C]/20'}`}>
+      {work? 'Bekerja' : 'Belum Bekerja'}
     </p>
   );
 }

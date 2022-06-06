@@ -1,10 +1,13 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { SearchRegionCityProfile, SearchRegionProfile} from 'components/SearchRegion';
+import {
+  SearchRegionCityProfile,
+  SearchRegionProfile,
+} from 'components/SearchRegion';
 import ProfileService from 'services/Profile/ProfileService';
 
-export default function ModalProfile({data_profile}) {
+export default function ModalProfile({ data_profile }) {
   let [isOpen, setIsOpen] = useState(false);
   let [dataProfile, setDataProfile] = useState({
     full_name: data_profile.full_name,
@@ -16,7 +19,7 @@ export default function ModalProfile({data_profile}) {
     date_of_birth: data_profile.date_of_birth,
     country: data_profile.country,
   });
-  const [city, setCity] = useState([])
+  const [city, setCity] = useState([]);
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
@@ -49,13 +52,8 @@ export default function ModalProfile({data_profile}) {
       label: 'Email',
       required: true,
     },
-    {
-      name: 'gender',
-      type: 'text',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Gender',
-      required: true,
-    },
+  ];
+  let input2 = [
     {
       name: 'date_of_birth',
       type: 'date',
@@ -182,6 +180,50 @@ export default function ModalProfile({data_profile}) {
                         </div>
                       </div>
                       {inputs.map((input, index) => (
+                        <InputFormProfile
+                          handleOnChange={handleOnChange}
+                          data={dataProfile}
+                          key={index}
+                          {...input}
+                        />
+                      ))}
+                      <div className=" items-center lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base">Gender</label>
+                        </div>
+                        <div className="flex items-center lg:w-7/12">
+                          <input
+                            className="mr-2"
+                            type="radio"
+                            id="male"
+                            name="gender"
+                            value="L"
+                            checked
+                            onChange={handleOnChange}
+                          />
+                          <label
+                            className="mr-5 text-sm "
+                            htmlFor="male"
+                          >
+                            Male
+                          </label>
+                          <input
+                            className="mr-2"
+                            type="radio"
+                            id="female"
+                            name="gender"
+                            value="P"
+                            onChange={handleOnChange}
+                          />
+                          <label
+                            className="mr-5 text-sm "
+                            htmlFor="female"
+                          >
+                            Female
+                          </label>
+                        </div>
+                      </div>
+                      {input2.map((input, index) => (
                         <InputFormProfile
                           handleOnChange={handleOnChange}
                           data={dataProfile}
