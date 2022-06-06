@@ -183,6 +183,7 @@ export default function ModalProfile({data_profile}) {
                       {inputs.map((input, index) => (
                         <InputFormProfile
                           handleOnChange={handleOnChange}
+                          data={dataProfile}
                           key={index}
                           {...input}
                         />
@@ -230,7 +231,7 @@ export default function ModalProfile({data_profile}) {
   );
 }
 
-function InputFormProfile({ label, handleOnChange, ...inputProps }) {
+function InputFormProfile({ label, handleOnChange, data, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -238,6 +239,7 @@ function InputFormProfile({ label, handleOnChange, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
+          value={data[inputProps.name]}
           onChange={handleOnChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
