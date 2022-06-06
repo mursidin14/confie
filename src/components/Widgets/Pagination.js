@@ -45,7 +45,7 @@ export default function Pagination({ length, pagination, setPagination }) {
           setPage(page);
           setPagination({
             sliceOne: pagination.sliceOne + 3 * page,
-            sliceTwo: pagination.sliceOne + 3 * page,
+            sliceTwo: pagination.sliceTwo + 3 * page,
           });
         }}
         className={`${page === page ? active : ''}`}
@@ -57,7 +57,7 @@ export default function Pagination({ length, pagination, setPagination }) {
           setPage(page + 1);
           setPagination({
             sliceOne: pagination.sliceOne + 3 * (page + 1),
-            sliceTwo: pagination.sliceOne + 3 * (page + 1),
+            sliceTwo: pagination.sliceTwo + 3 * (page + 1),
           });
         }}
         className={`${page === page + 1 ? active : ''}`}
@@ -69,7 +69,7 @@ export default function Pagination({ length, pagination, setPagination }) {
           setPage(page + 2);
           setPagination({
             sliceOne: pagination.sliceOne + 3 * (page + 2),
-            sliceTwo: pagination.sliceOne + 3 * (page + 2),
+            sliceTwo: pagination.sliceTwo + 3 * (page + 2),
           });
         }}
         className={`${page === page + 2 ? active : ''}`}
