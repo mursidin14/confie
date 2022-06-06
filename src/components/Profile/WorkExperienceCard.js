@@ -30,7 +30,7 @@ export default function WorkExperienceCard({data_profile}) {
           </div>
         </div>
         <div className='flex justify-center'>
-          <Pagination pagination={pagination} setPagination={setPagination}/>
+          <Pagination length={workExperience.length} pagination={pagination} setPagination={setPagination}/>
         </div>
       </div>
     </div>

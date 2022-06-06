@@ -28,7 +28,7 @@ export default function EducationCard({ data_profile }) {
           </div>
         </div>
         <div className="flex justify-center">
-          <Pagination pagination={pagination} setPagination={setPagination}/>
+          <Pagination length={educationHistory.length} pagination={pagination} setPagination={setPagination}/>
         </div>
       </div>
     </div>
