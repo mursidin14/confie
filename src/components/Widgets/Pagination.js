@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Pagination({length}) {
+export default function Pagination({ length, pagination, setPagination }) {
   let lengthData = length;
   const [page, setPage] = useState(1);
   let active = `bg-[#FE9A00] px-5 py-2 rounded-md text-white`;
@@ -8,15 +8,24 @@ export default function Pagination({length}) {
     if (page > 1) {
       setPage(page - 1);
     }
+    setPagination({
+      sliceOne: pagination.sliceOne - 3,
+      sliceTwo: pagination.sliceTwo - 3,
+    });
   }
   function handleIncrement() {
-   
-      setPage(page + 1);
+    setPage(page + 1);
+    setPagination({
+      sliceOne: pagination.sliceOne + 3,
+      sliceTwo: pagination.sliceTwo + 3,
+    });
   }
   return (
     <div className="my-4 flex items-center gap-7">
       <svg
-        className={`${page === 1 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'} cursor-pointer transform: rotate-180 `}
+        className={`${
+          page === 1 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
+        } transform: rotate-180 cursor-pointer `}
         onClick={handleDecrement}
         width="6"
         height="10"
@@ -38,19 +47,21 @@ export default function Pagination({length}) {
         {page}
       </button>
       <button
-        onClick={() => setPage(page+1)}
-        className={`${page === page+1 ? active : ''}`}
+        onClick={() => setPage(page + 1)}
+        className={`${page === page + 1 ? active : ''}`}
       >
-       {page+1}
+        {page + 1}
       </button>
       <button
-        onClick={() => setPage(page+2)}
-        className={`${page === page+2 ? active : ''}`}
+        onClick={() => setPage(page + 2)}
+        className={`${page === page + 2 ? active : ''}`}
       >
-      {page+2}
+        {page + 2}
       </button>
       <svg
-        className={`${page === 3 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'} cursor-pointer`}
+        className={`${
+          page === 3 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
+        } cursor-pointer`}
         onClick={handleIncrement}
         width="6"
         height="10"

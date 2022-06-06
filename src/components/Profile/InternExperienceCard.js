@@ -7,6 +7,10 @@ import utils from 'utils/utils';
 export default function InternExperienceCard({data_profile}) {
 
   let internExperience = data_profile
+  const [pagination, setPagination] = useState({
+    sliceOne: 0,
+    sliceTwo: 3,
+  })
   async function handleDelete(id) {
       const response = await ProfileService.deleteIntershipExperience(id)
       window.location.reload()
@@ -22,11 +26,11 @@ export default function InternExperienceCard({data_profile}) {
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">
         <div className="overflow-auto">
-            <Table items={internExperience} handleDelete={handleDelete}></Table>
+            <Table items={internExperience.slice(pagination.sliceOne, pagination.sliceTwo)} handleDelete={handleDelete}></Table>
           </div>
         </div>
         <div className='flex justify-center'>
-          <Pagination />
+          <Pagination pagination={pagination} setPagination={setPagination}/>
         </div>
       </div>
     </div>
