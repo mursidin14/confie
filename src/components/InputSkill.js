@@ -61,7 +61,7 @@ const people =  [
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute text-left mt-1 sm:max-w-[400px] max-w-[240px] h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="absolute text-left mt-1 sm:max-w-[400px] max-w-[240px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative z-10 cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
@@ -71,7 +71,7 @@ const people =  [
                 <Combobox.Option
                   key={person.id}
                   className={({ active }) =>
-                    `aboslute z-10 cursor-default select-none py-2 pl-10 pr-4 ${
+                    `z-10 cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? 'bg-orange text-white' : 'text-gray-900'
                     }`
                   }
@@ -99,7 +99,8 @@ const people =  [
   );
 }
 
-export default function InputSkill({setTagss, tagss}) {
+export default function InputSkill({data, onChange}) {
+  console.log(data)
     const [tags, setTags] = useState([]);
     const [idTags, setIdTags] = useState([]);
     const removeTags = indexToRemove => {
@@ -109,7 +110,10 @@ export default function InputSkill({setTagss, tagss}) {
     if (value !== "") {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
-      setTagss([...tagss, id])
+      onChange({
+        ...data,
+        skills: [...idTags]
+      })
     }
     return
   };

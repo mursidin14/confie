@@ -33,7 +33,6 @@ export default function WizardFormFourthPage(props) {
           <label className="label">
             {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
           </label>
-
           <InputSkill data={data} onChange={onChange}></InputSkill>
           <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
             <button
