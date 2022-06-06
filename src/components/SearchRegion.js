@@ -144,7 +144,6 @@ export default function SearchRegion({ data, onChange, setCity }) {
   );
 }
 export function SearchRegionCity({ data, onChange, city }) {
-  console.log(city);
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const people = city;

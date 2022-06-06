@@ -99,7 +99,7 @@ const people =  [
   );
 }
 
-export default function UpdateInputSkill({data, onChange}) {
+export default function UpdateInputSkill({skills, setSkills}) {
     const [tags, setTags] = useState([]);
     const [idTags, setIdTags] = useState([]);
     const removeTags = indexToRemove => {
@@ -109,12 +109,7 @@ export default function UpdateInputSkill({data, onChange}) {
     if (value !== "") {
       setTags([...tags, value]);
       setIdTags([...idTags, id]);
-      onChange(
-        {
-            ...data,
-            skills: [...idTags, id]
-        }
-      )
+      setSkills([...idTags, id])
     }
     return
   };
@@ -132,4 +127,4 @@ export default function UpdateInputSkill({data, onChange}) {
         <InputTag addTags={addTags}></InputTag>
     </div>    
   )
-  }
+}

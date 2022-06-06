@@ -10,7 +10,7 @@ export default function TargetCard({ userId, data_plan }) {
       if (data_plan) {
         setData(data_plan[0]);
         const response_plan =
-          await PersonalPlanService.getDetailPersonalPlanData(data_plan[0].id);
+          await PersonalPlanService.getDetailPersonalPlanData(data_plan[0]?.id);
         setdataMilestone(response_plan.data.data.milestone);
         setLoading(false);
       }

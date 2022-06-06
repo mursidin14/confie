@@ -2,7 +2,8 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
-import {UpdateInputSkill} from 'components/InputSkill';
+import UpdateInputSkill from 'components/UpdateInputSkill';
+
 export default function ModalSkill() {
   let [isOpen, setIsOpen] = useState(false);
   const [skills, setSkills] = useState([]);

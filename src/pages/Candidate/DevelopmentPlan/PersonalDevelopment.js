@@ -13,7 +13,6 @@ export default function PersonalDevelopment() {
   useEffect(() => {
     async function getTarget() {
       const response = await PersonalPlanService.getPersonalPlanData();
-      console.log(response);
       setTarget(response.data.data);
       setLoading(false);
     }
