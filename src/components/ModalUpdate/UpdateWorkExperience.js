@@ -157,7 +157,7 @@ export default function UpdateWorkExperience({ item, id }) {
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
                           <input
-                            value={dataWorkExperience.is_current}
+                            checked={dataWorkExperience.is_current}
                             onChange={() => {
                               setDataWorkExperience({
                                 ...dataWorkExperience,

@@ -83,7 +83,7 @@ function InputTag({ addTags, people }) {
   );
 }
 
-export default function InputSkill({ data, onChange, skills }) {
+export default function InputSkill({ data, onChange }) {
   const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
@@ -91,7 +91,6 @@ export default function InputSkill({ data, onChange, skills }) {
       const getSkill = async () => {
         const response = await AuthService.getListSkill();
         setPeople(response.data.data);
-        console.log(response.data.data)
         console.log(skills)
       }
       getSkill();
@@ -126,6 +125,62 @@ export default function InputSkill({ data, onChange, skills }) {
             key={index}
           >
             <span>{tag}</span>
+            <button className="" onClick={() => removeTags(index)}>
+              x
+            </button>
+          </li>
+        ))}
+      </ul>
+      <InputTag people={people} addTags={addTags}></InputTag>
+    </div>
+  );
+}
+export function UpdateInputSkill({ data, onChange, skills }) {
+  const [tags, setTags] = useState([skills]);
+  const [idTags, setIdTags] = useState([]);
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+      const getSkill = async () => {
+        const response = await AuthService.getListSkill();
+        setPeople(response.data.data);
+        console.log(skills)
+      }
+      getSkill();
+  }, [])
+  
+  const removeTags = (indexToRemove) => {
+    setTags([...tags.filter((_, index) => index !== indexToRemove)])
+    setIdTags([...idTags.filter((_, index) => index !== indexToRemove)])
+    onChange({
+      ...data,
+      skills: [...idTags],
+    })
+    console.log(data.skills)
+  };
+  const addTags = (value, id) => {
+    if (value !== '') {
+      setTags([...tags, {
+        name: value,
+        id: id
+      }]);
+      setIdTags([...idTags, id]);
+      onChange({
+        ...data,
+        skills: [...idTags, id]
+      })
+    }
+    return;
+  };
+
+  return (
+    <div className="flex h-fit flex-wrap items-center gap-2 overflow-hidden  rounded-md border-2 border-transparent bg-soft-gray py-5 px-3 focus-within:border-black">
+      <ul className="flex flex-wrap">
+        {tags.map((tag, index) => (
+          <li
+            className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
+            key={index}
+          >
+            <span>{tag.name}</span>
             <button className="" onClick={() => removeTags(index)}>
               x
             </button>

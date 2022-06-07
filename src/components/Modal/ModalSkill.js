@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
-import InputSkill from 'components/InputSkill';
+import { UpdateInputSkill } from 'components/InputSkill';
 
 export default function ModalSkill({skills}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +76,7 @@ export default function ModalSkill({skills}) {
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
                     <div className="lg:px-8 px-2">
-                      <InputSkill onChange={setData} data={data} skills={skills}></InputSkill>
+                      <UpdateInputSkill onChange={setData} data={data} skills={skills}></UpdateInputSkill>
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">
