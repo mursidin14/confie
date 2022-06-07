@@ -1,28 +1,10 @@
 import ModalProfile from 'components/Modal/ModalProfile';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import {makeCapital, getDate, getGender} from 'utils/utils';
 export default function PersonalInfomationCard({ data_profile }) {
-  function makeCapital(name) {
-    name = name.toLowerCase()
-    let nameArray = name.split(' ');
-    if (nameArray.length > 1) {
-      let capitalName = '';
-      nameArray.forEach((name) => {
-        capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' ';
-      });
-      return capitalName;
-    }
-    return name.slice(0, 1).toUpperCase() + name.slice(1);
-  }
-  function formatDate(date) {
-    return new Date(date).toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
-  function getGender(gender) {
-    return gender == 'L' ? 'Laki-laki' : 'Perempuan'
-  }
+  
+  
+ 
   let inputs = [
     {
       label: 'Full Name',
@@ -42,7 +24,7 @@ export default function PersonalInfomationCard({ data_profile }) {
     },
     {
       label: 'Date of Birth',
-      value: formatDate(data_profile.date_of_birth * 1000),
+      value: getDate(data_profile.date_of_birth * 1000),
     },
     {
       label: 'Country',
@@ -72,7 +54,11 @@ export default function PersonalInfomationCard({ data_profile }) {
               <label className="text-xs lg:text-base">Avatar</label>
             </div>
             <div className="w-7/12">
-              <img className="w-20 sm:w-32" src="/person.png" alt="" />
+              <img
+                className="w-20 sm:w-32"
+                src={data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
+                alt=""
+              />
             </div>
           </div>
           {inputs.map((input, index) => (

@@ -42,7 +42,7 @@ const people = [
 ];
 
 export default function SearchRegion({ data, onChange, setCity }) {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState();
   const [query, setQuery] = useState('');
   const filteredPeople =
     query === ''
@@ -252,7 +252,11 @@ export function SearchRegionCity({ data, onChange, city }) {
   );
 }
 export function SearchRegionProfile({ data, onChange, setCity }) {
-  const [selected, setSelected] = useState('');
+  const province = {
+    id: data.province,
+    name: data.province_name,
+  }
+  const [selected, setSelected] = useState(province);
   const [query, setQuery] = useState('');
   const filteredPeople =
     query === ''
@@ -359,7 +363,11 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
   );
 }
 export function SearchRegionCityProfile({ data, onChange, city }) {
-  const [selected, setSelected] = useState('');
+  const city_profile = {
+    id: data.city,
+    name: data.city_name,
+  }
+  const [selected, setSelected] = useState(city_profile);
   const [query, setQuery] = useState('');
   const people = city;
   const filteredPeople =

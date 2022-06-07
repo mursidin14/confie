@@ -1,5 +1,6 @@
-function makeCapital(name) {
-  let nameArray = name.split(' ');
+export function makeCapital(name) {
+  name = name.toLowerCase();
+  const nameArray = name.split(' ');
   if (nameArray.length > 1) {
     let capitalName = '';
     nameArray.forEach((name) => {
@@ -25,14 +26,18 @@ const timeEpoch = (time) => {
   let date = new Date(time);
   return date.getTime() / 1000;
 };
+export  function getGender(gender) {
+  return gender == 'L' ? 'Laki-laki' : 'Perempuan';
+}
 
-const getDate = (time) => {
+export const getDate = (time) => {
   return new Date(time * 1000).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
 };
+
 const getMonthYear = (time) => {
   time = parseInt(time);
   return new Date(time * 1000).toLocaleDateString('id-ID', {
