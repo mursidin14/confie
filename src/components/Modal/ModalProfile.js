@@ -77,7 +77,9 @@ export default function ModalProfile({ data_profile }) {
       setDataProfile({ ...dataProfile, [name]: value });
   }
   async function handleClick() {
-    console.log(dataProfile);
+    if (dataProfile.city == undefined) {
+      dataProfile.city = data_profile.city
+    }
     dataProfile['date_of_birth'] = utils.timeEpoch(dataProfile['date_of_birth']);
     const response = await ProfileService.updateProfileData(dataProfile);
     if (response.data.meta.status == 'error') {

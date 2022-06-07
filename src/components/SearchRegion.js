@@ -382,7 +382,6 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
     setQuery(event.target.value);
   }
   function handleClick(e) {
-    console.log(e)
     const id = people.find((person) => person.name === e.target.innerText)?.id;
     onChange({
       ...data,
