@@ -7,7 +7,7 @@ import { UpdateInputSkill } from 'components/InputSkill';
 export default function ModalSkill({skills}) {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState({
-    skills: []
+    skills: skills.map(skill => skill.id)
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -19,7 +19,7 @@ export default function ModalSkill({skills}) {
   }
 
   async function handleSubmit() {
-    const response = await ProfileService.addSkill(data);
+    const response = await ProfileService.updateSkill(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;
