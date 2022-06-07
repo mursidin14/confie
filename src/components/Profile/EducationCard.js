@@ -52,7 +52,7 @@ function Table({ items, handleDelete }) {
       <tbody>
       {!items.length > 0 && (
               <tr>
-                <td colSpan="4" className="text-center py-4 font-semibold">
+                <td colSpan="6" className="text-center py-4 font-semibold">
                   Tidak ada data
                 </td>
               </tr>
