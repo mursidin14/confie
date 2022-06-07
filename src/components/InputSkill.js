@@ -83,7 +83,7 @@ function InputTag({ addTags, people }) {
   );
 }
 
-export default function InputSkill({ data, onChange }) {
+export default function InputSkill({ data, onChange, skills }) {
   const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
@@ -92,7 +92,7 @@ export default function InputSkill({ data, onChange }) {
         const response = await AuthService.getListSkill();
         setPeople(response.data.data);
         console.log(response.data.data)
-        console.log(data)
+        console.log(skills)
       }
       getSkill();
   }, [])

@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import InputSkill from 'components/InputSkill';
 
-export default function ModalSkill({data}) {
+export default function ModalSkill({skills}) {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState({
     skills: []
@@ -76,7 +76,7 @@ export default function ModalSkill({data}) {
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
                     <div className="lg:px-8 px-2">
-                      <InputSkill onChange={setData} data={data}></InputSkill>
+                      <InputSkill onChange={setData} data={data} skills={skills}></InputSkill>
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">
