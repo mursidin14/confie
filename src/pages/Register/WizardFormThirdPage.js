@@ -61,7 +61,7 @@ export default function WizardFormThirdPage(props) {
                     id="male"
                     name="gender"
                     value="L"
-                    checked
+                    checked={data.gender == 'L'}
                     onChange={handleChange}
                   />
                   <label
@@ -76,6 +76,7 @@ export default function WizardFormThirdPage(props) {
                     id="female"
                     name="gender"
                     value="P"
+                    checked={data.gender == 'P'}
                     onChange={handleChange}
                   />
                   <label

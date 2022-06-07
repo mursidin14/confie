@@ -67,6 +67,9 @@ export default function SearchRegion({ data, onChange, setCity }) {
     setCity(utils.getCity(response.data.data));
   }
   async function handleEnter(name) {
+    if(name == undefined) {
+      return
+    }
     const province_name = people.find((person) => person.name === name)
     const id = province_name?.id;
     onChange({
@@ -261,6 +264,9 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
     setCity(utils.getCity(response.data.data));
   }
   async function handleEnter(name) {
+    if(name == undefined) {
+      return
+    }
     const province_name = people.find((person) => person.name === name)
     const id = province_name?.id;
     onChange({

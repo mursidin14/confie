@@ -199,7 +199,7 @@ export default function ModalProfile({ data_profile }) {
                             id="male"
                             name="gender"
                             value="L"
-                            checked
+                            checked={dataProfile.gender == 'L'}
                             onChange={handleOnChange}
                           />
                           <label
@@ -214,6 +214,7 @@ export default function ModalProfile({ data_profile }) {
                             id="female"
                             name="gender"
                             value="P"
+                            checked={dataProfile.gender == 'P'}
                             onChange={handleOnChange}
                           />
                           <label
