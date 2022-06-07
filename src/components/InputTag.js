@@ -1,15 +1,29 @@
 import React from 'react'
 import { useState } from 'react';
-export default function InputTag({data, onChange, setDataa}) {
+export default function InputTag({data, onChange}) {
+    console.log(data);
     const [tags, setTags] = useState([]);
+    const [skill, setSkills] = useState('')
 	const removeTags = indexToRemove => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+        onChange(
+            {
+                ...data,
+                skills: [...tags.filter((_, index) => index !== indexToRemove)]
+            }
+        )
 	};
 	const addTags = event => {
 		if (event.target.value !== "") {
 			setTags([...tags, event.target.value]);
-            setDataa([...data, event.target.value])
+            onChange(
+                {
+                    ...data,
+                    skills: [...tags, event.target.value]
+                }
+            )
 		}
+        setSkills('')
 	};
   
   return (
@@ -22,7 +36,9 @@ export default function InputTag({data, onChange, setDataa}) {
                 </li>
             ))}
         </ul>
-        <input 
+        <input
+        value={skill}
+        onChange={e => setSkills(e.target.value)} 
         name={'personal' === 'personal' ? 'skills' : 'fields'}
         placeholder={'personal' === 'personal' ? 'Add your skill' : 'Add field'}
         onKeyUp={event => event.key === "Enter" ? addTags(event) : null}

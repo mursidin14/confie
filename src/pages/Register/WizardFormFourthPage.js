@@ -1,7 +1,7 @@
 import React from 'react';
 import LayoutRegister from './LayoutRegister';
 import InputSkill from 'components/InputSkill';
-
+import InputTag from 'components/InputTag';
 export default function WizardFormFourthPage({ data, onChange, children, skills, setSkills, previousPage, onSubmit }) {
   function handleChange(e) {
     onChange({
@@ -30,7 +30,7 @@ export default function WizardFormFourthPage({ data, onChange, children, skills,
           <label className="label">
             {data.role === 'personal' ? 'My Skill:' : 'Business Field:'}
           </label>
-          <InputSkill data={data} onChange={onChange}></InputSkill>
+          <InputTag data={data} onChange={onChange}></InputTag>
           <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
             <button
               type="button"

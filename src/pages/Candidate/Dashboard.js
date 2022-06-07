@@ -24,7 +24,7 @@ export default function Dashboard() {
       }
       setData({
         profile: response_profile.data.data,
-        personal_plan: response_personal_plan.data.data,
+        personal_plan: response_personal_plan?.data?.data,
       });
       setLoading(false);
     }

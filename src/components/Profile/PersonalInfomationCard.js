@@ -1,6 +1,5 @@
 import ModalProfile from 'components/Modal/ModalProfile';
 import React, { useEffect, useState } from 'react';
-
 export default function PersonalInfomationCard({ data_profile }) {
   function makeCapital(name) {
     name = name.toLowerCase()

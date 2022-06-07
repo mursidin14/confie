@@ -4,7 +4,6 @@ import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
 import utils from 'utils/utils';
 
-
 export default function PersonalCard({data_profile, id, loading}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
@@ -39,7 +38,7 @@ export default function PersonalCard({data_profile, id, loading}) {
                   />
                 </svg> */}
               </div>
-              <EmploymentStatus work={false} />
+              <EmploymentStatus work={utils.isWork(data_profile.experiences)} />
             </div>
             <div className="hidden md:block">
               <ButtonDashboard id={id} data={data_profile} />

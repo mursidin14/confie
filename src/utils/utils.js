@@ -72,6 +72,10 @@ const getProfileCompletion = (my_profile) => {
   return Math.round((profile_completion / total_data) * 100);
 };
 
+const isWork = (works_experience) => {
+    works_experience.some((work_experience) => work_experience.is_current == true)
+}
+
 const utils = {
   makeCapital,
   getCity,
@@ -79,6 +83,7 @@ const utils = {
   getDate,
   getMonthYear,
   getProfileCompletion,
+  isWork
 };
 
 export default utils;

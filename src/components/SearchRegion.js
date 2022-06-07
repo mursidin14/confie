@@ -287,7 +287,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
             }}
             onChange={handleChange}
           />
-          <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
+          <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 top-4 flex items-center pr-2">
             <SelectorIcon
               className="h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -376,7 +376,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
             displayValue={(person) => person.name}
             onChange={handleChange}
           />
-          <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
+          <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 top-4 flex items-center pr-2">
             <SelectorIcon
               className="h-5 w-5 text-gray-400"
               aria-hidden="true"
