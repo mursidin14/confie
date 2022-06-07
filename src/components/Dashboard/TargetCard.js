@@ -7,7 +7,7 @@ export default function TargetCard({ userId, data_plan }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
-      console.log(data_plan);
+      console.log(data_plan.length > 0);
       if (data_plan) {
         setData(data_plan[0]);
         const response_plan =

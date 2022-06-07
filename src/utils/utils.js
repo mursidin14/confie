@@ -73,7 +73,7 @@ const getProfileCompletion = (my_profile) => {
 };
 
 const isWork = (works_experience) => {
-    works_experience.some((work_experience) => work_experience.is_current == true)
+  return works_experience.some((work) => work.is_current == true)
 }
 
 const utils = {
