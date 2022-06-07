@@ -75,11 +75,11 @@ function SkeletonCardSmall() {
     <div className="mt-5 rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 w-full">
       <div className='lg:flex flex-col items-start gap-2 hidden'>
       <Skeleton width={100} height={50} />
-      <Skeleton width={420} height={150} />
+      <Skeleton width={420} height={100} />
       </div>
       <div className='lg:hidden flex flex-col items-start gap-2'>
       <Skeleton width={100} height={50} />
-      <Skeleton width={200} height={150} />
+      <Skeleton width={200} height={100} />
       </div>
     </div>
   );

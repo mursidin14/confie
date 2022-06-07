@@ -10,7 +10,7 @@ export default function PersonalCard({data_profile, id, loading}) {
       <div className="flex items-start gap-3 lg:items-stretch">
         <img
           className="w-28 rounded-md object-cover md:w-48"
-          src="/person.png"
+          src={data_profile.gender == "L" ? "/male.jpg" : "/female.jpg"}
           alt=""
         />
         <div className="w-full">
