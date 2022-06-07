@@ -9,7 +9,7 @@ export default function UpdateCertificationModal({ item, id }) {
     description: item.description,
     link: item.link,
     name: item.name,
-    year: item.year,
+    year: utils.getYearMonthDay(item.year),
   });
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([]);
@@ -198,7 +198,7 @@ export default function UpdateCertificationModal({ item, id }) {
   );
 }
 
-function InputFormProfile({data, label, handleChange, ...inputProps }) {
+function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -208,11 +208,7 @@ function InputFormProfile({data, label, handleChange, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
-          value={
-            data[inputProps.name] === 'year'
-              ? utils.getYearMonthDay(data[inputProps.name])
-              : data[inputProps.name]
-          }
+          value={data[inputProps.name]}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
           onChange={handleChange}

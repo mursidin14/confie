@@ -9,10 +9,10 @@ export default function UpdateIntershipExperience({ item, id }) {
   const [dataInternship, setDataInternship] = useState({
     agency: item.agency,
     description: item.description,
-    end_date: item.end_date,
+    end_date: utils.getYearMonthDay(item.end_date),
     is_current: item.is_current,
     position: item.position,
-    start_date: item.start_date,
+    start_date: utils.getYearMonthDay(item.start_date),
     status: item.status,
   });
   function closeModal() {
@@ -225,12 +225,7 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
-          value={
-            data[inputProps.name] === 'start_date' ||
-            data[inputProps.name] === 'end_date'
-              ? utils.getYearMonthDay(data[inputProps.name])
-              : data[inputProps.name]
-          }
+          value={data[inputProps.name]}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3"
           onChange={handleChange}
