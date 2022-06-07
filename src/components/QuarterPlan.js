@@ -10,7 +10,10 @@ const people = [
 ];
 
 export default function QuarterPlan({ milestone, setMilestone }) {
-  const [selected, setSelected] = useState('');
+  const initial = {
+    name: milestone.quarter
+  }
+  const [selected, setSelected] = useState(initial);
   const [query, setQuery] = useState('');
   const filteredPeople =
     query === ''

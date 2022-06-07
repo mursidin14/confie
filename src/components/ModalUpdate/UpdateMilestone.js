@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import QuarterPlan from 'components/QuarterPlan';
-export default function UpdateMilestone({ idPlan, idMilestone }) {
+export default function UpdateMilestone({item, idPlan, idMilestone }) {
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
@@ -12,7 +12,11 @@ export default function UpdateMilestone({ idPlan, idMilestone }) {
   function openModal() {
     setIsOpen(true);
   }
-  const [milestone, setMilestone] = useState({});
+  const [milestone, setMilestone] = useState({
+    quarter: item.quarter,
+    target_title: item.target_title,
+
+  });
   function handleChange(e) {
     setMilestone({
       ...milestone,
@@ -98,6 +102,7 @@ export default function UpdateMilestone({ idPlan, idMilestone }) {
                       ></QuarterPlan>
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          milestone={milestone}
                           handleChange={handleChange}
                           key={index}
                           {...input}
@@ -130,7 +135,7 @@ export default function UpdateMilestone({ idPlan, idMilestone }) {
   );
 }
 
-function InputFormProfile({ handleChange, label, ...inputProps }) {
+function InputFormProfile({milestone, handleChange, label, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -138,6 +143,7 @@ function InputFormProfile({ handleChange, label, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
+          value={milestone[inputProps.name]}
           onChange={handleChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "

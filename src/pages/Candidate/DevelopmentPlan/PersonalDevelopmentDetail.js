@@ -125,17 +125,18 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 1</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
+              {targetMilestone.map((target, index) => (
                 <>
-                  {quarter == '1' && (
+                  {target.quarter == '1' && (
                     <>
                       <MilestoneTarget
-                        status={status}
+                        target={target}
+                        status={target.status}
                         deleteMilestone={deleteMilestone}
-                        target_milestone={target_title}
-                        quarter={quarter}
+                        target_milestone={target.target_title}
+                        quarter={target.quarter}
                         idPlan={idDetail}
-                        id={id}
+                        id={target.id}
                         handleChange={handleChange}
                       />
                     </>
@@ -147,18 +148,19 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 2</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
+              {targetMilestone.map((target, index) => (
                 <>
-                  {quarter == '2' && (
+                  {target.quarter == '2' && (
                     <>
                       <MilestoneTarget
-                        status={status}
-                        deleteMilestone={deleteMilestone}
-                        target_milestone={target_title}
-                        quarter={quarter}
-                        idPlan={idDetail}
-                        id={id}
-                        handleChange={handleChange}
+                        target={target}
+                         status={target.status}
+                         deleteMilestone={deleteMilestone}
+                         target_milestone={target.target_title}
+                         quarter={target.quarter}
+                         idPlan={idDetail}
+                         id={target.id}
+                         handleChange={handleChange}
                       />
                     </>
                   )}
@@ -169,18 +171,19 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 3</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id, status }, index) => (
+              {targetMilestone.map((target, index) => (
                 <>
-                  {quarter == '3' && (
+                  {target.quarter == '3' && (
                     <>
                       <MilestoneTarget
-                        status={status}
-                        deleteMilestone={deleteMilestone}
-                        target_milestone={target_title}
-                        quarter={quarter}
-                        idPlan={idDetail}
-                        id={id}
-                        handleChange={handleChange}
+                        target={target}
+                         status={target.status}
+                         deleteMilestone={deleteMilestone}
+                         target_milestone={target.target_title}
+                         quarter={target.quarter}
+                         idPlan={idDetail}
+                         id={target.id}
+                         handleChange={handleChange}
                       />
                     </>
                   )}
@@ -191,18 +194,19 @@ export default function PersonalDevelopmentDetail() {
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 4</p>
               </div>
-              {targetMilestone.map(({ target_title, quarter, id, status}, index) => (
+              {targetMilestone.map((target, index) => (
                 <>
-                  {quarter == '4' && (
+                  {target.quarter == '4' && (
                     <>
                       <MilestoneTarget
-                        deleteMilestone={deleteMilestone}
-                        target_milestone={target_title}
-                        quarter={quarter}
-                        idPlan={idDetail}
-                        id={id}
-                        status={status}
-                        handleChange={handleChange}
+                        target={target}
+                         status={target.status}
+                         deleteMilestone={deleteMilestone}
+                         target_milestone={target.target_title}
+                         quarter={target.quarter}
+                         idPlan={idDetail}
+                         id={target.id}
+                         handleChange={handleChange}
                       />
                     </>
                   )}
@@ -217,6 +221,7 @@ export default function PersonalDevelopmentDetail() {
 }
 
 function MilestoneTarget({
+  target,
   deleteMilestone,
   target_milestone,
   handleChange,
@@ -242,7 +247,7 @@ function MilestoneTarget({
           <p>{target_milestone}</p>
         </div>
         <div className="flex justify-center gap-2">
-          <UpdateMilestone idPlan={idPlan} idMilestone={id}></UpdateMilestone>
+          <UpdateMilestone item={target} idPlan={idPlan} idMilestone={id}></UpdateMilestone>
           <button
           onClick={()=>{
             deleteMilestone(id)

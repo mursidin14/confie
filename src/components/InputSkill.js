@@ -99,7 +99,7 @@ export default function InputSkill({ data, onChange }) {
     setIdTags([...idTags.filter((_, index) => index !== indexToRemove)]);
     onChange({
       ...data,
-      skills: [...idTags],
+      skills: [...idTags.filter((_, index) => index !== indexToRemove)],
     });
   };
   const addTags = (value, id) => {
@@ -154,7 +154,7 @@ export function UpdateInputSkill({ data, onChange, skills }) {
     setIdTags([...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)]);
     onChange({
       ...data,
-      skills: [...idTags],
+      skills: [[...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)]],
     });
     console.log(data.skills);
   };

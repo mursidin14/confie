@@ -17,6 +17,7 @@ export default function Layout({PageName, children, userId}) {
       const response_profile = await ProfileService.getProfileData();
       if(response_profile.data.meta.status == 'error'){
         setIsOpen(true)
+        window.location.href = '/'
       }
       setData(response_profile.data.data);
       setLoading(false);
