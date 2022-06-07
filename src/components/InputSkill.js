@@ -91,7 +91,6 @@ export default function InputSkill({ data, onChange }) {
       const getSkill = async () => {
         const response = await AuthService.getListSkill();
         setPeople(response.data.data);
-        console.log(skills)
       }
       getSkill();
   }, [])
