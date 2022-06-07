@@ -143,6 +143,7 @@ export function UpdateInputSkill({ data, onChange, skills }) {
       const response = await AuthService.getListSkill();
       setPeople(response.data.data);
       setTags(skills);
+      setIdTags(skills.map(skill => skill.id));
       setLoading(false);
     };
     getSkill();
