@@ -51,11 +51,12 @@ export default function ErrorModal({ isOpen, closeModal, error_msg }) {
                   {error_msg.map((item, index) => (
                     <p
                       key={index}
-                      className="mx-auto my-1 w-full text-center text-xs text-[#7E8299] lg:w-[400px]"
+                      className="mx-auto my-1 w-full text-center text-[#7E8299] lg:w-[400px]"
                     >
                       {item}
                     </p>
                   ))}
+                  <a href='/' className='font-bold text-xs text-center block'>Back to login page</a>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
