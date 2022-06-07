@@ -8,7 +8,7 @@ export default function UpdateCertificationModal({ item, id }) {
     agency: item.agency,
     description: item.description,
     link: item.link,
-    name: utils.getYearMonthDay(item.name),
+    name: item.name,
     year: item.year,
   });
   let [isOpen, setIsOpen] = useState(false);
@@ -208,7 +208,11 @@ function InputFormProfile({data, label, handleChange, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
-          value={data[inputProps.name]}
+          value={
+            data[inputProps.name] === 'year'
+              ? utils.getYearMonthDay(data[inputProps.name])
+              : data[inputProps.name]
+          }
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
           onChange={handleChange}

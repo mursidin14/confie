@@ -80,7 +80,7 @@ const getYearMonthDay = (epoch) => {
   const date = new Date(epoch * 1000);
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${month < 10 ? `0${day}` : `${day}`}`;
+  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}`;
 };
 
 const utils = {

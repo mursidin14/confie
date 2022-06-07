@@ -8,10 +8,10 @@ export default function UpdateWorkExperience({ item, id }) {
   const [dataWorkExperience, setDataWorkExperience] = useState({
     agency: item.agency,
     description: item.description,
-    end_date: utils.getYearMonthDay(item.end_date),
+    end_date: item.end_date,
     is_current: item.is_current,
     position: item.position,
-    start_date: utils.getYearMonthDay(item.start_date),
+    start_date: item.start_date,
     status: item.status,
   });
   const [error, setError] = useState([]);
@@ -264,7 +264,7 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
         <input
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3"
-          value={data[inputProps.name]}
+          value={data[inputProps.name] === 'start_date' || data[inputProps.name] === 'end_date' ? utils.getYearMonthDay(data[inputProps.name]) : data[inputProps.name]}
           onChange={handleChange}
         />
       </div>

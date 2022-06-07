@@ -6,7 +6,7 @@ import {
   SearchRegionProfile,
 } from 'components/SearchRegion';
 import ProfileService from 'services/Profile/ProfileService';
-import utils from 'utils/utils'; 
+import utils from 'utils/utils';
 
 export default function ModalProfile({ data_profile }) {
   let [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function ModalProfile({ data_profile }) {
     province: data_profile.province,
     city: data_profile.city,
     gender: data_profile.gender,
-    date_of_birth: utils.getYearMonthDay(data_profile.date_of_birth),
+    date_of_birth: data_profile.date_of_birth,
     country: data_profile.country,
   });
   const [city, setCity] = useState([]);
@@ -202,10 +202,7 @@ export default function ModalProfile({ data_profile }) {
                             checked={dataProfile.gender == 'L'}
                             onChange={handleOnChange}
                           />
-                          <label
-                            className="mr-5 text-sm "
-                            htmlFor="male"
-                          >
+                          <label className="mr-5 text-sm " htmlFor="male">
                             Male
                           </label>
                           <input
@@ -217,10 +214,7 @@ export default function ModalProfile({ data_profile }) {
                             checked={dataProfile.gender == 'P'}
                             onChange={handleOnChange}
                           />
-                          <label
-                            className="mr-5 text-sm "
-                            htmlFor="female"
-                          >
+                          <label className="mr-5 text-sm " htmlFor="female">
                             Female
                           </label>
                         </div>
@@ -284,7 +278,11 @@ function InputFormProfile({ label, handleOnChange, data, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
-          value={data[inputProps.name]}
+          value={
+            data[inputProps.name] === 'date_of_birth'
+              ? utils.getYearMonthDay(data[inputProps.name])
+              : data[inputProps.name]
+          }
           onChange={handleOnChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
