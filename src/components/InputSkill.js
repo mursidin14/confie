@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import AuthService from 'services/Auth/AuthService';
 
-
 function InputTag({ addTags, people }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
@@ -88,20 +87,20 @@ export default function InputSkill({ data, onChange }) {
   const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
   useEffect(() => {
-      const getSkill = async () => {
-        const response = await AuthService.getListSkill();
-        setPeople(response.data.data);
-      }
-      getSkill();
-  }, [])
-  
+    const getSkill = async () => {
+      const response = await AuthService.getListSkill();
+      setPeople(response.data.data);
+    };
+    getSkill();
+  }, []);
+
   const removeTags = (indexToRemove) => {
-    setTags([...tags.filter((_, index) => index !== indexToRemove)])
-    setIdTags([...idTags.filter((_, index) => index !== indexToRemove)])
+    setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+    setIdTags([...idTags.filter((_, index) => index !== indexToRemove)]);
     onChange({
       ...data,
       skills: [...idTags],
-    })
+    });
   };
   const addTags = (value, id) => {
     if (value !== '') {
@@ -109,8 +108,8 @@ export default function InputSkill({ data, onChange }) {
       setIdTags([...idTags, id]);
       onChange({
         ...data,
-        skills: [...idTags, id]
-      })
+        skills: [...idTags, id],
+      });
     }
     return;
   };
@@ -135,38 +134,43 @@ export default function InputSkill({ data, onChange }) {
   );
 }
 export function UpdateInputSkill({ data, onChange, skills }) {
-  const [tags, setTags] = useState([skills]);
+  const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-      const getSkill = async () => {
-        const response = await AuthService.getListSkill();
-        setPeople(response.data.data);
-        console.log(skills)
-      }
-      getSkill();
-  }, [])
-  
+    const getSkill = async () => {
+      const response = await AuthService.getListSkill();
+      setPeople(response.data.data);
+      setTags(skills);
+      setLoading(false);
+    };
+    getSkill();
+  }, []);
+
   const removeTags = (indexToRemove) => {
-    setTags([...tags.filter((_, index) => index !== indexToRemove)])
-    setIdTags([...idTags.filter((_, index) => index !== indexToRemove)])
+    setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+    setIdTags([...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)]);
     onChange({
       ...data,
       skills: [...idTags],
-    })
-    console.log(data.skills)
+    });
+    console.log(data.skills);
   };
   const addTags = (value, id) => {
     if (value !== '') {
-      setTags([...tags, {
-        name: value,
-        id: id
-      }]);
+      setTags([
+        ...tags,
+        {
+          name: value,
+          id: id,
+        },
+      ]);
       setIdTags([...idTags, id]);
       onChange({
         ...data,
-        skills: [...idTags, id]
-      })
+        skills: [...idTags, id],
+      });
     }
     return;
   };
@@ -174,20 +178,21 @@ export function UpdateInputSkill({ data, onChange, skills }) {
   return (
     <div className="flex h-fit flex-wrap items-center gap-2 overflow-hidden  rounded-md border-2 border-transparent bg-soft-gray py-5 px-3 focus-within:border-black">
       <ul className="flex flex-wrap">
-        {tags.map((tag, index) => (
-          <li
-            className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
-            key={index}
-          >
-            <span>{tag.name}</span>
-            <button className="" onClick={() => removeTags(index)}>
-              x
-            </button>
-          </li>
-        ))}
+        {loading
+          ? null
+          : tags.map((tag, index) => (
+              <li
+                className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
+                key={index}
+              >
+                <span>{tag.name}</span>
+                <button className="" onClick={() => removeTags(index)}>
+                  x
+                </button>
+              </li>
+            ))}
       </ul>
       <InputTag people={people} addTags={addTags}></InputTag>
     </div>
   );
 }
-
