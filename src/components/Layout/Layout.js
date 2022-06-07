@@ -18,7 +18,7 @@ export default function Layout({PageName, children, userId}) {
       if(response_profile.data.meta.status == 'error'){
         setIsOpen(true)
       }
-      setData(response_profile);
+      setData(response_profile.data.data);
       setLoading(false);
     }
     fetchData();
