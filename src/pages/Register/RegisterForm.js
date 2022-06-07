@@ -9,7 +9,7 @@ import AuthService from 'services/Auth/AuthService';
 
 export default function Register() {
   const [error_msg, setError_msg] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(3);
   const [dataAccount, setDataAccount] = useState({
     role: 'personal',
     gender: 'L',

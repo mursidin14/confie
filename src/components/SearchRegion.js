@@ -169,6 +169,16 @@ export function SearchRegionCity({ data, onChange, city }) {
       city: id,
     });
   }
+  function handleEnter(name){
+    if(name == undefined) {
+      return
+    }
+    const id = people.find((person) => person.name === name).id;
+    onChange({
+      ...data,
+      city: id,
+    });
+  }
 
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -179,7 +189,10 @@ export function SearchRegionCity({ data, onChange, city }) {
           </label>
           <Combobox.Input
             className="input-form peer mb-3"
-            displayValue={(person) => person.name}
+            displayValue={(person) => {
+              handleEnter(person.name);
+              return person.name;
+            }}
             onChange={handleChange}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
@@ -368,6 +381,16 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
       city: id,
     });
   }
+  function handleEnter(name){
+    if(name == undefined) {
+      return
+    }
+    const id = people.find((person) => person.name === name).id;
+    onChange({
+      ...data,
+      city: id,
+    });
+  }
 
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -379,7 +402,10 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
           <div className="lg:w-7/12">
           <Combobox.Input
             className="input-form peer mb-3"
-            displayValue={(person) => person.name}
+            displayValue={(person) => {
+              handleEnter(person.name);
+              return person.name;
+            }}
             onChange={handleChange}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 top-4 flex items-center pr-2">
