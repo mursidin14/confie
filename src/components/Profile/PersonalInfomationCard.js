@@ -73,8 +73,7 @@ export default function PersonalInfomationCard({ data_profile }) {
                     />
                   </svg>
                 </div>
-
-                <img className="w-20 sm:w-32" src="/person.png" alt="" />
+                <img className="w-20 sm:w-32" src={data_profile.gender == 'L' ? "/male.jpg" : "/female.jpg"} alt="" />
               </div>
             </label>
             <input id="file-input" type="file" />
