@@ -20,22 +20,19 @@ export default function UpdateWorkExperience({ item, id }) {
   }
 
   function handleChange(e) {
-    let { name, value } = e.target;
-    if (name == 'start_date' || name == 'end_date') {
-      value = utils.timeEpoch(value);
+    const { name, value } = e.target;
       setDataWorkExperience({ ...dataWorkExperience, [name]: value });
-    } else {
-      setDataWorkExperience({ ...dataWorkExperience, [name]: value });
-    }
   }
 
   function openModal() {
     setIsOpen(true);
   }
   async function handleSubmit() {
-    let data = {
+    const data = {
       ...dataWorkExperience,
     };
+    data['start_date'] = utils.timeEpoch(data['start_date']);
+    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.updateJobExperience(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];

@@ -17,7 +17,7 @@ export default function ModalProfile({ data_profile }) {
     province: data_profile.province,
     city: data_profile.city,
     gender: data_profile.gender,
-    date_of_birth: data_profile.date_of_birth,
+    date_of_birth: utils.getYearMonthDay(data_profile.date_of_birth),
     country: data_profile.country,
   });
   const [city, setCity] = useState([]);
@@ -71,19 +71,11 @@ export default function ModalProfile({ data_profile }) {
     },
   ];
   function handleOnChange(e) {
-    let { name, value } = e.target;
-    if (name === 'date_of_birth') {
-      setDataProfile({
-        ...dataProfile,
-        [name]: new Date(value).getTime() / 1000,
-      });
-    } else {
+      const { name, value } = e.target;
       setDataProfile({ ...dataProfile, [name]: value });
-    }
   }
   async function handleClick() {
-    let new_date = new Date(dataProfile['date_of_birth']).getTime();
-    dataProfile['date_of_birth'] = parseInt(new_date);
+    dataProfile['date_of_birth'] = utils.timeEpoch(dataProfile['date_of_birth']);
     const response = await ProfileService.updateProfileData(dataProfile);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -278,11 +270,7 @@ function InputFormProfile({ label, handleOnChange, data, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
-          value={
-            data[inputProps.name] === 'date_of_birth'
-              ? utils.getYearMonthDay(data[inputProps.name])
-              : data[inputProps.name]
-          }
+          value={data[inputProps.name]}
           onChange={handleOnChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
