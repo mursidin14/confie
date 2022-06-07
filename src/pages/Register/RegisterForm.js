@@ -15,7 +15,6 @@ export default function Register() {
     gender: 'L',
     skills: []
   });
-  console.log(dataAccount)
   const [isOpen, setIsOpenFailed] = useState(false);
   function closeModal() {
     setIsOpenFailed(false);
