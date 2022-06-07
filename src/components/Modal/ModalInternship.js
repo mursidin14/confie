@@ -116,7 +116,7 @@ export default function ModalInternship() {
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="px-8">
+                    <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile {...input} handleChange={handleChange} />
                       ))}

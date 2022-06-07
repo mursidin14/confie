@@ -84,22 +84,25 @@ function InputTag({ addTags, people }) {
 }
 
 export default function InputSkill({ data, onChange }) {
-  const [tags, setTags] = useState([...data.skills]);
+  const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
   useEffect(() => {
       const getSkill = async () => {
         const response = await AuthService.getListSkill();
         setPeople(response.data.data);
+        console.log(response.data.data)
+        console.log(data)
       }
       getSkill();
   }, [])
   
   const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)])
+    setIdTags([...idTags.filter((_, index) => index !== indexToRemove)])
     onChange({
       ...data,
-      skills: idTags,
+      skills: [...idTags],
     })
   };
   const addTags = (value, id) => {

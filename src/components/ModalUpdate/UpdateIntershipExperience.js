@@ -172,6 +172,7 @@ export default function UpdateIntershipExperience({ item, id }) {
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
                           <input
+                            value={dataInternship.is_current}
                             type="checkbox"
                             id="current_school"
                             onChange={() => {

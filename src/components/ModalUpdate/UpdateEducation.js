@@ -176,6 +176,7 @@ export default function UpdateEducation({ item, id }) {
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
                           <input
+                            value={dataEducation.is_current}
                             type="checkbox"
                             id="current_school"
                             onChange={() => {

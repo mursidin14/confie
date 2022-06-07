@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import ModalSkill from 'components/Modal/ModalSkill';
 export default function SkillCard({data_skills}) {
-  let skills = data_skills;
+  const skills = data_skills;
   
   return (
     <div className="lg:relative">
       <div className="mt-4 rounded-md bg-white pt-7 pb-2 text-left shadow-mine ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">My Skill</h3>
-          <ModalSkill></ModalSkill>
+          <ModalSkill data={skills}></ModalSkill>
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5">

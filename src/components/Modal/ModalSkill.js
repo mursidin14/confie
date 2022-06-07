@@ -4,8 +4,8 @@ import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import InputSkill from 'components/InputSkill';
 
-export default function ModalSkill() {
-  let [isOpen, setIsOpen] = useState(false);
+export default function ModalSkill({data}) {
+  const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState({
     skills: []
   });
