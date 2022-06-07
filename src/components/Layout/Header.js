@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AuthService from 'services/Auth/AuthService';
 
+
 export default function Header({data, offCanvas, handleNav, PageName }) {
   const [open, setOpen] = useState(false);
   function clickProfile() {
