@@ -3,7 +3,6 @@ import Header from 'components/Layout/Header'
 export default function NotFound() {
   return (
     <>
-        <Header />
         <div className='flex justify-center items-center min-h-[calc(100vh-11vh)]'>
           <div>
           <p className='text-9xl mb-5 font-bold'>4😓4</p>
