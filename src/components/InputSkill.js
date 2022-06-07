@@ -84,7 +84,7 @@ function InputTag({ addTags, people }) {
 }
 
 export default function InputSkill({ data, onChange }) {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([...data.skills]);
   const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
   useEffect(() => {
@@ -96,7 +96,11 @@ export default function InputSkill({ data, onChange }) {
   }, [])
   
   const removeTags = (indexToRemove) => {
-    setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+    setTags([...tags.filter((_, index) => index !== indexToRemove)])
+    onChange({
+      ...data,
+      skills: idTags,
+    })
   };
   const addTags = (value, id) => {
     if (value !== '') {
@@ -130,45 +134,3 @@ export default function InputSkill({ data, onChange }) {
   );
 }
 
-export function UpdateInputSkill({ skills, setSkills }) {
-  const [tags, setTags] = useState([]);
-  const [idTags, setIdTags] = useState([]);
-  const [people, setPeople] = useState([])
-  const removeTags = (indexToRemove) => {
-    setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-  };
-  useEffect(() => {
-    const getSkill = async () => {
-      const response = await AuthService.getListSkill();
-      setPeople(response.data.data);
-    }
-    getSkill();
-}, [])
-  const addTags = (value, id) => {
-    if (value !== '') {
-      setTags([...tags, value]);
-      setIdTags([...idTags, id]);
-      setSkills([...skills, id]);
-    }
-    return;
-  };
-
-  return (
-    <div className="flex h-fit flex-wrap items-center gap-2 overflow-hidden  rounded-md border-2 border-transparent bg-soft-gray py-5 px-3 focus-within:border-black">
-      <ul className="flex flex-wrap">
-        {tags.map((tag, index) => (
-          <li
-            className="m-2 flex items-center gap-3 rounded-md bg-[#A1A5B7] px-3 py-1 text-white"
-            key={index}
-          >
-            <span>{tag}</span>
-            <button className="" onClick={() => removeTags(index)}>
-              x
-            </button>
-          </li>
-        ))}
-      </ul>
-      <InputTag people={people} addTags={addTags}></InputTag>
-    </div>
-  );
-}
