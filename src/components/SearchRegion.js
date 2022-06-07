@@ -163,7 +163,7 @@ export function SearchRegionCity({ data, onChange, city }) {
     setQuery(event.target.value);
   }
   function handleClick(e) {
-    const id = people.find((person) => person.name === e.target.innerText).id;
+    const id = people.find((person) => person.name === e.target.innerText)?.id;
     onChange({
       ...data,
       city: id,
@@ -173,7 +173,7 @@ export function SearchRegionCity({ data, onChange, city }) {
     if(name == undefined) {
       return
     }
-    const id = people.find((person) => person.name === name).id;
+    const id = people.find((person) => person.name === name)?.id;
     onChange({
       ...data,
       city: id,
@@ -381,7 +381,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
     setQuery(event.target.value);
   }
   function handleClick(e) {
-    const id = people.find((person) => person.name === e.target.innerText).id;
+    const id = people.find((person) => person.name === e.target.innerText)?.id;
     onChange({
       ...data,
       city: id,
@@ -391,7 +391,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
     if(name == undefined) {
       return
     }
-    const id = people.find((person) => person.name === name).id;
+    const id = people.find((person) => person.name === name)?.id;
     onChange({
       ...data,
       city: id,

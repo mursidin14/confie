@@ -180,7 +180,7 @@ export default function ModalProfile({ data_profile }) {
                           {...input}
                         />
                       ))}
-                      <div className=" items-center lg:flex">
+                      <div className=" items-center lg:flex my-1">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base">Gender</label>
                         </div>
