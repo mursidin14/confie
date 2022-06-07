@@ -147,6 +147,7 @@ export default function ModalInternship() {
                             type="checkbox"
                             id="current_school"
                             onChange={() => {
+                              console.log(dataInternship.is_current)
                               setDataInternship({
                                 ...dataInternship,
                                 is_current: !dataInternship.is_current,

@@ -17,7 +17,7 @@ export default function ModalProfile({ data_profile }) {
     province: data_profile.province,
     city: data_profile.city,
     gender: data_profile.gender,
-    date_of_birth: utils.getDate(data_profile.date_of_birth),
+    date_of_birth: utils.getYearMonthDay(data_profile.date_of_birth),
     country: data_profile.country,
   });
   const [city, setCity] = useState([]);

@@ -3,8 +3,14 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function UpdateCertificationModal({id}) {
-  const [dataCertificate, setDataCertificate] = useState({});
+export default function UpdateCertificationModal({ item, id }) {
+  const [dataCertificate, setDataCertificate] = useState({
+    agency: item,
+    description: item,
+    link: item,
+    name: item,
+    year: item,
+  });
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([]);
   function closeModal() {
@@ -15,13 +21,16 @@ export default function UpdateCertificationModal({id}) {
     setIsOpen(true);
   }
   function handleChange(e) {
-    if (e.target.name === 'year' ) {
+    if (e.target.name === 'year') {
       setDataCertificate({
         ...dataCertificate,
-        [e.target.name]:  parseInt(utils.timeEpoch(e.target.value)),
+        [e.target.name]: parseInt(utils.timeEpoch(e.target.value)),
       });
     } else {
-      setDataCertificate({ ...dataCertificate, [e.target.name]: e.target.value });
+      setDataCertificate({
+        ...dataCertificate,
+        [e.target.name]: e.target.value,
+      });
     }
   }
   async function handleSubmit() {
@@ -136,7 +145,11 @@ export default function UpdateCertificationModal({id}) {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile handleChange={handleChange} {...input} />
+                        <InputFormProfile
+                          data={dataCertificate}
+                          handleChange={handleChange}
+                          {...input}
+                        />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -146,9 +159,9 @@ export default function UpdateCertificationModal({id}) {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataCertificate.description}
                             onChange={handleChange}
                             name="description"
-                            id=""
                             className="w-full rounded-md bg-soft-gray p-5"
                             rows="10"
                           ></textarea>
@@ -168,7 +181,10 @@ export default function UpdateCertificationModal({id}) {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleSubmit}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Edit
                     </button>
                   </div>
@@ -182,7 +198,7 @@ export default function UpdateCertificationModal({id}) {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -191,7 +207,12 @@ function InputFormProfile({ label, handleChange, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " onChange={handleChange} />
+        <input
+          value={data[inputProps.name]}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3 "
+          onChange={handleChange}
+        />
       </div>
     </div>
   );

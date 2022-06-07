@@ -76,6 +76,14 @@ const isWork = (works_experience) => {
   return works_experience.some((work) => work.is_current == true)
 }
 
+const getYearMonthDay = (epoch) => {
+  const date = new Date(epoch * 1000);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}-${month}-${day}`;
+  }
+
 const utils = {
   makeCapital,
   getCity,
@@ -83,7 +91,8 @@ const utils = {
   getDate,
   getMonthYear,
   getProfileCompletion,
-  isWork
+  isWork,
+  getYearMonthDay,
 };
 
 export default utils;

@@ -3,12 +3,18 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function UpdateIntershipExperience({id}) {
+export default function UpdateIntershipExperience({ item, id }) {
   let [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState([])
+  const [error, setError] = useState([]);
   const [dataInternship, setDataInternship] = useState({
-    is_current: false,
-  })
+    agency: item.agency,
+    description: item.description,
+    end_date: item.end_date,
+    is_current: item.is_current,
+    position: item.position,
+    start_date: item.start_date,
+    status: item.status,
+  });
   function closeModal() {
     setIsOpen(false);
   }
@@ -21,7 +27,7 @@ export default function UpdateIntershipExperience({id}) {
       value = utils.timeEpoch(value);
     }
     setDataInternship({ ...dataInternship, [name]: value });
-    console.log(dataInternship)
+    console.log(dataInternship);
   }
   async function handleSubmit() {
     let data = {
@@ -135,7 +141,11 @@ export default function UpdateIntershipExperience({id}) {
                   <div className="my-5">
                     <div className="px-8">
                       {inputs.map((input, index) => (
-                        <InputFormProfile {...input} handleChange={handleChange} />
+                        <InputFormProfile
+                          data={dataInternship}
+                          {...input}
+                          handleChange={handleChange}
+                        />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
@@ -145,6 +155,7 @@ export default function UpdateIntershipExperience({id}) {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataInternship.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -175,7 +186,7 @@ export default function UpdateIntershipExperience({id}) {
                       </div>
                     </div>
                   </div>
-                  <section className="text-left text-sm text-red-500 px-8">
+                  <section className="px-8 text-left text-sm text-red-500">
                     {error.map((err, index) => (
                       <p key={index}>{err}</p>
                     ))}
@@ -187,7 +198,10 @@ export default function UpdateIntershipExperience({id}) {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleSubmit}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Edit
                     </button>
                   </div>
@@ -201,7 +215,7 @@ export default function UpdateIntershipExperience({id}) {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -210,7 +224,12 @@ function InputFormProfile({ label, handleChange, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3" onChange={handleChange} />
+        <input
+          value={data[inputProps.name]}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3"
+          onChange={handleChange}
+        />
       </div>
     </div>
   );

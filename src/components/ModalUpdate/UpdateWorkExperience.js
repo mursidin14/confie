@@ -3,11 +3,16 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function UpdateWorkExperience({ id }) {
+export default function UpdateWorkExperience({ item, id }) {
   let [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
-    is_current: false,
-    status: 'onsite',
+    agency: item.agency,
+    description: item.description,
+    end_date: item.end_date,
+    is_current: item.is_current,
+    position: item.position,
+    start_date: item.start_date,
+    status: item.status,
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -142,6 +147,7 @@ export default function UpdateWorkExperience({ id }) {
                     <div className="px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          data={dataWorkExperience}
                           handleChange={handleChange}
                           {...input}
                         />
@@ -167,6 +173,7 @@ export default function UpdateWorkExperience({ id }) {
                       </div>
                       {inputs_2.map((input, index) => (
                         <InputFormProfile
+                          data={dataWorkExperience}
                           handleChange={handleChange}
                           {...input}
                         />
@@ -179,6 +186,7 @@ export default function UpdateWorkExperience({ id }) {
                         </div>
                         <div className="lg:w-7/12">
                           <select
+                            value={dataWorkExperience.status}
                             className="h-fit w-full rounded-md bg-soft-gray p-5 text-sm"
                             name="status"
                             id="status"
@@ -204,6 +212,7 @@ export default function UpdateWorkExperience({ id }) {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataWorkExperience.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -243,7 +252,7 @@ export default function UpdateWorkExperience({ id }) {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -255,6 +264,7 @@ function InputFormProfile({ label, handleChange, ...inputProps }) {
         <input
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3"
+          value={data[inputProps.name]}
           onChange={handleChange}
         />
       </div>

@@ -3,10 +3,15 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function UpdateEducation({id}) {
+export default function UpdateEducation({ item, id }) {
   let [isOpen, setIsOpen] = useState(false);
   const [dataEducation, setDataEducation] = useState({
-    is_current: false,
+    description: item.description,
+    end_date: item.end_date,
+    is_current: item.is_current,
+    major: item.major,
+    school: item.school,
+    start_date: item.start_date,
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -24,7 +29,7 @@ export default function UpdateEducation({id}) {
     } else {
       setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
     }
-    console.log(dataEducation)
+    console.log(dataEducation);
   }
 
   async function handleSubmit() {
@@ -141,6 +146,7 @@ export default function UpdateEducation({id}) {
                     <div className="px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          data={dataEducation}
                           handleChange={handleChange}
                           {...input}
                         />
@@ -153,6 +159,7 @@ export default function UpdateEducation({id}) {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataEducation.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -212,7 +219,7 @@ export default function UpdateEducation({id}) {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
     <div className=" items-center lg:flex">
       <div className="w-5/12">
@@ -222,6 +229,7 @@ function InputFormProfile({ label, handleChange, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
+          value={data[inputProps.name]}
           onChange={handleChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "

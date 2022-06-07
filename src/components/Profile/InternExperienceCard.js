@@ -72,7 +72,7 @@ function Table({items, handleDelete}) {
             <td className="w-[16%] text-center lg:px-3 px-8 lg:py-1 py-4">{item.description}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
-                <UpdateIntershipExperience id={item.id}></UpdateIntershipExperience>
+                <UpdateIntershipExperience item={item} id={item.id}></UpdateIntershipExperience>
                 <button onClick={()=>{
                   handleDelete(item.id)
                 }}>

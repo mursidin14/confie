@@ -71,7 +71,7 @@ function Table({ items, handleDelete }) {
             </td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
-                <UpdateEducation id={item.id} />
+                <UpdateEducation item={item} id={item.id} />
                 <button onClick={()=>{
                   handleDelete(item.id)
                 }}>

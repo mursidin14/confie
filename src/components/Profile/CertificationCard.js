@@ -68,7 +68,7 @@ function Table({ items, handleDelete }) {
             <td className="w-[6%] ">{utils.getMonthYear(item.year)}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
-                <UpdateCertificationModal id={item.id}></UpdateCertificationModal>
+                <UpdateCertificationModal item={item} id={item.id}></UpdateCertificationModal>
                 <button onClick={()=>{
                   handleDelete(item.id)
                 }}>
