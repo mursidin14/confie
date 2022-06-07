@@ -1,21 +1,9 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import AuthService from 'services/Auth/AuthService';
 
-const people = [
-  { id: 1, name: 'accounting', category: 'personal' },
-  { id: 2, name: 'web development', category: 'personal' },
-  { id: 3, name: 'mobile development', category: 'personal' },
-  { id: 4, name: 'javascript', category: 'personal' },
-  { id: 5, name: 'golang', category: 'personal' },
-  { id: 6, name: 'C', category: 'personal' },
-  { id: 7, name: 'C++', category: 'personal' },
-  { id: 8, name: 'ruby', category: 'personal' },
-  { id: 9, name: 'java', category: 'personal' },
-  { id: 10, name: 'python', category: 'personal' },
-];
 
-function InputTag({ addTags, data }) {
+function InputTag({ addTags, people }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const filteredPeople =
@@ -37,9 +25,9 @@ function InputTag({ addTags, data }) {
 
   return (
     <Combobox value={selected} onChange={setSelected}>
-      <div className="mt-1">
+      <div className="mt-1 grow">
         <Combobox.Input
-          className="w-[100px] bg-soft-gray pl-2 focus:outline-none"
+          className="w-full bg-soft-gray pl-2 focus:outline-none"
           displayValue={(person) => {}}
           onChange={handleChange}
           onKeyUp={(e) => {
@@ -95,9 +83,18 @@ function InputTag({ addTags, data }) {
   );
 }
 
-export default function InputSkill({ data, onChange, skills, setSkills }) {
+export default function InputSkill({ data, onChange }) {
   const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+      const getSkill = async () => {
+        const response = await AuthService.getListSkill();
+        setPeople(response.data.data);
+      }
+      getSkill();
+  }, [])
+  
   const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)]);
   };
@@ -128,16 +125,25 @@ export default function InputSkill({ data, onChange, skills, setSkills }) {
           </li>
         ))}
       </ul>
-      <InputTag addTags={addTags}></InputTag>
+      <InputTag people={people} addTags={addTags}></InputTag>
     </div>
   );
 }
+
 export function UpdateInputSkill({ skills, setSkills }) {
   const [tags, setTags] = useState([]);
   const [idTags, setIdTags] = useState([]);
+  const [people, setPeople] = useState([])
   const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)]);
   };
+  useEffect(() => {
+    const getSkill = async () => {
+      const response = await AuthService.getListSkill();
+      setPeople(response.data.data);
+    }
+    getSkill();
+}, [])
   const addTags = (value, id) => {
     if (value !== '') {
       setTags([...tags, value]);
@@ -162,7 +168,7 @@ export function UpdateInputSkill({ skills, setSkills }) {
           </li>
         ))}
       </ul>
-      <InputTag addTags={addTags}></InputTag>
+      <InputTag people={people} addTags={addTags}></InputTag>
     </div>
   );
 }
