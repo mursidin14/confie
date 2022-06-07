@@ -19,7 +19,7 @@ export default function ModalSkill({skills}) {
   }
 
   async function handleSubmit() {
-    const response = await ProfileService.updateSkill(data);
+    const response = await ProfileService.addSkill(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;
