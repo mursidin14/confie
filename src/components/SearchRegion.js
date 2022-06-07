@@ -253,7 +253,7 @@ export function SearchRegionCity({ data, onChange, city }) {
 }
 export function SearchRegionProfile({ data, onChange, setCity }) {
   const province = {
-    name: data.province,
+    name: data.province_name,
   }
   const [selected, setSelected] = useState(province);
   const [query, setQuery] = useState('');
@@ -363,7 +363,8 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
 }
 export function SearchRegionCityProfile({ data, onChange, city }) {
   const city_profile = {
-    name: data.city,
+    id: data.city,
+    name: data.city_name,
   }
   const [selected, setSelected] = useState(city_profile);
   const [query, setQuery] = useState('');
