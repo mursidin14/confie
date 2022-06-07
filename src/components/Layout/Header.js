@@ -90,7 +90,7 @@ export default function Header({data, offCanvas, handleNav, PageName }) {
           />
           <section
             className={`absolute right-1 rounded-md bg-white px-5 py-2 shadow-mine top-14 ${
-              !open ? 'translate-y-0  opacity-0' : ' translate-y-1 opacity-100'
+              !open ? 'translate-y-0  opacity-0 hidden' : ' translate-y-1 opacity-100 block'
             } transition-all max-w-xs`}
           >
             <div className='text-left'>
