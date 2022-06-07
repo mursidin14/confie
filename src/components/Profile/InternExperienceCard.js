@@ -53,6 +53,13 @@ function Table({items, handleDelete}) {
         </tr>
       </thead>
       <tbody>
+      {!items.length > 0 && (
+              <tr>
+                <td colSpan="4" className="text-center py-4 font-semibold">
+                  Tidak ada data
+                </td>
+              </tr>
+            )}
         {items.map((item, index) => (
           <tr
             className="mt-3 text-sm h-32  border-b-2 border-gray-300/50 text-[#7E8299]"

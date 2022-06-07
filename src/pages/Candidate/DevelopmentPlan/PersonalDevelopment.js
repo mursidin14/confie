@@ -29,7 +29,7 @@ export default function PersonalDevelopment() {
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-            <Table target={target} userId={id} items={target} loading={loading}></Table>
+            <Table userId={id} items={target} loading={loading}></Table>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function PersonalDevelopment() {
   );
 }
 
-function Table({ target, items, userId, loading }) {
+function Table({ items, userId, loading }) {
   return (
     <div>
       {items == 'Not found' ? (
@@ -143,9 +143,9 @@ function Table({ target, items, userId, loading }) {
                   </td>
                 </tr>
               ))}
-            {!target.length > 0 && (
+            {!items.length > 0 && (
               <tr>
-                <td colSpan="4" className="text-center">
+                <td colSpan="4" className="text-center py-4 font-semibold">
                   Tidak ada data
                 </td>
               </tr>
