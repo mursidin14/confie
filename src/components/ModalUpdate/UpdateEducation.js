@@ -68,14 +68,14 @@ export default function UpdateEducation({ item, id }) {
     },
     {
       name: 'start_date',
-      type: 'date',
+      type: 'number',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
-      type: 'date',
+      type: 'number',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,

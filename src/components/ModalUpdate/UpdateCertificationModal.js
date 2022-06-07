@@ -5,11 +5,11 @@ import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
 export default function UpdateCertificationModal({ item, id }) {
   const [dataCertificate, setDataCertificate] = useState({
-    agency: item,
-    description: item,
-    link: item,
-    name: item,
-    year: item,
+    agency: item.agency,
+    description: item.description,
+    link: item.link,
+    name: utils.getYearMonthDay(item.name),
+    year: item.year,
   });
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([]);

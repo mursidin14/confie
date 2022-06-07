@@ -8,10 +8,10 @@ export default function UpdateWorkExperience({ item, id }) {
   const [dataWorkExperience, setDataWorkExperience] = useState({
     agency: item.agency,
     description: item.description,
-    end_date: item.end_date,
+    end_date: utils.getYearMonthDay(item.end_date),
     is_current: item.is_current,
     position: item.position,
-    start_date: item.start_date,
+    start_date: utils.getYearMonthDay(item.start_date),
     status: item.status,
   });
   const [error, setError] = useState([]);

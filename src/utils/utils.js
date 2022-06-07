@@ -78,11 +78,10 @@ const isWork = (works_experience) => {
 
 const getYearMonthDay = (epoch) => {
   const date = new Date(epoch * 1000);
-  const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${year}-${month}-${day}`;
-  }
+  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${month < 10 ? `0${day}` : `${day}`}`;
+};
 
 const utils = {
   makeCapital,
