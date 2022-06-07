@@ -10,8 +10,8 @@ import CertificationCard from 'components/Profile/CertificationCard';
 import ProfileService from 'services/Profile/ProfileService';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-
 import { useParams } from 'react-router-dom';
+
 export default function Profile() {
   const { id } = useParams();
   const [data, setData] = useState({});
