@@ -31,7 +31,7 @@ export default function InternExperienceCard({data_profile}) {
           </div>
         </div>
         <div className='flex justify-center'>
-          <Pagination length={internExperience.length} pagination={pagination} setPagination={setPagination}/>
+          {internExperience.length > 3 ? <Pagination length={internExperience.length} pagination={pagination} setPagination={setPagination}/> : null}
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ export default function CertificationCard({data_profile}) {
           </div>
         </div>
         <div className="flex justify-center">
-          <Pagination length={certification.length} pagination={pagination} setPagination={setPagination} />
+          {certification.length > 3 ? <Pagination length={certification.length} pagination={pagination} setPagination={setPagination} /> : null}
         </div>
       </div>
     </div>
