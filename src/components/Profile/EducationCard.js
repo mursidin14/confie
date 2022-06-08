@@ -13,7 +13,6 @@ export default function EducationCard({ data_profile }) {
   })
   async function handleDelete(id) {
     const response = await ProfileService.deleteEducation(id);
-    window.location.reload();
   }
   return (
     <div className="lg:relative">
