@@ -56,7 +56,7 @@ export default function ErrorModal({ isOpen, closeModal, error_msg }) {
                       {item}
                     </p>
                   ))}
-                  <a href='/' className='font-bold text-xs text-center block'>Back to login page</a>
+                  <p className='font-bold text-xs text-center block'>Back to login page</p>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

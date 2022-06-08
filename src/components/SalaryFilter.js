@@ -30,7 +30,7 @@ export default function SalaryFilter() {
       </button>
       <div
         className={`absolute right-8 w-[300px] rounded-md border-[0.5px] border-[#b1b1b1] bg-white py-4 px-6 md:right-auto ${
-          open ? 'translate-y-0  opacity-0' : ' translate-y-1 opacity-100'
+          open ? 'translate-y-0  opacity-0 hidden' : ' translate-y-1 opacity-100'
         } transition-all`}
       >
       <div className='space-y-2'>

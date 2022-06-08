@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AuthService from 'services/Auth/AuthService';
+import { makeCapital } from 'utils/utils';
 
 
 export default function Header({data, offCanvas, handleNav, PageName }) {
@@ -94,7 +95,7 @@ export default function Header({data, offCanvas, handleNav, PageName }) {
             } transition-all max-w-xs`}
           >
             <div className='text-left'>
-            <p className='font-semibold'>{data.full_name}</p>
+            <p className='font-semibold'>{makeCapital(data.full_name)}</p>
             <p className='text-xs text-[#7E8299]'>{data.email}</p>
             <hr className='my-2'/>
             </div>

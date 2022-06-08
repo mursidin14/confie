@@ -154,7 +154,7 @@ export function UpdateInputSkill({ data, onChange, skills }) {
     setIdTags([...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)]);
     onChange({
       ...data,
-      skills: [[...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)]],
+      skills: [...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)],
     });
     console.log(data.skills);
   };

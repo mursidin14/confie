@@ -43,7 +43,7 @@ function Table({items, handleDelete}) {
     return (
     <table className="table-fixed text-xs sm:text-base min-w-[700px] w-full text-center">
       <thead className="bg-[#F5F8FA] ">
-        <tr className="sm:h-[60px] text-sm text-[#181C32]">
+        <tr className="-[60px] text-sm text-[#181C32]">
           <th className="pl-10 w-[10%] text-left">Posisi</th>
           <th className="w-[10%] ">Instansi</th>
           <th className="w-[6%]">Tahun Mulai</th>
@@ -62,7 +62,7 @@ function Table({items, handleDelete}) {
             )}
         {items.map((item, index) => (
           <tr
-            className="mt-3 text-sm h-32  border-b-2 border-gray-300/50 text-[#7E8299]"
+            className="mt-3 text-sm sm:h-32  border-b-2 border-gray-300/50 text-[#7E8299]"
             key={index}
           >
             <td className="pl-10 w-[10%] text-left">{item.position}</td>
