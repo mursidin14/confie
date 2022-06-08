@@ -20,11 +20,15 @@ export default function ModalInternship() {
     setDataInternship({ ...dataInternship, [name]: value });
   }
   async function handleSubmit() {
+    console.log("Submit")
     const data = {
       ...dataInternship,
     };
     data['start_date'] = utils.timeEpoch(data['start_date']);
-    data['end_date'] = utils.timeEpoch(data['end_date']);
+    if (data['end_date']) {
+      data['end_date'] = utils.timeEpoch(data['end_date']);
+    }
+    console.log("Send")
     const response = await ProfileService.addIntershipExperience(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
