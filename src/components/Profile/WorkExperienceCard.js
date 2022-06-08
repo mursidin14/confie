@@ -13,7 +13,6 @@ export default function WorkExperienceCard({ data_profile }) {
   });
   async function handleDelete(id) {
     const response = await ProfileService.deleteJobExperience(id);
-    window.location.reload();
   }
 
   return (

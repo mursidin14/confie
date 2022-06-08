@@ -21,7 +21,6 @@ export default function PersonalDevelopment() {
   }, []);
   async function handleDelete(id) {
     await PersonalPlanService.deletePersonalPlanData(id);
-    alert('Data berhasil dihapus');
     window.location.reload();
   }
 

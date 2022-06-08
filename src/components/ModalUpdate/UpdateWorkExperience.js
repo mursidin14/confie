@@ -267,8 +267,13 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
       <div className="lg:w-7/12">
         <input
           {...inputProps}
-          className="input-form my-2 lg:my-5 lg:py-3"
+          className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? 'hidden' : ''}`}
           value={data[inputProps.name] === 'start_date' ? utils.getYearMonthDay(data[inputProps.name]) : data[inputProps.name]}
+          onChange={handleChange}
+        />
+        <input
+          {...inputProps}
+          className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? '' : 'hidden'}`}
           onChange={handleChange}
         />
       </div>

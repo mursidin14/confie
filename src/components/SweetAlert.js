@@ -14,6 +14,7 @@ export default function SweetAlert({item, handleDelete }) {
       html.removeAttribute('style');
     }, 500);
     handleDelete(item.id);
+    window.location.reload();
   }
   function handleAccept() {
     closeModal();
