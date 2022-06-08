@@ -24,10 +24,11 @@ export default function ModalProfile({ data_profile }) {
   });
   const [city, setCity] = useState([]);
   const [error, setError] = useState([]);
+  const [resetCity, setResetCity] = useState(false)
   function closeModal() {
     setIsOpen(false);
   }
-
+  
   function openModal() {
     setIsOpen(true);
   }
@@ -188,12 +189,14 @@ export default function ModalProfile({ data_profile }) {
                       ))}
                       <div className="relative z-10">
                         <SearchRegionProfile
+                          setResetCity={setResetCity}
                           data={dataProfile}
                           onChange={setDataProfile}
                           setCity={setCity}
                         ></SearchRegionProfile>
                       </div>
                       <SearchRegionCityProfile
+                        resetCity={resetCity}
                         data={dataProfile}
                         onChange={setDataProfile}
                         city={city}

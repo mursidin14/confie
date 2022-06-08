@@ -64,7 +64,7 @@ function Table({ items, handleDelete }) {
           >
             <td className="w-[10%] pl-10 text-left ">{item.name}</td>
             <td className="w-[10%] ">{item.agency}</td>
-            <td className="w-[6%] ">{utils.getMonthYear(item.year)}</td>
+            <td className="w-[6%] ">{(item.year)}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
                 <UpdateCertificationModal item={item} id={item.id}></UpdateCertificationModal>

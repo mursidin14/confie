@@ -41,7 +41,6 @@ const people = [
   { id: '92', name: 'PAPUA BARAT' },
 ];
 
-const [resetCity, setResetCity] = useState(false)
 
 export default function SearchRegion({ data, onChange, setCity }) {
   const [selected, setSelected] = useState('');
@@ -253,7 +252,7 @@ export function SearchRegionCity({ data, onChange, city }) {
     </Combobox>
   );
 }
-export function SearchRegionProfile({ data, onChange, setCity }) {
+export function SearchRegionProfile({setResetCity, data, onChange, setCity }) {
   const province = {
     name: data.province_name,
   }
@@ -365,7 +364,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
     </Combobox>
   );
 }
-export function SearchRegionCityProfile({ data, onChange, city }) {
+export function SearchRegionCityProfile({resetCity, data, onChange, city }) {
   const city_profile = {
     id: data.city,
     name: resetCity ? '' : data.city_name,
