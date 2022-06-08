@@ -228,10 +228,10 @@ export default function UpdateIntershipExperience({ item, id }) {
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div
-      className={`items-center lg:flex ${
+      className={`items-center  ${
         data.is_current == true && inputProps.name == 'end_date'
           ? 'hidden'
-          : null
+          : 'lg:flex'
       }`}
     >
       <div className="w-5/12">

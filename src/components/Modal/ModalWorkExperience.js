@@ -15,22 +15,19 @@ export default function ModalWorkExperience() {
   }
 
   function handleChange(e) {
-    let { name, value } = e.target;
-    if (name == 'start_date' || name == 'end_date') {
-      value = utils.timeEpoch(value);
+      const { name, value } = e.target;
       setDataWorkExperience({ ...dataWorkExperience, [name]: value });
-    } else {
-      setDataWorkExperience({ ...dataWorkExperience, [name]: value });
-    }
   }
 
   function openModal() {
     setIsOpen(true);
   }
   async function handleSubmit() {
-    let data = {
+    const data = {
       ...dataWorkExperience,
     };
+    data['start_date'] = utils.timeEpoch(data['start_date']);
+    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.addJobExperience(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -141,6 +138,7 @@ export default function ModalWorkExperience() {
                               });
                             }}
                             type="checkbox"
+                            checked={dataWorkExperience.is_current === true}
                           />
                           <label htmlFor="">Ya</label>
                         </div>
@@ -161,6 +159,7 @@ export default function ModalWorkExperience() {
                         </div>
                         <div className="lg:w-7/12">
                           <select
+                            value={dataWorkExperience.status}
                             className="w-full h-fit bg-soft-gray rounded-md p-5 text-sm"
                             name="status"
                             id="status"
@@ -186,6 +185,7 @@ export default function ModalWorkExperience() {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataWorkExperience.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -227,10 +227,10 @@ export default function ModalWorkExperience() {
 
 function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className={`items-center lg:flex ${
+    <div className={`items-center ${
       data.is_current == true && inputProps.name == 'end_date'
         ? 'hidden'
-        : null
+        : 'lg:flex'
     }`}>
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">
@@ -240,6 +240,7 @@ function InputFormProfile({data, label, handleChange, ...inputProps }) {
       <div className="lg:w-7/12">
         <input
           {...inputProps}
+          value={data[inputProps.name]}
           className="input-form my-2 lg:my-5 lg:py-3"
           onChange={handleChange}
         />

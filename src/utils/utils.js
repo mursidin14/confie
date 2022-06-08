@@ -23,6 +23,9 @@ const getCity = (data) => {
 };
 
 const timeEpoch = (time) => {
+  if (time === undefined) {
+    return 0;
+  }
   let date = new Date(time);
   return date.getTime() / 1000;
 };

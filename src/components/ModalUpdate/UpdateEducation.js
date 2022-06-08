@@ -25,9 +25,11 @@ export default function UpdateEducation({ item, id }) {
   }
 
   async function handleSubmit() {
-    let data = {
+    const data = {
       ...dataEducation,
     };
+    data['start_date'] = utils.timeEpoch(data['start_date']);
+    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.updateEducation(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -225,10 +227,10 @@ export default function UpdateEducation({ item, id }) {
 function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
     <div
-      className={`items-center lg:flex ${
+      className={`items-center ${
         data.is_current == true && inputProps.name == 'end_date'
           ? 'hidden'
-          : null
+          : 'lg:flex '
       }`}
     >
       <div className="w-5/12">

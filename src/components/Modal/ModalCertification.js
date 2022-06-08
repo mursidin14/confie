@@ -15,19 +15,14 @@ export default function ModalCertification() {
     setIsOpen(true);
   }
   function handleChange(e) {
-    if (e.target.name === 'year' ) {
-      setDataCertificate({
-        ...dataCertificate,
-        [e.target.name]:  parseInt(utils.timeEpoch(e.target.value)),
-      });
-    } else {
+    
       setDataCertificate({ ...dataCertificate, [e.target.name]: e.target.value });
-    }
   }
   async function handleSubmit() {
-    let data = {
+    const data = {
       ...dataCertificate,
     };
+    data['year'] = utils.timeEpoch(data['year']);
     const response = await ProfileService.addCertificate(data);
     if (response.data.meta.status == 'error') {
       let errors = [];

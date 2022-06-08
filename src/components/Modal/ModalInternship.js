@@ -17,16 +17,14 @@ export default function ModalInternship() {
   }
   function handleChange(e) {
     let { name, value } = e.target;
-    if (name == 'start_date' || name == 'end_date') {
-      value = utils.timeEpoch(value);
-    }
     setDataInternship({ ...dataInternship, [name]: value });
-    console.log(dataInternship)
   }
   async function handleSubmit() {
-    let data = {
+    const data = {
       ...dataInternship,
     };
+    data['start_date'] = utils.timeEpoch(data['start_date']);
+    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.addIntershipExperience(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -125,6 +123,7 @@ export default function ModalInternship() {
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
                           <input
+                            checked={dataInternship.is_current}
                             type="checkbox"
                             id="current_school"
                             onChange={() => {
@@ -148,6 +147,7 @@ export default function ModalInternship() {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataInternship.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -187,10 +187,10 @@ export default function ModalInternship() {
 
 function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className={`items-center lg:flex ${
+    <div className={`items-center ${
       data.is_current == true && inputProps.name == 'end_date'
         ? 'hidden'
-        : null
+        : 'lg:flex'
     }`}>
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">
@@ -198,7 +198,7 @@ function InputFormProfile({data, label, handleChange, ...inputProps }) {
         </label>
       </div>
       <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3" onChange={handleChange} />
+        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3" onChange={handleChange} value={data[inputProps.name]} />
       </div>
     </div>
   );

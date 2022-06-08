@@ -18,19 +18,11 @@ export default function ModalEducation() {
   }
 
   function handleChange(e) {
-    if (e.target.name === 'start_date' || e.target.name === 'end_date') {
-      setDataEducation({
-        ...dataEducation,
-        [e.target.name]: e.target.value,
-      });
-    } else {
-      setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
-    }
-    console.log(dataEducation);
+    setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit() {
-    let data = {
+    const data = {
       ...dataEducation,
     };
     const response = await ProfileService.addEducation(data);
@@ -137,6 +129,7 @@ export default function ModalEducation() {
                         </div>
                         <div className="flex items-center gap-3 lg:w-7/12">
                           <input
+                            checked={dataEducation.is_current}
                             type="checkbox"
                             id="current_school"
                             onChange={() => {
@@ -165,6 +158,7 @@ export default function ModalEducation() {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
+                            value={dataEducation.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -207,10 +201,10 @@ export default function ModalEducation() {
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div
-      className={`items-center lg:flex ${
+      className={`items-center  ${
         data.is_current == true && inputProps.name == 'end_date'
           ? 'hidden'
-          : null
+          : 'lg:flex'
       }`}
     >
       <div className="w-5/12">
@@ -223,6 +217,7 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
           onChange={handleChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
+          value={data[inputProps.name]}
         />
       </div>
     </div>
