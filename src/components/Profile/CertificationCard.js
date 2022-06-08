@@ -60,7 +60,7 @@ function Table({ items, handleDelete }) {
             )}
         {items.map((item, index) => (
           <tr
-            className="mt-3 sm:h-20 border-b-2 border-gray-300/50 text-sm text-[#7E8299]"
+            className="mt-3 sm:h-20 h-10 border-b-2 border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
           >
             <td className="w-[10%] pl-10 text-left ">{item.name}</td>
