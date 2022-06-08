@@ -37,6 +37,7 @@ export default function UpdateCertificationModal({ item, id }) {
     let data = {
       ...dataCertificate,
     };
+    data['year'] = utils.timeEpoch(data['year']);
     const response = await ProfileService.updateCertificate(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];

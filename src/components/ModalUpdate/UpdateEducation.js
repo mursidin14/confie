@@ -21,15 +21,7 @@ export default function UpdateEducation({ item, id }) {
     setIsOpen(true);
   }
   function handleChange(e) {
-    if (e.target.name === 'start_date' || e.target.name === 'end_date') {
-      setDataEducation({
-        ...dataEducation,
-        [e.target.name]: utils.timeEpoch(e.target.value),
-      });
-    } else {
       setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
-    }
-    console.log(dataEducation);
   }
 
   async function handleSubmit() {

@@ -13,7 +13,6 @@ export default function UpdateIntershipExperience({ item, id }) {
     is_current: item.is_current,
     position: item.position,
     start_date: utils.getYearMonthDay(item.start_date),
-    status: item.status,
   });
   function closeModal() {
     setIsOpen(false);
@@ -23,9 +22,7 @@ export default function UpdateIntershipExperience({ item, id }) {
   }
   function handleChange(e) {
     let { name, value } = e.target;
-    if (name == 'start_date' || name == 'end_date') {
-      value = utils.timeEpoch(value);
-    }
+    
     setDataInternship({ ...dataInternship, [name]: value });
     console.log(dataInternship);
   }
@@ -33,6 +30,8 @@ export default function UpdateIntershipExperience({ item, id }) {
     let data = {
       ...dataInternship,
     };
+    data['start_date'] = utils.timeEpoch(data['start_date']);
+    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.updateIntershipExperience(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
