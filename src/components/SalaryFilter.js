@@ -50,7 +50,7 @@ export default function SalaryFilter() {
               </svg>
             </div>
             <input
-              className="ml-2 bg-[#F5F8FA] focus:outline-none"
+              className="ml-2 bg-[#F5F8FA] focus:outline-none w-fit"
               type="number"
               placeholder="Minimun Salary..."
             />
@@ -71,7 +71,7 @@ export default function SalaryFilter() {
               </svg>
             </div>
             <input
-              className="ml-2 bg-[#F5F8FA] focus:outline-none"
+              className="ml-2 bg-[#F5F8FA] focus:outline-none w-fit"
               type="number"
               placeholder="Max Salary..."
             />
