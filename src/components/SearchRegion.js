@@ -42,7 +42,7 @@ const people = [
 ];
 
 export default function SearchRegion({ data, onChange, setCity }) {
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const filteredPeople =
     query === ''

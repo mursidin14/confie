@@ -59,12 +59,14 @@ export default function ModalEducation() {
       type: 'number',
       label: 'Tahun Mulai',
       required: true,
+      min: 0,
     },
     {
       name: 'end_date',
       type: 'number',
       label: 'Tahun Selesai',
       required: true,
+      min: 0,
     },
   ];
   return (
