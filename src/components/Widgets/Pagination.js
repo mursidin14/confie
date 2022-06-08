@@ -8,15 +8,15 @@ export default function Pagination({ length, pagination, setPagination }) {
       setPage(page - 1);
     }
     setPagination({
-      sliceOne: pagination.sliceOne - 3,
-      sliceTwo: pagination.sliceTwo - 3,
+      sliceOne: pagination.sliceOne - 4,
+      sliceTwo: pagination.sliceTwo - 4,
     });
   }
   function handleIncrement() {
     setPage(page + 1);
     setPagination({
-      sliceOne: pagination.sliceOne + 3,
-      sliceTwo: pagination.sliceTwo + 3,
+      sliceOne: pagination.sliceOne + 4,
+      sliceTwo: pagination.sliceTwo + 4,
     });
   }
   return (
@@ -84,7 +84,7 @@ export default function Pagination({ length, pagination, setPagination }) {
       </button>
       <button
         onClick={handleIncrement}
-        disabled={!(page <= length/3)}
+        disabled={!(page <= length/4)}
       >
         <svg
           className={`${

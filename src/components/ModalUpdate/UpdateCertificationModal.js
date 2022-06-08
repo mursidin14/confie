@@ -21,7 +21,6 @@ export default function UpdateCertificationModal({ item, id }) {
     setIsOpen(true);
   }
   function handleChange(e) {
-   
       setDataCertificate({
         ...dataCertificate,
         [e.target.name]: e.target.value,
@@ -32,7 +31,6 @@ export default function UpdateCertificationModal({ item, id }) {
     let data = {
       ...dataCertificate,
     };
-    data['year'] = utils.timeEpoch(data['year']);
     const response = await ProfileService.updateCertificate(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -71,10 +69,11 @@ export default function UpdateCertificationModal({ item, id }) {
     },
     {
       name: 'year',
-      type: 'date',
+      type: 'number',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun',
       required: true,
+      min: 0
     },
   ];
   return (

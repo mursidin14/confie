@@ -15,14 +15,12 @@ export default function ModalCertification() {
     setIsOpen(true);
   }
   function handleChange(e) {
-    
       setDataCertificate({ ...dataCertificate, [e.target.name]: e.target.value });
   }
   async function handleSubmit() {
     const data = {
       ...dataCertificate,
     };
-    data['year'] = utils.timeEpoch(data['year']);
     const response = await ProfileService.addCertificate(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -61,7 +59,7 @@ export default function ModalCertification() {
     },
     {
       name: 'year',
-      type: 'date',
+      type: 'number',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun',
       required: true,
