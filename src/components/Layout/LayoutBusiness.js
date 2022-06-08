@@ -4,9 +4,12 @@ import ASideBarBusiness from 'components/Aside/AsideBarBusiness';
 import ASideBarMobileBusiness from 'components/Aside/ASideBarMobileBusiness';
 export default function LayoutBusiness({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
-
-  function handleNav() {
+  const data = {
+    full_name : 'Business Profile',
+    gender: 'L',
     
+  }
+  function handleNav() {
     setOffCanvas(!offCanvas);
   }
   return (
@@ -28,7 +31,7 @@ export default function LayoutBusiness({PageName, children, userId}) {
           !offCanvas ? 'w-full' : 'w-full'
         } min-h-screen bg-[#FFFFFF]`}
       >
-        <Header handleNav={handleNav} PageName={PageName} />
+        <Header data={data} handleNav={handleNav} PageName={PageName} />
         <div className="my-4 lg:mx-7 mx-3 py-5">{children}</div>
       </section>
     </main>

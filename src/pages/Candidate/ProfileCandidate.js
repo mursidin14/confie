@@ -24,10 +24,13 @@ export default function ProfileCandidate() {
   }, []);
 
   return (
-    <main className="flex shadow-mine md:mx-auto md:w-fit lg:p-5">
-      {loading && <div>Loading..</div>}
+    <>
+      {loading && <main className='flex flex-col items-center justify-center min-h-screen'>
+        <p className='text-9xl mb-5 font-bold'>😓</p>
+          <p className='font-semibold'>Profile Not Found!</p>
+        </main>}
       {!loading && (
-        <>
+        <main className="flex shadow-mine md:mx-auto md:w-fit lg:p-5">
           <section className="bg-dark-blue py-10 px-3 text-white sm:px-7 ">
             <div className="">
               <img
@@ -74,8 +77,8 @@ export default function ProfileCandidate() {
             ></IntershipExperience>
             <EducationHistory data={dataProfile.educations}></EducationHistory>
           </section>
-        </>
+        </main>
       )}
-    </main>
+    </>
   );
 }

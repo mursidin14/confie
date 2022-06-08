@@ -95,7 +95,7 @@ export default function UpdateMilestone({item, idPlan, idMilestone }) {
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="px-8">
+                    <div className="lg:px-8 px-2">
                       <QuarterPlan
                         milestone={milestone}
                         setMilestone={setMilestone}
