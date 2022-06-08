@@ -88,7 +88,7 @@ export default function Pagination({ length, pagination, setPagination }) {
       >
         <svg
           className={`${
-            page === 3 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
+            !(page <= length/4) ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
           } cursor-pointer`}
           width="6"
           height="10"
