@@ -41,6 +41,8 @@ const people = [
   { id: '92', name: 'PAPUA BARAT' },
 ];
 
+const [resetCity, setResetCity] = useState(false)
+
 export default function SearchRegion({ data, onChange, setCity }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
@@ -276,6 +278,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
       ...data,
       province: id,
     });
+    setResetCity(true)
     const response = await httpClient.get(`api/location?provinsi=${id}`);
     setCity(utils.getCity(response.data.data));
   }
@@ -289,6 +292,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
       ...data,
       province: id,
     });
+    setResetCity(true)
     const response = await httpClient.get(`api/location?provinsi=${id}`);
     setCity(utils.getCity(response.data.data));
   }
@@ -364,7 +368,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
 export function SearchRegionCityProfile({ data, onChange, city }) {
   const city_profile = {
     id: data.city,
-    name: data.city_name,
+    name: resetCity ? '' : data.city_name,
   }
   const [selected, setSelected] = useState(city_profile);
   const [query, setQuery] = useState('');
@@ -415,7 +419,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
             }}
             onChange={handleChange}
           />
-          <Combobox.Button className="mt-1 h-fit lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 top-4 flex items-center pr-2">
             <SelectorIcon
               className="h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -430,7 +434,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute mt-1 max-h-[100px]  w-full overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="mt-1 h-fit lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
