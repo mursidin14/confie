@@ -268,7 +268,7 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
         <input
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3"
-          value={data[inputProps.name] === 'start_date' || data[inputProps.name] === 'end_date' ? utils.getYearMonthDay(data[inputProps.name]) : data[inputProps.name]}
+          value={data[inputProps.name] === 'start_date' ? utils.getYearMonthDay(data[inputProps.name]) : data[inputProps.name]}
           onChange={handleChange}
         />
       </div>
