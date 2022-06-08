@@ -3,7 +3,7 @@ import Pagination from 'components/Widgets/Pagination';
 import ModalEducation from 'components/Modal/ModalEducation';
 import ProfileService from 'services/Profile/ProfileService';
 import UpdateEducation from 'components/ModalUpdate/UpdateEducation';
-import utils from 'utils/utils';
+import utils, { getLength } from 'utils/utils';
 export default function EducationCard({ data_profile }) {
   let educationHistory = data_profile;
   const [pagination, setPagination] = useState({
@@ -59,14 +59,14 @@ function Table({ items, handleDelete }) {
             )}
         {items.map((item, index) => (
           <tr
-            className="mt-3 sm:h-32 h-10 border-b-2  border-gray-300/50 text-sm text-[#7E8299]"
+            className="mt-3 h-32 border-b-2  border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
           >
             <td className="w-[10%] pl-10 text-left">{item.school}</td>
             <td className="w-[10%] ">{item.major}</td>
             <td className="w-[6%] ">{(item.start_date)}</td>
             <td className="w-[6%] ">{item.is_current ? 'Sekarang' : (item.end_date)}</td>
-            <td className="w-[16%] px-8 py-4 text-center lg:px-3 lg:py-1">
+            <td className={`w-[16%] px-8 py-4 ${getLength(item.description) ? 'text-left' : 'text-center'} lg:px-3 lg:py-1`}>
               {item.description}
             </td>
             <td className="w-[6%]">

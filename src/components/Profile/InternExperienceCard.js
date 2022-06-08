@@ -3,7 +3,7 @@ import Pagination from 'components/Widgets/Pagination';
 import ModalInternship from 'components/Modal/ModalInternship';
 import ProfileService from 'services/Profile/ProfileService';
 import UpdateIntershipExperience from 'components/ModalUpdate/UpdateIntershipExperience';
-import utils from 'utils/utils';
+import utils, { getLength } from 'utils/utils';
 export default function InternExperienceCard({data_profile}) {
 
   let internExperience = data_profile
@@ -62,14 +62,14 @@ function Table({items, handleDelete}) {
             )}
         {items.map((item, index) => (
           <tr
-            className="mt-3 text-sm sm:h-32 h-10  border-b-2 border-gray-300/50 text-[#7E8299]"
+            className="mt-3 text-sm h-32 border-b-2 border-gray-300/50 text-[#7E8299]"
             key={index}
           >
             <td className="pl-10 w-[10%] text-left">{item.position}</td>
             <td className="w-[10%] ">{item.agency}</td>
             <td className="w-[6%] ">{utils.getMonthYear(item.start_date)}</td>
             <td className="w-[6%] ">{item.is_current ? 'Sekarang' : utils.getMonthYear(item.end_date)}</td>
-            <td className="w-[16%] text-center lg:px-3 px-8 lg:py-1 py-4">{item.description}</td>
+            <td className={`w-[16%] ${getLength(item.description) ? 'text-left' : 'text-center'} lg:px-3 px-8 lg:py-1 py-4`}>{item.description}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
                 <UpdateIntershipExperience item={item} id={item.id}></UpdateIntershipExperience>

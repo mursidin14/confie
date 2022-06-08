@@ -3,7 +3,7 @@ import Pagination from 'components/Widgets/Pagination';
 import ModalWorkExperience from 'components/Modal/ModalWorkExperience';
 import UpdateWorkExperience from 'components/ModalUpdate/UpdateWorkExperience';
 import ProfileService from 'services/Profile/ProfileService';
-import utils from 'utils/utils';
+import utils, { getLength } from 'utils/utils';
 export default function WorkExperienceCard({ data_profile }) {
   let workExperience = data_profile;
   const [pagination, setPagination] = useState({
@@ -70,7 +70,7 @@ function Table({ items, handleDelete }) {
         )}
         {items.map((item, index) => (
           <tr
-            className="mt-3 border-b-2 border-gray-300/50 text-sm text-[#7E8299] sm:h-32 h-10"
+            className="mt-3 border-b-2 border-gray-300/50 text-sm text-[#7E8299] h-32"
             key={index}
           >
             <td className="w-[10%] pl-10 text-left">{item.position}</td>
@@ -79,7 +79,7 @@ function Table({ items, handleDelete }) {
             <td className="w-[6%] ">
               {item.is_current ? 'Sekarang' : utils.getMonthYear(item.end_date)}
             </td>
-            <td className="w-[16%] px-8 py-4 text-center lg:py-1 lg:px-3">
+            <td className={` w-[16%] px-8 py-4 ${getLength(item.description) ? 'text-left' : 'text-center'} lg:py-1 lg:px-3`}>
               {item.description}
             </td>
             <td className="w-[6%]">

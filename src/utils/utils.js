@@ -88,6 +88,10 @@ const getYearMonthDay = (epoch) => {
   return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}`;
 };
 
+export const getLength = (word) => {
+  return word.length > 24 ? true : false;
+}
+
 const utils = {
   makeCapital,
   getCity,
