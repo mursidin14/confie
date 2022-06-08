@@ -121,7 +121,7 @@ function JobStatus({data}) {
           />
         </svg>
 
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data.position}</p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data.position || 'Belum Kerja'}</p>
       </div>
       <div className="mt flex items-center gap-3">
         <svg
@@ -141,8 +141,7 @@ function JobStatus({data}) {
             fill="#4B5783"
           />
         </svg>
-
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data.agency}</p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data.agency || 'Belum Kerja'}</p>
       </div>
     </div>
   );
