@@ -198,7 +198,7 @@ export default function UpdateWorkExperience({ item, id }) {
                           >
                             <option value="onsite">On Site</option>
                             <option value="freelance">Freelance</option>
-                            <option value="contract">Contract</option>
+                            <option value="done">Done</option>
                           </select>
                         </div>
                       </div>
@@ -252,7 +252,13 @@ export default function UpdateWorkExperience({ item, id }) {
 
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
-    <div className=" items-center lg:flex">
+    <div
+      className={`items-center lg:flex ${
+        data.is_current == true && inputProps.name == 'end_date'
+          ? 'hidden'
+          : null
+      }`}
+    >
       <div className="w-5/12">
         <label className="text-xs lg:text-base" for="">
           {label}

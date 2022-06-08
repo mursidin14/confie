@@ -22,7 +22,7 @@ export default function UpdateIntershipExperience({ item, id }) {
   }
   function handleChange(e) {
     let { name, value } = e.target;
-    
+
     setDataInternship({ ...dataInternship, [name]: value });
     console.log(dataInternship);
   }
@@ -61,6 +61,8 @@ export default function UpdateIntershipExperience({ item, id }) {
       errorMessage: 'It should be a valid phone number!',
       required: true,
     },
+  ];
+  let inputs2 = [
     {
       name: 'start_date',
       type: 'date',
@@ -76,6 +78,7 @@ export default function UpdateIntershipExperience({ item, id }) {
       required: true,
     },
   ];
+
   return (
     <>
       <div className="flex items-center justify-center">
@@ -138,8 +141,36 @@ export default function UpdateIntershipExperience({ item, id }) {
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="lg:px-8 px-2">
+                    <div className="px-2 lg:px-8">
                       {inputs.map((input, index) => (
+                        <InputFormProfile
+                          data={dataInternship}
+                          {...input}
+                          handleChange={handleChange}
+                        />
+                      ))}
+                      <div className="mt-4 lg:flex">
+                        <div className="sm:w-5/12">
+                          <label className="text-xs lg:text-base" for="">
+                            Magang Saat Ini
+                          </label>
+                        </div>
+                        <div className="flex items-center gap-3 lg:w-7/12">
+                          <input
+                            checked={dataInternship.is_current}
+                            type="checkbox"
+                            id="current_school"
+                            onChange={() => {
+                              setDataInternship({
+                                ...dataInternship,
+                                is_current: !dataInternship.is_current,
+                              });
+                            }}
+                          />
+                          <label for="current_school">Ya</label>
+                        </div>
+                      </div>
+                      {inputs2.map((input, index) => (
                         <InputFormProfile
                           data={dataInternship}
                           {...input}
@@ -161,27 +192,6 @@ export default function UpdateIntershipExperience({ item, id }) {
                             className="w-full rounded-md bg-soft-gray p-5"
                             rows="10"
                           ></textarea>
-                        </div>
-                      </div>
-                      <div className="mt-4 lg:flex">
-                        <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
-                            Magang Saat Ini
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-3 lg:w-7/12">
-                          <input
-                            checked={dataInternship.is_current}
-                            type="checkbox"
-                            id="current_school"
-                            onChange={() => {
-                              setDataInternship({
-                                ...dataInternship,
-                                is_current: !dataInternship.is_current,
-                              });
-                            }}
-                          />
-                          <label for="current_school">Ya</label>
                         </div>
                       </div>
                     </div>
@@ -217,7 +227,13 @@ export default function UpdateIntershipExperience({ item, id }) {
 
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
-    <div className=" items-center lg:flex">
+    <div
+      className={`items-center lg:flex ${
+        data.is_current == true && inputProps.name == 'end_date'
+          ? 'hidden'
+          : null
+      }`}
+    >
       <div className="w-5/12">
         <label className="text-xs lg:text-base" for="">
           {label}

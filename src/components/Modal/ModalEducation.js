@@ -21,12 +21,12 @@ export default function ModalEducation() {
     if (e.target.name === 'start_date' || e.target.name === 'end_date') {
       setDataEducation({
         ...dataEducation,
-        [e.target.name]: (e.target.value),
+        [e.target.name]: e.target.value,
       });
     } else {
       setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
     }
-    console.log(dataEducation)
+    console.log(dataEducation);
   }
 
   async function handleSubmit() {
@@ -51,8 +51,6 @@ export default function ModalEducation() {
       label: 'Sekolah/Universitas',
       type: 'text',
       name: 'school',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
       pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
@@ -60,20 +58,19 @@ export default function ModalEducation() {
       name: 'major',
       label: 'Jurusan',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
+  ];
+  let inputs2 = [
     {
       name: 'start_date',
       type: 'number',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
       type: 'number',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,
     },
@@ -123,32 +120,18 @@ export default function ModalEducation() {
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="lg:px-8 px-2">
+                    <div className="px-2 lg:px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
+                          data={dataEducation}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
                       <div className="mt-4 lg:flex">
-                        <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
-                            Deskripsi
-                          </label>
-                        </div>
-                        <div className="lg:w-7/12">
-                          <textarea
-                            onChange={handleChange}
-                            name="description"
-                            id=""
-                            className="w-full rounded-md bg-soft-gray p-5"
-                            rows="10"
-                          ></textarea>
-                        </div>
-                      </div>
-                      <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Sekolah saat ini
                           </label>
                         </div>
@@ -163,7 +146,31 @@ export default function ModalEducation() {
                               });
                             }}
                           />
-                          <label for="current_school">Ya</label>
+                          <label htmlFor="current_school">Ya</label>
+                        </div>
+                      </div>
+                      {inputs2.map((input, index) => (
+                        <InputFormProfile
+                          key={index}
+                          data={dataEducation}
+                          handleChange={handleChange}
+                          {...input}
+                        />
+                      ))}
+                      <div className="mt-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            Deskripsi
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <textarea
+                            onChange={handleChange}
+                            name="description"
+                            id=""
+                            className="w-full rounded-md bg-soft-gray p-5"
+                            rows="10"
+                          ></textarea>
                         </div>
                       </div>
                     </div>
@@ -197,11 +204,17 @@ export default function ModalEducation() {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
-    <div className=" items-center lg:flex">
+    <div
+      className={`items-center lg:flex ${
+        data.is_current == true && inputProps.name == 'end_date'
+          ? 'hidden'
+          : null
+      }`}
+    >
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" htmlFor="">
           {label}
         </label>
       </div>

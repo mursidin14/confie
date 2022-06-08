@@ -44,8 +44,6 @@ export default function ModalInternship() {
       label: 'Posisi',
       type: 'text',
       name: 'position',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
       pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
@@ -53,20 +51,19 @@ export default function ModalInternship() {
       name: 'agency',
       label: 'Instansi',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
+  ];
+  let inputs2 = [
     {
       name: 'start_date',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,
     },
@@ -118,27 +115,11 @@ export default function ModalInternship() {
                   <div className="my-5">
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
-                        <InputFormProfile {...input} handleChange={handleChange} />
+                        <InputFormProfile data={dataInternship} key={index} {...input} handleChange={handleChange} />
                       ))}
-                      <div className="mt-4 lg:flex">
-                        <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
-                            Deskripsi
-                          </label>
-                        </div>
-                        <div className="lg:w-7/12">
-                          <textarea
-                            onChange={handleChange}
-                            name="description"
-                            id=""
-                            className="w-full rounded-md bg-soft-gray p-5"
-                            rows="10"
-                          ></textarea>
-                        </div>
-                      </div>
-                      <div className="mt-4 lg:flex">
+                       <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Magang Saat Ini
                           </label>
                         </div>
@@ -153,9 +134,29 @@ export default function ModalInternship() {
                               });
                             }}
                           />
-                          <label for="current_school">Ya</label>
+                          <label htmlFor="current_school">Ya</label>
                         </div>
                       </div>
+                      {inputs2.map((input, index) => (
+                        <InputFormProfile data={dataInternship} key={index} {...input} handleChange={handleChange} />
+                      ))}
+                      <div className="mt-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            Deskripsi
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <textarea
+                            onChange={handleChange}
+                            name="description"
+                            id=""
+                            className="w-full rounded-md bg-soft-gray p-5"
+                            rows="10"
+                          ></textarea>
+                        </div>
+                      </div>
+                     
                     </div>
                   </div>
                   <section className="text-left text-sm text-red-500 px-8">
@@ -184,11 +185,15 @@ export default function ModalInternship() {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className=" items-center lg:flex">
+    <div className={`items-center lg:flex ${
+      data.is_current == true && inputProps.name == 'end_date'
+        ? 'hidden'
+        : null
+    }`}>
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" htmlFor="">
           {label}
         </label>
       </div>

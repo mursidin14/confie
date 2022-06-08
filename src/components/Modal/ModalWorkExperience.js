@@ -48,8 +48,6 @@ export default function ModalWorkExperience() {
       label: 'Posisi',
       type: 'text',
       name: 'position',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
       pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
@@ -57,7 +55,6 @@ export default function ModalWorkExperience() {
       name: 'agency',
       label: 'Instansi',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
   ];
@@ -65,14 +62,12 @@ export default function ModalWorkExperience() {
     {
       name: 'start_date',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,
     },
@@ -125,13 +120,15 @@ export default function ModalWorkExperience() {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
+                          data={dataWorkExperience}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Bekerja saat ini
                           </label>
                         </div>
@@ -145,18 +142,20 @@ export default function ModalWorkExperience() {
                             }}
                             type="checkbox"
                           />
-                          <label for="">Ya</label>
+                          <label htmlFor="">Ya</label>
                         </div>
                       </div>
                       {inputs_2.map((input, index) => (
                         <InputFormProfile
+                          key={index}
+                          data={dataWorkExperience}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Status
                           </label>
                         </div>
@@ -175,13 +174,13 @@ export default function ModalWorkExperience() {
                           >
                             <option value="onsite">On Site</option>
                             <option value="freelance">Freelance</option>
-                            <option value="contract">Contract</option>
+                            <option value="done">Done</option>
                           </select>
                         </div>
                       </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Deskripsi
                           </label>
                         </div>
@@ -226,11 +225,15 @@ export default function ModalWorkExperience() {
   );
 }
 
-function InputFormProfile({ label, handleChange, ...inputProps }) {
+function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className=" items-center lg:flex">
+    <div className={`items-center lg:flex ${
+      data.is_current == true && inputProps.name == 'end_date'
+        ? 'hidden'
+        : null
+    }`}>
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" htmlFor="">
           {label}
         </label>
       </div>

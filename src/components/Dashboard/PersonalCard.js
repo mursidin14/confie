@@ -44,7 +44,7 @@ export default function PersonalCard({data_profile, id, loading}) {
               <ButtonDashboard id={id} data={data_profile} />
             </div>
           </div>
-          <JobStatus />
+          <JobStatus data={data_profile.experiences.filter(exp => exp.is_current == true)[0]} />
           <div className="hidden md:block">
             <Status data={data_profile}/>
           </div>
@@ -99,7 +99,7 @@ function EmploymentStatus({work}) {
   );
 }
 
-function JobStatus({}) {
+function JobStatus({data}) {
   return (
     <div className="">
       <div className="mb-3 flex items-center gap-3">
@@ -121,7 +121,7 @@ function JobStatus({}) {
           />
         </svg>
 
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">Backend Developer</p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data.position}</p>
       </div>
       <div className="mt flex items-center gap-3">
         <svg
@@ -142,7 +142,7 @@ function JobStatus({}) {
           />
         </svg>
 
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">Upana Studio</p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data.agency}</p>
       </div>
     </div>
   );

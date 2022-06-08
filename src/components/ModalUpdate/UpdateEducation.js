@@ -58,7 +58,9 @@ export default function UpdateEducation({ item, id }) {
       errorMessage: 'It should be a valid phone number!',
       required: true,
     },
-    {
+  ];
+  let inputs2 = [
+    { 
       name: 'start_date',
       type: 'number',
       errorMessage: 'It should be a valid email address!',
@@ -144,23 +146,6 @@ export default function UpdateEducation({ item, id }) {
                         />
                       ))}
                       <div className="mt-4 lg:flex">
-                        <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
-                            Deskripsi
-                          </label>
-                        </div>
-                        <div className="lg:w-7/12">
-                          <textarea
-                            value={dataEducation.description}
-                            onChange={handleChange}
-                            name="description"
-                            id=""
-                            className="w-full rounded-md bg-soft-gray p-5"
-                            rows="10"
-                          ></textarea>
-                        </div>
-                      </div>
-                      <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">
                           <label className="text-xs lg:text-base" for="">
                             Sekolah saat ini
@@ -181,6 +166,31 @@ export default function UpdateEducation({ item, id }) {
                           <label for="current_school">Ya</label>
                         </div>
                       </div>
+                      {inputs2.map((input, index) => (
+                        <InputFormProfile
+                          data={dataEducation}
+                          handleChange={handleChange}
+                          {...input}
+                        />
+                      ))}
+                      <div className="mt-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" for="">
+                            Deskripsi
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <textarea
+                            value={dataEducation.description}
+                            onChange={handleChange}
+                            name="description"
+                            id=""
+                            className="w-full rounded-md bg-soft-gray p-5"
+                            rows="10"
+                          ></textarea>
+                        </div>
+                      </div>
+                      
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">
@@ -214,7 +224,13 @@ export default function UpdateEducation({ item, id }) {
 
 function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className=" items-center lg:flex">
+    <div
+      className={`items-center lg:flex ${
+        data.is_current == true && inputProps.name == 'end_date'
+          ? 'hidden'
+          : null
+      }`}
+    >
       <div className="w-5/12">
         <label className="text-xs lg:text-base" for="">
           {label}
