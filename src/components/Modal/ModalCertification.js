@@ -63,6 +63,7 @@ export default function ModalCertification() {
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun',
       required: true,
+      min: 0,
     },
   ];
   return (

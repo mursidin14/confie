@@ -14,9 +14,8 @@ export default function CertificationCard({data_profile}) {
   })
   async function handleDelete(id) {
     const response = await ProfileService.deleteCertificate(id)
-    alert("Data berhasil dihapus")
     window.location.reload()
-}
+ }
   return (
     <div className="lg:relative">
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">

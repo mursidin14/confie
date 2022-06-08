@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import ModalTarget from 'components/Modal/ModalTarget';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
+import SweetAlert from 'components/SweetAlert';
 
 export default function PersonalDevelopment() {
   const { id } = useParams();
@@ -18,6 +19,11 @@ export default function PersonalDevelopment() {
     }
     getTarget();
   }, []);
+  async function handleDelete(id) {
+    await PersonalPlanService.deletePersonalPlanData(id);
+    alert('Data berhasil dihapus');
+    window.location.reload();
+  }
 
   return (
     <Layout userId={id} PageName={'Personal Development Plan'}>
@@ -29,7 +35,7 @@ export default function PersonalDevelopment() {
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-            <Table userId={id} items={target} loading={loading}></Table>
+            <Table handleDelete={handleDelete} userId={id} items={target} loading={loading}></Table>
           </div>
         </div>
       </div>
@@ -37,7 +43,7 @@ export default function PersonalDevelopment() {
   );
 }
 
-function Table({ items, userId, loading }) {
+function Table({ items, userId, loading, handleDelete }) {
   return (
     <div>
       {items == 'Not found' ? (
@@ -102,43 +108,8 @@ function Table({ items, userId, loading }) {
                           />
                         </svg>
                       </a>
-
-                      <button
-                        onClick={async function () {
-                          await PersonalPlanService.deletePersonalPlanData(
-                            item.id
-                          );
-                          alert('Data berhasil dihapus');
-                          window.location.reload();
-                        }}
-                      >
-                        <svg
-                          className="w-11"
-                          width="34"
-                          height="34"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
-                            fill="#FFF5F8"
-                          />
-                          <path
-                            d="M11.75 14.75C11.75 14.3358 12.0858 14 12.5 14H21.5C21.9142 14 22.25 14.3358 22.25 14.75V21.5C22.25 22.7427 21.2427 23.75 20 23.75H14C12.7574 23.75 11.75 22.7427 11.75 21.5V14.75Z"
-                            fill="#F1416C"
-                          />
-                          <path
-                            opacity="0.5"
-                            d="M11.75 11.75C11.75 11.3358 12.0858 11 12.5 11H21.5C21.9142 11 22.25 11.3358 22.25 11.75C22.25 12.1642 21.9142 12.5 21.5 12.5H12.5C12.0858 12.5 11.75 12.1642 11.75 11.75Z"
-                            fill="#F1416C"
-                          />
-                          <path
-                            opacity="0.5"
-                            d="M14.75 11C14.75 10.5858 15.0858 10.25 15.5 10.25H18.5C18.9142 10.25 19.25 10.5858 19.25 11H14.75Z"
-                            fill="#F1416C"
-                          />
-                        </svg>
-                      </button>
+                      <SweetAlert item={item} handleDelete={handleDelete}></SweetAlert>
+                    
                     </div>
                   </td>
                 </tr>

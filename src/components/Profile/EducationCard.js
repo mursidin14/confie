@@ -13,7 +13,6 @@ export default function EducationCard({ data_profile }) {
   })
   async function handleDelete(id) {
     const response = await ProfileService.deleteEducation(id);
-    alert("Data berhasil dihapus")
     window.location.reload();
   }
   return (
