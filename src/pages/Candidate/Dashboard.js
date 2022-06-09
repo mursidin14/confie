@@ -30,7 +30,7 @@ export default function Dashboard() {
       {loading ? (
         <SkeletonCard />
       ) : (
-        <article className="rounded-md bg-[#FFF6E7] py-7 px-3 shadow-mine sm:px-8 flex items-center gap-5 mb-5">
+        <article className="rounded-md bg-[#FFF6E7] py-7 px-3 shadow-mine sm:px-8 flex sm:block items-center gap-5 mb-5">
           <svg
             className="w-12 h-12"
             width="29"
@@ -51,7 +51,7 @@ export default function Dashboard() {
           </svg>
           <div className='text-left'>
             <h3 className='text-lg font-semibold text-black'>Email anda belum terverifikasi!</h3>
-            <p className='text-sm'>Silahkan klik tombol atau link verifikasi pada email yang dikirimkan oleh confie.id ke email anda. Apabila anda tidak menerima email apapun, silahkan periksa atau ganti email anda pada <a href="/setting" className='text-[#7588CD] italic font-semibold'>Account Setting</a> atau kirim ulang email verifikasi <a href="" className='text-[#7588CD] italic font-semibold'>klik disini</a></p>
+            <p className='lg:text-sm text-xs'>Silahkan klik tombol atau link verifikasi pada email yang dikirimkan oleh confie.id ke email anda. Apabila anda tidak menerima email apapun, silahkan periksa atau ganti email anda pada <a href="/setting" className='text-[#7588CD] italic font-semibold'>Account Setting</a> atau kirim ulang email verifikasi <a href="" className='text-[#7588CD] italic font-semibold'>klik disini</a></p>
           </div>
         </article>
       )}
