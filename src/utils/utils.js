@@ -12,9 +12,9 @@ export function makeCapital(name) {
 }
 
 const getCity = (data) => {
-  let city = [];
+  const city = [];
   data.forEach((element) => {
-    let city_data = {};
+    const city_data = {};
     city_data.id = element.kode;
     city_data.name = element.kabkota;
     city.push(city_data);
@@ -92,6 +92,9 @@ const getYearMonthDay = (epoch) => {
 };
 
 export const getLength = (word) => {
+  if(word == undefined) {
+    return true
+  }
   return word.length > 24 ? true : false;
 }
 
