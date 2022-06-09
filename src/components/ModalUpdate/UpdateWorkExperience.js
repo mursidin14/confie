@@ -31,7 +31,8 @@ export default function UpdateWorkExperience({ item, id }) {
     const data = {
       ...dataWorkExperience,
     };
-    if (data['end_date'] === 0) {
+
+    if (data['end_date'] === null) {
       delete data['end_date'] 
     }else{
       data['end_date'] = utils.timeEpoch(data['end_date']);
