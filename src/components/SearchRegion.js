@@ -327,7 +327,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="mt-1 h-fit lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="mt-1 h-[120px] lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
@@ -433,7 +433,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="mt-1 h-fit lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
+          <Combobox.Options className="mt-1 h-[120px] lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
