@@ -29,7 +29,6 @@ export default function Header({data, offCanvas, handleNav, PageName }) {
           />
         </svg>
       </button>
-
       <h4 className="hidden text-[18px] font-semibold lg:block">{PageName}</h4>
       <img className="block w-24 lg:hidden" src="/logo.png" alt="" />
       <div className="flex items-center gap-6 py-3">
@@ -90,7 +89,7 @@ export default function Header({data, offCanvas, handleNav, PageName }) {
             alt=""
           />
           <section
-            className={`absolute right-1 rounded-md bg-white px-5 py-2 shadow-mine top-14 ${
+            className={`absolute right-1 rounded-md bg-white px-5 py-2 shadow-mine top-14 z-10 ${
               !open ? 'translate-y-0  opacity-0 hidden' : ' translate-y-1 opacity-100 block'
             } transition-all max-w-xs`}
           >
