@@ -32,7 +32,7 @@ export default function Dashboard() {
       ) : (
         <article className="rounded-md bg-[#FFF6E7] py-7 px-3 shadow-mine sm:px-8 flex sm:block items-center gap-5 mb-5">
           <svg
-            className="w-12 h-12"
+            className="sm:w-12 sm:h-12 w-7 h-7"
             width="29"
             height="17"
             viewBox="0 0 29 17"
