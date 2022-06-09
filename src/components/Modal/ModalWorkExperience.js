@@ -23,16 +23,15 @@ export default function ModalWorkExperience() {
     setIsOpen(true);
   }
   async function handleSubmit() {
-    console.log("Submit")
-
-    const data = {
+      const data = {
       ...dataWorkExperience,
     };
-    data['start_date'] = utils.timeEpoch(data['start_date']);
+    if (data['start_date']) {
+      data['start_date'] = utils.timeEpoch(data['start_date']);
+    }
     if (data['end_date']) {
       data['end_date'] = utils.timeEpoch(data['end_date']);
     }
-    console.log("Send")
 
     const response = await ProfileService.addJobExperience(data);
     if (response.data.meta.status == 'error') {

@@ -31,8 +31,12 @@ export default function UpdateWorkExperience({ item, id }) {
     const data = {
       ...dataWorkExperience,
     };
+    if (data['end_date'] === 0) {
+      delete data['end_date'] 
+    }else{
+      data['end_date'] = utils.timeEpoch(data['end_date']);
+    }
     data['start_date'] = utils.timeEpoch(data['start_date']);
-    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.updateJobExperience(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];

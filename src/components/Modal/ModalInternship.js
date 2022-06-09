@@ -23,7 +23,9 @@ export default function ModalInternship() {
     const data = {
       ...dataInternship,
     };
-    data['start_date'] = utils.timeEpoch(data['start_date']);
+    if (data['start_date']) {
+      data['start_date'] = utils.timeEpoch(data['start_date']);
+    }
     if (data['end_date']) {
       data['end_date'] = utils.timeEpoch(data['end_date']);
     }
