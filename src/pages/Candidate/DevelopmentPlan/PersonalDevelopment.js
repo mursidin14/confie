@@ -1,5 +1,4 @@
 import Layout from 'components/Layout/Layout';
-import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import ModalTarget from 'components/Modal/ModalTarget';
@@ -7,7 +6,6 @@ import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import SweetAlert from 'components/SweetAlert';
 
 export default function PersonalDevelopment() {
-  const { id } = useParams();
   const [target, setTarget] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +23,7 @@ export default function PersonalDevelopment() {
   }
 
   return (
-    <Layout userId={id} PageName={'Personal Development Plan'}>
+    <Layout PageName={'Personal Development Plan'}>
       <div className="lg:relative">
         <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
           <div className="flex items-center justify-between px-8">
@@ -34,7 +32,7 @@ export default function PersonalDevelopment() {
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-            <Table handleDelete={handleDelete} userId={id} items={target} loading={loading}></Table>
+            <Table handleDelete={handleDelete} items={target} loading={loading}></Table>
           </div>
         </div>
       </div>
@@ -42,7 +40,7 @@ export default function PersonalDevelopment() {
   );
 }
 
-function Table({ items, userId, loading, handleDelete }) {
+function Table({ items, loading, handleDelete }) {
   return (
     <div>
       {items == 'Not found' ? (
@@ -83,7 +81,7 @@ function Table({ items, userId, loading, handleDelete }) {
                   </td>
                   <td className="w-[6%]">
                     <div className="flex justify-center gap-2">
-                      <a href={`/pdp/${userId}/detail/${item.id}`}>
+                      <a href={`/pdp/detail/${item.id}`}>
                         <svg
                           className="w-11"
                           width="34"

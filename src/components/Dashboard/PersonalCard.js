@@ -4,7 +4,7 @@ import Pdf from 'react-to-pdf';
 import CurriculumVitae from 'components/CurriculumVitae';
 import utils from 'utils/utils';
 
-export default function PersonalCard({data_profile, id, loading}) {
+export default function PersonalCard({data_profile}) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-start gap-3 lg:items-stretch">
@@ -41,7 +41,7 @@ export default function PersonalCard({data_profile, id, loading}) {
               <EmploymentStatus work={utils.isWork(data_profile.experiences)} />
             </div>
             <div className="hidden md:block">
-              <ButtonDashboard id={id} data={data_profile} />
+              <ButtonDashboard data={data_profile} />
             </div>
           </div>
           <JobStatus data={data_profile.experiences.filter(exp => exp.is_current == true)[0]} />
@@ -54,13 +54,13 @@ export default function PersonalCard({data_profile, id, loading}) {
         <Status data={data_profile} />
       </div>
       <div className="block md:hidden">
-        <ButtonDashboard id={id} data={data_profile} />
+        <ButtonDashboard data={data_profile} />
       </div>
     </div>
   );
 }
 
-function ButtonDashboard({id, data}) {
+function ButtonDashboard({data}) {
   const cv = React.createRef();
   return (
     <>
@@ -82,7 +82,7 @@ function ButtonDashboard({id, data}) {
         )}
       </Pdf>
         
-        <a className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit " href={`/profile/${id}`}>
+        <a className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit " href={`/profile/`}>
           <p>Edit Profile</p>
         </a>
       </div>

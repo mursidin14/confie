@@ -7,7 +7,7 @@ import ErrorModal from 'components/Widgets/ErrorModal';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-export default function Layout({ PageName, children, userId }) {
+export default function Layout({ PageName, children }) {
   const [offCanvas, setOffCanvas] = useState(false);
   const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
@@ -36,16 +36,16 @@ export default function Layout({ PageName, children, userId }) {
       {!loading && !isOpen ?  (
         <main className="flex">
           <ASideBar
+            is_verified={data.email_verified_at}
             offCanvas={offCanvas}
             handleNav={handleNav}
             PageName={PageName}
-            userId={userId}
           ></ASideBar>
           <ASideBarMobile
+            is_verified={data.email_verified_at}
             offCanvas={offCanvas}
             handleNav={handleNav}
             PageName={PageName}
-            userId={userId}
           ></ASideBarMobile>
           <section
             className={`${

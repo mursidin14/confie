@@ -7,10 +7,8 @@ import ProfileService from 'services/Profile/ProfileService';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
-import { useParams } from 'react-router-dom';
 
 export default function Dashboard() {
-  const { id } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -28,22 +26,22 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Layout userId={id} PageName={'Dashboard'}>
+    <Layout PageName={'Dashboard'}>
       {loading ? (
         <SkeletonCard />
       ) : (
-        <PersonalCard id={id} data_profile={data.profile} loading={loading} />
+        <PersonalCard data_profile={data.profile}/>
       )}
       <div className="gap-5 lg:flex">
         {loading ? (
           <SkeletonCardSmall />
         ) : (
-          <ClassCard id={id}  />
+          <ClassCard />
         )}
         {loading ? (
           <SkeletonCardSmall />
         ) : (
-          <TargetCard userId={id} data_plan={data.personal_plan} />
+          <TargetCard data_plan={data.personal_plan} />
         )}
       </div>
     </Layout>

@@ -26,6 +26,15 @@ const updateAbout = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
+const updateProfilePicture = (data) =>
+  httpClient
+    .put('/api/profile/photo', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
 
 const getOnlineProfileData = (id) =>
   httpClient
