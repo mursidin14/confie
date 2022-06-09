@@ -31,7 +31,8 @@ export default function UpdateWorkExperience({ item, id }) {
     const data = {
       ...dataWorkExperience,
     };
-
+    console.log(data['end_date'])
+    console.log(data['end_date'] === null)
     if (data['end_date'] === null) {
       delete data['end_date'] 
     }else{

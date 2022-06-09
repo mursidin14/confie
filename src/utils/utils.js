@@ -85,6 +85,9 @@ const isWork = (works_experience) => {
 }
 
 const getYearMonthDay = (epoch) => {
+  if (epoch === null) {
+    return null;
+  }
   const date = new Date(epoch * 1000);
   const month = date.getMonth() + 1;
   const day = date.getDate();
