@@ -31,7 +31,7 @@ export default function UpdateWorkExperience({ item, id }) {
     const data = {
       ...dataWorkExperience,
     };
-    if (data['end_date'] === null) {
+    if (data['end_date'] === null && data['is_current'] === false) {
       setError(...error, ['End date is required']);
       return
     }else{
