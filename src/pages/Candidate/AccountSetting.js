@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import BasicCard from 'components/BasicCard';
 import Skeleton from 'react-loading-skeleton';
+import ProfileService from 'services/Profile/ProfileService';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function AccountSetting() {
@@ -18,6 +19,10 @@ export default function AccountSetting() {
   function handleOnChange(e) {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
+  }
+  async function handleUpdate() {
+    const response = await ProfileService.updateProfileData(data);
+    console.log(response)
   }
   let inputs = [
     {
@@ -61,7 +66,7 @@ export default function AccountSetting() {
             <InputFormProfile key={input.name} {...input} data={data} handleOnChange={handleOnChange} />
           ))}
           <div className="mt-3 px-10 text-right">
-            <button className="primary-btn w-fit px-5 py-2">Update</button>
+            <button onClick={handleUpdate} className="primary-btn w-fit px-5 py-2">Update</button>
           </div>
         </BasicCard>
       )}

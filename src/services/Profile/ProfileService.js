@@ -36,6 +36,16 @@ const updateProfilePicture = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
+const updateSettingProfile = (data) =>
+  httpClient
+    .put('/api/password', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
 const getOnlineProfileData = (id) =>
   httpClient
     .get(`/api/profile/${id}`)
@@ -181,6 +191,8 @@ const LogoutProfile = () =>
 const ProfileService = {
   getProfileData,
   updateProfileData,
+  updateSettingProfile,
+  updateProfilePicture,
   updateAbout,
   getOnlineProfileData,
   addSkill,
