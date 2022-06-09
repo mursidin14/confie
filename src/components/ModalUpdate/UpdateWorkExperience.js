@@ -8,7 +8,6 @@ export default function UpdateWorkExperience({ item, id }) {
   const [dataWorkExperience, setDataWorkExperience] = useState({
     agency: item.agency,
     description: item.description,
-    end_date: utils.getYearMonthDay(item.end_date),
     is_current: item.is_current,
     position: item.position,
     start_date: utils.getYearMonthDay(item.start_date),
@@ -31,10 +30,10 @@ export default function UpdateWorkExperience({ item, id }) {
     const data = {
       ...dataWorkExperience,
     };
-    if (data['end_date'] === null && data['is_current'] === false) {
+    if (data['end_date'] === undefined && data['is_current'] === false) {
       setError(...error, ['End date is required']);
       return
-    }else{
+    }else if(data['end_date'] !== undefined){
       data['end_date'] = utils.timeEpoch(data['end_date']);
     }
     data['start_date'] = utils.timeEpoch(data['start_date']);
