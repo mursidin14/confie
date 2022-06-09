@@ -8,7 +8,6 @@ export default function UpdateEducation({ item, id }) {
   const [dataEducation, setDataEducation] = useState({
     description: item.description,
     end_date: item.end_date,
-    is_current: item.is_current,
     major: item.major,
     school: item.school,
     start_date: item.start_date,
@@ -149,27 +148,6 @@ export default function UpdateEducation({ item, id }) {
                           {...input}
                         />
                       ))}
-                      <div className="mt-4 lg:flex">
-                        <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
-                            Sekolah saat ini
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-3 lg:w-7/12">
-                          <input
-                            checked={dataEducation.is_current}
-                            type="checkbox"
-                            id="current_school"
-                            onChange={() => {
-                              setDataEducation({
-                                ...dataEducation,
-                                is_current: !dataEducation.is_current,
-                              });
-                            }}
-                          />
-                          <label for="current_school">Ya</label>
-                        </div>
-                      </div>
                       {inputs2.map((input, index) => (
                         <InputFormProfile
                           data={dataEducation}

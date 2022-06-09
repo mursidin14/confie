@@ -10,7 +10,6 @@ export default function UpdateIntershipExperience({ item, id }) {
     agency: item.agency,
     description: item.description,
     end_date: utils.getYearMonthDay(item.end_date),
-    is_current: item.is_current,
     position: item.position,
     start_date: utils.getYearMonthDay(item.start_date),
   });
@@ -149,27 +148,6 @@ export default function UpdateIntershipExperience({ item, id }) {
                           handleChange={handleChange}
                         />
                       ))}
-                      <div className="mt-4 lg:flex">
-                        <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
-                            Magang Saat Ini
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-3 lg:w-7/12">
-                          <input
-                            checked={dataInternship.is_current}
-                            type="checkbox"
-                            id="current_school"
-                            onChange={() => {
-                              setDataInternship({
-                                ...dataInternship,
-                                is_current: !dataInternship.is_current,
-                              });
-                            }}
-                          />
-                          <label for="current_school">Ya</label>
-                        </div>
-                      </div>
                       {inputs2.map((input, index) => (
                         <InputFormProfile
                           data={dataInternship}
