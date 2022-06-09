@@ -31,10 +31,9 @@ export default function UpdateWorkExperience({ item, id }) {
     const data = {
       ...dataWorkExperience,
     };
-    console.log(data['end_date'])
-    console.log(data['end_date'] === null)
     if (data['end_date'] === null) {
-      delete data['end_date'] 
+      setError(...error, ['End date is required']);
+      return
     }else{
       data['end_date'] = utils.timeEpoch(data['end_date']);
     }
