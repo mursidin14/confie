@@ -31,7 +31,7 @@ export default function Dashboard() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.email_verified_at === null ? (
+          {data.profile.email_verified_at === true ? (
             <></>
           ) : (
             <article className="mb-5 items-center gap-5 rounded-md bg-[#FFF6E7] py-7 px-3 shadow-mine sm:flex sm:px-8">
