@@ -68,7 +68,7 @@ export default function Login() {
                   e.preventDefault();
                   const respon = await AuthService.login(data);
                   if (respon.statusText === 'OK') {
-                    window.location.href = `/dashboard/${respon.data.data.slug}`;
+                    window.location.href = `/dashboardp`;
                   }else{
                     setError(true);
                     setError_msg(respon.data.meta.message)

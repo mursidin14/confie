@@ -54,9 +54,9 @@ export default function AccountSetting() {
 }
 function InputFormProfile({ label, handleOnChange, data, ...inputProps }) {
   return (
-    <div className="items-center justify-between px-10 lg:flex ">
-      <label className="w-1/3 text-left text-xs lg:text-base">{label}</label>
-      <div className="my-2 lg:py-3 grow">
+    <div className="items-center justify-between px-10 lg:flex-row flex flex-col">
+      <label className="lg:w-1/3 w-full text-left text-sm lg:text-base">{label}</label>
+      <div className="my-2 lg:py-3 grow lg:w-fit w-full">
         <input
           value={data[inputProps.name]}
           onChange={handleOnChange}
@@ -64,7 +64,7 @@ function InputFormProfile({ label, handleOnChange, data, ...inputProps }) {
           className="input-form"
         />
         {inputProps.type === 'password' && (
-          <p className="text-sm italic text-[#A1A5B7] text-left my-2">
+          <p className="lg:text-sm text-xs italic text-[#A1A5B7] text-left my-2">
             Leave this field blank if you don’t want to change password
           </p>
         )}

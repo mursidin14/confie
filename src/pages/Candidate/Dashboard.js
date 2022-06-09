@@ -30,7 +30,7 @@ export default function Dashboard() {
       {loading ? (
         <SkeletonCard />
       ) : (
-        <article className="rounded-md bg-[#FFF6E7] py-7 px-3 shadow-mine sm:px-8 flex items-center gap-5">
+        <article className="rounded-md bg-[#FFF6E7] py-7 px-3 shadow-mine sm:px-8 flex items-center gap-5 mb-5">
           <svg
             className="w-12 h-12"
             width="29"
