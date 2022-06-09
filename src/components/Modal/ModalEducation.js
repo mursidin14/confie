@@ -6,7 +6,6 @@ import utils from 'utils/utils';
 export default function ModalEducation() {
   let [isOpen, setIsOpen] = useState(false);
   const [dataEducation, setDataEducation] = useState({
-    is_current: false,
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -123,27 +122,6 @@ export default function ModalEducation() {
                           {...input}
                         />
                       ))}
-                      <div className="mt-4 lg:flex">
-                        <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" htmlFor="">
-                            Sekolah saat ini
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-3 lg:w-7/12">
-                          <input
-                            checked={dataEducation.is_current}
-                            type="checkbox"
-                            id="current_school"
-                            onChange={() => {
-                              setDataEducation({
-                                ...dataEducation,
-                                is_current: !dataEducation.is_current,
-                              });
-                            }}
-                          />
-                          <label htmlFor="current_school">Ya</label>
-                        </div>
-                      </div>
                       {inputs2.map((input, index) => (
                         <InputFormProfile
                           key={index}
@@ -203,11 +181,7 @@ export default function ModalEducation() {
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div
-      className={`items-center  ${
-        data.is_current == true && inputProps.name == 'end_date'
-          ? 'hidden'
-          : 'lg:flex'
-      }`}
+      className={`items-center lg:flex`}
     >
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">

@@ -7,7 +7,6 @@ export default function ModalInternship() {
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([])
   const [dataInternship, setDataInternship] = useState({
-    is_current: false,
   })
   function closeModal() {
     setIsOpen(false);
@@ -119,27 +118,6 @@ export default function ModalInternship() {
                       {inputs.map((input, index) => (
                         <InputFormProfile data={dataInternship} key={index} {...input} handleChange={handleChange} />
                       ))}
-                       <div className="mt-4 lg:flex">
-                        <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" htmlFor="">
-                            Magang Saat Ini
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-3 lg:w-7/12">
-                          <input
-                            checked={dataInternship.is_current}
-                            type="checkbox"
-                            id="current_school"
-                            onChange={() => {
-                              setDataInternship({
-                                ...dataInternship,
-                                is_current: !dataInternship.is_current,
-                              });
-                            }}
-                          />
-                          <label htmlFor="current_school">Ya</label>
-                        </div>
-                      </div>
                       {inputs2.map((input, index) => (
                         <InputFormProfile data={dataInternship} key={index} {...input} handleChange={handleChange} />
                       ))}
@@ -191,11 +169,7 @@ export default function ModalInternship() {
 
 function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className={`items-center ${
-      data.is_current == true && inputProps.name == 'end_date'
-        ? 'hidden'
-        : 'lg:flex'
-    }`}>
+    <div className={`items-center lg:flex`}>
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">
           {label}

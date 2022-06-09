@@ -252,7 +252,7 @@ export function SearchRegionCity({ data, onChange, city }) {
     </Combobox>
   );
 }
-export function SearchRegionProfile({setResetCity, data, onChange, setCity }) {
+export function SearchRegionProfile({ data, onChange, setCity }) {
   const province = {
     name: data.province_name,
   }
@@ -276,8 +276,8 @@ export function SearchRegionProfile({setResetCity, data, onChange, setCity }) {
     onChange({
       ...data,
       province: id,
+      city_name: ''
     });
-    setResetCity(true)
     const response = await httpClient.get(`api/location?provinsi=${id}`);
     setCity(utils.getCity(response.data.data));
   }
@@ -290,8 +290,8 @@ export function SearchRegionProfile({setResetCity, data, onChange, setCity }) {
     onChange({
       ...data,
       province: id,
+      city_name: ''
     });
-    setResetCity(true)
     const response = await httpClient.get(`api/location?provinsi=${id}`);
     setCity(utils.getCity(response.data.data));
   }
@@ -364,10 +364,10 @@ export function SearchRegionProfile({setResetCity, data, onChange, setCity }) {
     </Combobox>
   );
 }
-export function SearchRegionCityProfile({resetCity, data, onChange, city }) {
+export function SearchRegionCityProfile({ data, onChange, city }) {
   const city_profile = {
     id: data.city,
-    name: resetCity ? '' : data.city_name,
+    name: data.city_name,
   }
   const [selected, setSelected] = useState(city_profile);
   const [query, setQuery] = useState('');
