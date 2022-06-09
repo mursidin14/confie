@@ -4,6 +4,7 @@ import Register from 'pages/Register/RegisterForm';
 import Dashboard from 'pages/Candidate/Dashboard';
 import Profile from 'pages/Candidate/Profile';
 import ProfileCandidate from 'pages/Candidate/ProfileCandidate';
+import AccountSetting from 'pages/Candidate/AccountSetting';
 import PersonalDevelopment from 'pages/Candidate/DevelopmentPlan/PersonalDevelopment';
 import PersonalDevelopmentDetail from 'pages/Candidate/DevelopmentPlan/PersonalDevelopmentDetail';
 import Jobs from 'pages/Candidate/Job/Jobs';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/:id" element={<ProfileCandidate />} />
+        <Route path="/setting" element={<AccountSetting />} />
         <Route path="/pdp" element={<PersonalDevelopment />} />
         <Route path="/pdp/detail/:idDetail" element={<PersonalDevelopmentDetail />} />
         <Route path="/lowongan" element={<Jobs />}/>

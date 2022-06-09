@@ -9,7 +9,7 @@ export default function NotFound() {
           <div>
           <p className='text-9xl mb-5 font-bold'>4😓4</p>
           <p>Halaman ga ada, bang!</p>
-          <a className='text-xs underline font-bold' href={`/dashboard/${id}`}>Back to Home</a>
+          <a className='text-xs underline font-bold' href={`/dashboard/`}>Back to Home</a>
           </div>
         </div>
     </>

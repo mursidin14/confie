@@ -9,7 +9,12 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function Layout({ PageName, children }) {
   const [offCanvas, setOffCanvas] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    email_verified_at: null,
+    full_name: 'Annas Casmawan Ahmad',
+    email: 'annas@gmail.com',
+    gender: 'L',
+  });
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {

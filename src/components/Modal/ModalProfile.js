@@ -162,7 +162,7 @@ export default function ModalProfile({ data_profile }) {
                             onChange={handleOnChange}
                           />
                           <label className="mr-5 text-sm " htmlFor="male">
-                            Male
+                            Laki-Laki
                           </label>
                           <input
                             className="mr-2"
@@ -174,7 +174,7 @@ export default function ModalProfile({ data_profile }) {
                             onChange={handleOnChange}
                           />
                           <label className="mr-5 text-sm " htmlFor="female">
-                            Female
+                            Perempuan
                           </label>
                         </div>
                       </div>

@@ -89,7 +89,7 @@ export default function Header({data, offCanvas, handleNav, PageName }) {
             alt=""
           />
           <section
-            className={`absolute right-1 rounded-md bg-white px-5 py-2 shadow-mine top-14 z-10 ${
+            className={`absolute right-1 rounded-md bg-white px-5 py-2 shadow-mine top-14 z-10 text-left ${
               !open ? 'translate-y-0  opacity-0 hidden' : ' translate-y-1 opacity-100 block'
             } transition-all max-w-xs`}
           >
@@ -97,8 +97,10 @@ export default function Header({data, offCanvas, handleNav, PageName }) {
             <p className='font-semibold'>{makeCapital(data.full_name)}</p>
             <p className='text-xs text-[#7E8299]'>{data.email}</p>
             <hr className='my-2'/>
+            <a href="/setting" className='text-black hover:underline'>Account Setting</a>
+            <hr className='my-2'/>
             </div>
-            <button onClick={clickLogout} className='hover:text-red-500 text-sm transition-all'>Logout</button>
+            <button onClick={clickLogout} className='hover:text-red-500 text-black transition-all'>Logout</button>
           </section>
         </div>
       </div>

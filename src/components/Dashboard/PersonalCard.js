@@ -6,7 +6,7 @@ import utils from 'utils/utils';
 
 export default function PersonalCard({data_profile}) {
   return (
-    <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
+    <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8">
       <div className="flex items-start gap-3 lg:items-stretch">
         <img
           className="w-28 rounded-md object-cover md:w-48"
