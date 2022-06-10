@@ -12,7 +12,6 @@ export default function ModalProfile({ data_profile }) {
   let [isOpen, setIsOpen] = useState(false);
   let [dataProfile, setDataProfile] = useState({
     full_name: data_profile.full_name,
-    email: data_profile.email,
     phone_number: data_profile.phone_number,
     province: data_profile.province,
     province_name: data_profile.province_name,
@@ -46,13 +45,6 @@ export default function ModalProfile({ data_profile }) {
       label: 'Phone Number',
       type: 'number',
       errorMessage: 'It should be a valid phone number!',
-      required: true,
-    },
-    {
-      name: 'email',
-      type: 'email',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Email',
       required: true,
     },
   ];
