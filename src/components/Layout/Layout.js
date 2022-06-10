@@ -38,8 +38,8 @@ export default function Layout({ PageName, children }) {
   }
   return (
     <>
-      {/* {!loading && !isOpen ?  ( */}
-      {true ?  (
+      {!loading && !isOpen ?  (
+      
         <main className="flex">
           <ASideBar
             is_verified={data.email_verified_at}
