@@ -68,7 +68,7 @@ export default function NavBar({is_verified, page, offCanvas}) {
                 <img
                   className="sm:w-5 w-4"
                   src={
-                    item.alias === pageName
+                    item.alias === 'dashboard' && pageName === 'account setting' || item.alias === pageName
                       ? item.icon_active
                       : item.icon_inactive
                   }
