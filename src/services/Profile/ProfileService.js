@@ -6,15 +6,15 @@ const getProfileData = () =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const UploadFilePhoto = (data) =>
-  httpClient
-    .put('/api/profile/photo', data, {
-      headers: {
-        'Content-Type': '',
-      },
-    })
-    .then((response) => response)
-    .catch((error) => error.response);
+    const updateProfileData = (data) =>
+    httpClient
+      .put('/api/profile', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => response)
+      .catch((error) => error.response);
 
 const updateAbout = (data) => 
   httpClient
@@ -191,6 +191,7 @@ const LogoutProfile = () =>
 const ProfileService = {
   getProfileData,
   updateProfilePicture,
+  updateProfileData,
   updateSettingProfile,
   updateProfilePicture,
   updateAbout,
