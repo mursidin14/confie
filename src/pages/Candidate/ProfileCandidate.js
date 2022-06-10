@@ -20,6 +20,7 @@ export default function ProfileCandidate() {
       const response_profile = await ProfileService.getOnlineProfileData(id);
       if (response_profile.data.meta.status == 'error') {
         setNotFound(true);
+        setLoading(false);
         return;
       }
       setDataProfile(response_profile.data.data);
@@ -30,18 +31,20 @@ export default function ProfileCandidate() {
 
   return (
     <>
-      {loading && <>
-        <main className='flex min-h-screen flex-col items-center justify-center'>
-          <img className='animate-pulse' src="/logo.png" alt=""/>
-        </main>
-      </>}
-      {notFound && (
+      {loading && !notFound ? (
+        <>
+          <main className="flex min-h-screen flex-col items-center justify-center">
+            <img className="animate-pulse" src="/logo.png" alt="" />
+          </main>
+        </>
+      ) : null}
+      {notFound && !loading ? (
         <main className="flex min-h-screen flex-col items-center justify-center">
           <p className="mb-5 text-9xl font-bold">😓</p>
           <p className="font-semibold">Profile Not Found!</p>
         </main>
-      )}
-      {!loading && (
+      ) : null}
+      {!loading && !notFound ? (
         <main className="flex shadow-mine md:mx-auto md:w-fit lg:p-5">
           <section className="bg-dark-blue py-10 px-3 text-white sm:px-7 ">
             <div className="">
@@ -90,7 +93,7 @@ export default function ProfileCandidate() {
             <EducationHistory data={dataProfile.educations}></EducationHistory>
           </section>
         </main>
-      )}
+      ) : null}
     </>
   );
 }
