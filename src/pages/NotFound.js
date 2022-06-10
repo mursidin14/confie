@@ -8,7 +8,7 @@ export default function NotFound() {
         <div className='flex justify-center items-center min-h-[calc(100vh-11vh)]'>
           <div>
           <p className='text-9xl mb-5 font-bold'>4😓4</p>
-          <p className='text-xs sm:text-base'>Either you haven't verified ur email or main lu kejahuan bray</p>
+          <p className='text-xs sm:text-base px-8 sm:px-0'>Either you haven't verified ur email or main lu kejahuan bray</p>
           <a className='text-xs underline font-bold' href={`/dashboard/`}>Back to Home</a>
           </div>
         </div>
