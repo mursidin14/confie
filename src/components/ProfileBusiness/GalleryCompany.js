@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 export default function GalleryCompany({children}) {
   let img_company = [1, 2, 3];
   return (

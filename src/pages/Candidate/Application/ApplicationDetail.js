@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout/Layout';
-import BasicJobInformation from 'components/BasicJobInformation';
+import BasicJobInformation from 'pages/Candidate/Job/BasicJobInformation';
 export default function ApplicationDetail() {
   let accept_style = 'border-[#50CD89] bg-[#E8FFF3] text-[#50CD89]'
   let refuse_style = 'border-[#F1416C] bg-[#FFF5F8] text-[#F1416C]'

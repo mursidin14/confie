@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import ModalTarget from 'components/Modal/ModalTarget';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
-import SweetAlert from 'components/SweetAlert';
+import SweetAlert from 'components/Widgets/SweetAlert';
 
 export default function PersonalDevelopment() {
   const [target, setTarget] = useState([]);

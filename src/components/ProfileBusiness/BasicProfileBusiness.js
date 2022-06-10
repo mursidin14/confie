@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import ModalProfileBusiness from 'components/Modal/ModalProfileBusiness';
 
 export default function BasicProfileBusiness({ input, index }) {

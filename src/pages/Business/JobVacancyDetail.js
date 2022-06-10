@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import { Tab } from '@headlessui/react';
 import { useParams } from 'react-router-dom';
 import Pagination from 'components/Widgets/Pagination';

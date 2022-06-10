@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tab } from '@headlessui/react';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import { useParams } from 'react-router-dom';
 
 function classNames(...classes) {

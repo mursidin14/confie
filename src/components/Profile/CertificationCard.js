@@ -4,7 +4,7 @@ import ModalCertification from 'components/Modal/ModalCertification';
 import UpdateCertificationModal from 'components/ModalUpdate/UpdateCertificationModal';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-import SweetAlert from 'components/SweetAlert';
+import SweetAlert from 'components/Widgets/SweetAlert';
 
 export default function CertificationCard({data_profile}) {
   let certification = data_profile || []

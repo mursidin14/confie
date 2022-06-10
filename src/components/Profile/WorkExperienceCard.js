@@ -4,7 +4,7 @@ import ModalWorkExperience from 'components/Modal/ModalWorkExperience';
 import UpdateWorkExperience from 'components/ModalUpdate/UpdateWorkExperience';
 import ProfileService from 'services/Profile/ProfileService';
 import utils, { getLength } from 'utils/utils';
-import SweetAlert from 'components/SweetAlert';
+import SweetAlert from 'components/Widgets/SweetAlert';
 export default function WorkExperienceCard({ data_profile }) {
   let workExperience = data_profile;
   const [pagination, setPagination] = useState({

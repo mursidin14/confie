@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import ModalMilestone from 'components/Modal/ModalMilestone';
 import UpdateMilestone from 'components/ModalUpdate/UpdateMilestone';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
-import SweetAlert from 'components/SweetAlert';
+import SweetAlert from 'components/Widgets/SweetAlert';
 
 export default function PersonalDevelopmentDetail() {
   const [targetMilestone, setTargetMilestone] = useState([]);

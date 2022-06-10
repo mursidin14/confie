@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import { useParams } from 'react-router-dom';
 import InputForm from 'components/Widgets/InputForm';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import JobPlaceInput from 'components/JobPlaceInput';
 
 export default function OpenJobVacancy() {

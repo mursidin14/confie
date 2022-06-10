@@ -11,6 +11,8 @@ import Jobs from 'pages/Candidate/Job/Jobs';
 import JobDetail from 'pages/Candidate/Job/JobDetail';
 import Application from 'pages/Candidate/Application/Application';
 import ApplicationDetail from 'pages/Candidate/Application/ApplicationDetail';
+import Class from 'pages/Candidate/Class/Class';
+import ClassDetail from 'pages/Candidate/Class/ClassDetail';
 
 import Business from 'pages/Business/Index';
 import BusinessProfile from 'pages/Business/Profile';
@@ -40,6 +42,8 @@ function App() {
         <Route path="/lowongan/detailJob/:idDetail" element={<JobDetail />} />
         <Route path="/lamaran/" element={<Application />} />
         <Route path="/detailApplication" element={<ApplicationDetail />} />
+        <Route path="/kelas" element={<Class />} />
+        <Route path="/kelas/detailKelas/detail" element={<ClassDetail />} />
 
         <Route path="/business/:id" element={<Business />} />
         <Route path="/business/profile/:id" element={<BusinessProfile />} />

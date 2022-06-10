@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'components/Layout/Layout';
-import BasicJobInformation from 'components/BasicJobInformation';
+import BasicJobInformation from 'pages/Candidate/Job/BasicJobInformation';
 import BasicDisclosure from 'components/Widgets/BasicDisclosure';
 import ModalJobApplication from 'components/Modal/ModalJobApplication';
 export default function JobDetail() {

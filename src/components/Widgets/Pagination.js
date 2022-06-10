@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 
 export default function Pagination({ length, pagination, setPagination }) {
-  const lengthPage = Math.ceil(length / 4);
+  let lengthPage = 0
+  const lengthData = Math.ceil(length / 4)
+  if(length > 4){
+     lengthPage = Math.ceil(length / 4);
+  }else{
+    lengthPage = 3;
+  }
   const [page, setPage] = useState(1);
 
   const sliceOne = page < 3 || lengthPage == 3 ? 0 : page - 2
   const sliceTwo = page < 3 || lengthPage == 3 ? 3 : page + 1
 
-  const page_number = lengthPage == 3 ? [1, 2, 3] : Array.from({ length: lengthPage }, (v, k) => k + 1).slice(sliceOne, sliceTwo)
-  console.log(page_number)
+  const page_number = lengthData <= 3 ? [1, 2, 3] : Array.from({ length: lengthPage }, (v, k) => k + 1).slice(sliceOne, sliceTwo)
   let active = `bg-[#FE9A00] px-5 py-2 rounded-md text-white`;
   function handleDecrement() {
     if (page > 1) {
@@ -87,7 +92,7 @@ export default function Pagination({ length, pagination, setPagination }) {
       >
         {page_number[2] === undefined ? page_number[1] : page_number[2]}
       </button>
-      <button onClick={handleIncrement} disabled={lengthPage === page}>
+      <button onClick={handleIncrement} disabled={lengthPage > lengthData}>
         <svg
           className={`${
             lengthPage === page ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'

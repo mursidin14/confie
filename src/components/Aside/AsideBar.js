@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from 'components/NavBar';
+import NavBar from 'components/Layout/NavBar';
 
 export default function ASideBar({is_verified, offCanvas, handleNav, PageName }) {
     return (

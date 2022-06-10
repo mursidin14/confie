@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from 'components/Layout/Header';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import BasicTab from 'components/Widgets/BasicTab';
 import GalleryCompany from 'components/ProfileBusiness/GalleryCompany';
 export default function CompanyDetail() {

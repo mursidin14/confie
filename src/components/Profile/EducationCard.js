@@ -4,7 +4,7 @@ import ModalEducation from 'components/Modal/ModalEducation';
 import ProfileService from 'services/Profile/ProfileService';
 import UpdateEducation from 'components/ModalUpdate/UpdateEducation';
 import utils, { getLength } from 'utils/utils';
-import SweetAlert from 'components/SweetAlert';
+import SweetAlert from 'components/Widgets/SweetAlert';
 export default function EducationCard({ data_profile }) {
   let educationHistory = data_profile;
   const [pagination, setPagination] = useState({

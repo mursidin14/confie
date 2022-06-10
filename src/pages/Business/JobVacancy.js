@@ -1,7 +1,7 @@
 import React from 'react';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import { useParams } from 'react-router-dom';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import TabJob from 'components/Widgets/TabJob';
 import Pagination from 'components/Widgets/Pagination';
 export default function JobVacancy() {

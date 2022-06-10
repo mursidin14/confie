@@ -53,6 +53,7 @@ export default function SalaryFilter() {
               className="ml-2 bg-[#F5F8FA] focus:outline-none w-fit"
               type="number"
               placeholder="Minimun Salary..."
+              min={0}
             />
           </div>
           <div className="flex items-center rounded-md border-2 border-[#F5F8FA] bg-[#F5F8FA] focus-within:border-black">
@@ -74,6 +75,7 @@ export default function SalaryFilter() {
               className="ml-2 bg-[#F5F8FA] focus:outline-none w-fit"
               type="number"
               placeholder="Max Salary..."
+              min={0}
             />
           </div>
         </div>

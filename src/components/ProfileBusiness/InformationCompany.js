@@ -1,5 +1,5 @@
 import React from 'react'
-import BasicCard from 'components/BasicCard'
+import BasicCard from 'components/Widgets/BasicCard'
 import ModalInformation from 'components/Modal/ModalInformation'
 export default function Information() {
   let inputs = [

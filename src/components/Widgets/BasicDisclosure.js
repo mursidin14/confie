@@ -2,7 +2,7 @@ import { Disclosure } from '@headlessui/react';
 
 export default function BasicDisclosure({title}) {
   let requirments = [
-    'Ngaji',
+    'Ngoding',
     'Makan',
     'Tidur',
     

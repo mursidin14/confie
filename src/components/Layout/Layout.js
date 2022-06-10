@@ -38,6 +38,7 @@ export default function Layout({ PageName, children }) {
   }
   return (
     <>
+      {/* {!loading && !isOpen ?  ( */}
       {true ?  (
         <main className="flex">
           <ASideBar

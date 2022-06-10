@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
-import JobFeed from 'components/JobFeed'
+import JobFeed from 'pages/Candidate/Job/JobFeed'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }

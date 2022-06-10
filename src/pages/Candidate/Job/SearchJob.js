@@ -1,5 +1,5 @@
 import React from 'react';
-import SalaryFilter from 'components/SalaryFilter';
+import SalaryFilter from 'pages/Candidate/Job/SalaryFilter';
 
 export default function SearchJob() {
   return (

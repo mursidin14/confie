@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBarBusiness from 'components/NavBarBusiness';
+import NavBarBusiness from 'components/Layout/NavBarBusiness';
 
 export default function ASideBar({ offCanvas, handleNav, PageName, userId }) {
     return (

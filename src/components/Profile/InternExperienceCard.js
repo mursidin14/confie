@@ -4,7 +4,7 @@ import ModalInternship from 'components/Modal/ModalInternship';
 import ProfileService from 'services/Profile/ProfileService';
 import UpdateIntershipExperience from 'components/ModalUpdate/UpdateIntershipExperience';
 import utils, { getLength } from 'utils/utils';
-import SweetAlert from 'components/SweetAlert';
+import SweetAlert from 'components/Widgets/SweetAlert';
 export default function InternExperienceCard({data_profile}) {
 
   let internExperience = data_profile

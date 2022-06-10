@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from 'components/Layout/Layout';
 import Pagination from 'components/Widgets/Pagination';
 import SelectBox from 'components/SelecBox';
@@ -17,7 +17,77 @@ export default function Application() {
       },
       detail: '/detailApplication',
     },
+    {
+      no: 2,
+      name_job: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      date_application: 'Jan 2021',
+      status: {
+        rejected: false,
+        name: 'Lamaran Diterima'
+      },
+      detail: '/detailApplication',
+    },
+    {
+      no: 3,
+      name_job: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      date_application: 'Jan 2021',
+      status: {
+        rejected: false,
+        name: 'Lamaran Diterima'
+      },
+      detail: '/detailApplication',
+    },
+    {
+      no: 4,
+      name_job: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      date_application: 'Jan 2021',
+      status: {
+        rejected: false,
+        name: 'Lamaran Diterima'
+      },
+      detail: '/detailApplication',
+    },
+    {
+      no: 5,
+      name_job: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      date_application: 'Jan 2021',
+      status: {
+        rejected: false,
+        name: 'Lamaran Diterima'
+      },
+      detail: '/detailApplication',
+    },
+    {
+      no: 6,
+      name_job: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      date_application: 'Jan 2021',
+      status: {
+        rejected: false,
+        name: 'Lamaran Diterima'
+      },
+      detail: '/detailApplication',
+    },
+    {
+      no: 7,
+      name_job: 'Frontend Developer',
+      company: 'PT. Bintang Jaya',
+      date_application: 'Jan 2021',
+      status: {
+        rejected: false,
+        name: 'Lamaran Diterima'
+      },
+      detail: '/detailApplication',
+    },
   ];
+  const [pagination, setPagination] = useState({
+    sliceOne: 0,
+    sliceTwo: 4,
+  })
   const filter_time = [
     { name: 'All Time' },
     { name: 'Today' },
@@ -82,10 +152,10 @@ export default function Application() {
           </div>
         </div>
         <div className='overflow-auto'>
-        <Table items={educationHistory}></Table>
+        <Table items={educationHistory.slice(pagination.sliceOne, pagination.sliceTwo)}></Table>
         </div>
         <div className='w-full flex lg:justify-end justify-center mr-2'>
-          <Pagination />
+          <Pagination length={educationHistory.length} pagination={pagination} setPagination={setPagination}/>
         </div>
       </div>
     </Layout>

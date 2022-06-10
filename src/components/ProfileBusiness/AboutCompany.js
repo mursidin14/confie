@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import ModalAboutCompany from 'components/Modal/ModalAboutCompany';
 export default function AboutCompany() {
   return (

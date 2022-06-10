@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
-import BasicCard from 'components/BasicCard';
+import BasicCard from 'components/Widgets/BasicCard';
 import Skeleton from 'react-loading-skeleton';
 import ProfileService from 'services/Profile/ProfileService';
 import 'react-loading-skeleton/dist/skeleton.css';

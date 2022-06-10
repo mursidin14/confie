@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from 'components/Layout/Layout';
-import SearchJob from 'components/SearchJob';
-import JobApplicationCard from 'components/JobApplicationCard';
+import SearchJob from 'pages/Candidate/Job/SearchJob';
+import JobApplicationCard from 'pages/Candidate/Job/JobApplicationCard';
 import Pagination from 'components/Widgets/Pagination';
 import { useParams } from "react-router-dom";
 
