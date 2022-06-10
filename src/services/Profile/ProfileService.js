@@ -38,7 +38,7 @@ const updateProfilePicture = (data) =>
 
 const updateSettingProfile = (data) =>
   httpClient
-    .put('/api/password', data, {
+    .put('/api/profile/account', data, {
       headers: {
         'Content-Type': 'application/json',
       },
