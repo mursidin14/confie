@@ -7,8 +7,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function AccountSetting() {
   const [dataUpdate, setDataUpdate] = useState({
-
   })
+  const [error, setError] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
@@ -26,6 +26,17 @@ export default function AccountSetting() {
   }
   async function handleUpdate() {
     const response = await ProfileService.updateSettingProfile(dataUpdate);
+    if (response.data.meta.status == 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
+    }
+    window.location.reload();
+
   }
   let inputs = [
     {
@@ -43,7 +54,7 @@ export default function AccountSetting() {
   ];
   let inputs2 = [
     {
-      name: 'new_password',
+      name: 'password',
       type: 'password',
       label: 'New Password',
       required: true,
@@ -68,6 +79,11 @@ export default function AccountSetting() {
           {inputs2.map((input) => (
             <InputFormProfile key={input.name} {...input} data={dataUpdate} handleOnChange={handleOnChange} />
           ))}
+          <section className="px-8 text-left text-sm text-red-500 my-1">
+                    {error.map((err, index) => (
+                      <p key={index}>{err}</p>
+                    ))}
+                  </section>
           <div className="mt-3 px-10 text-right">
             <button onClick={handleUpdate} className="primary-btn w-fit px-5 py-2">Update</button>
           </div>
