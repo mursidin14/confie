@@ -8,7 +8,6 @@ import 'react-loading-skeleton/dist/skeleton.css';
 export default function AccountSetting() {
   const [data, setData] = useState({});
   const [dataUpdate, setDataUpdate] = useState({
-    email: data.email,
 
   })
   const [loading, setLoading] = useState(true);
@@ -16,17 +15,17 @@ export default function AccountSetting() {
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
       setData(response_profile.data.data);
+      setDataUpdate(response_profile.data.data);
       setLoading(false);
     }
     fetchData();
   }, []);
   function handleOnChange(e) {
     const { name, value } = e.target;
-    setDataUpdate({ ...data, [name]: value });
+    setDataUpdate({ ...dataUpdate, [name]: value });
   }
   async function handleUpdate() {
     const response = await ProfileService.updateSettingProfile(dataUpdate);
-    console.log(response)
   }
   let inputs = [
     {
