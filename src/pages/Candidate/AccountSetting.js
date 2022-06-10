@@ -25,7 +25,7 @@ export default function AccountSetting() {
     setDataUpdate({ ...data, [name]: value });
   }
   async function handleUpdate() {
-    const response = await ProfileService.updateProfileData(data);
+    const response = await ProfileService.updateSettingProfile(dataUpdate);
     console.log(response)
   }
   let inputs = [
