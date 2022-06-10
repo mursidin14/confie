@@ -10,7 +10,7 @@ const UploadFilePhoto = (data) =>
   httpClient
     .put('/api/profile/photo', data, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': '',
       },
     })
     .then((response) => response)
@@ -30,7 +30,7 @@ const updateProfilePicture = (data) =>
   httpClient
     .put('/api/profile/photo', data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     })
     .then((response) => response)
