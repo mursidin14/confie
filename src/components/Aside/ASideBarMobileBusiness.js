@@ -58,8 +58,8 @@ export default function ASideBarMobileBusiness({
     },
   ];
   let page = PageName.toLowerCase();
-  if (pageName == 'account setting') {
-    pageName = 'dashboard';
+  if (page == 'account setting') {
+    page = 'dashboard';
   }
   return (
     <aside
