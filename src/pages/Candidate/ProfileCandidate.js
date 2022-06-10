@@ -12,11 +12,16 @@ import AboutMe from './OnlineProfile/AboutMe';
 import utils from 'utils/utils';
 export default function ProfileCandidate() {
   const { id } = useParams();
+  const [notFound, setNotFound] = useState(false);
   const [dataProfile, setDataProfile] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
       const response_profile = await ProfileService.getOnlineProfileData(id);
+      if (response_profile.data.meta.status == 'error') {
+        setNotFound(true);
+        return;
+      }
       setDataProfile(response_profile.data.data);
       setLoading(false);
     }
@@ -25,10 +30,17 @@ export default function ProfileCandidate() {
 
   return (
     <>
-      {loading && <main className='flex flex-col items-center justify-center min-h-screen'>
-        <p className='text-9xl mb-5 font-bold'>😓</p>
-          <p className='font-semibold'>Profile Not Found!</p>
-        </main>}
+      {loading && <>
+        <main className='flex min-h-screen flex-col items-center justify-center'>
+          <img className='animate-pulse' src="/logo.png" alt=""/>
+        </main>
+      </>}
+      {notFound && (
+        <main className="flex min-h-screen flex-col items-center justify-center">
+          <p className="mb-5 text-9xl font-bold">😓</p>
+          <p className="font-semibold">Profile Not Found!</p>
+        </main>
+      )}
       {!loading && (
         <main className="flex shadow-mine md:mx-auto md:w-fit lg:p-5">
           <section className="bg-dark-blue py-10 px-3 text-white sm:px-7 ">

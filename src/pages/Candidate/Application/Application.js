@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import Pagination from 'components/Widgets/Pagination';
 import SelectBox from 'components/SelecBox';
@@ -103,6 +103,15 @@ export default function Application() {
     { name: 'SELESAI' },
   ];
   const { id } = useParams();
+  useEffect(() => {
+    async function fetchData() {
+      const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.email_verified_at == null) {
+        window.location.href = '/not_verified';
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <Layout userId={id} PageName={'Lamaran Saya'}>

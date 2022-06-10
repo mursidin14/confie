@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import SearchJob from 'pages/Candidate/Job/SearchJob';
 import JobApplicationCard from 'pages/Candidate/Job/JobApplicationCard';
 import Pagination from 'components/Widgets/Pagination';
+import ProfileService from 'services/Profile/ProfileService';
 import { useParams } from "react-router-dom";
 
 export default function Jobs() {
@@ -11,10 +12,17 @@ export default function Jobs() {
     sliceOne: 0,
     sliceTwo: 4
   });
-  const { id } = useParams();
-
+  useEffect(() => {
+    async function fetchData() {
+      const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.email_verified_at == null) {
+        window.location.href = '/not_verified';
+      }
+    }
+    fetchData();
+  }, []);
   return (
-    <Layout userId={id} PageName={'Lowongan Kerja'}>
+    <Layout  PageName={'Lowongan Kerja'}>
       <SearchJob></SearchJob>
       <section className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 mt-10'>
         {items.slice(pagination.sliceOne, pagination.sliceTwo).map((item, index) => (

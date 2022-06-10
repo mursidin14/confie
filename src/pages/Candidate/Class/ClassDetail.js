@@ -15,9 +15,10 @@ export default function ClassDetail() {
   return (
     <Layout PageName={'Kelas Online'}>
       <BasicCard>
-        <article className="flex justify-between px-8 text-left">
+        <article className="md:flex justify-between px-8 text-left items-start">
           <div>
             <p className="text-lg font-semibold">Class Title</p>
+            <img className="md:w-[400px] object-cover block md:hidden my-2" src="/class_img.png" alt="" srcset="" />
             <div className="mt-2 flex flex-wrap gap-2">
               {categories.map((category) => (
                 <span className="rounded-md border border-[#C6C6C6] bg-[#F3F3F3] py-1 px-2 text-xs">
@@ -49,8 +50,8 @@ export default function ClassDetail() {
               </svg>
               <p className="text-sm">Last updated 2/2022</p>
             </div>
-            <div className="flex w-fit items-center justify-between gap-8 rounded-md border border-dashed border-black p-5">
-              <button className="primary-btn w-fit px-5 py-2 text-sm">
+            <div className="flex w-fit items-center justify-between gap-8 rounded-md border border-dashed border-black p-5 sm:text-sm text-xs">
+              <button className="primary-btn w-fit px-5 py-2">
                 Ambil Kelas
               </button>
               <p>
@@ -58,11 +59,11 @@ export default function ClassDetail() {
               </p>
             </div>
           </div>
-          <img className="w-[400px] " src="/class_img.png" alt="" srcset="" />
+          <img className="md:w-[400px] object-cover hidden md:block" src="/class_img.png" alt="" srcset="" />
         </article>
       </BasicCard>
-      <section className="mt-9 flex gap-6">
-        <div className="w-4/6">
+      <section className="mt-9 md:flex gap-6">
+        <div className="md:w-4/6">
           <BasicCard>
             <article className=" px-8 text-left">
               <p className="font-semibold">Tentang Kelas</p>
@@ -147,7 +148,7 @@ export default function ClassDetail() {
             <BasicCard></BasicCard>
           </section>
         </div>
-        <div className="w-1/3">
+        <div className="md:w-1/3">
           <BasicCard>
             <div className="px-8 text-left">
               <div className="flex items-center gap-3">

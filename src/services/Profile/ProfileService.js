@@ -50,7 +50,7 @@ const getOnlineProfileData = (id) =>
   httpClient
     .get(`/api/profile/${id}`)
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const addSkill = (data) =>
   httpClient
