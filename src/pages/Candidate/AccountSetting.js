@@ -60,7 +60,7 @@ export default function AccountSetting() {
       required: true,
     },
     {
-      name: 'confirm_password',
+      name: 'password_confirmation',
       type: 'password',
       label: 'Confirm New Password',
       required: true,
