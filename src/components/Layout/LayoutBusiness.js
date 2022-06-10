@@ -4,11 +4,12 @@ import ASideBarBusiness from 'components/Aside/AsideBarBusiness';
 import ASideBarMobileBusiness from 'components/Aside/ASideBarMobileBusiness';
 export default function LayoutBusiness({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
-  const data = {
-    full_name : 'Business Profile',
+  const [data, setData] = useState({
+    email_verified_at: null,
+    full_name: 'Annas Casmawan Ahmad',
+    email: 'annas@gmail.com',
     gender: 'L',
-    
-  }
+  });
   function handleNav() {
     setOffCanvas(!offCanvas);
   }

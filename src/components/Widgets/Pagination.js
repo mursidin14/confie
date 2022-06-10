@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 
 export default function Pagination({ length, pagination, setPagination }) {
+  const lengthPage = Math.ceil(length / 4);
   const [page, setPage] = useState(1);
+
+  const sliceOne = page < 3 || lengthPage == 3 ? 0 : page - 2
+  const sliceTwo = page < 3 || lengthPage == 3 ? 3 : page + 1
+
+  const page_number = lengthPage == 3 ? [1, 2, 3] : Array.from({ length: lengthPage }, (v, k) => k + 1).slice(sliceOne, sliceTwo)
+  console.log(page_number)
   let active = `bg-[#FE9A00] px-5 py-2 rounded-md text-white`;
   function handleDecrement() {
     if (page > 1) {
@@ -13,20 +20,18 @@ export default function Pagination({ length, pagination, setPagination }) {
     });
   }
   function handleIncrement() {
-    setPage(page + 1);
-    setPagination({
-      sliceOne: pagination.sliceOne + 4,
-      sliceTwo: pagination.sliceTwo + 4,
-    });
+    if (page < lengthPage ) {
+      setPage(page + 1);
+      setPagination({
+        sliceOne: pagination.sliceOne + 4,
+        sliceTwo: pagination.sliceTwo + 4,
+      });
+    }
   }
   return (
     <div className="my-4 flex items-center gap-7">
-      <button
-        disabled={page === 1} 
-        onClick={handleDecrement}
-        >
+      <button disabled={page === 1} onClick={handleDecrement}>
         <svg
-        
           className={`${
             page === 1 ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
           } transform: rotate-180 cursor-pointer `}
@@ -52,9 +57,9 @@ export default function Pagination({ length, pagination, setPagination }) {
         //     sliceTwo: pagination.sliceTwo + 3 * page,
         //   });
         // }}
-        className={`${page === page ? active : ''}`}
+        className={`${page === 1 ? active : ''}`}
       >
-        {page}
+        {page_number[2] === undefined ? page_number[0] - 1 : page_number[0]}
       </button>
       <button
         disabled
@@ -65,9 +70,9 @@ export default function Pagination({ length, pagination, setPagination }) {
             sliceTwo: pagination.sliceTwo + 3 * 1,
           });
         }}
-        className={`${page === page + 1 ? active : ''}`}
+        className={`${page > 1 && page < lengthPage || page === 2 ? active : ''}`}
       >
-        {page + 1}
+        {page_number[2] === undefined ? page_number[1] - 1 : page_number[1]}
       </button>
       <button
         disabled
@@ -78,17 +83,14 @@ export default function Pagination({ length, pagination, setPagination }) {
             sliceTwo: pagination.sliceTwo + 3 * 2,
           });
         }}
-        className={`${page === page + 2 ? active : ''}`}
+        className={`${page === lengthPage ? active : ''}`}
       >
-        {page + 2}
+        {page_number[2] === undefined ? page_number[1] : page_number[2]}
       </button>
-      <button
-        onClick={handleIncrement}
-        disabled={!(page <= length/4)}
-      >
+      <button onClick={handleIncrement} disabled={lengthPage === page}>
         <svg
           className={`${
-            !(page <= length/4) ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
+            lengthPage === page ? 'fill-[#B5B5C3]' : 'fill-[#5E6278]'
           } cursor-pointer`}
           width="6"
           height="10"

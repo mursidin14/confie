@@ -113,7 +113,7 @@ function Table({ items, loading, handleDelete }) {
               ))}
             {!items.length > 0 && (
               <tr>
-                <td colSpan="4" className="text-center py-4 font-semibold">
+                <td colSpan="4" className="text-center py-4 font-semibold text-xs italic text-[#7E8299]">
                   Tidak ada data
                 </td>
               </tr>

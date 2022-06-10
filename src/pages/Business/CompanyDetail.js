@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from 'components/Layout/Header';
 import BasicCard from 'components/BasicCard';
 import BasicTab from 'components/Widgets/BasicTab';
 import GalleryCompany from 'components/ProfileBusiness/GalleryCompany';
 export default function CompanyDetail() {
-    let Background = "https://source.unsplash.com/1000x600/?coding"
+    const Background = "https://source.unsplash.com/1000x600/?coding"
+    const [data, setData] = useState({
+      email_verified_at: null,
+      full_name: 'Annas Casmawan Ahmad',
+      email: 'annas@gmail.com',
+      gender: 'L',
+    });
   return (
     <main>
-      <Header PageName={'Profile Perusahaan'} />
+      <Header data={data} PageName={'Profile Perusahaan'} />
       <section className="mt-5 text-left text-white h-[500px] relative bg-no-repeat bg-cover" style={{backgroundImage: `url(${Background})`}}>
         <div className='absolute bottom-0 w-full bg-banner p-8'>
             <p className="my-2 text-3xl font-bold ">

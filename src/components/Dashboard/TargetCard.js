@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 
-export default function TargetCard({ userId, data_plan }) {
+export default function TargetCard({ data_plan }) {
   const [data, setData] = useState([]);
   const [dataMilestone, setdataMilestone] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ export default function TargetCard({ userId, data_plan }) {
             Quarter {quarter}
           </p>
         </div>
-        <a href={`/pdp/${userId}`}>
+        <a href={`/pdp`}>
           <svg
             width="20"
             height="20"
