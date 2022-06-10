@@ -41,10 +41,11 @@ export default function PersonalInfomationCard({ data_profile }) {
     e.preventDefault();
     const data = {
       photo_profile: e.target.files[0],
-    }
+    };
+    console.log(data)
     const response = await ProfileService.updateProfilePicture(data);
-    console.log(response)
-  }    
+    console.log(response);
+  };
   return (
     <div className="rounded-md bg-white pt-7 pb-2 text-left shadow-mine ">
       <div className="flex items-center justify-between px-8">
@@ -54,14 +55,14 @@ export default function PersonalInfomationCard({ data_profile }) {
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="my-5">
         <div className="px-8">
-          <div className="mb-5 lg:flex">
+          <div className="mb-5 mt-10 lg:flex">
             <div className="w-5/12">
               <label className="text-xs lg:text-base">Avatar</label>
             </div>
             <div className="image-upload w-7/12">
-              <label for="file-input">
-                <div className="relative w-fit">
-                  <div className="absolute -top-3 -right-5 w-fit cursor-pointer rounded-full bg-white p-2">
+              <div className="relative w-fit">
+                <label for="file-input">
+                  <div className="absolute -top-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
                     <svg
                       className="h-3 w-3"
                       width="11"
@@ -81,15 +82,30 @@ export default function PersonalInfomationCard({ data_profile }) {
                       />
                     </svg>
                   </div>
-                  <img
-                    className="w-20 sm:w-32"
-                    src={
-                      data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'
-                    }
-                    alt=""
-                  />
-                </div>
-              </label>
+                </label>
+                <img
+                  className="w-20 sm:w-32"
+                  src={true ? '/male.jpg' : '/female.jpg'}
+                  alt=""
+                />
+                <button className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 10 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.73477 4.98867L9.87977 0.854754C9.96169 0.759359 10.0045 0.63665 9.99963 0.511148C9.99477 0.385647 9.9426 0.266597 9.85355 0.177788C9.76451 0.0889785 9.64514 0.0369516 9.5193 0.032104C9.39346 0.0272564 9.27042 0.0699452 9.17477 0.151639L5.02977 4.28555L0.884772 0.146653C0.79062 0.0527525 0.662923 0 0.529772 0C0.396621 0 0.268924 0.0527525 0.174772 0.146653C0.0806199 0.240553 0.0277259 0.367908 0.0277259 0.500703C0.0277259 0.633498 0.0806199 0.760854 0.174772 0.854754L4.32477 4.98867L0.174772 9.12258C0.122431 9.16729 0.0799207 9.2223 0.0499091 9.28416C0.0198974 9.34603 0.00303234 9.41341 0.000372596 9.48209C-0.00228715 9.55077 0.00931558 9.61925 0.0344529 9.68324C0.0595901 9.74723 0.0977193 9.80535 0.146447 9.85395C0.195174 9.90254 0.253448 9.94057 0.31761 9.96564C0.381773 9.99071 0.450439 10.0023 0.519298 9.99963C0.588158 9.99698 0.655724 9.98016 0.717757 9.95022C0.779789 9.92029 0.834948 9.8779 0.879772 9.8257L5.02977 5.69178L9.17477 9.8257C9.27042 9.90739 9.39346 9.95008 9.5193 9.94523C9.64514 9.94038 9.76451 9.88836 9.85355 9.79955C9.9426 9.71074 9.99477 9.59169 9.99963 9.46619C10.0045 9.34068 9.96169 9.21798 9.87977 9.12258L5.73477 4.98867Z"
+                      fill="#181C32"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <p className="absolute mt-4 text-sm text-[#A1A5B7]">
+                Allowed file types: png, jpg, jpeg.
+              </p>
               <input id="file-input" type="file" onChange={uploadPhoto} />
             </div>
           </div>
