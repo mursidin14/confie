@@ -88,7 +88,7 @@ export default function Pagination({ length, pagination, setPagination }) {
             sliceTwo: pagination.sliceTwo + 3 * 2,
           });
         }}
-        className={`${page === lengthPage ? active : ''}`}
+        className={`${page === lengthPage && lengthData > 2 ? active : ''}`}
       >
         {page_number[2] === undefined ? page_number[1] : page_number[2]}
       </button>
