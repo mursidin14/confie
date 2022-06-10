@@ -7,6 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function AccountSetting() {
   const [data, setData] = useState({});
+  const [dataUpdate, setDataUpdate] = useState({})
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +19,7 @@ export default function AccountSetting() {
   }, []);
   function handleOnChange(e) {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+    setDataUpdate({ ...data, [name]: value });
   }
   async function handleUpdate() {
     const response = await ProfileService.updateProfileData(data);

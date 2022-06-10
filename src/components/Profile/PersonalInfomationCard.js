@@ -40,7 +40,7 @@ export default function PersonalInfomationCard({ data_profile }) {
   const uploadPhoto = async (e) => {
     e.preventDefault();
     const data = {
-      photo_profile: e.target.files[0],
+      photo_profile: 'jkgh',
     };
     console.log(data)
     const response = await ProfileService.updateProfilePicture(data);
@@ -103,7 +103,7 @@ export default function PersonalInfomationCard({ data_profile }) {
                   </svg>
                 </button>
               </div>
-              <p className="absolute mt-4 text-sm text-[#A1A5B7]">
+              <p className="mt-4 text-sm text-[#A1A5B7]">
                 Allowed file types: png, jpg, jpeg.
               </p>
               <input id="file-input" type="file" onChange={uploadPhoto} />
