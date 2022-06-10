@@ -7,7 +7,10 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function AccountSetting() {
   const [data, setData] = useState({});
-  const [dataUpdate, setDataUpdate] = useState({})
+  const [dataUpdate, setDataUpdate] = useState({
+    email: data.email,
+
+  })
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
@@ -60,11 +63,11 @@ export default function AccountSetting() {
       ) : (
         <BasicCard>
           {inputs.map((input) => (
-            <InputFormProfile key={input.name} {...input} data={data} handleOnChange={handleOnChange} />
+            <InputFormProfile key={input.name} {...input} data={dataUpdate} handleOnChange={handleOnChange} />
           ))}
           <hr className="my-2 mx-2 border border-dashed" />
           {inputs2.map((input) => (
-            <InputFormProfile key={input.name} {...input} data={data} handleOnChange={handleOnChange} />
+            <InputFormProfile key={input.name} {...input} data={dataUpdate} handleOnChange={handleOnChange} />
           ))}
           <div className="mt-3 px-10 text-right">
             <button onClick={handleUpdate} className="primary-btn w-fit px-5 py-2">Update</button>
