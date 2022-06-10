@@ -165,7 +165,7 @@ export default function Application() {
         <Table items={educationHistory.slice(pagination.sliceOne, pagination.sliceTwo)}></Table>
         </div>
         <div className='w-full flex lg:justify-end justify-center mr-2'>
-          <Pagination length={educationHistory.length} pagination={pagination} setPagination={setPagination}/>
+          <Pagination length={educationHistory.length} pagination={pagination} setPagination={setPagination} howMany={4}/>
         </div>
       </div>
     </Layout>

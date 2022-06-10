@@ -39,6 +39,7 @@ export default function WorkExperienceCard({ data_profile }) {
             length={workExperience.length}
             pagination={pagination}
             setPagination={setPagination}
+            howMany={4}
           /> : null}
         </div>
       </div>

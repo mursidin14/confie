@@ -39,7 +39,7 @@ export default function NavBar({is_verified, page, offCanvas}) {
         link:  `/lowongan`,
         icon_active: '/nav_icon/job_offer.png',
         icon_inactive: '/nav_icon/i_job_offer.png',
-        can_access: true
+        can_access: is_verified === true
       },
       {
         alias: 'lamaran saya',
@@ -47,7 +47,7 @@ export default function NavBar({is_verified, page, offCanvas}) {
         link: `/lamaran`,
         icon_active: '/nav_icon/applicant.png',
         icon_inactive: '/nav_icon/i_applicant.png',
-        can_access: true
+        can_access: is_verified === true
       },
       {
         alias: 'kelas online',
@@ -55,7 +55,7 @@ export default function NavBar({is_verified, page, offCanvas}) {
         link: `/kelas`,
         icon_active: '/nav_icon/class.png',
         icon_inactive: '/nav_icon/i_class.png',
-        can_access: true
+        can_access: is_verified === true
       },
     ];
 

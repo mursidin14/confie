@@ -50,7 +50,7 @@ export default function ClassDetail() {
               </svg>
               <p className="text-sm">Last updated 2/2022</p>
             </div>
-            <div className="flex w-fit items-center justify-between gap-8 rounded-md border border-dashed border-black p-5 sm:text-sm text-xs">
+            <div className="flex w-fit items-center justify-between sm:gap-8 gap-2 rounded-md border border-dashed border-black p-5 sm:text-sm text-xs">
               <button className="primary-btn w-fit px-5 py-2">
                 Ambil Kelas
               </button>

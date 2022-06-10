@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-export default function Pagination({ length, pagination, setPagination }) {
+export default function Pagination({ length, pagination, setPagination, howMany }) {
   let lengthPage = 0
-  const lengthData = Math.ceil(length / 4)
+  const lengthData = Math.ceil(length / howMany)
   if(length > 4){
-     lengthPage = Math.ceil(length / 4);
+     lengthPage = Math.ceil(length / howMany);
   }else{
     lengthPage = 3;
   }
@@ -20,16 +20,16 @@ export default function Pagination({ length, pagination, setPagination }) {
       setPage(page - 1);
     }
     setPagination({
-      sliceOne: pagination.sliceOne - 4,
-      sliceTwo: pagination.sliceTwo - 4,
+      sliceOne: pagination.sliceOne - howMany,
+      sliceTwo: pagination.sliceTwo - howMany,
     });
   }
   function handleIncrement() {
     if (page < lengthPage ) {
       setPage(page + 1);
       setPagination({
-        sliceOne: pagination.sliceOne + 4,
-        sliceTwo: pagination.sliceTwo + 4,
+        sliceOne: pagination.sliceOne + howMany,
+        sliceTwo: pagination.sliceTwo + howMany,
       });
     }
   }
@@ -55,13 +55,13 @@ export default function Pagination({ length, pagination, setPagination }) {
       </button>
       <button
         disabled
-        // onClick={() => {
-        //   setPage(page);
-        //   setPagination({
-        //     sliceOne: pagination.sliceOne + 3 * page,
-        //     sliceTwo: pagination.sliceTwo + 3 * page,
-        //   });
-        // }}
+        onClick={() => {
+          setPage(page);
+          setPagination({
+            sliceOne: pagination.sliceOne + 3 * page,
+            sliceTwo: pagination.sliceTwo + 3 * page,
+          });
+        }}
         className={`${page === 1 ? active : ''}`}
       >
         {page_number[2] === undefined ? page_number[0] - 1 : page_number[0]}

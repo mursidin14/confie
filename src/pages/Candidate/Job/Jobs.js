@@ -10,7 +10,7 @@ export default function Jobs() {
   const [items, setItems] = useState([1,2,3,4,5,6,7,8,9,10,11,12,13]);
   const [pagination, setPagination] = useState({
     sliceOne: 0,
-    sliceTwo: 4
+    sliceTwo: 6
   });
   useEffect(() => {
     async function fetchData() {
@@ -19,7 +19,7 @@ export default function Jobs() {
         window.location.href = '/not_verified';
       }
     }
-    fetchData();
+    // fetchData();
   }, []);
   return (
     <Layout  PageName={'Lowongan Kerja'}>
@@ -30,7 +30,7 @@ export default function Jobs() {
         ))}
       </section>
       <div className='flex justify-center mt-3'>
-      <Pagination length={items.length} pagination={pagination} setPagination={setPagination}></Pagination>
+      <Pagination length={items.length} pagination={pagination} setPagination={setPagination} howMany={6}></Pagination>
       </div>
     </Layout>
   );
