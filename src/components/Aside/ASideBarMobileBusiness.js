@@ -6,6 +6,7 @@ export default function ASideBarMobileBusiness({
   PageName,
   userId,
 }) {
+  
   let menu = [
     {
       alias: 'dashboard',
@@ -57,6 +58,9 @@ export default function ASideBarMobileBusiness({
     },
   ];
   let page = PageName.toLowerCase();
+  if (pageName == 'account setting') {
+    pageName = 'dashboard';
+  }
   return (
     <aside
       className={` fixed z-10 block min-h-screen w-8/12 bg-[#1E1E2D] transition-all md:w-4/12 lg:hidden ${

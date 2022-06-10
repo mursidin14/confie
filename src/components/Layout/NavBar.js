@@ -4,6 +4,7 @@ import AuthService from 'services/Auth/AuthService';
 export default function NavBar({is_verified, page, offCanvas}) {
 
     let pageName = page.toLowerCase();
+    
     if (pageName == 'account setting') {
       pageName = 'dashboard';
     }
