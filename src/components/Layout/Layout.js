@@ -27,7 +27,7 @@ export default function Layout({ PageName, children }) {
         setLoading(false);
       }
     }
-    // fetchData();
+    fetchData();
   }, []);
   function closeModal() {
     setIsOpen(false);
