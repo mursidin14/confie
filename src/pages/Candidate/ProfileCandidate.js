@@ -18,9 +18,9 @@ export default function ProfileCandidate() {
   useEffect(() => {
     async function fetchData() {
       const response_profile = await ProfileService.getOnlineProfileData(id);
+      console.log(response_profile);
       if (response_profile.data.meta.status == 'error') {
         setNotFound(true);
-        setLoading(false);
         return;
       }
       setDataProfile(response_profile.data.data);
@@ -31,14 +31,14 @@ export default function ProfileCandidate() {
 
   return (
     <>
-      {loading && !notFound ? (
+      {/* {loading && !notFound ? (
         <>
           <main className="flex min-h-screen flex-col items-center justify-center">
             <img className="animate-pulse" src="/logo.png" alt="" />
           </main>
         </>
-      ) : null}
-      {notFound && !loading ? (
+      ) : null} */}
+      {loading ? (
         <main className="flex min-h-screen flex-col items-center justify-center">
           <p className="mb-5 text-9xl font-bold">😓</p>
           <p className="font-semibold">Profile Not Found!</p>

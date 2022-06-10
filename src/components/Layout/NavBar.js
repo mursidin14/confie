@@ -2,7 +2,12 @@ import React from 'react'
 import AuthService from 'services/Auth/AuthService';
 
 export default function NavBar({is_verified, page, offCanvas}) {
+
     let pageName = page.toLowerCase();
+    if (pageName == 'account setting') {
+      pageName = 'dashboard';
+    }
+
     let menu = [
       {
         alias: 'dashboard',
@@ -68,7 +73,7 @@ export default function NavBar({is_verified, page, offCanvas}) {
                 <img
                   className="sm:w-5 w-4"
                   src={
-                    item.alias === 'dashboard' && pageName === 'account setting' || item.alias === pageName
+                    item.alias === pageName
                       ? item.icon_active
                       : item.icon_inactive
                   }
