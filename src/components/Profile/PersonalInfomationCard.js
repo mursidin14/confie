@@ -40,7 +40,7 @@ export default function PersonalInfomationCard({ data_profile }) {
   const uploadPhoto = async (e) => {
     e.preventDefault();
     const data = {
-      photo_profile: 'jkgh',
+      photo_profile: e.target.files[0],
     };
     console.log(data)
     const response = await ProfileService.updateProfilePicture(data);
