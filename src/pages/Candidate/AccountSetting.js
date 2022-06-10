@@ -6,7 +6,6 @@ import ProfileService from 'services/Profile/ProfileService';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function AccountSetting() {
-  const [data, setData] = useState({});
   const [dataUpdate, setDataUpdate] = useState({
 
   })
@@ -14,8 +13,9 @@ export default function AccountSetting() {
   useEffect(() => {
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
-      setData(response_profile.data.data);
-      setDataUpdate(response_profile.data.data);
+      setDataUpdate({
+        email: response_profile.data.data.email,
+        slug: response_profile.data.data.slug,});
       setLoading(false);
     }
     fetchData();
@@ -35,7 +35,7 @@ export default function AccountSetting() {
       required: true,
     },
     {
-      name: 'username',
+      name: 'slug',
       type: 'text',
       label: 'Username',
       required: true,
