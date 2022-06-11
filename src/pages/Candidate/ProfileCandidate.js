@@ -19,7 +19,7 @@ export default function ProfileCandidate() {
     async function fetchData() {
       const response_profile = await ProfileService.getOnlineProfileData(id);
       console.log(response_profile);
-      if (response_profile.response.status === 500) {
+      if (response_profile?.response?.status === 500) {
         setNotFound(true);
         setLoading(false);
         return;
