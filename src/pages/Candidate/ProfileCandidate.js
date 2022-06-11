@@ -76,11 +76,8 @@ export default function ProfileCandidate() {
                   />
                 </svg>
               </div>
-              <p className="mt-1 text-center text-xs sm:text-sm">
-                Teknik Informatika
-              </p>
             </div>
-            <EmploymentStatus />
+            <EmploymentStatus data={dataProfile.experiences.filter(exp => exp.is_current == true)} />
             <BasicInformation data={dataProfile} />
             <SkillInfomation data={dataProfile.skills} />
             <CertificationInformation data={dataProfile.certificates} />
