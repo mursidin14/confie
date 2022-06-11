@@ -30,7 +30,12 @@ const updateProfilePicture = (data) =>
   httpClient
     .put('/api/profile/photo', data, {
       headers: {
-        'Content-Type': 'multipart/form-data', 
+        'Content-Type': 'image/*',
+        'Content-Disposition': 'attachment',
+        'Content-Transfer-Encoding': 'binary',
+        'Cache-Control': 'no-cache',
+        'Expires': '0',
+        'Pragma': 'no-cache',
       },
     })
     .then((response) => response)
