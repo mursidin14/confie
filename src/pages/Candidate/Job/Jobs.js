@@ -23,7 +23,8 @@ export default function Jobs() {
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
       if (response_profile.data.meta.email_verified_at == null) {
-        window.location.href = '/not_verified';
+        setError(true);
+        setLoading(false);
       }
     }
     fetchData();

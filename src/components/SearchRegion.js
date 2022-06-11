@@ -80,7 +80,6 @@ export default function SearchRegion({ data, onChange, setCity }) {
     const response = await httpClient.get(`api/location?provinsi=${id}`);
     setCity(utils.getCity(response.data.data));
   }
-
   return (
     <Combobox value={selected} onChange={setSelected}>
       <div className="relative mt-1">
@@ -92,7 +91,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return person.name;
+              return `${utils.makeCapital(person.name)}`;
             }}
             onChange={handleChange}
           />
@@ -134,7 +133,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
                         }`}
                         onClick={handleClick}
                       >
-                        {person.name}
+                        {utils.makeCapital(person.name)}
                       </span>
                     </>
                   )}
@@ -192,7 +191,7 @@ export function SearchRegionCity({ data, onChange, city }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return person.name;
+              return `${utils.makeCapital(person.name)}`;
             }}
             onChange={handleChange}
           />
@@ -239,7 +238,7 @@ export function SearchRegionCity({ data, onChange, city }) {
                         }`}
                         onClick={handleClick}
                       >
-                        {person.name}
+                        {utils.makeCapital(person.name)}
                       </span>
                     </>
                   )}
@@ -308,7 +307,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return person.name;
+              return `${utils.makeCapital(person.name)}`;
             }}
             onChange={handleChange}
           />
@@ -351,7 +350,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
                         }`}
                         onClick={handleClick}
                       >
-                        {person.name}
+                        {utils.makeCapital(person.name)}
                       </span>
                     </>
                   )}
@@ -414,7 +413,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return person.name;
+              return `${utils.makeCapital(person.name)}`;;
             }}
             onChange={handleChange}
           />
@@ -462,7 +461,7 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
                         }`}
                         onClick={handleClick}
                       >
-                        {person.name}
+                        {utils.makeCapital(person.name)}
                       </span>
                     </>
                   )}
