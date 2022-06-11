@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function EmploymentStatus({data}) {
+  console.log(data)
   return (
     <>
       <p className="mt-1 text-center text-xs sm:text-sm">{data ? data.position : '-'}</p>
