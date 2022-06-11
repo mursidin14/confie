@@ -54,6 +54,9 @@ export default function ASideBarMobile({is_verified, offCanvas, handleNav, PageN
       
     ];
     let page = PageName.toLowerCase();
+    if (page == 'account setting') {
+      page = 'dashboard';
+    }
     async function clickLogout() {
       await AuthService.logout();
       window.location.href = '/';
