@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
 export default function ModalWorkExperience() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
     is_current: false,
     status: 'onsite',
@@ -15,15 +15,15 @@ export default function ModalWorkExperience() {
   }
 
   function handleChange(e) {
-      const { name, value } = e.target;
-      setDataWorkExperience({ ...dataWorkExperience, [name]: value });
+    const { name, value } = e.target;
+    setDataWorkExperience({ ...dataWorkExperience, [name]: value });
   }
 
   function openModal() {
     setIsOpen(true);
   }
   async function handleSubmit() {
-      const data = {
+    const data = {
       ...dataWorkExperience,
     };
     if (data['start_date']) {
@@ -119,7 +119,7 @@ export default function ModalWorkExperience() {
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="lg:px-8 px-2">
+                    <div className="px-2 lg:px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
                           key={index}
@@ -165,7 +165,7 @@ export default function ModalWorkExperience() {
                         <div className="lg:w-7/12">
                           <select
                             value={dataWorkExperience.status}
-                            className="w-full h-fit bg-soft-gray rounded-md p-5 text-sm"
+                            className="h-fit w-full rounded-md bg-soft-gray p-5 text-sm"
                             name="status"
                             id="status"
                             onChange={(e) => {
@@ -230,13 +230,9 @@ export default function ModalWorkExperience() {
   );
 }
 
-function InputFormProfile({data, label, handleChange, ...inputProps }) {
+function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
-    <div className={`items-center ${
-      data.is_current == true && inputProps.name == 'end_date'
-        ? 'hidden'
-        : 'lg:flex'
-    }`}>
+    <div className={`items-center lg:flex`}>
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">
           {label}
@@ -244,9 +240,18 @@ function InputFormProfile({data, label, handleChange, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
+          disabled={
+            data.is_current == true && inputProps.name == 'end_date'
+              ? true
+              : false
+          }
           {...inputProps}
           value={data[inputProps.name]}
-          className="input-form my-2 lg:my-5 lg:py-3"
+          className={`input-form my-2 lg:my-5 lg:py-3 ${
+            data.is_current == true && inputProps.name == 'end_date'
+              ? 'bg-[#cbcbcc]'
+              : 'bg-soft-gray'
+          } transition-all`}
           onChange={handleChange}
         />
       </div>
