@@ -30,8 +30,7 @@ const updateProfilePicture = (data) =>
   httpClient
     .put('/api/profile/photo', data, {
       headers: {
-        
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     })
     .then((response) => response)
