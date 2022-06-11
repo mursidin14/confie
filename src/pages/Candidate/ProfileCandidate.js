@@ -77,7 +77,7 @@ export default function ProfileCandidate() {
                 </svg>
               </div>
             </div>
-            <EmploymentStatus data={dataProfile.experiences.filter(exp => exp.is_current == true)} />
+            <EmploymentStatus data={dataProfile.experiences.filter(exp => exp.is_current == true)[0]} />
             <BasicInformation data={dataProfile} />
             <SkillInfomation data={dataProfile.skills} />
             <CertificationInformation data={dataProfile.certificates} />

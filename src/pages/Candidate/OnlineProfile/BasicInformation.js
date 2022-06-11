@@ -1,4 +1,5 @@
 import React from 'react';
+import utils from 'utils/utils';
 
 export default function BasicInformation({ data }) {
   return (
@@ -17,7 +18,7 @@ export default function BasicInformation({ data }) {
             fill="white"
           />
         </svg>
-        <p>{data.city_name}</p>
+        <p>{utils.makeCapital(data.city_name)}</p>
       </div>
       <div className="flex items-center gap-2 sm:gap-5">
         <svg
