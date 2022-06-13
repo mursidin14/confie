@@ -3,29 +3,6 @@ import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import { getQuarter } from 'utils/utils';
 
 export default function TargetCard({ data_plan }) {
-  console.log(data_plan)
-  const [dataTarget, setDataTarget] = useState([]);
-  const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   function fetchData() {
-  //     if (data_plan.length > 0) {
-  //       data_plan.map(async (data) => {
-  //         const dataPlan = {
-  //           title: data.title,
-  //           milestone: [],
-  //         };
-  //         const response = await PersonalPlanService.getDetailPersonalPlanData(
-  //           data.id
-  //         );
-  //         dataPlan.milestone = response.data.data.milestone;
-  //         setDataTarget([...dataTarget, dataPlan]);
-  //       });
-  //       setLoading(false);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
-  
   const quarter = getQuarter();
   async function handleChange(id, status) {
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
@@ -62,16 +39,13 @@ export default function TargetCard({ data_plan }) {
         </a>
       </div>
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      {/* {!loading && (
-        <>
-          {dataTarget.map((data) => (
+          {data_plan.map((data) => (
             <>
               <div className="bg-[#F5F8FA] py-5 px-8">
                 <p className="">{data.title}</p>
               </div>
               <div className="my-3 space-y-2 px-8">
-                {!loading
-                  ? data.milestone.map((milestone, index) => (
+                  {data.milestone.map((milestone, index) => (
                       <div
                         className={`flex items-center gap-3 ${
                           milestone.quarter == quarter ? '' : 'hidden'
@@ -82,13 +56,10 @@ export default function TargetCard({ data_plan }) {
                           handleChange={handleChange}
                         />
                       </div>
-                    ))
-                  : 'loading'}
+                    ))}
               </div>
             </>
           ))}
-        </>
-      )} */}
     </div>
   );
 }
