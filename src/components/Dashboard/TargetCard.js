@@ -3,6 +3,7 @@ import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import { getQuarter } from 'utils/utils';
 
 export default function TargetCard({ data_plan }) {
+  console.log(data_plan)
   const quarter = getQuarter();
   async function handleChange(id, status) {
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
