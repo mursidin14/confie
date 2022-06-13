@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 
 export default function TargetCard({ data_plan }) {
-  const [data, setData] = useState([]);
+  const [dataTarget, setDataTarget] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     function fetchData() {
@@ -16,8 +16,7 @@ export default function TargetCard({ data_plan }) {
             data.id
           );
           dataPlan.milestone = response.data.data.milestone;
-          console.log(dataPlan);
-          setData([...data, dataPlan]);
+          setData([...dataTarget, dataPlan]);
         });
         setLoading(false);
       }
@@ -77,7 +76,7 @@ export default function TargetCard({ data_plan }) {
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
       {!loading && (
         <>
-          {data.map((data) => (
+          {dataTarget.map((data) => (
             <>
               <div className="bg-[#F5F8FA] py-5 px-8">
                 <p className="">{data.title}</p>
