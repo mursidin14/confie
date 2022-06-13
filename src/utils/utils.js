@@ -10,13 +10,30 @@ export function makeCapital(name) {
   }
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
+export function getQuarter() {
+  let today = new Date();
+  let month = today.getMonth();
+  let quarter;
+  if (month < 3) {
+    quarter = 1;
+  } else if (month < 6) {
+    quarter = 2;
+  } else if (month < 9) {
+    quarter = 3;
+  } else {
+    quarter = 4;
+  }
+  return quarter;
+}
 
 export const getTodayDate = () => {
   const date = new Date();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}`;
-}
+  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${
+    day < 10 ? `0${day}` : `${day}`
+  }`;
+};
 
 const getCity = (data) => {
   const city = [];
@@ -36,7 +53,7 @@ const timeEpoch = (time) => {
   let date = new Date(time);
   return date.getTime() / 1000;
 };
-export  function getGender(gender) {
+export function getGender(gender) {
   return gender == 'L' ? 'Laki-laki' : 'Perempuan';
 }
 
@@ -88,8 +105,8 @@ const getProfileCompletion = (my_profile) => {
 };
 
 const isWork = (works_experience) => {
-  return works_experience.some((work) => work.is_current == true)
-}
+  return works_experience.some((work) => work.is_current == true);
+};
 
 const getYearMonthDay = (epoch) => {
   if (epoch === null) {
@@ -98,15 +115,17 @@ const getYearMonthDay = (epoch) => {
   const date = new Date(epoch * 1000);
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}`;
+  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${
+    day < 10 ? `0${day}` : `${day}`
+  }`;
 };
 
 export const getLength = (word) => {
-  if(word == undefined) {
-    return true
+  if (word == undefined) {
+    return true;
   }
   return word.length > 24 ? true : false;
-}
+};
 
 const utils = {
   makeCapital,

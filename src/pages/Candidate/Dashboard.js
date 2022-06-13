@@ -13,12 +13,23 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
+      const list_plan_milestone = []
       const response_profile = await ProfileService.getProfileData();
       const response_personal_plan =
         await PersonalPlanService.getPersonalPlanData();
+      const list_plan = response_personal_plan?.data?.data
+      list_plan.map(async (list)=>{
+        const obj_plan = {
+          title: list.title,
+          milestone: [],
+        }
+        const response_plan = await PersonalPlanService.getDetailPersonalPlanData(list.id)
+        obj_plan.milestone = response_plan.data.data.milestone
+        list_plan_milestone.push(obj_plan)
+      })
       setData({
         profile: response_profile.data.data,
-        personal_plan: response_personal_plan?.data?.data,
+        personal_plan: list_plan_milestone,
       });
       setLoading(false);
     }

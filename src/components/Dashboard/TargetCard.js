@@ -1,43 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
+import { getQuarter } from 'utils/utils';
 
 export default function TargetCard({ data_plan }) {
+  console.log(data_plan)
   const [dataTarget, setDataTarget] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    function fetchData() {
-      if (data_plan.length > 0) {
-        data_plan.map(async (data) => {
-          const dataPlan = {
-            title: data.title,
-            milestone: [],
-          };
-          const response = await PersonalPlanService.getDetailPersonalPlanData(
-            data.id
-          );
-          dataPlan.milestone = response.data.data.milestone;
-          setDataTarget([...dataTarget, dataPlan]);
-        });
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
-  function getQuarter() {
-    let today = new Date();
-    let month = today.getMonth();
-    let quarter;
-    if (month < 3) {
-      quarter = 1;
-    } else if (month < 6) {
-      quarter = 2;
-    } else if (month < 9) {
-      quarter = 3;
-    } else {
-      quarter = 4;
-    }
-    return quarter;
-  }
+  // useEffect(() => {
+  //   function fetchData() {
+  //     if (data_plan.length > 0) {
+  //       data_plan.map(async (data) => {
+  //         const dataPlan = {
+  //           title: data.title,
+  //           milestone: [],
+  //         };
+  //         const response = await PersonalPlanService.getDetailPersonalPlanData(
+  //           data.id
+  //         );
+  //         dataPlan.milestone = response.data.data.milestone;
+  //         setDataTarget([...dataTarget, dataPlan]);
+  //       });
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+  
   const quarter = getQuarter();
   async function handleChange(id, status) {
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
@@ -74,7 +62,7 @@ export default function TargetCard({ data_plan }) {
         </a>
       </div>
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      {!loading && (
+      {/* {!loading && (
         <>
           {dataTarget.map((data) => (
             <>
@@ -100,7 +88,7 @@ export default function TargetCard({ data_plan }) {
             </>
           ))}
         </>
-      )}
+      )} */}
     </div>
   );
 }

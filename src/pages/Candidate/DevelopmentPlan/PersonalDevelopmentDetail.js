@@ -48,7 +48,7 @@ export default function PersonalDevelopmentDetail() {
     let checkbox_checked = document.querySelectorAll(
       '.target_checkbox:checked'
     ).length;
-    let percentage = (checkbox_checked / target_checkbox) * 100;
+    let percentage = Math.ceil((checkbox_checked / target_checkbox) * 100);
     setProgress(percentage);
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
       status: !status,
