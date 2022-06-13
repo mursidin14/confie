@@ -7,19 +7,16 @@ export default function TargetCard({ data_plan }) {
   useEffect(() => {
     function fetchData() {
       if (data_plan.length > 0) {
-        // setData(data_plan[0]);
-        // const response_plan =
-        //   await PersonalPlanService.getDetailPersonalPlanData(data_plan[0]?.id);
-        // setdataMilestone(response_plan.data.data.milestone);
         data_plan.map(async (data) => {
           const dataPlan = {
             title: data.title,
             milestone: [],
           };
-          const milestone = await PersonalPlanService.getDetailPersonalPlanData(
+          const response = await PersonalPlanService.getDetailPersonalPlanData(
             data.id
           );
-          dataPlan.milestone = milestone.data.data.milestone;
+          dataPlan.milestone = response.data.data.milestone;
+          console.log(dataPlan);
           setData([...data, dataPlan]);
         });
         setLoading(false);
@@ -78,7 +75,7 @@ export default function TargetCard({ data_plan }) {
         </a>
       </div>
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      {data && !loading ? (
+      {!loading && (
         <>
           {data.map((data) => (
             <>
@@ -104,7 +101,7 @@ export default function TargetCard({ data_plan }) {
             </>
           ))}
         </>
-      ) : null}
+      )}
     </div>
   );
 }
