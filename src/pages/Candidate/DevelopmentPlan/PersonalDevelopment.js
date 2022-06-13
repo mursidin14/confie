@@ -39,7 +39,6 @@ export default function PersonalDevelopment() {
     </Layout>
   );
 }
-
 function Table({ items, loading, handleDelete }) {
   return (
     <div>
