@@ -26,6 +26,7 @@ export default function TargetCard() {
       })
       setLoading(false);
     }
+    getPlan();
   }, []);
 
   return (
