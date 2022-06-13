@@ -23,6 +23,7 @@ export default function PersonalDevelopmentDetail() {
       );
       setTarget(response.data.data);
       setTargetMilestone(response.data.data.milestone);
+      setProgress(response.data.data.process);
       setLoading(false);
     }
 
@@ -34,9 +35,8 @@ export default function PersonalDevelopmentDetail() {
     let checkbox_checked = document.querySelectorAll(
       '.target_checkbox:checked'
     ).length;
-    let percentage = (checkbox_checked / target_checkbox) * 100;
+    let percentage = Math.ceil((checkbox_checked / target_checkbox) * 100);
     if (isNaN(percentage)) {
-      setProgress(0);
       return
     }
     setProgress(percentage);

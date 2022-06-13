@@ -2,14 +2,32 @@ import React, { useState, useEffect } from 'react';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import { getQuarter } from 'utils/utils';
 
-export default function TargetCard({ data_plan }) {
-  console.log(data_plan)
+export default function TargetCard() {
+  const [listPlan, setListPlan] = useState([])
+  const [loading, setLoading] = useState(true);
   const quarter = getQuarter();
   async function handleChange(id, status) {
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
       status: !status,
     });
   }
+  useEffect(() => {
+    async function getPlan() {
+      const response_personal_plan = await PersonalPlanService.getPersonalPlanData();
+      const list_plan = response_personal_plan?.data?.data
+      list_plan.map(async (list)=>{
+        const obj_plan = {
+          title: list.title,
+          milestone: [],
+        }
+        const response_plan = await PersonalPlanService.getDetailPersonalPlanData(list.id)
+        obj_plan.milestone = response_plan.data.data.milestone
+        setListPlan([...listPlan, obj_plan])
+      })
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <div className="mt-4 rounded-md bg-white py-7  text-left shadow-mine lg:w-6/12 ">
       <div className="flex justify-between px-8 pb-2">
@@ -40,27 +58,25 @@ export default function TargetCard({ data_plan }) {
         </a>
       </div>
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-          {data_plan.map((data) => (
-            <>
-              <div className="bg-[#F5F8FA] py-5 px-8">
-                <p className="">{data.title}</p>
-              </div>
-              <div className="my-3 space-y-2 px-8">
-                  {data.milestone.map((milestone, index) => (
-                      <div
-                        className={`flex items-center gap-3 ${
-                          milestone.quarter == quarter ? '' : 'hidden'
-                        }`}
-                      >
-                        <Checkbox
-                          milestone={milestone}
-                          handleChange={handleChange}
-                        />
-                      </div>
-                    ))}
-              </div>
-            </>
-          ))}
+      {!loading &&
+        listPlan.map((data) => (
+          <>
+            <div className="bg-[#F5F8FA] py-5 px-8">
+              <p className="">{data.title}</p>
+            </div>
+            <div className="my-3 space-y-2 px-8">
+              {data.milestone.map((milestone, index) => (
+                <div
+                  className={`flex items-center gap-3 ${
+                    milestone.quarter == quarter ? '' : 'hidden'
+                  }`}
+                >
+                  <Checkbox milestone={milestone} handleChange={handleChange} />
+                </div>
+              ))}
+            </div>
+          </>
+        ))}
     </div>
   );
 }
