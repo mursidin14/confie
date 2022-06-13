@@ -103,7 +103,7 @@ export default function PersonalInfomationCard({ data_profile }) {
                   </svg>
                 </button>
               </div>
-              <p className="mt-4 text-sm text-[#A1A5B7]">
+              <p className="mt-4 text-xs sm:text-sm text-[#A1A5B7]">
                 Allowed file types: png, jpg, jpeg.
               </p>
               <input id="file-input" type="file" onChange={uploadPhoto} />

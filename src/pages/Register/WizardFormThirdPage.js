@@ -3,6 +3,7 @@ import LayoutRegister from './LayoutRegister';
 import InputField from 'components/InputField';
 import SearchRegion from 'components/SearchRegion';
 import { SearchRegionCity } from 'components/SearchRegion';
+import { getTodayDate } from 'utils/utils';
 
 export default function WizardFormThirdPage(props) {
   let { data, onChange } = props;
@@ -20,6 +21,8 @@ export default function WizardFormThirdPage(props) {
       }`,
       type: 'date',
       name: 'date_of_birth',
+      min: 0,
+      max: getTodayDate,
       required: true,
     },
     {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
-import utils from 'utils/utils';
+import utils, { getTodayDate } from 'utils/utils';
 export default function ModalWorkExperience() {
   const [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
@@ -65,12 +65,14 @@ export default function ModalWorkExperience() {
       name: 'start_date',
       type: 'date',
       label: 'Tahun Mulai',
+      max: getTodayDate,
       required: true,
     },
     {
       name: 'end_date',
       type: 'date',
       label: 'Tahun Selesai',
+      max: getTodayDate,
       required: true,
     },
   ];

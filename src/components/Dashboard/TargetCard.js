@@ -3,15 +3,25 @@ import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 
 export default function TargetCard({ data_plan }) {
   const [data, setData] = useState([]);
-  const [dataMilestone, setdataMilestone] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    async function fetchData() {
+    function fetchData() {
       if (data_plan.length > 0) {
-        setData(data_plan[0]);
-        const response_plan =
-          await PersonalPlanService.getDetailPersonalPlanData(data_plan[0]?.id);
-        setdataMilestone(response_plan.data.data.milestone);
+        // setData(data_plan[0]);
+        // const response_plan =
+        //   await PersonalPlanService.getDetailPersonalPlanData(data_plan[0]?.id);
+        // setdataMilestone(response_plan.data.data.milestone);
+        data_plan.map(async (data) => {
+          const dataPlan = {
+            title: data.title,
+            milestone: [],
+          };
+          const milestone = await PersonalPlanService.getDetailPersonalPlanData(
+            data.id
+          );
+          dataPlan.milestone = milestone.data.data.milestone;
+          setData([...data, dataPlan]);
+        });
         setLoading(false);
       }
     }
@@ -32,7 +42,7 @@ export default function TargetCard({ data_plan }) {
     }
     return quarter;
   }
-  let quarter = getQuarter();
+  const quarter = getQuarter();
   async function handleChange(id, status) {
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
       status: !status,
@@ -47,8 +57,12 @@ export default function TargetCard({ data_plan }) {
             Quarter {quarter}
           </p>
         </div>
-        <a href={`/pdp`}>
+        <a
+          className="group rounded-md p-2 transition-all hover:bg-gray-400/80"
+          href={`/pdp`}
+        >
           <svg
+            className="fill-[#A1A5B7] group-hover:fill-white"
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -58,37 +72,37 @@ export default function TargetCard({ data_plan }) {
             <path
               opacity="0.5"
               d="M5.35703 10.8333L14.2749 10.8333C14.7227 10.8333 15.0856 10.4602 15.0856 9.99998C15.0856 9.53974 14.7227 9.16665 14.2749 9.16665L5.35703 9.16665C4.90928 9.16665 4.54631 9.53974 4.54631 9.99998C4.54631 10.4602 4.90928 10.8333 5.35703 10.8333Z"
-              fill="#A1A5B7"
             />
-            <path
-              d="M13.0056 10.4714L9.6133 13.9583C9.2775 14.3035 9.2775 14.8632 9.6133 15.2083C9.9491 15.5535 10.4936 15.5535 10.8294 15.2083L15.3231 10.5892C15.6397 10.2638 15.6397 9.73616 15.3231 9.41074L10.8294 4.79166C10.4936 4.44648 9.9491 4.44648 9.6133 4.79166C9.2775 5.13683 9.2775 5.69648 9.6133 6.04166L13.0056 9.52857C13.2589 9.78891 13.2589 10.2111 13.0056 10.4714Z"
-              fill="#A1A5B7"
-            />
+            <path d="M13.0056 10.4714L9.6133 13.9583C9.2775 14.3035 9.2775 14.8632 9.6133 15.2083C9.9491 15.5535 10.4936 15.5535 10.8294 15.2083L15.3231 10.5892C15.6397 10.2638 15.6397 9.73616 15.3231 9.41074L10.8294 4.79166C10.4936 4.44648 9.9491 4.44648 9.6133 4.79166C9.2775 5.13683 9.2775 5.69648 9.6133 6.04166L13.0056 9.52857C13.2589 9.78891 13.2589 10.2111 13.0056 10.4714Z" />
           </svg>
         </a>
       </div>
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
       {data && !loading ? (
         <>
-          <div className="bg-[#F5F8FA] py-5 px-8">
-            <p className="">{data.title}</p>
-          </div>
-          <div className="my-3 space-y-2 px-8">
-            {!loading
-              ? dataMilestone.map((milestone, index) => (
-                  <div
-                    className={`flex items-center gap-3 ${
-                      milestone.quarter == quarter ? '' : 'hidden'
-                    }`}
-                  >
-                    <Checkbox
-                      milestone={milestone}
-                      handleChange={handleChange}
-                    />
-                  </div>
-                ))
-              : 'loading'}
-          </div>
+          {data.map((data) => (
+            <>
+              <div className="bg-[#F5F8FA] py-5 px-8">
+                <p className="">{data.title}</p>
+              </div>
+              <div className="my-3 space-y-2 px-8">
+                {!loading
+                  ? data.milestone.map((milestone, index) => (
+                      <div
+                        className={`flex items-center gap-3 ${
+                          milestone.quarter == quarter ? '' : 'hidden'
+                        }`}
+                      >
+                        <Checkbox
+                          milestone={milestone}
+                          handleChange={handleChange}
+                        />
+                      </div>
+                    ))
+                  : 'loading'}
+              </div>
+            </>
+          ))}
         </>
       ) : null}
     </div>
@@ -108,9 +122,7 @@ function Checkbox({ milestone, handleChange }) {
         type="checkbox"
         class="form-checkbox h-5 w-5 bg-[#FFF8DD]"
       />
-      <p
-        className={`text-sm ${status ? 'line-through' : ''}`}
-      >
+      <p className={`text-sm ${status ? 'line-through' : ''}`}>
         {milestone.target_title}
       </p>
     </>

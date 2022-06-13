@@ -11,6 +11,13 @@ export function makeCapital(name) {
   return name.slice(0, 1).toUpperCase() + name.slice(1);
 }
 
+export const getTodayDate = () => {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${day < 10 ? `0${day}` : `${day}`}`;
+}
+
 const getCity = (data) => {
   const city = [];
   data.forEach((element) => {

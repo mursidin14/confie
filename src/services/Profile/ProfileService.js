@@ -31,6 +31,7 @@ const updateProfilePicture = (data) =>
     .put('/api/profile/photo', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
