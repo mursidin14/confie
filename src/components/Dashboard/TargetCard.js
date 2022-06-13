@@ -16,7 +16,7 @@ export default function TargetCard({ data_plan }) {
             data.id
           );
           dataPlan.milestone = response.data.data.milestone;
-          setData([...dataTarget, dataPlan]);
+          setDataTarget([...dataTarget, dataPlan]);
         });
         setLoading(false);
       }
