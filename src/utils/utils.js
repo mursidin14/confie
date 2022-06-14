@@ -66,6 +66,9 @@ export const getDate = (time) => {
 };
 
 const getMonthYear = (time) => {
+  if (time === null) {
+    return '-'
+  }
   time = parseInt(time);
   return new Date(time * 1000).toLocaleDateString('id-ID', {
     year: 'numeric',

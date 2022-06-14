@@ -41,6 +41,7 @@ export default function PersonalInfomationCard({ data_profile }) {
     e.preventDefault();
     const data = {
       photo_profile: e.target.files[0],
+      _method: 'put'
     };
     console.log(data)
     const response = await ProfileService.updateProfilePicture(data);

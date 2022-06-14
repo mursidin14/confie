@@ -28,11 +28,12 @@ const updateAbout = (data) =>
 
 const updateProfilePicture = (data) =>
   httpClient
-    .put('/api/profile/photo', data, {
+    .post('/api/profile/photo', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Accept': 'multipart/form-data',
       },
+      
     })
     .then((response) => response)
     .catch((error) => error.response);
