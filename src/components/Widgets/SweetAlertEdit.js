@@ -203,7 +203,7 @@ export default function SweetAlertEdit({}) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div>
                     <div className="flex items-center justify-center p-8">
-                      {error && (
+                      {!error && (
                         <svg
                           width="100"
                           height="100"
