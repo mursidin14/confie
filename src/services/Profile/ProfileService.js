@@ -38,6 +38,13 @@ const updateProfilePicture = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
+const deletePhotoProfile = () =>
+  httpClient
+    .delete('/api/profile/photo')
+    .then((response) => response)
+    .catch((error) => error.response);
+
+
 const updateSettingProfile = (data) =>
   httpClient
     .put('/api/profile/account', data, {
@@ -193,9 +200,9 @@ const LogoutProfile = () =>
 const ProfileService = {
   getProfileData,
   updateProfilePicture,
+  deletePhotoProfile,
   updateProfileData,
   updateSettingProfile,
-  updateProfilePicture,
   updateAbout,
   getOnlineProfileData,
   addSkill,
