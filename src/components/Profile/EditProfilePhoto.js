@@ -93,7 +93,7 @@ export default function EditProfilePhoto({data_profile}) {
               src={data_profile.url_photo_profile ? `/${data_profile.url_photo_profile}` : data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
               alt=""
             />
-            <button className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
+            <button onClick={deletePhoto} className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
               <svg
                 width="11"
                 height="11"
@@ -240,8 +240,8 @@ export default function EditProfilePhoto({data_profile}) {
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
                       {error
-                        ? 'Data tidak berhasil diubah'
-                        : 'Data berhasil diubah!'}
+                        ? 'Data anda tidak berhasil diubah'
+                        : 'Data anda berhasil diubah!'}
                     </p>
                   </div>
                 </Dialog.Panel>
