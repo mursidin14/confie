@@ -145,7 +145,7 @@ export default function SweetAlertEdit({}) {
                       </svg>
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                      Apakah Anda ingin menghapus data ini?
+                      Apakah Anda ingin mengubah data ini?
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-4">
                       <button
