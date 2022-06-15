@@ -22,7 +22,10 @@ export default function SweetAlertEdit({}) {
     const response = await ProfileService.updateProfilePicture(dataProfile);
     if (response?.data?.meta === 201) {
       setError(false);
+      setIsOpenAccept(true);
+      return
     }
+    setError(true);
     setIsOpenAccept(true);
   }
   function openModal() {
