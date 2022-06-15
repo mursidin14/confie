@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
-export default function SweetAlertEdit({}) {
+export default function EditProfilePhoto({data_profile}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAccept, setIsOpenAccept] = useState(false);
   const [error, setError] = useState(false);
@@ -20,8 +20,8 @@ export default function SweetAlertEdit({}) {
   async function handleEditPhoto() {
     closeModal();
     const response = await ProfileService.updateProfilePicture(dataProfile);
-    if (response?.data?.meta === 201) {
-      setError(false);
+    console.log(response)
+    if (response?.data?.meta?.code === 200) {
       setIsOpenAccept(true);
       return
     }
@@ -74,7 +74,7 @@ export default function SweetAlertEdit({}) {
             </label>
             <img
               className="w-20 sm:w-32"
-              src={true ? '/male.jpg' : '/female.jpg'}
+              src={data_profile.url_photo_profile || data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
               alt=""
             />
             <button className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">

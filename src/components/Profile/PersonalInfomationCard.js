@@ -1,5 +1,5 @@
 import ModalProfile from 'components/Modal/ModalProfile';
-import SweetAlertEdit from 'components/Widgets/SweetAlertEdit';
+import EditProfilePhoto from 'components/Profile/EditProfilePhoto';
 import React from 'react';
 import { makeCapital, getDate, getGender } from 'utils/utils';
 export default function PersonalInfomationCard({ data_profile }) {
@@ -48,7 +48,7 @@ export default function PersonalInfomationCard({ data_profile }) {
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="my-5">
         <div className="px-8">
-          <SweetAlertEdit></SweetAlertEdit>
+          <EditProfilePhoto data_profile={data_profile}></EditProfilePhoto>
           {inputs.map((input, index) => (
             <DataPersonal key={index} {...input} />
           ))}
