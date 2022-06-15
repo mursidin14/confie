@@ -74,7 +74,7 @@ export default function EditProfilePhoto({data_profile}) {
             </label>
             <img
               className="w-20 sm:w-32"
-              src={data_profile.url_photo_profile || data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
+              src={data_profile.url_photo_profile ? `/${data_profile.url_photo_profile}` : data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
               alt=""
             />
             <button className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
