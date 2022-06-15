@@ -18,7 +18,7 @@ export default function SweetAlertEdit({}) {
     handleEdit();
     window.location.reload();
   }
-  function handleEditPhoto() {
+  async function handleEditPhoto() {
     closeModal();
     const response = await ProfileService.updateProfilePicture(dataProfile);
     console.log(response)
