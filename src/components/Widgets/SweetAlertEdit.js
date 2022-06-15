@@ -15,7 +15,6 @@ export default function SweetAlertEdit({}) {
       let html = document.querySelector('html');
       html.removeAttribute('style');
     }, 500);
-    handleEdit();
     window.location.reload();
   }
   async function handleEditPhoto() {
