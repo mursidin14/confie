@@ -89,7 +89,7 @@ export default function EditProfilePhoto({data_profile}) {
               </div>
             </label>
             <img
-              className="w-20 sm:w-32"
+              className="w-20 sm:w-32 h-20 sm:h-32 rounded-full"
               src={data_profile.url_photo_profile ? `/backend/${data_profile.url_photo_profile}` : data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
               alt=""
             />

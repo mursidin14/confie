@@ -84,7 +84,7 @@ export default function Header({data, handleNav, PageName }) {
         <div className="">
           <img
             onClick={clickProfile}
-            className="w-10 cursor-pointer"
+            className="w-10 h-10 object-contain cursor-pointer"
             src={data.url_photo_profile ? `/backend/${data.url_photo_profile}` : data.gender == "L" ? "/male.jpg" : "/female.jpg"}
             alt=""
           />
