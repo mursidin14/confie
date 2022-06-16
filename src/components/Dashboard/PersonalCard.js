@@ -9,7 +9,7 @@ export default function PersonalCard({data_profile}) {
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8">
       <div className="flex items-start gap-3 lg:items-stretch">
         <img
-          className="w-28 rounded-md object-cover md:w-48"
+          className="w-28 md:w-48 h-28 md:h-28 rounded-md object-cover"
           src={data_profile.url_photo_profile ? `/backend/${data_profile.url_photo_profile}` : data_profile.gender == "L" ? "/male.jpg" : "/female.jpg"}
           alt=""
         />
