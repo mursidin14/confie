@@ -50,7 +50,7 @@ export default function ProfileCandidate() {
           <section className="bg-dark-blue py-10 px-3 text-white sm:px-7 ">
             <div className="">
               <img
-                className="mx-auto w-16 rounded-full sm:w-24 lg:w-32 "
+                className="mx-auto w-16 rounded-full sm:w-24 lg:w-32 object-cover"
                 src={dataProfile.url_photo_profile ? `/backend/${dataProfile.url_photo_profile}` : dataProfile.gender == "L" ? "/male.jpg" : "/female.jpg"}
                 alt=""
               />
