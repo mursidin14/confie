@@ -85,7 +85,7 @@ export default function Header({data, handleNav, PageName }) {
           <img
             onClick={clickProfile}
             className="w-10 cursor-pointer"
-            src={data.url_photo_profile ? `/${data.url_photo_profile}` : data.gender == "L" ? "/male.jpg" : "/female.jpg"}
+            src={data.url_photo_profile ? `/backend/${data.url_photo_profile}` : data.gender == "L" ? "/male.jpg" : "/female.jpg"}
             alt=""
           />
           <section
