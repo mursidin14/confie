@@ -91,7 +91,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return `${utils.makeCapital(person.name)}`;
+              return person.name;
             }}
             onChange={handleChange}
           />
@@ -133,7 +133,7 @@ export default function SearchRegion({ data, onChange, setCity }) {
                         }`}
                         onClick={handleClick}
                       >
-                        {utils.makeCapital(person.name)}
+                        {person.name}
                       </span>
                     </>
                   )}
@@ -191,7 +191,7 @@ export function SearchRegionCity({ data, onChange, city }) {
             className="input-form peer mb-3"
             displayValue={(person) => {
               handleEnter(person.name);
-              return `${utils.makeCapital(person.name)}`;
+              return person.name;
             }}
             onChange={handleChange}
           />
@@ -238,7 +238,7 @@ export function SearchRegionCity({ data, onChange, city }) {
                         }`}
                         onClick={handleClick}
                       >
-                        {utils.makeCapital(person.name)}
+                        {person.name}
                       </span>
                     </>
                   )}
@@ -251,6 +251,8 @@ export function SearchRegionCity({ data, onChange, city }) {
     </Combobox>
   );
 }
+
+
 export function SearchRegionProfile({ data, onChange, setCity }) {
   const province = {
     name: data.province_name,
