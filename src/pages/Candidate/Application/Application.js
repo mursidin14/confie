@@ -5,9 +5,7 @@ import SelectBox from 'components/SelecBox';
 import ProfileService from 'services/Profile/ProfileService';
 import ModalError from 'components/Modal/ModalError';
 export default function Application() {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  let datas = [
+  const datas = [
     {
       no: 1,
       name_job: 'Frontend Developer',
@@ -86,27 +84,14 @@ export default function Application() {
       detail: '/detailApplication',
     },
   ];
-  const closeError = () => {
-    window.location.href = '/dashboard';
-  }
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,
   });
-  useEffect(() => {
-    async function fetchData() {
-      const response_profile = await ProfileService.getProfileData();
-      if (response_profile.data.meta.email_verified_at == null) {
-        setError(true);
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
+ 
 
   return (
     <>
-      {!loading && !error && (
         <Layout PageName={'Lamaran Saya'}>
           <div className="rounded-md bg-white p-6 shadow-mine">
             <div className="w-full items-center justify-between lg:flex">
@@ -183,8 +168,6 @@ export default function Application() {
             </div>
           </div>
         </Layout>
-      )}
-      {!loading && error && <ModalError error={error} closeModal={closeError} error_msg={`u haven't verify ur email`}></ModalError>}
     </>
   );
 }
