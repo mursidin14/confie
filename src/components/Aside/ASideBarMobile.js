@@ -33,7 +33,7 @@ export default function ASideBarMobile({is_verified, offCanvas, handleNav, PageN
         link:  `/lowongan`,
         icon_active: '/nav_icon/job_offer.png',
         icon_inactive: '/nav_icon/i_job_offer.png',
-        can_access: is_verified === true
+        can_access: true
       },
       {
         alias: 'lamaran saya',
@@ -41,7 +41,7 @@ export default function ASideBarMobile({is_verified, offCanvas, handleNav, PageN
         link: `/lamaran`,
         icon_active: '/nav_icon/applicant.png',
         icon_inactive: '/nav_icon/i_applicant.png',
-        can_access: is_verified === true
+        can_access: true
       },
       {
         alias: 'kelas online',
@@ -49,7 +49,7 @@ export default function ASideBarMobile({is_verified, offCanvas, handleNav, PageN
         link: `/kelas`,
         icon_active: '/nav_icon/class.png',
         icon_inactive: '/nav_icon/i_class.png',
-        can_access: is_verified === true
+        can_access: true
       },
       
     ];
