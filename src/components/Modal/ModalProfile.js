@@ -197,7 +197,7 @@ export default function ModalProfile({ data_profile }) {
                       <p key={index}>{err}</p>
                     ))}
                   </section>
-                  <div className="mt-4 flex justify-end gap-4 px-8">
+                  <div className="mt-20 flex justify-end gap-4 px-8">
                     <button
                       onClick={closeModal}
                       className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
