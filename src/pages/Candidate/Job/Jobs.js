@@ -13,6 +13,10 @@ export default function Jobs() {
     sliceOne: 0,
     sliceTwo: 6,
   });
+  useEffect(() => {
+    document.title = 'Lowongan';
+  }, [])
+  
   return (
     <>
       {false && (

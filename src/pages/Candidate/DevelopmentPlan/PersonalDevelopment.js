@@ -10,6 +10,7 @@ export default function PersonalDevelopment() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Personal Development';
     async function getTarget() {
       const response = await PersonalPlanService.getPersonalPlanData();
       setTarget(response.data.data);

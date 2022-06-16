@@ -15,6 +15,7 @@ export default function Profile() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    document.title = 'Profile';
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
       setData({

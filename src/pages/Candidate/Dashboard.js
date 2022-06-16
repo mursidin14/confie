@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    document.title = 'Dashboard';
     async function fetchData() {
       const list_plan_milestone = []
       const response_profile = await ProfileService.getProfileData();

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import Pagination from 'components/Widgets/Pagination';
 import SelectBox from 'components/SelecBox';
-import ProfileService from 'services/Profile/ProfileService';
-import ModalError from 'components/Modal/ModalError';
 import UnderConstruction from 'pages/UnderConstruction';
 export default function Application() {
   const datas = [
@@ -89,7 +87,9 @@ export default function Application() {
     sliceOne: 0,
     sliceTwo: 4,
   });
- 
+  useEffect(() => {
+    document.title = 'Lamaran';
+  }, [])
 
   return (
     <>
