@@ -4,6 +4,7 @@ import Pagination from 'components/Widgets/Pagination';
 import SelectBox from 'components/SelecBox';
 import ProfileService from 'services/Profile/ProfileService';
 import ModalError from 'components/Modal/ModalError';
+import UnderConstruction from 'pages/UnderConstruction';
 export default function Application() {
   const datas = [
     {
@@ -92,6 +93,7 @@ export default function Application() {
 
   return (
     <>
+        {false &&
         <Layout PageName={'Lamaran Saya'}>
           <div className="rounded-md bg-white p-6 shadow-mine">
             <div className="w-full items-center justify-between lg:flex">
@@ -168,6 +170,10 @@ export default function Application() {
             </div>
           </div>
         </Layout>
+        }
+        {true && (
+            <UnderConstruction></UnderConstruction>
+        )}
     </>
   );
 }

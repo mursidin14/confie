@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import SearchJob from 'pages/Candidate/Job/SearchJob';
 import Pagination from 'components/Widgets/Pagination';
-import ProfileService from 'services/Profile/ProfileService';
-import ModalError from 'components/Modal/ModalError';
 import JobFeed from './JobFeed';
+import UnderConstruction from 'pages/UnderConstruction';
 
 export default function Jobs() {
   const [items, setItems] = useState([
@@ -16,6 +15,7 @@ export default function Jobs() {
   });
   return (
     <>
+      {false && (
         <Layout PageName={'Lowongan Kerja'}>
           <SearchJob></SearchJob>
           <JobFeed
@@ -30,6 +30,12 @@ export default function Jobs() {
             ></Pagination>
           </div>
         </Layout>
+      )}
+      {true && (
+          <>
+            <UnderConstruction></UnderConstruction>
+          </>
+      )}
     </>
   );
 }

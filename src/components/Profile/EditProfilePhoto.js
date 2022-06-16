@@ -2,8 +2,8 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
-export default function EditProfilePhoto({data_profile}) {
-  const [isDelete, setIsDelete] = useState(false)
+export default function EditProfilePhoto({ data_profile }) {
+  const [isDelete, setIsDelete] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAccept, setIsOpenAccept] = useState(false);
   const [error, setError] = useState(false);
@@ -25,20 +25,20 @@ export default function EditProfilePhoto({data_profile}) {
   async function handleEditPhoto() {
     closeModal();
     if (isDelete) {
-        const response = await ProfileService.deletePhotoProfile();
-        if (response?.data?.meta?.code === 200) {
-          setIsOpenAccept(true);
-          return
-        }
-        setError(true);
+      const response = await ProfileService.deletePhotoProfile();
+      if (response?.data?.meta?.code === 200) {
         setIsOpenAccept(true);
-        return
+        return;
+      }
+      setError(true);
+      setIsOpenAccept(true);
+      return;
     }
-    
+
     const response = await ProfileService.updateProfilePicture(dataProfile);
     if (response?.data?.meta?.code === 200) {
       setIsOpenAccept(true);
-      return
+      return;
     }
     setError(true);
     setIsOpenAccept(true);
@@ -49,7 +49,7 @@ export default function EditProfilePhoto({data_profile}) {
   const deletePhoto = async () => {
     setIsDelete(true);
     openModal();
-  }
+  };
   const uploadPhoto = (e) => {
     e.preventDefault();
     setDataProfile({
@@ -89,11 +89,20 @@ export default function EditProfilePhoto({data_profile}) {
               </div>
             </label>
             <img
-              className="w-20 sm:w-32 h-20 sm:h-32 rounded-md object-cover"
-              src={data_profile.url_photo_profile ? `/backend/${data_profile.url_photo_profile}` : data_profile.gender == 'L' ? '/male.jpg' : '/female.jpg'}
+              className="h-20 w-20 rounded-md object-cover sm:h-32 sm:w-32"
+              src={
+                data_profile.url_photo_profile
+                  ? `/backend/${data_profile.url_photo_profile}`
+                  : data_profile.gender == 'L'
+                  ? '/male.jpg'
+                  : '/female.jpg'
+              }
               alt=""
             />
-            <button onClick={deletePhoto} className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
+            <button
+              onClick={deletePhoto}
+              className="absolute -bottom-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2"
+            >
               <svg
                 width="11"
                 height="11"
@@ -164,7 +173,9 @@ export default function EditProfilePhoto({data_profile}) {
                       </svg>
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                      {isDelete ? 'Apakah anda ingin menghapus photo ini?' : 'Apakah Anda ingin mengubah foto ini?'}
+                      {isDelete
+                        ? 'Apakah anda ingin menghapus photo ini?'
+                        : 'Apakah Anda ingin mengubah foto ini?'}
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-4">
                       <button
@@ -219,7 +230,7 @@ export default function EditProfilePhoto({data_profile}) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div>
                     <div className="flex items-center justify-center p-8">
-                      {!error && (
+                      {!error ? (
                         <svg
                           width="100"
                           height="100"
@@ -234,6 +245,23 @@ export default function EditProfilePhoto({data_profile}) {
                           <path
                             d="M68.5624 31.0625C68.5179 31.1057 68.4761 31.1516 68.4374 31.2L46.7312 58.8563L33.6499 45.7688C32.7613 44.9408 31.586 44.49 30.3717 44.5115C29.1573 44.5329 27.9986 45.0248 27.1398 45.8837C26.281 46.7425 25.789 47.9011 25.7676 49.1155C25.7461 50.3299 26.1969 51.5052 27.0249 52.3938L43.5624 68.9375C44.0079 69.3822 44.5384 69.7327 45.1223 69.9679C45.7062 70.2031 46.3315 70.3183 46.9608 70.3067C47.5902 70.295 48.2108 70.1567 48.7855 69.9C49.3603 69.6433 49.8774 69.2735 50.3062 68.8125L75.2562 37.625C76.1057 36.7334 76.5702 35.5431 76.5492 34.3117C76.5283 33.0803 76.0235 31.9066 75.144 31.0444C74.2645 30.1822 73.0811 29.7007 71.8495 29.7041C70.6179 29.7075 69.4371 30.1955 68.5624 31.0625Z"
                             fill="#50CD89"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          width="100"
+                          height="100"
+                          viewBox="0 0 100 100"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M62.3868 31.6579C58.549 35.4984 54.7046 39.3395 50.8709 43.1806C47.0304 39.3415 43.19 35.5004 39.3482 31.6579C34.9044 27.2162 28.019 34.1049 32.4608 38.5467C36.2999 42.3838 40.1424 46.2269 43.9768 50.0626C40.1397 53.9017 36.2979 57.7442 32.4608 61.5853C28.019 66.0257 34.9078 72.9124 39.3482 68.4733C43.1873 64.6322 47.0277 60.7918 50.8709 56.9507C54.7113 60.7918 58.549 64.6309 62.3868 68.4733C66.8292 72.9131 73.7153 66.0257 69.2769 61.5859C65.4358 57.7448 61.5953 53.9057 57.7542 50.0633C61.596 46.2228 65.4364 42.3817 69.2769 38.5406C73.7153 34.1002 66.8292 27.2115 62.3868 31.6532"
+                            fill="#F44336"
+                          />
+                          <path
+                            d="M50 93.75C38.3968 93.75 27.2688 89.1406 19.0641 80.9359C10.8594 72.7312 6.25 61.6032 6.25 50C6.25 38.3968 10.8594 27.2688 19.0641 19.0641C27.2688 10.8594 38.3968 6.25 50 6.25C61.6032 6.25 72.7312 10.8594 80.9359 19.0641C89.1406 27.2688 93.75 38.3968 93.75 50C93.75 61.6032 89.1406 72.7312 80.9359 80.9359C72.7312 89.1406 61.6032 93.75 50 93.75ZM50 100C63.2608 100 75.9785 94.7322 85.3553 85.3553C94.7322 75.9785 100 63.2608 100 50C100 36.7392 94.7322 24.0215 85.3553 14.6447C75.9785 5.26784 63.2608 0 50 0C36.7392 0 24.0215 5.26784 14.6447 14.6447C5.26784 24.0215 0 36.7392 0 50C0 63.2608 5.26784 75.9785 14.6447 85.3553C24.0215 94.7322 36.7392 100 50 100V100Z"
+                            fill="#F44336"
                           />
                         </svg>
                       )}
