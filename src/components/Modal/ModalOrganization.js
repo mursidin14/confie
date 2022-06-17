@@ -5,8 +5,7 @@ import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
 export default function ModalOrganization() {
   let [isOpen, setIsOpen] = useState(false);
-  const [dataOrganization, setDataOrganization] = useState({
-  });
+  const [dataOrganization, setDataOrganization] = useState({});
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
@@ -17,7 +16,10 @@ export default function ModalOrganization() {
   }
 
   function handleChange(e) {
-    setDataOrganization({ ...dataOrganization, [e.target.name]: e.target.value });
+    setDataOrganization({
+      ...dataOrganization,
+      [e.target.name]: e.target.value,
+    });
   }
 
   async function handleSubmit() {
@@ -60,7 +62,6 @@ export default function ModalOrganization() {
       required: true,
       min: 0,
     },
-    
   ];
   return (
     <>
@@ -124,6 +125,25 @@ export default function ModalOrganization() {
                           {...input}
                         />
                       ))}
+                      <div className={`items-center lg:flex my-3`}>
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File / Dokumen
+                            <p className='text-xs text-[#A1A5B7]'>Max Size: 2 MB</p>
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input
+                            onChange={(e)=>{
+                              setDataOrganization({
+                                ...dataOrganization,
+                                file: e.target.files[0]
+                            })}}
+                            type="file"
+                            name='file'
+                          />
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" htmlFor="">
@@ -174,9 +194,7 @@ export default function ModalOrganization() {
 
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
-    <div
-      className={`items-center lg:flex`}
-    >
+    <div className={`items-center lg:flex`}>
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">
           {label}
