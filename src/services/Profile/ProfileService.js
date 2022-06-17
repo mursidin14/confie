@@ -165,6 +165,32 @@ const deleteEducation = (id) =>
     .then((response) => response)
     .catch((error) => error.response);
 
+const addOrganization = (data) =>
+  httpClient
+    .post('/api/profile/volunteers', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  const updateOrganization = (id, data) =>
+  httpClient
+    .put(`/api/profile/volunteers/${id}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+  const deleteOrganization = (id) =>
+  httpClient
+    .delete(`/api/profile/volunteers/${id}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+
 const addCertificate = (data) =>
   httpClient
     .post('/api/profile/certificates', data, {
@@ -217,6 +243,9 @@ const ProfileService = {
   addEducation,
   updateEducation,
   deleteEducation,
+  addOrganization,
+  updateOrganization,
+  deleteOrganization,
   addCertificate,
   updateCertificate,
   deleteCertificate,

@@ -3,14 +3,9 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function UpdateEducation({ item, id }) {
-  let [isOpen, setIsOpen] = useState(false);
-  const [dataEducation, setDataEducation] = useState({
-    description: item.description,
-    end_date: item.end_date,
-    major: item.major,
-    school: item.school,
-    start_date: item.start_date,
+export default function UpdateOrganization({ item, id }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [dataOrganization, setDataOrganization] = useState({
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -20,16 +15,16 @@ export default function UpdateEducation({ item, id }) {
     setIsOpen(true);
   }
   function handleChange(e) {
-      setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
+      setDataOrganization({ ...dataOrganization, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit() {
     const data = {
-      ...dataEducation,
+      ...dataOrganization,
     };
     data['start_date'] = utils.timeEpoch(data['start_date']);
     data['end_date'] = utils.timeEpoch(data['end_date']);
-    const response = await ProfileService.updateEducation(id, data);
+    const response = await ProfileService.updateOrganization(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;
@@ -44,36 +39,22 @@ export default function UpdateEducation({ item, id }) {
 
   let inputs = [
     {
-      label: 'Sekolah/Universitas',
+      label: 'Lembaga Organisasi',
       type: 'text',
       name: 'school',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
-      pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
+      label: 'Jabatan / Tugas',
       name: 'major',
-      label: 'Jurusan',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
   ];
   let inputs2 = [
     { 
       name: 'start_date',
-      type: 'number',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Tahun Mulai',
-      required: true,
-      min: 0,
-    },
-    {
-      name: 'end_date',
-      type: 'number',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Tahun Selesai',
+      label: 'Tahun Aktif',
       required: true,
       min: 0,
     },
@@ -135,7 +116,7 @@ export default function UpdateEducation({ item, id }) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                      Edit Riwayat Pendidikan
+                      Edit Pengalaman Organisasi / Relawan
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
@@ -143,14 +124,14 @@ export default function UpdateEducation({ item, id }) {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
-                          data={dataEducation}
+                          data={dataOrganization}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
                       {inputs2.map((input, index) => (
                         <InputFormProfile
-                          data={dataEducation}
+                          data={dataOrganization}
                           handleChange={handleChange}
                           {...input}
                         />
@@ -163,7 +144,7 @@ export default function UpdateEducation({ item, id }) {
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
-                            value={dataEducation.description}
+                            value={dataOrganization.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -203,7 +184,6 @@ export default function UpdateEducation({ item, id }) {
     </>
   );
 }
-
 function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
     <div

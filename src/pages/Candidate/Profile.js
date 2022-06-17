@@ -10,10 +10,12 @@ import CertificationCard from 'components/Profile/CertificationCard';
 import ProfileService from 'services/Profile/ProfileService';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import OrganizationCard from 'components/Profile/OrganizationCard';
 
 export default function Profile() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     document.title = 'Profile';
     async function fetchData() {
@@ -25,6 +27,7 @@ export default function Profile() {
     }
     fetchData();
   }, []);
+
   return (
     <Layout PageName={'Profile'}>
       {loading ? (
@@ -56,6 +59,11 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <EducationCard data_profile={data.profile.educations}/>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <OrganizationCard data_profile={[]}/>
       )}
       {loading ? (
         <SkeletonCard />

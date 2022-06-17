@@ -3,33 +3,28 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function UpdateEducation({ item, id }) {
+export default function ModalOrganization() {
   let [isOpen, setIsOpen] = useState(false);
-  const [dataEducation, setDataEducation] = useState({
-    description: item.description,
-    end_date: item.end_date,
-    major: item.major,
-    school: item.school,
-    start_date: item.start_date,
+  const [dataOrganization, setDataOrganization] = useState({
   });
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
+
   function openModal() {
     setIsOpen(true);
   }
+
   function handleChange(e) {
-      setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
+    setDataOrganization({ ...dataOrganization, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit() {
     const data = {
-      ...dataEducation,
+      ...dataOrganization,
     };
-    data['start_date'] = utils.timeEpoch(data['start_date']);
-    data['end_date'] = utils.timeEpoch(data['end_date']);
-    const response = await ProfileService.updateEducation(id, data);
+    const response = await ProfileService.addOrganization(data);
     if (response.data.meta.status == 'error') {
       let errors = [];
       let error = response.data.data;
@@ -44,66 +39,38 @@ export default function UpdateEducation({ item, id }) {
 
   let inputs = [
     {
-      label: 'Sekolah/Universitas',
+      label: 'Lembaga Organisasi',
       type: 'text',
       name: 'school',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
       pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
+      label: 'Jabatan / Tugas',
       name: 'major',
-      label: 'Jurusan',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
   ];
   let inputs2 = [
-    { 
+    {
       name: 'start_date',
       type: 'number',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Tahun Mulai',
+      label: 'Tahun Aktif',
       required: true,
       min: 0,
     },
-    {
-      name: 'end_date',
-      type: 'number',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Tahun Selesai',
-      required: true,
-      min: 0,
-    },
+    
   ];
   return (
     <>
       <div className="flex items-center justify-center">
-        <button onClick={openModal}>
-          <svg
-            className="w-11"
-            width="34"
-            height="34"
-            viewBox="0 0 34 34"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
-              fill="#FFF8DD"
-            />
-            <path
-              opacity="0.3"
-              d="M25.05 14.2649L23.4307 15.8833L19.1137 11.5663L20.7322 9.94705C21.0186 9.66076 21.4069 9.5 21.8119 9.5C22.2168 9.5 22.6051 9.66076 22.8915 9.94705L25.05 12.1056C25.3363 12.3919 25.4971 12.7803 25.4971 13.1852C25.4971 13.5901 25.3363 13.9785 25.05 14.2649ZM11.7652 24.4491L16.4152 22.8988L12.0982 18.5818L10.548 23.2318C10.4911 23.4016 10.4828 23.5841 10.5239 23.7584C10.565 23.9328 10.654 24.0922 10.7808 24.2187C10.9077 24.3451 11.0673 24.4337 11.2417 24.4744C11.4162 24.5152 11.5985 24.5064 11.7682 24.4491H11.7652Z"
-              fill="#FE9A00"
-            />
-            <path
-              d="M13.1805 23.975L11.769 24.446C11.5995 24.5024 11.4175 24.5106 11.2436 24.4695C11.0697 24.4284 10.9106 24.3398 10.7842 24.2134C10.6578 24.0871 10.5691 23.9281 10.5279 23.7542C10.4867 23.5803 10.4947 23.3984 10.551 23.2288L11.022 21.8165L13.1805 23.975ZM12.1013 18.5787L16.4183 22.8957L23.4338 15.8802L19.1168 11.5632L12.1013 18.5787Z"
-              fill="#FE9A00"
-            />
-          </svg>
+        <button
+          type="button"
+          onClick={openModal}
+          className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        >
+          Tambah
         </button>
       </div>
 
@@ -135,35 +102,37 @@ export default function UpdateEducation({ item, id }) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                      Edit Riwayat Pendidikan
+                      Tambah Pengalaman Organisasi / Relawan
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="lg:px-8 px-2">
+                    <div className="px-2 lg:px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
-                          data={dataEducation}
+                          key={index}
+                          data={dataOrganization}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
                       {inputs2.map((input, index) => (
                         <InputFormProfile
-                          data={dataEducation}
+                          key={index}
+                          data={dataOrganization}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Deskripsi
                           </label>
                         </div>
                         <div className="lg:w-7/12">
                           <textarea
-                            value={dataEducation.description}
+                            value={dataOrganization.description}
                             onChange={handleChange}
                             name="description"
                             id=""
@@ -172,7 +141,6 @@ export default function UpdateEducation({ item, id }) {
                           ></textarea>
                         </div>
                       </div>
-                      
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">
@@ -191,7 +159,7 @@ export default function UpdateEducation({ item, id }) {
                       onClick={handleSubmit}
                       className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
                     >
-                      Edit
+                      Submit
                     </button>
                   </div>
                 </Dialog.Panel>
@@ -204,26 +172,22 @@ export default function UpdateEducation({ item, id }) {
   );
 }
 
-function InputFormProfile({data, label, handleChange, ...inputProps }) {
+function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div
-      className={`items-center ${
-        data.is_current == true && inputProps.name == 'end_date'
-          ? 'hidden'
-          : 'lg:flex '
-      }`}
+      className={`items-center lg:flex`}
     >
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" htmlFor="">
           {label}
         </label>
       </div>
       <div className="lg:w-7/12">
         <input
-          value={data[inputProps.name]}
           onChange={handleChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
+          value={data[inputProps.name]}
         />
       </div>
     </div>
