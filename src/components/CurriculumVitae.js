@@ -116,7 +116,7 @@ function BasicInformation({ data }) {
           />
         </svg>
 
-        <p className='max-w-[150px]'>{data.email}</p>
+        <p className='max-w-[170px] break-all'>{data.email}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
         <svg
