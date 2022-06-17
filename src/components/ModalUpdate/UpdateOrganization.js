@@ -140,6 +140,25 @@ export default function UpdateOrganization({ item, id }) {
                           {...input}
                         />
                       ))}
+                       <div className={`items-center lg:flex my-3`}>
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File / Dokumen
+                            <p className='text-xs text-[#A1A5B7]'>Max Size: 2 MB</p>
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input
+                            onChange={(e)=>{
+                              setDataOrganization({
+                                ...dataOrganization,
+                                file: e.target.files[0]
+                            })}}
+                            type="file"
+                            name='file'
+                          />
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" for="">

@@ -63,7 +63,7 @@ export default function Profile() {
       {loading ? (
         <SkeletonCard />
       ) : (
-        <OrganizationCard data_profile={[]}/>
+        <OrganizationCard data_profile={data.profile.volunteers}/>
       )}
       {loading ? (
         <SkeletonCard />

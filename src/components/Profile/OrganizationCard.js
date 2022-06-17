@@ -60,9 +60,9 @@ function Table({ items, handleDelete }) {
             className="mt-3 h-32 border-b-2  border-gray-300/50 text-sm text-[#7E8299]"
             key={index}
           >
-            <td className="w-[10%] pl-10 text-left">{item.school}</td>
-            <td className="w-[10%] ">{item.major}</td>
-            <td className="w-[6%] ">{(item.start_date)}</td>
+            <td className="w-[10%] pl-10 text-left">{item.agency}</td>
+            <td className="w-[10%] ">{item.position}</td>
+            <td className="w-[6%] ">{(item.year)}</td>
             <td className="w-[20%] ">{item.description}</td>
             <td className="w-[6%]">
               <div className="flex justify-center gap-2">
