@@ -1,15 +1,39 @@
 import React from 'react';
 import InformationTitle from 'pages/Candidate/OnlineProfile/InformationTitle';
 import utils from 'utils/utils';
-export default function CurriculumVitae({ data }) {
+export default function CurriculumVitae({data}) {
+  // const data = {
+  //   about: "Annas",
+  //   address: null,
+  //   certificates: [],
+  //   city: "73.71",
+  //   city_name: "KOTA MAKASSAR",
+  //   country: "Indonesia",
+  //   date_of_birth: 1654041600,
+  //   educations: [],
+  //   email: "",
+  //   email_verified_at: null,
+  //   experiences: [],
+  //   full_name: "annas@gmail.com",
+  //   gender: "L",
+  //   id: 4,
+  //   internships: [],
+  //   phone_number: "11111111111",
+  //   province: "73",
+  //   province_name: "SULAWESI SELATAN",
+  //   skills: [],
+  //   slug: "edgynerr",
+  //   url_linkedin: null,
+  //   url_photo_profile: null
+  // }
   return (
     <main className="flex ">
       <section className="h-[2480px] bg-dark-blue py-10 px-7 text-white sm:w-[35%]">
         <div className="mx-auto w-fit ">
           <img className="rounded-full" src="/person.png" alt="" />
           <div className="mt-5 flex items-center gap-3">
-            <p className="text-lg">{data.full_name}</p>
-            <svg
+            <p className="text-lg">{utils.makeCapital(data.full_name)}</p>
+            {/* <svg
               className="h-5 w-5"
               width="28"
               height="28"
@@ -25,9 +49,9 @@ export default function CurriculumVitae({ data }) {
                 d="M20.7607 11.3173C21.1012 10.9165 21.6287 10.8976 22.0293 11.2383C22.4302 11.5789 22.3717 12.1073 22.031 12.5081L15.7718 20.4265C15.4258 20.8336 14.8128 20.8765 14.4135 20.5215L10.1278 16.712C9.73464 16.3625 9.69924 15.7606 10.0487 15.3675C10.3981 14.9743 11.0001 14.939 11.3932 15.2883L14.9512 18.451L20.7607 11.3173Z"
                 fill="white"
               />
-            </svg>
+            </svg> */}
           </div>
-          <p className="mt-1 text-center text-sm">Teknik Informatika</p>
+          <p className="mt-1 text-center text-sm"></p>
         </div>
         <BasicInformation data={data} />
         <SkillInfomation data={data.skills} />
@@ -73,23 +97,6 @@ function BasicInformation({ data }) {
       <div className="my-5 flex items-center gap-5">
         <svg
           className="h-4 w-4"
-          width="22"
-          height="22"
-          viewBox="0 0 22 22"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M14.5182 15.4525L16.3382 13.6325C16.5833 13.3904 16.8935 13.2247 17.231 13.1555C17.5685 13.0863 17.9188 13.1165 18.2395 13.2425L20.4576 14.1282C20.7816 14.2597 21.0595 14.4842 21.2561 14.7734C21.4527 15.0625 21.5594 15.4035 21.5626 15.7532V19.8157C21.5607 20.0535 21.5107 20.2886 21.4156 20.5066C21.3205 20.7247 21.1822 20.9212 21.0091 21.0844C20.836 21.2476 20.6317 21.3741 20.4085 21.4563C20.1852 21.5385 19.9477 21.5746 19.7101 21.5625C4.16695 20.5957 1.0307 7.43316 0.437578 2.39566C0.410045 2.14828 0.435201 1.89788 0.511392 1.66092C0.587583 1.42397 0.713082 1.20583 0.879633 1.02086C1.04618 0.835885 1.25001 0.688275 1.47771 0.587735C1.7054 0.487195 1.9518 0.436006 2.2007 0.437533H6.12508C6.47527 0.43857 6.81715 0.54435 7.10674 0.74127C7.39632 0.938189 7.62038 1.21724 7.75008 1.54253L8.6357 3.76066C8.76591 4.08003 8.79913 4.43068 8.73121 4.76882C8.66329 5.10696 8.49725 5.41759 8.25383 5.66191L6.43383 7.48191C6.43383 7.48191 7.48195 14.575 14.5182 15.4525Z"
-            fill="white"
-          />
-        </svg>
-
-        <p>{data.email}</p>
-      </div>
-      <div className="my-5 flex items-center gap-5">
-        <svg
-          className="h-4 w-4"
           width="8"
           height="7"
           viewBox="0 0 8 7"
@@ -109,9 +116,26 @@ function BasicInformation({ data }) {
           />
         </svg>
 
-        <p>{data.phone_number}</p>
+        <p className='max-w-[150px]'>{data.email}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
+        <svg
+          className="h-4 w-4"
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14.5182 15.4525L16.3382 13.6325C16.5833 13.3904 16.8935 13.2247 17.231 13.1555C17.5685 13.0863 17.9188 13.1165 18.2395 13.2425L20.4576 14.1282C20.7816 14.2597 21.0595 14.4842 21.2561 14.7734C21.4527 15.0625 21.5594 15.4035 21.5626 15.7532V19.8157C21.5607 20.0535 21.5107 20.2886 21.4156 20.5066C21.3205 20.7247 21.1822 20.9212 21.0091 21.0844C20.836 21.2476 20.6317 21.3741 20.4085 21.4563C20.1852 21.5385 19.9477 21.5746 19.7101 21.5625C4.16695 20.5957 1.0307 7.43316 0.437578 2.39566C0.410045 2.14828 0.435201 1.89788 0.511392 1.66092C0.587583 1.42397 0.713082 1.20583 0.879633 1.02086C1.04618 0.835885 1.25001 0.688275 1.47771 0.587735C1.7054 0.487195 1.9518 0.436006 2.2007 0.437533H6.12508C6.47527 0.43857 6.81715 0.54435 7.10674 0.74127C7.39632 0.938189 7.62038 1.21724 7.75008 1.54253L8.6357 3.76066C8.76591 4.08003 8.79913 4.43068 8.73121 4.76882C8.66329 5.10696 8.49725 5.41759 8.25383 5.66191L6.43383 7.48191C6.43383 7.48191 7.48195 14.575 14.5182 15.4525Z"
+            fill="white"
+          />
+        </svg>
+
+        <p>{data.phone_number}</p>
+      </div>
+      {/* <div className="my-5 flex items-center gap-5">
         <svg
           className="h-4 w-4"
           width="27"
@@ -127,7 +151,7 @@ function BasicInformation({ data }) {
         </svg>
 
         <p>{data.url_linkedin}</p>
-      </div>
+      </div> */}
     </section>
   );
 }
