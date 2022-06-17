@@ -41,20 +41,20 @@ export default function ModalOrganization() {
     {
       label: 'Lembaga Organisasi',
       type: 'text',
-      name: 'school',
+      name: 'agency',
       pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
       label: 'Jabatan / Tugas',
-      name: 'major',
+      name: 'position',
       type: 'text',
       required: true,
     },
   ];
   let inputs2 = [
     {
-      name: 'start_date',
+      name: 'year',
       type: 'number',
       label: 'Tahun Aktif',
       required: true,

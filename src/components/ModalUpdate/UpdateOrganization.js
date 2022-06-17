@@ -6,6 +6,9 @@ import utils from 'utils/utils';
 export default function UpdateOrganization({ item, id }) {
   const [isOpen, setIsOpen] = useState(false);
   const [dataOrganization, setDataOrganization] = useState({
+    agency: item.agency,
+    position: item.position,
+    year: item.year,
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -41,20 +44,21 @@ export default function UpdateOrganization({ item, id }) {
     {
       label: 'Lembaga Organisasi',
       type: 'text',
-      name: 'school',
+      name: 'agency',
       required: true,
     },
     {
       label: 'Jabatan / Tugas',
-      name: 'major',
+      name: 'position',
       type: 'text',
       required: true,
     },
   ];
   let inputs2 = [
     { 
-      name: 'start_date',
+      name: 'year',
       label: 'Tahun Aktif',
+      type: 'number',
       required: true,
       min: 0,
     },
