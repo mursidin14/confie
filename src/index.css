@@ -4,7 +4,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
-
+@layer base{
+  h1{
+    @apply text-4xl font-semibold;
+  }
+  h2{
+    @apply font-semibold text-2xl my-6;
+  }
+}
+@layer components {
+  .input-form{
+    @apply w-full h-[35px] rounded-md bg-soft-gray p-5;
+  }
+  .primary-btn{
+    @apply text-white bg-orange rounded-md w-full;
+  }
+  .secondary-btn{
+    @apply text-orange border-2 border-orange rounded-md w-full ;
+  }
+  .label{
+    @apply text-left text-sm font-semibold block mb-2 text-black;
+  }
+  .center{
+    @apply flex justify-center items-center;
+  }
+}
 body{
   font-family: 'Poppins', sans-serif
+}
+
+.image-upload>input {
+  display: none;
+}
+
+.requirments{
+  list-style-type: '\2212';
+}
+
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bg-banner{
+  background: rgb(27,27,29);
+  background: linear-gradient(0deg, rgba(27,27,29,1) 0%, rgba(0,0,0,0) 100%); 
 }
