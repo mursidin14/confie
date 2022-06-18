@@ -1,9 +1,9 @@
-name: CICD Branch Dev
+name: CICD Branch Production
 
 # Controls when the workflow will run
 on:
   push:
-    branches: [ development ]
+    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: false
-      REACT_APP_API_URL: ${{ secrets.API_URL_DEV }}
-
+      REACT_APP_API_URL: ${{ secrets.API_URL_PROD }}
+      
     steps:
       - uses: actions/checkout@v2
       - name: Setup node.js env
@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT }}
           source: "./build"
-          target: "/var/www/confie.upanastudio.com/"
+          target: "/var/www/confie/confie.id"
           use_insecure_cipher: true
 
       - name: Send telegram notification
