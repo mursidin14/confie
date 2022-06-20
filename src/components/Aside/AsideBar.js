@@ -9,9 +9,9 @@ export default function ASideBar({is_verified, offCanvas, handleNav, PageName })
         }`}
       >
         <div className={offCanvas ? 'w-20 fixed' : 'w-[250px] fixed'}>
-        <div className="pt-5 flex items-center justify-between pl-2">
+        <div className="pt-5 flex items-center justify-between pl-6">
           <img
-            className={offCanvas ? 'w-9' : 'w-24'}
+            className={offCanvas ? 'w-5' : 'w-24'}
             src={offCanvas ? '/logo-sm.png' : '/logo.png'}
             alt=""
           />
