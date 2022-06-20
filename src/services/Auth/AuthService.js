@@ -2,10 +2,10 @@ import loginClient, { httpClient, registerClient } from 'utils/http-common';
 
 const login = (data) =>
   loginClient.get('/sanctum/csrf-cookie').then((response) =>
-    loginClient
-      .post('/api/login', data, {
+    loginClient.post('/api/login', data, {
         headers: {
-          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          "Content-Type": "application/x-www-form-urlencoded", 
         },
       })
       .then((response) => {
