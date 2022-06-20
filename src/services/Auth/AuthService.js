@@ -4,8 +4,7 @@ const login = (data) =>
   loginClient.get('/sanctum/csrf-cookie').then((response) =>
     loginClient.post('/api/login', data, {
         headers: {
-          Accept: 'application/json',
-          "Content-Type": "application/x-www-form-urlencoded", 
+          'Content-Type': 'application/json', 
         },
       })
       .then((response) => {
