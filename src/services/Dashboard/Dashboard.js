@@ -1,7 +1,7 @@
-import { httpClient } from 'utils/http-common';
+import { httpAuthClient } from 'utils/http-common';
 
 const getDashboardData = () =>
-  httpClient
+  httpAuthClient
     .get('/api/dashboard')
     .then((response) => response)
     .catch((error) => error);

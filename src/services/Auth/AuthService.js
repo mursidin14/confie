@@ -8,6 +8,10 @@ const login = (data) =>
         },
       })
       .then((response) => {
+		if (response.data.meta.access_token) {
+			localStorage.setItem("user", JSON.stringify(response.data.data));
+			localStorage.setItem("metadata", JSON.stringify(response.data.meta));
+		}
         return response;
       })
       .catch((error) => {
@@ -42,8 +46,15 @@ const register = (data) =>
   loginClient.post('/api/logout').then((response) => {
     return response;
   });
-      
 
+  const getCurrentUser = () => {
+	return JSON.parse(localStorage.getItem("user")) ;
+  };
+
+  const getMetadata = () => {
+	return localStorage.getItem("metadata") ;
+  }
+      
 
 
 const AuthService = {
@@ -51,6 +62,8 @@ const AuthService = {
   register,
   getListSkill,
   logout,
+  getCurrentUser,
+  getMetadata,
 };
 
 export default AuthService;
