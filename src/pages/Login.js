@@ -62,19 +62,21 @@ export default function Login() {
               />
 
               <button
-                type="submit"
+                type="submit"  
                 className="primary-btn mt-10 px-5 py-3 text-center"
                 onClick={async (e) => {
                   e.preventDefault();
-                  const respon = await AuthService.login(data);
-                  if (respon.statusText === 'OK') {
-                    window.location.href = `/dashboard`;
-                  }else{
-                    setError(true);
-                    setError_msg(respon.data.meta.message)
-                  }
+                  await AuthService.login(data).then(
+					() => {
+						window.location.href = `/dashboard`
+					},
+					(error) => {
+						setError(true)
+						setError_msg(error.data.meta.message)
+					}
+				  )
                 }}
-              >
+              >  
                 LOGIN
               </button>
             </form>

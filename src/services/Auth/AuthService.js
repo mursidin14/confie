@@ -2,13 +2,16 @@ import loginClient, { httpClient, registerClient } from 'utils/http-common';
 
 const login = (data) =>
   loginClient.get('/sanctum/csrf-cookie').then((response) =>
-    loginClient
-      .post('/api/login', data, {
+    loginClient.post('/api/login', data, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json', 
         },
       })
       .then((response) => {
+		if (response.data.meta.access_token) {
+			localStorage.setItem("user", JSON.stringify(response.data.data));
+			localStorage.setItem("metadata", JSON.stringify(response.data.meta));
+		}
         return response;
       })
       .catch((error) => {
@@ -43,8 +46,15 @@ const register = (data) =>
   loginClient.post('/api/logout').then((response) => {
     return response;
   });
-      
 
+  const getCurrentUser = () => {
+	return JSON.parse(localStorage.getItem("user")) ;
+  };
+
+  const getMetadata = () => {
+	return localStorage.getItem("metadata") ;
+  }
+      
 
 
 const AuthService = {
@@ -52,6 +62,8 @@ const AuthService = {
   register,
   getListSkill,
   logout,
+  getCurrentUser,
+  getMetadata,
 };
 
 export default AuthService;

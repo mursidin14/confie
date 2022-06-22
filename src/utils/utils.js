@@ -1,3 +1,13 @@
+export function authHeader() {
+  const metadata = JSON.parse(localStorage.getItem('metadata'));
+  if (metadata && metadata.access_token) {
+    return { 
+		'Authorization': 'Bearer ' + metadata.access_token,
+	};
+  } else {
+    return {};
+  }
+}
 export function makeCapital(name) {
   name = name.toLowerCase();
   const nameArray = name.split(' ');
@@ -131,6 +141,7 @@ export const getLength = (word) => {
 };
 
 const utils = {
+  authHeader,
   makeCapital,
   getCity,
   timeEpoch,

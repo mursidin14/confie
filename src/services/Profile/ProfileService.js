@@ -1,13 +1,13 @@
-import { httpClient } from 'utils/http-common';
+import { httpAuthClient } from 'utils/http-common';
 
 const getProfileData = () =>
-  httpClient
+  httpAuthClient
     .get('/api/profile')
     .then((response) => response)
     .catch((error) => error.response);
 
-    const updateProfileData = (data) =>
-    httpClient
+const updateProfileData = (data) =>
+    httpAuthClient
       .put('/api/profile', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const getProfileData = () =>
       .catch((error) => error.response);
 
 const updateAbout = (data) => 
-  httpClient
+  httpAuthClient
     .put('/api/profile/about', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const updateAbout = (data) =>
     .catch((error) => error.response);
 
 const updateProfilePicture = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/photo', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -39,14 +39,14 @@ const updateProfilePicture = (data) =>
     .catch((error) => error.response);
 
 const deletePhotoProfile = () =>
-  httpClient
+  httpAuthClient
     .delete('/api/profile/photo')
     .then((response) => response)
     .catch((error) => error.response);
 
 
 const updateSettingProfile = (data) =>
-  httpClient
+  httpAuthClient
     .put('/api/profile/account', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -56,13 +56,13 @@ const updateSettingProfile = (data) =>
     .catch((error) => error.response);
 
 const getOnlineProfileData = (id) =>
-  httpClient
+  httpAuthClient
     .get(`/api/profile/${id}`)
     .then((response) => response)
     .catch((error) => error);
 
 const addSkill = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/skills', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const addSkill = (data) =>
     .catch((error) => error.response);
 
 const updateSkill = (data) =>
-  httpClient
+  httpAuthClient
     .put('/api/profile/skills', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -82,13 +82,13 @@ const updateSkill = (data) =>
     .catch((error) => error);
 
 const deleteSkill = (id) =>
-  httpClient
+  httpAuthClient
     .delete(`/api/profile/skills/${id}`)
     .then((response) => response)
     .catch((error) => error);
 
 const addJobExperience = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/experiences', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const addJobExperience = (data) =>
     .catch((error) => error.response);
 
 const updateJobExperience = (id, data) =>
-  httpClient
+  httpAuthClient
     .put(`/api/profile/experiences/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -108,13 +108,13 @@ const updateJobExperience = (id, data) =>
     .catch((error) => error.response);
 
 const deleteJobExperience = (id) =>
-  httpClient
+  httpAuthClient
     .delete(`/api/profile/experiences/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 
 const addIntershipExperience = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/internships', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ const addIntershipExperience = (data) =>
     .catch((error) => error.response);
 
 const updateIntershipExperience = (id, data) =>
-  httpClient
+  httpAuthClient
     .put(`/api/profile/internships/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -134,13 +134,13 @@ const updateIntershipExperience = (id, data) =>
     .catch((error) => error.response);
 
 const deleteIntershipExperience = (id) =>
-  httpClient
+  httpAuthClient
     .delete(`/api/profile/internships/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 
 const addEducation = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/educations', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ const addEducation = (data) =>
     .catch((error) => error.response);
 
 const updateEducation = (id, data) =>
-  httpClient
+  httpAuthClient
     .put(`/api/profile/educations/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -160,13 +160,13 @@ const updateEducation = (id, data) =>
     .catch((error) => error.response);
 
 const deleteEducation = (id) =>
-  httpClient
+  httpAuthClient
     .delete(`/api/profile/educations/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 
 const addOrganization = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/volunteers', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -177,7 +177,7 @@ const addOrganization = (data) =>
     .catch((error) => error.response);
 
   const updateOrganization = (id, data) =>
-  httpClient
+  httpAuthClient
     .put(`/api/profile/volunteers/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -187,13 +187,13 @@ const addOrganization = (data) =>
     .catch((error) => error.response);
 
   const deleteOrganization = (id) =>
-  httpClient
+  httpAuthClient
     .delete(`/api/profile/volunteers/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 
 const addCertificate = (data) =>
-  httpClient
+  httpAuthClient
     .post('/api/profile/certificates', data, {
       headers: {
         'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ const addCertificate = (data) =>
     .catch((error) => error.response);
 
 const updateCertificate = (id, data) =>
-  httpClient
+  httpAuthClient
     .put(`/api/profile/certificates/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
@@ -213,13 +213,13 @@ const updateCertificate = (id, data) =>
     .catch((error) => error.response);
 
 const deleteCertificate = (id) =>
-  httpClient
+  httpAuthClient
     .delete(`/api/profile/certificates/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 
 const LogoutProfile = () =>
-  httpClient
+  httpAuthClient
     .post('/api/logout')
     .then((response) => response)
     .catch((error) => error);
