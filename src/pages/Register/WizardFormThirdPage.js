@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import LayoutRegister from './LayoutRegister';
 import InputField from 'components/InputField';
-import SearchRegion from 'components/SearchRegion';
+import SearchRegion, { SearchCountry } from 'components/SearchRegion';
 import { SearchRegionCity } from 'components/SearchRegion';
 import { getTodayDate } from 'utils/utils';
 
 export default function WizardFormThirdPage(props) {
   let { data, onChange } = props;
-  const [city, setCity] = useState([])
+  const [city, setCity] = useState([]);
   function handleChange(e) {
     onChange({
       ...data,
       [e.target.name]: e.target.value,
     });
   }
-  let inputs = [
+  const inputs = [
     {
       label: `${
         data.role === 'personal' ? 'Date of Birth' : 'Company Founding Date'
@@ -25,10 +25,18 @@ export default function WizardFormThirdPage(props) {
       max: getTodayDate,
       required: true,
     },
+  ];
+  const inputs2 = [
     {
-      label: 'Country',
+      label: 'Address',
       type: 'text',
-      name: 'country',
+      name: 'address',
+      required: true,
+    },
+    {
+      label: 'Zipcode',
+      type: 'text',
+      name: 'zipcode',
       required: true,
     },
   ];
@@ -112,10 +120,39 @@ export default function WizardFormThirdPage(props) {
                 onChange={onChange}
               />
             ))}
-            <div className='relative z-10'>
-            <SearchRegion data={data} onChange={onChange} setCity={setCity}></SearchRegion>
+            <div className="relative z-20">
+              <SearchCountry data={data} onChange={onChange}></SearchCountry>
             </div>
-            <SearchRegionCity data={data} onChange={onChange} city={city}></SearchRegionCity>
+            {data.country == 'INDONESIA' && (
+              <>
+                <div className="relative z-10">
+                  <SearchRegion
+                    data={data}
+                    onChange={onChange}
+                    setCity={setCity}
+                  ></SearchRegion>
+                </div>
+                <SearchRegionCity
+                  data={data}
+                  onChange={onChange}
+                  city={city}
+                ></SearchRegionCity>
+              </>
+            )}
+            {data.country != 'INDONESIA' && (
+              <>
+                {inputs2.map((input) => (
+                  <InputField
+                    key={input.label}
+                    label={input.label}
+                    {...input}
+                    data={data}
+                    onChange={onChange}
+                  />
+                ))}
+              </>
+            )}
+
             <div className="mt-3 flex flex-col justify-between gap-3 lg:flex-row">
               <button
                 type="button"

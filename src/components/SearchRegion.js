@@ -42,6 +42,111 @@ const people = [
 ];
 
 
+
+export function SearchCountry({ data, onChange }) {
+  const countries = [
+    { id: 'INDONESIA', name: 'INDONESIA' },
+    { id: 'MALAYSIA', name: 'MALAYSIA' },
+    { id: 'TAIWAN', name: 'TAIWAN' },
+    { id: 'SINGAPORE', name: 'SINGAPORE' },
+    { id: 'FILIPINA', name: 'FILIPINA' },
+    { id: 'BRUNEI DARUSSALAM', name: 'BRUNEI DARUSSALAM' },
+  ]
+
+  const [selected, setSelected] = useState({name: data.country});
+  const [query, setQuery] = useState('');
+  const filteredPeople =
+    query === ''
+      ? countries
+      : countries.filter((country) =>
+          country.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+  function handleChange(event) {
+    setQuery(event.target.value);
+  }
+  async function handleClick(e) {
+    onChange({
+      ...data,
+      country: e.target.innerText,
+    })
+    
+  }
+  async function handleEnter(name) {
+    if(name == undefined) {
+      return
+    }
+    
+  }
+  return (
+    <Combobox value={selected} onChange={setSelected}>
+      <div className="relative mt-1">
+        <div className="">
+          <label className="label after:ml-1 after:text-pink-500 after:content-['*']">
+            Country
+          </label>
+          <Combobox.Input
+            className="input-form peer mb-3"
+            displayValue={(person) => {
+              handleEnter(person.name);
+              return person.name;
+            }}
+            onChange={handleChange}
+          />
+          <Combobox.Button className="absolute inset-y-0 right-0 top-4 flex items-center pr-2">
+            <SelectorIcon
+              className="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+          </Combobox.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+          afterLeave={() => setQuery('')}
+        >
+          <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+            {filteredPeople.length === 0 && query !== '' ? (
+              <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                Nothing found.
+              </div>
+            ) : (
+              filteredPeople.map((person) => (
+                <Combobox.Option
+                  key={person.id}
+                  className={({ active }) =>
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      data.country === person.name ? 'bg-orange text-white' : 'text-gray-900'
+                    }`
+                  }
+                  value={person}
+                >
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        className={`block truncate ${
+                          selected ? 'font-medium' : 'font-normal'
+                        }`}
+                        onClick={handleClick}
+                      >
+                        {person.name}
+                      </span>
+                      
+                    </>
+                  )}
+                </Combobox.Option>
+              ))
+            )}
+          </Combobox.Options>
+        </Transition>
+      </div>
+    </Combobox>
+  );
+}
 export default function SearchRegion({ data, onChange, setCity }) {
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');

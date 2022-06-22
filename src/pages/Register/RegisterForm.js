@@ -13,6 +13,7 @@ export default function Register() {
   const [dataAccount, setDataAccount] = useState({
     role: 'personal',
     gender: 'L',
+    country: 'INDONESIA',
     skills: []
   });
   const [isOpen, setIsOpenFailed] = useState(false);
