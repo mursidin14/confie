@@ -6,26 +6,18 @@ import ProfileService from 'services/Profile/ProfileService';
 import ErrorModal from 'components/Widgets/ErrorModal';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { getCurrentUser } from 'services/Auth/AuthService';
 
 export default function Layout({ PageName, children }) {
   const [offCanvas, setOffCanvas] = useState(false);
-  const [data, setData] = useState({
-    email_verified_at: null,
-    full_name: 'Annas Casmawan Ahmad',
-    email: 'annas@gmail.com',
-    gender: 'L',
-  });
+  const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchData() {
-      const response_profile = await ProfileService.getProfileData();
-      if (response_profile.data.meta.status == 'error') {
-        setIsOpen(true);
-      } else {
-        setData(response_profile.data.data);
-        setLoading(false);
-      }
+       const profile = getCurrentUser();
+       setData(profile)
+       setLoading(false);
     }
     fetchData();
   }, []);

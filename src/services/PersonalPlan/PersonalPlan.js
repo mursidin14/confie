@@ -25,7 +25,7 @@ const updatePersonalPlanData = (id, data) =>
     .catch((error) => error);
 
 const deletePersonalPlanData = (id) =>
-  httpAuthClient.delete(`/api/pdp/${id}`).then((response) => response);
+  httpAuthClient.delete(`/api/pdp/${id}`).then((response) => response).catch((error) => error.response);
 
 const addQuarterlyPlanData = (id, data) =>
   httpAuthClient
@@ -40,7 +40,7 @@ const updateQuarterlyPlanData = (id, data) =>
     .catch((error) => error);
 
 const deleteQuarterlyPlanData = (id) =>
-  httpAuthClient.delete(`/api/pdp/milestone/${id}`).then((response) => response);
+  httpAuthClient.delete(`/api/pdp/milestone/${id}`).then((response) => response).catch((error) => error.response);
 
 const PersonalPlanService = {
   getPersonalPlanData,

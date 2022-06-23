@@ -50,7 +50,7 @@ const register = (data) =>
     return error.response;
   });
 
-  const getCurrentUser = () => {
+  export const getCurrentUser = () => {
 	return JSON.parse(localStorage.getItem("user")) ;
   };
 
