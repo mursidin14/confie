@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import AuthService from 'services/Auth/AuthService';
 import { makeCapital } from 'utils/utils';
 
-
 export default function Header({data, handleNav, PageName }) {
   const [open, setOpen] = useState(false);
   function clickProfile() {

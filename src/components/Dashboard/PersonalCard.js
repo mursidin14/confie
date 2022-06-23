@@ -10,7 +10,7 @@ export default function PersonalCard({data_profile}) {
       <div className="flex items-start gap-3 lg:items-stretch">
         <img
           className="w-28 h-28 md:w-48 md:h-48 rounded-md object-cover"
-          src={data_profile.url_photo_profile ? `/backend/${data_profile.url_photo_profile}` : data_profile.gender == "L" ? "/male.jpg" : "/female.jpg"}
+          src={data_profile.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data_profile.url_photo_profile}` : data_profile.gender == "L" ? "/male.jpg" : "/female.jpg"}
           alt=""
         />
         <div className="w-full">
