@@ -25,6 +25,7 @@ export default function Profile() {
       setData({
         profile: response_profile.data.data,
       });
+      localStorage.setItem("user", JSON.stringify(response_profile.data.data));
       setLoading(false);
     }
     fetchData();
