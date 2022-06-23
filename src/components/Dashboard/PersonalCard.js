@@ -69,7 +69,7 @@ function ButtonDashboard({data}) {
       </div>
       <div className="my-3 flex w-full">
       <div className="flex items-center sm:justify-start justify-between w-full gap-3">
-      <Pdf targetRef={cv} filename="cv.pdf">
+      <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
         {({ toPdf }) => (
           <button
             onClick={toPdf}

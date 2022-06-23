@@ -36,7 +36,7 @@ export default function WizardFormThirdPage(props) {
     {
       label: 'Zipcode',
       type: 'text',
-      name: 'zipcode',
+      name: 'zip_code',
       required: true,
     },
   ];
@@ -123,7 +123,7 @@ export default function WizardFormThirdPage(props) {
             <div className="relative z-20">
               <SearchCountry data={data} onChange={onChange}></SearchCountry>
             </div>
-            {data.country == 'INDONESIA' && (
+            {data.country == 'indonesia' && (
               <>
                 <div className="relative z-10">
                   <SearchRegion
@@ -139,7 +139,7 @@ export default function WizardFormThirdPage(props) {
                 ></SearchRegionCity>
               </>
             )}
-            {data.country != 'INDONESIA' && (
+            {data.country != 'indonesia' && (
               <>
                 {inputs2.map((input) => (
                   <InputField

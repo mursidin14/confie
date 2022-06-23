@@ -45,17 +45,17 @@ const people = [
 
 export function SearchCountry({ data, onChange }) {
   const countries = [
-    { id: 'INDONESIA', name: 'INDONESIA' },
-    { id: 'MALAYSIA', name: 'MALAYSIA' },
-    { id: 'TAIWAN', name: 'TAIWAN' },
-    { id: 'SINGAPORE', name: 'SINGAPORE' },
-    { id: 'FILIPINA', name: 'FILIPINA' },
-    { id: 'BRUNEI DARUSSALAM', name: 'BRUNEI DARUSSALAM' },
+    { id: 'indonesia', name: 'INDONESIA' },
+    { id: 'malaysia', name: 'MALAYSIA' },
+    { id: 'taiwan', name: 'TAIWAN' },
+    { id: 'singapore', name: 'SINGAPORE' },
+    { id: 'filipina', name: 'FILIPINA' },
+    { id: 'brunei darussalam', name: 'BRUNEI DARUSSALAM' },
   ]
 
   const [selected, setSelected] = useState({name: data.country});
   const [query, setQuery] = useState('');
-  const filteredPeople =
+  const filteredCountry =
     query === ''
       ? countries
       : countries.filter((country) =>
@@ -70,7 +70,7 @@ export function SearchCountry({ data, onChange }) {
   async function handleClick(e) {
     onChange({
       ...data,
-      country: e.target.innerText,
+      country: e.target.innerText.toLowerCase(),
     })
     
   }
@@ -78,6 +78,10 @@ export function SearchCountry({ data, onChange }) {
     if(name == undefined) {
       return
     }
+    onChange({
+      ...data,
+      country: name.toLowerCase(),
+    })
     
   }
   return (
@@ -110,12 +114,12 @@ export function SearchCountry({ data, onChange }) {
           afterLeave={() => setQuery('')}
         >
           <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
-            {filteredPeople.length === 0 && query !== '' ? (
+            {filteredCountry.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
               </div>
             ) : (
-              filteredPeople.map((person) => (
+              filteredCountry.map((person) => (
                 <Combobox.Option
                   key={person.id}
                   className={({ active }) =>
