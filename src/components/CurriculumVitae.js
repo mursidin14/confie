@@ -106,13 +106,13 @@ function BasicInformation({ data }) {
           <path
             d="M1 2.68695C1 2.57083 1.06043 2.46308 1.15952 2.40252L4 0.666672L6.84047 2.40252C6.93957 2.46308 7 2.57083 7 2.68695V6.00001C7 6.18411 6.85077 6.33334 6.66667 6.33334H1.33333C1.14924 6.33334 1 6.18411 1 6.00001V2.68695Z"
             stroke="white"
-            stroke-width="0.666667"
+            strokeWidth="0.666667"
           />
           <path
             d="M1 2.83334L4 4.66668L7 2.83334"
             stroke="white"
-            stroke-width="0.666667"
-            stroke-linecap="round"
+            strokeWidth="0.666667"
+            strokeLinecap="round"
           />
         </svg>
 

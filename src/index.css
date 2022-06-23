@@ -28,6 +28,9 @@
   .center{
     @apply flex justify-center items-center;
   }
+  .modal-section{
+    @apply rounded-md bg-[#FE9A00] h-full w-full px-3 py-2 text-white hover:bg-opacity-70 hover:scale-105 transition-all text-left;
+  }
 }
 body{
   font-family: 'Poppins', sans-serif

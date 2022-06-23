@@ -44,7 +44,7 @@ function InputTag({ addTags, people }) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute mt-1 max-h-60 w-fit overflow-auto rounded-md bg-white text-left shadow-lg sm:max-w-[400px]">
+          <Combobox.Options className="absolute mt-1 max-h-60 w-fit h-[100px] overflow-auto rounded-md bg-white text-left shadow-lg sm:max-w-[400px]">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative z-10 cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.

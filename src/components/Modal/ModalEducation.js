@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function ModalEducation() {
+export default function ModalEducation({section}) {
   let [isOpen, setIsOpen] = useState(false);
   const [dataEducation, setDataEducation] = useState({
   });
@@ -71,13 +71,34 @@ export default function ModalEducation() {
   return (
     <>
       <div className="flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Tambah
-        </button>
+      {section ? (
+          <>
+            <button
+              type="button"
+              onClick={openModal}
+              className="modal-section"
+            >
+              <div className='flex items-center gap-2'>
+              <svg width="18" height="18" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.332 3.2L4 4.8L8 2.4L4 0L0 2.4H4V3.2H1.332ZM0 3.2V6.4L0.8 5.512V3.68L0 3.2ZM4 8L2 6.8L1.2 6.32V3.92L4 5.6L6.8 3.92V6.32L4 8Z" fill="white"/>
+</svg>
+
+              <p>Education</p>
+              </div>
+              <p className='text-xs font-thin mt-2'>Show off your primary education, college degrees, etc.</p>
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={openModal}
+              className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              Tambah
+            </button>
+          </>
+        )}
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>

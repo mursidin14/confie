@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils, { getTodayDate } from 'utils/utils';
-export default function ModalWorkExperience() {
+export default function ModalWorkExperience({ section }) {
   const [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
     is_current: false,
@@ -79,13 +79,33 @@ export default function ModalWorkExperience() {
   return (
     <>
       <div className="flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Tambah
-        </button>
+        {section ? (
+          <>
+            <button
+              type="button"
+              onClick={openModal}
+              className="modal-section"
+            >
+              <div className='flex items-center gap-2'>
+              <svg width="18" height="18" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.625 2.01816H7.79883V1.53026C7.79883 1.13106 7.66634 0.794705 7.40137 0.521183C7.13639 0.247662 6.81055 0.110901 6.42383 0.110901H4.57617C4.18945 0.110901 3.86361 0.247662 3.59863 0.521183C3.33366 0.794705 3.20117 1.13106 3.20117 1.53026V2.01816H1.375C0.988281 2.01816 0.662435 2.15122 0.397461 2.41735C0.132487 2.68348 0 3.02354 0 3.43751V5.32259C0 5.63308 0.150391 5.78832 0.451172 5.78832V9.58066C0.451172 9.832 0.544271 10.0538 0.730469 10.246C0.916667 10.4382 1.13151 10.5343 1.375 10.5343H9.625C9.86849 10.5343 10.0833 10.4382 10.2695 10.246C10.4557 10.0538 10.5488 9.832 10.5488 9.58066V5.78832C10.8496 5.78832 11 5.63308 11 5.32259V3.43751C11 3.02354 10.8675 2.68348 10.6025 2.41735C10.3376 2.15122 10.0117 2.01816 9.625 2.01816ZM4.125 1.53026C4.125 1.39719 4.16797 1.2863 4.25391 1.19759C4.33984 1.10888 4.44727 1.06453 4.57617 1.06453H6.42383C6.55273 1.06453 6.66016 1.10888 6.74609 1.19759C6.83203 1.2863 6.875 1.39719 6.875 1.53026V2.01816H4.125V1.53026ZM1.375 9.58066V5.78832H4.125V7.20768C4.125 7.4738 4.21452 7.69927 4.39355 7.88409C4.57259 8.0689 4.79102 8.1613 5.04883 8.1613H5.95117C6.20898 8.1613 6.42741 8.0689 6.60645 7.88409C6.78548 7.69927 6.875 7.4738 6.875 7.20768V5.78832H9.625V9.58066H1.375ZM5.04883 7.20768V5.78832H5.95117V7.20768H5.04883ZM10.0762 4.85687H0.923828V3.43751C0.923828 3.11225 1.07422 2.94961 1.375 2.94961H9.625C9.92578 2.94961 10.0762 3.11225 10.0762 3.43751V4.85687Z" fill="white"/>
+</svg>
+              <p>Professional Experience</p>
+              </div>
+              <p className='text-xs font-thin mt-2'>A place to highlight your professional experience.</p>
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={openModal}
+              className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              Tambah
+            </button>
+          </>
+        )}
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>

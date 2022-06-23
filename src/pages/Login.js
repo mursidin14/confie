@@ -34,7 +34,6 @@ export default function Login() {
               <label className="mt-5  mb-2 block text-left text-sm font-semibold text-dark-blue">
                 Email
               </label>
-
               <input
                 onChange={handleChange}
                 required

@@ -29,12 +29,12 @@ export default function PersonalInfomationCard({ data_profile }) {
       value: makeCapital(data_profile.country),
     },
     {
-      label: 'Province',
-      value: makeCapital(data_profile.province_name),
+      label: data_profile.country === 'indonesia' ? 'Province' : 'Address',
+      value: data_profile.country === 'indonesia' ?  makeCapital(data_profile.province_name) : makeCapital(data_profile.address),
     },
     {
-      label: 'City',
-      value: makeCapital(data_profile.city_name),
+      label: data_profile.country === 'indonesia' ? 'City' : 'ZipCode',
+      value: data_profile.country === 'indonesia' ?  makeCapital(data_profile.city_name) : data_profile.zip_code,
     },
   ];
 

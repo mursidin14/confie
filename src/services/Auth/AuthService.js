@@ -45,6 +45,8 @@ const register = (data) =>
   const logout = () =>
   loginClient.post('/api/logout').then((response) => {
     return response;
+  }).catch((error) => {
+    return error.response;
   });
 
   const getCurrentUser = () => {

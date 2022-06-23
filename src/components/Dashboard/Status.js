@@ -51,7 +51,7 @@ export default function Status({data}) {
     <div className="mt-7 justify-between gap-3 md:mt-0 lg:flex">
       <div className="mt-3 flex w-full gap-2 lg:w-6/12">
         {status.map((item, index) => (
-          <div className="flex flex-col justify-center rounded border-2 border-dashed border-[#B5B5C3] px-4 py-1">
+          <div key={index} className="flex flex-col justify-center rounded border-2 border-dashed border-[#B5B5C3] px-4 py-1">
             <p className="text-sm font-semibold">{item.value}</p>
             <p className=" text-[10px] text-[#B5B5C3] sm:text-xs">
               {item.name}
