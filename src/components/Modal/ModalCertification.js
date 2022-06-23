@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
-export default function ModalCertification() {
+export default function ModalCertification({section}) {
   const [dataCertificate, setDataCertificate] = useState({});
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([]);
@@ -69,13 +69,35 @@ export default function ModalCertification() {
   return (
     <>
       <div className="flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Tambah
-        </button>
+      {section ? (
+          <>
+            <button
+              type="button"
+              onClick={openModal}
+              className="modal-section"
+            >
+              <div className='flex items-center gap-2'>
+              <svg width="18" height="18" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 0L4.8345 0.432L5.7635 0.573L6.1845 1.413L6.853 2.073L6.7 3L6.853 3.927L6.1845 4.587L5.7635 5.427L4.8345 5.568L4 6L3.1655 5.568L2.2365 5.427L1.8155 4.587L1.147 3.927L1.3 3L1.147 2.073L1.8155 1.413L2.2365 0.573L3.1655 0.432L4 0Z" fill="white"/>
+<path d="M2 5.897V8L4 7.5L6 8V5.897L4.991 6.05L4 6.563L3.009 6.05L2 5.897Z" fill="white"/>
+</svg>
+
+              <p>Awards / Certification</p>
+              </div>
+              <p className='text-xs font-thin mt-2'>Awards / Certification like student competitions or industry accolades belong here.</p>
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={openModal}
+              className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              Tambah
+            </button>
+          </>
+        )}
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>

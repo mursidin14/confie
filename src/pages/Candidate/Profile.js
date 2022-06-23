@@ -11,6 +11,7 @@ import ProfileService from 'services/Profile/ProfileService';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import OrganizationCard from 'components/Profile/OrganizationCard';
+import AddSection from 'components/Modal/AddSection';
 
 export default function Profile() {
   const [data, setData] = useState({});
@@ -35,53 +36,79 @@ export default function Profile() {
       ) : (
         <PersonalInfomationCard data_profile={data.profile} />
       )}
+      {loading ? <SkeletonCard /> : <AboutMeCard data_profile={data.profile} />}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <AboutMeCard data_profile={data.profile}/>
+        <SkillCard data_skills={data.profile.skills} />
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <SkillCard data_skills={data.profile.skills}/>
+        <>
+          {data.profile.experiences.length > 0 ? (
+            <WorkExperienceCard data_profile={data.profile.experiences} />
+          ) : null}
+        </>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <WorkExperienceCard data_profile={data.profile.experiences}/>
+        <>
+          {data.profile.internships.length > 0 ? (
+            <InternExperienceCard data_profile={data.profile.internships} />
+          ) : null}
+        </>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <InternExperienceCard data_profile={data.profile.internships}/>
+        <>
+          {data.profile.educations.length > 0 ? (
+            <EducationCard data_profile={data.profile.educations} />
+          ) : null}
+        </>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <EducationCard data_profile={data.profile.educations}/>
+        <>
+          {data.profile.volunteers.length > 0 ? (
+            <OrganizationCard data_profile={data.profile.volunteers} />
+          ) : null}
+        </>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <OrganizationCard data_profile={data.profile.volunteers}/>
+        <>
+          {data.profile.certificates.length > 0 ? (
+            <CertificationCard data_profile={data.profile.certificates} />
+          ) : null}
+        </>
       )}
       {loading ? (
         <SkeletonCard />
       ) : (
-        <CertificationCard data_profile={data.profile.certificates}/>
+        <>
+         <div className='flex items-center justify-center'>
+            <AddSection action={'Add Section'} experiences={data.profile.experiences} educations={data.profile.educations} internships={data.profile.internships} volunteers={data.profile.volunteers} awards={data.profile.certificates}></AddSection>
+          </div>
+        </>
       )}
+      
     </Layout>
   );
 }
 
 function SkeletonCard() {
   return (
-    <div className="rounded-md bg-white py-7 shadow-mine mt-4 first:mt-0 ">
-      <div className="lg:flex hidden flex-col items-start justify-start gap-2 px-8">
+    <div className="mt-4 rounded-md bg-white py-7 shadow-mine first:mt-0 ">
+      <div className="hidden flex-col items-start justify-start gap-2 px-8 lg:flex">
         <Skeleton width={100} height={40} />
         <Skeleton width={750} height={200} />
       </div>
-      <div className="lg:hidden flex flex-col items-start justify-start gap-2 px-8">
+      <div className="flex flex-col items-start justify-start gap-2 px-8 lg:hidden">
         <Skeleton width={100} height={40} />
         <Skeleton width={250} height={200} />
       </div>
