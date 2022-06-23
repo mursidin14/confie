@@ -5,6 +5,10 @@ import { getQuarter } from 'utils/utils';
 export default function TargetCard({data_plan}) {
   
   const quarter = getQuarter();
+  const handleChange = async (id, status) => {
+    await PersonalPlanService.updateQuarterlyPlanData(id, {status :!status});
+
+  }
   return (
     <div className="mt-4 rounded-md bg-white py-7  text-left shadow-mine lg:w-6/12 ">
       <div className="flex justify-between px-8 pb-2">
@@ -41,7 +45,16 @@ export default function TargetCard({data_plan}) {
               <p className="">{data.title}</p>
             </div>
             <div className="my-3 space-y-2 px-8">
-             
+            {data.milestone.map((milestone, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center gap-3 ${
+                    milestone.quarter == quarter ? '' : 'hidden'
+                  }`}
+                >
+                  <Checkbox milestone={milestone} handleChange={handleChange} />
+                </div>
+              ))}
             </div>
           </div>
         ))}

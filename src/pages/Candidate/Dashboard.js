@@ -8,6 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import EmailVerifiedCard from 'components/EmailVerifiedCard';
+import DashboardService from 'services/Dashboard/Dashboard';
 
 export default function Dashboard() {
   const [data, setData] = useState({});
@@ -16,11 +17,11 @@ export default function Dashboard() {
     document.title = 'Dashboard';
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
-      const response_personal_plan = await PersonalPlanService.getPersonalPlanData();
-      
+      const dashboard_profile = await DashboardService.getDashboardData();
+
       setData({
+        dashboard_profile: dashboard_profile.data.data,
         profile: response_profile.data.data,
-        personal_plan: response_personal_plan.data.data,
       });
       setLoading(false);
     }
@@ -50,7 +51,7 @@ export default function Dashboard() {
         {loading ? (
           <SkeletonCardSmall />
         ) : (
-          <TargetCard data_plan={data.personal_plan} />
+          <TargetCard data_plan={data.dashboard_profile.personaldevplan}  />
         )}
       </div>
     </Layout>
