@@ -92,7 +92,7 @@ export default function EditProfilePhoto({ data_profile }) {
               className="h-20 w-20 rounded-md object-cover sm:h-32 sm:w-32"
               src={
                 data_profile.url_photo_profile
-                  ? `/backend/${data_profile.url_photo_profile}`
+                  ? `${process.env.REACT_APP_API_URL}/${data_profile.url_photo_profile}`
                   : data_profile.gender == 'L'
                   ? '/male.jpg'
                   : '/female.jpg'
