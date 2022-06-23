@@ -28,6 +28,7 @@ export default function EditProfilePhoto({ data_profile }) {
       const response = await ProfileService.deletePhotoProfile();
       if (response?.data?.meta?.code === 200) {
         setIsOpenAccept(true);
+        localStorage.setItem('user', JSON.stringify(response.data.data));
         return;
       }
       setError(true);
@@ -38,6 +39,7 @@ export default function EditProfilePhoto({ data_profile }) {
     const response = await ProfileService.updateProfilePicture(dataProfile);
     if (response?.data?.meta?.code === 200) {
       setIsOpenAccept(true);
+      localStorage.setItem('user', JSON.stringify(response.data.data));
       return;
     }
     setError(true);
