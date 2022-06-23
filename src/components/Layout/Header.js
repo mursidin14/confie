@@ -9,7 +9,7 @@ export default function Header({data, handleNav, PageName }) {
     setOpen(!open);
   }
   async function clickLogout() {
-    await AuthService.logout();
+    const response = await AuthService.logout();
     window.location.href = '/';
   }
   return (

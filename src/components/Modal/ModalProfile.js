@@ -2,6 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import {
+  SearchCountryProfile,
   SearchRegionCityProfile,
   SearchRegionProfile,
 } from 'components/SearchRegion';
@@ -9,70 +10,76 @@ import ProfileService from 'services/Profile/ProfileService';
 import utils from 'utils/utils';
 
 export default function ModalProfile({ data_profile }) {
-  let [isOpen, setIsOpen] = useState(false);
-  let [dataProfile, setDataProfile] = useState({
+  const [isOpen, setIsOpen] = useState(false);
+  const [dataProfile, setDataProfile] = useState({
     full_name: data_profile.full_name,
     phone_number: data_profile.phone_number,
+    country: data_profile.country,
     province: data_profile.province,
     province_name: data_profile.province_name,
     city: data_profile.city,
     city_name: data_profile.city_name,
+    address: data_profile.address,
+    zip_code: data_profile.zip_code,
     gender: data_profile.gender,
     date_of_birth: utils.getYearMonthDay(data_profile.date_of_birth),
-    country: data_profile.country,
   });
   const [city, setCity] = useState([]);
   const [error, setError] = useState([]);
   function closeModal() {
     setIsOpen(false);
   }
-  
+
   function openModal() {
     setIsOpen(true);
   }
-  let inputs = [
+  const inputs = [
     {
       label: 'Full Name',
       type: 'text',
       name: 'full_name',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
-      pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
       name: 'phone_number',
       label: 'Phone Number',
       type: 'number',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
   ];
-  let input2 = [
+  const input2 = [
     {
       name: 'date_of_birth',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Date of Birth',
       required: true,
     },
+  ];
+  const input3 = [
     {
-      name: 'country',
+      name: 'address',
       type: 'text',
-      errorMessage: 'It should be a valid email address!',
-      label: 'Country',
+      label: 'Address',
+      required: true,
+    },
+    {
+      name: 'zip_code',
+      type: 'text',
+      label: 'ZipCode',
       required: true,
     },
   ];
   function handleOnChange(e) {
-      const { name, value } = e.target;
-      setDataProfile({ ...dataProfile, [name]: value });
+    const { name, value } = e.target;
+    setDataProfile({ ...dataProfile, [name]: value });
   }
   async function handleClick() {
     if (dataProfile.city == undefined) {
-      dataProfile.city = data_profile.city
+      dataProfile.city = data_profile.city;
     }
-    dataProfile['date_of_birth'] = utils.timeEpoch(dataProfile['date_of_birth']);
+    dataProfile['date_of_birth'] = utils.timeEpoch(
+      dataProfile['date_of_birth']
+    );
     const response = await ProfileService.updateProfileData(dataProfile);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -130,7 +137,7 @@ export default function ModalProfile({ data_profile }) {
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="lg:px-8 px-2">
+                    <div className="px-2 lg:px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
                           handleOnChange={handleOnChange}
@@ -139,7 +146,7 @@ export default function ModalProfile({ data_profile }) {
                           {...input}
                         />
                       ))}
-                      <div className=" items-center lg:flex my-1">
+                      <div className=" my-1 items-center lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base">Gender</label>
                         </div>
@@ -178,18 +185,34 @@ export default function ModalProfile({ data_profile }) {
                           {...input}
                         />
                       ))}
-                      <div className="relative z-10">
-                        <SearchRegionProfile
-                          data={dataProfile}
-                          onChange={setDataProfile}
-                          setCity={setCity}
-                        ></SearchRegionProfile>
+                      <div className="relative z-20">
+                      <SearchCountryProfile data={dataProfile} onChange={setDataProfile}></SearchCountryProfile>
                       </div>
-                      <SearchRegionCityProfile
-                        data={dataProfile}
-                        onChange={setDataProfile}
-                        city={city}
-                      ></SearchRegionCityProfile>
+                      {dataProfile.country === 'indonesia' ? (
+                        <>
+                          <div className="relative z-10">
+                            <SearchRegionProfile
+                              data={dataProfile}
+                              onChange={setDataProfile}
+                              setCity={setCity}
+                            ></SearchRegionProfile>
+                          </div>
+                          <SearchRegionCityProfile
+                            data={dataProfile}
+                            onChange={setDataProfile}
+                            city={city}
+                          ></SearchRegionCityProfile>
+                        </>
+                      ) : <>
+                        {input3.map((input, index) => (
+                        <InputFormProfile
+                          handleOnChange={handleOnChange}
+                          data={dataProfile}
+                          key={index}
+                          {...input}
+                        />
+                      ))}
+                      </>}
                     </div>
                   </div>
                   <section className="px-8 text-left text-sm text-red-500">

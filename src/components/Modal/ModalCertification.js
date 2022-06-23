@@ -113,7 +113,7 @@ export default function ModalCertification() {
                   <div className="my-5">
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
-                        <InputFormProfile handleChange={handleChange} {...input} />
+                        <InputFormProfile key={index} handleChange={handleChange} {...input} />
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">

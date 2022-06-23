@@ -362,9 +362,120 @@ export function SearchRegionCity({ data, onChange, city }) {
 }
 
 
+export function SearchCountryProfile({ data, onChange }) {
+  const countries = [
+    { id: 'indonesia', name: 'INDONESIA' },
+    { id: 'malaysia', name: 'MALAYSIA' },
+    { id: 'taiwan', name: 'TAIWAN' },
+    { id: 'singapore', name: 'SINGAPORE' },
+    { id: 'filipina', name: 'FILIPINA' },
+    { id: 'brunei darussalam', name: 'BRUNEI DARUSSALAM' },
+  ]
+
+  const [selected, setSelected] = useState({name: data.country.toUpperCase()});
+  const [query, setQuery] = useState('');
+  const filteredCountry =
+    query === ''
+      ? countries
+      : countries.filter((country) =>
+          country.name
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        );
+  function handleChange(event) {
+    setQuery(event.target.value);
+  }
+  async function handleClick(e) {
+    onChange({
+      ...data,
+      country: e.target.innerText.toLowerCase(),
+    })
+    
+  }
+  async function handleEnter(name) {
+    if(name == undefined) {
+      return
+    }
+    onChange({
+      ...data,
+      country: name.toLowerCase(),
+    })
+    
+  }
+  return (
+    <Combobox value={selected} onChange={setSelected}>
+      <div className="relative mt-1">
+        <div className="items-center lg:flex">
+        <div className="w-5/12">
+            <label className="text-xs lg:text-base">Country</label>
+          </div>
+          <div className="lg:w-7/12">
+
+          <Combobox.Input
+            className="input-form peer mb-3"
+            displayValue={(person) => {
+              handleEnter(person.name);
+              return person.name;
+            }}
+            onChange={handleChange}
+          />
+          <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 top-5 flex items-center pr-2">
+            <SelectorIcon
+              className="h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+          </Combobox.Button>
+          </div>
+        </div>
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+          afterLeave={() => setQuery('')}
+        >
+          <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+            {filteredCountry.length === 0 && query !== '' ? (
+              <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                Nothing found.
+              </div>
+            ) : (
+              filteredCountry.map((country) => (
+                <Combobox.Option
+                  key={country.id}
+                  className={({ active }) =>
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      data.country === country.name ? 'bg-orange text-white' : 'text-gray-900'
+                    }`
+                  }
+                  value={country}
+                >
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        className={`block truncate ${
+                          selected ? 'font-medium' : 'font-normal'
+                        }`}
+                        onClick={handleClick}
+                      >
+                        {country.name}
+                      </span>
+                      
+                    </>
+                  )}
+                </Combobox.Option>
+              ))
+            )}
+          </Combobox.Options>
+        </Transition>
+      </div>
+    </Combobox>
+  );
+}
 export function SearchRegionProfile({ data, onChange, setCity }) {
   const province = {
-    name: data.province_name,
+    name: data.province_name || '',
   }
   const [selected, setSelected] = useState(province);
   const [query, setQuery] = useState('');
@@ -477,7 +588,7 @@ export function SearchRegionProfile({ data, onChange, setCity }) {
 export function SearchRegionCityProfile({ data, onChange, city }) {
   const city_profile = {
     id: data.city,
-    name: data.city_name,
+    name: data.city_name || '',
   }
   const [selected, setSelected] = useState(city_profile);
   const [query, setQuery] = useState('');
@@ -585,3 +696,4 @@ export function SearchRegionCityProfile({ data, onChange, city }) {
     </Combobox>
   );
 }
+

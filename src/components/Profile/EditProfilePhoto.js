@@ -66,7 +66,7 @@ export default function EditProfilePhoto({ data_profile }) {
         </div>
         <div className="image-upload w-7/12">
           <div className="relative w-fit">
-            <label for="file-input">
+            <label htmlFor="file-input">
               <div className="absolute -top-3 -right-5 w-fit cursor-pointer rounded-full border bg-white p-2">
                 <svg
                   className="h-3 w-3"

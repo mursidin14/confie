@@ -9,7 +9,7 @@ export default function UpdateCertificationModal({ item, id }) {
     description: item.description,
     link: item.link,
     name: item.name,
-    year: utils.getYearMonthDay(item.year),
+    year: item.year,
   });
   let [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState([]);
