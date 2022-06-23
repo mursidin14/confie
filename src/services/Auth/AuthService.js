@@ -1,4 +1,4 @@
-import loginClient, { httpClient, registerClient } from 'utils/http-common';
+import loginClient, { httpAuthClient, httpClient, registerClient } from 'utils/http-common';
 
 const login = (data) =>
   loginClient.get('/sanctum/csrf-cookie').then((response) =>
@@ -43,7 +43,8 @@ const register = (data) =>
   }
 
   const logout = () =>
-  loginClient.post('/api/logout').then((response) => {
+  httpAuthClient.post('/api/logout').then((response) => {
+    localStorage.removeItem("metadata");
     return response;
   }).catch((error) => {
     return error.response;

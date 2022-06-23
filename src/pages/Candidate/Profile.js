@@ -95,7 +95,8 @@ export default function Profile() {
          <div className='flex items-center justify-center'>
           {isEmpty([data.profile.certificates, data.profile.experiences, data.profile.internships, data.profile.certificates, data.profile.educations]) ? 
             <AddSection action={'Add Section'} experiences={data.profile.experiences} educations={data.profile.educations} internships={data.profile.internships} volunteers={data.profile.volunteers} awards={data.profile.certificates}></AddSection>
-          :null}
+          : <>
+          <p className='text-xs text-gray-400 mt-5 '>No more section to add</p></>}
           </div>
         </>
       )}
