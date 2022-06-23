@@ -12,6 +12,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import OrganizationCard from 'components/Profile/OrganizationCard';
 import AddSection from 'components/Modal/AddSection';
+import { isEmpty } from 'utils/utils';
 
 export default function Profile() {
   const [data, setData] = useState({});
@@ -92,7 +93,9 @@ export default function Profile() {
       ) : (
         <>
          <div className='flex items-center justify-center'>
+          {isEmpty([data.profile.certificates, data.profile.experiences, data.profile.internships, data.profile.certificates, data.profile.educations]) ? 
             <AddSection action={'Add Section'} experiences={data.profile.experiences} educations={data.profile.educations} internships={data.profile.internships} volunteers={data.profile.volunteers} awards={data.profile.certificates}></AddSection>
+          :null}
           </div>
         </>
       )}
