@@ -27,8 +27,6 @@ export default function UpdateEducation({ item, id }) {
     const data = {
       ...dataEducation,
     };
-    data['start_date'] = utils.timeEpoch(data['start_date']);
-    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.updateEducation(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
