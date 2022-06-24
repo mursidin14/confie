@@ -90,6 +90,9 @@ export default function ModalProfile({ data_profile }) {
       setError(errors);
       return;
     }
+    const data_user = JSON.parse(localStorage.getItem('user'));
+    data_user['full_name'] = dataProfile.full_name;
+    localStorage.setItem('user', JSON.stringify(data_user));
     window.location.reload();
   }
   return (

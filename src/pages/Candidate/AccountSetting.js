@@ -51,6 +51,9 @@ export default function AccountSetting() {
       setError(errors);
       return;
     }
+    const data_user = JSON.parse(localStorage.getItem('user'));
+    data_user['email'] = dataUpdate.email;
+    localStorage.setItem('user', JSON.stringify(data_user));
     setIsOpenAccept(true);
   }
   let inputs = [

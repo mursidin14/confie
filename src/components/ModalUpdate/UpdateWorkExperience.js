@@ -11,6 +11,7 @@ export default function UpdateWorkExperience({ item, id }) {
     is_current: item.is_current,
     position: item.position,
     start_date: utils.getYearMonthDay(item.start_date),
+    end_date: utils.getYearMonthDay(item.end_date),
     status: item.status,
   });
   const [error, setError] = useState([]);
@@ -148,6 +149,7 @@ export default function UpdateWorkExperience({ item, id }) {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataWorkExperience}
                           handleChange={handleChange}
                           {...input}
@@ -175,6 +177,7 @@ export default function UpdateWorkExperience({ item, id }) {
                       </div>
                       {inputs_2.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataWorkExperience}
                           handleChange={handleChange}
                           {...input}
@@ -257,11 +260,7 @@ export default function UpdateWorkExperience({ item, id }) {
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
     <div
-      className={`items-center ${
-        data.is_current == true && inputProps.name == 'end_date'
-          ? 'hidden'
-          : 'lg:flex'
-      }`}
+      className={`items-center lg:flex`}
     >
       <div className="w-5/12">
         <label className="text-xs lg:text-base" for="">
@@ -272,13 +271,19 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
         <input
           {...inputProps}
           className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? 'hidden' : ''}`}
-          value={data[inputProps.name] === 'start_date' ? utils.getYearMonthDay(data[inputProps.name]) : data[inputProps.name]}
+          value={inputProps.name === 'start_date' ? data[inputProps.name] : data[inputProps.name]}
           onChange={handleChange}
         />
         <input
           {...inputProps}
-          className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? '' : 'hidden'}`}
+          className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? '' : 'hidden'} ${
+            data.is_current == true && inputProps.name == 'end_date'
+              ? 'bg-[#cbcbcc]'
+              : 'bg-soft-gray'
+          }`}
+          value={inputProps.name === 'end_date' && !data.is_current ? data[inputProps.name] : ''}
           onChange={handleChange}
+          disabled={data.is_current}
         />
       </div>
     </div>

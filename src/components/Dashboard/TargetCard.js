@@ -41,9 +41,9 @@ export default function TargetCard({data_plan}) {
       <hr className=" mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
       {data_plan.map((data, index) => (
           <div key={index}>
-            <div className="bg-[#F5F8FA] py-5 px-8">
-              <p className="">{data.title}</p>
-            </div>
+            <a href={`/pdp/detail/${data.id}`} className="bg-[#F5F8FA] hover:bg-[#7c7c7c] hover:text-white transition-all py-5 px-8 inline-block cursor-pointer w-full">
+              <p >{data.title}</p>
+            </a>
             <div className="my-3 space-y-2 px-8">
             {data.milestone.map((milestone, index) => (
                 <div

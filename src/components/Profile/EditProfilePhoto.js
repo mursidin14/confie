@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 export default function EditProfilePhoto({ data_profile }) {
+  const [errorMessage, setErrorMessage] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAccept, setIsOpenAccept] = useState(false);
@@ -42,6 +43,7 @@ export default function EditProfilePhoto({ data_profile }) {
       localStorage.setItem('user', JSON.stringify(response.data.data));
       return;
     }
+    setErrorMessage(response.data.data.photo_profile[0]);
     setError(true);
     setIsOpenAccept(true);
   }
@@ -270,7 +272,8 @@ export default function EditProfilePhoto({ data_profile }) {
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
                       {error
-                        ? 'Data anda tidak berhasil diubah'
+                        ? <><p>Data tidak berhasil diubah!</p>
+                        <p className='text-xs text-gray-400 mt-1'>{errorMessage}</p></>
                         : 'Data anda berhasil diubah!'}
                     </p>
                   </div>
