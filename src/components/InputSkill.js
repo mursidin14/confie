@@ -179,6 +179,19 @@ export function UpdateInputSkill({ data, onChange, skills }) {
   const addTags = (value, id, value2) => {
     console.log(value, value2);
     if (value !== '' && value !== undefined) {
+      if(tags.map(tag => tag.name).includes(value)){
+        if(tags.map(tag => tag.name).includes(value2)){
+          return
+        }
+        setTags([...tags, {
+          name: value2
+        }]);
+        onChange({
+          ...data,
+          skills: [...data.skills, value2],
+        });
+        return
+      }
       setTags([
         ...tags,
         {
@@ -193,16 +206,18 @@ export function UpdateInputSkill({ data, onChange, skills }) {
       });
       return;
     }
-    setTags([
-      ...tags,
-      {
-        name: value2,
-      },
-    ]);
-    onChange({
-      ...data,
-      skills: [...data.skills, value2],
-    });
+    if (value2) {
+      setTags([
+        ...tags,
+        {
+          name: value2,
+        },
+      ]);
+      onChange({
+        ...data,
+        skills: [...data.skills, value2],
+      });
+    }
   };
 
   return (
