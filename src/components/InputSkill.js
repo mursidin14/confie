@@ -3,6 +3,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import AuthService from 'services/Auth/AuthService';
 
 function InputTag({ addTags, people }) {
+  const [nameSkill, setNameSkill] = useState('');
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
   const filteredPeople =
@@ -16,6 +17,7 @@ function InputTag({ addTags, people }) {
         );
   function handleChange(event) {
     setQuery(event.target.value);
+    setNameSkill(event.target.value);
   }
   async function handleClick(e) {
     const id = people.find((person) => person.name === e.target.innerText).id;
@@ -27,11 +29,10 @@ function InputTag({ addTags, people }) {
       <div className="mt-1 grow">
         <Combobox.Input
           className="w-full bg-soft-gray pl-2 focus:outline-none"
-          displayValue={(person) => {}}
           onChange={handleChange}
           onKeyUp={(e) => {
             if (e.key === 'Enter') {
-              addTags(selected.name, selected.id);
+              addTags(selected.name, selected.id, nameSkill);
             }
           }}
           placeholder="Add Skill"
@@ -44,10 +45,10 @@ function InputTag({ addTags, people }) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute mt-1 max-h-60 w-fit h-[100px] overflow-auto rounded-md bg-white text-left shadow-lg sm:max-w-[400px]">
+          <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-fit overflow-auto rounded-md bg-white text-left shadow-lg sm:max-w-[400px]">
             {filteredPeople.length === 0 && query !== '' ? (
               <div className="relative z-10 cursor-default select-none py-2 px-4 text-gray-700">
-                Nothing found.
+                Press enter to add arbitrary skill
               </div>
             ) : (
               filteredPeople.map((person) => (
@@ -84,7 +85,6 @@ function InputTag({ addTags, people }) {
 
 export default function InputSkill({ data, onChange }) {
   const [tags, setTags] = useState([]);
-  const [idTags, setIdTags] = useState([]);
   const [people, setPeople] = useState([]);
   useEffect(() => {
     const getSkill = async () => {
@@ -96,22 +96,37 @@ export default function InputSkill({ data, onChange }) {
 
   const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-    setIdTags([...idTags.filter((_, index) => index !== indexToRemove)]);
     onChange({
       ...data,
-      skills: [...idTags.filter((_, index) => index !== indexToRemove)],
+      skills: [...data.skills.filter((_, index) => index !== indexToRemove)],
     });
   };
-  const addTags = (value, id) => {
-    if (value !== '') {
+  const addTags = (value, id, value2) => {
+    if (value !== '' && value !== undefined) {
+      if (tags.includes(value)) {
+        if (value2) {
+          setTags([...tags, value2]);
+          onChange({
+            ...data,
+            skills: [...data.skills, value2],
+          });
+        }
+        return;
+      }
       setTags([...tags, value]);
-      setIdTags([...idTags, id]);
       onChange({
         ...data,
-        skills: [...idTags, id],
+        skills: [...data.skills, id],
+      });
+      return;
+    }
+    if (value2) {
+      setTags([...tags, value2]);
+      onChange({
+        ...data,
+        skills: [...data.skills, value2],
       });
     }
-    return;
   };
 
   return (
@@ -143,7 +158,7 @@ export function UpdateInputSkill({ data, onChange, skills }) {
       const response = await AuthService.getListSkill();
       setPeople(response.data.data);
       setTags(skills);
-      setIdTags(skills.map(skill => skill.id));
+      setIdTags(skills.map((skill) => skill.id));
       setLoading(false);
     };
     getSkill();
@@ -151,15 +166,19 @@ export function UpdateInputSkill({ data, onChange, skills }) {
 
   const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-    setIdTags([...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)]);
+    setIdTags([
+      ...tags
+        .filter((_, index) => index !== indexToRemove)
+        .map((tag) => tag.id),
+    ]);
     onChange({
       ...data,
-      skills: [...tags.filter((_, index) => index !== indexToRemove).map((tag) => tag.id)],
+      skills: [...data.skills.filter((_, index) => index !== indexToRemove)],
     });
-    console.log(data.skills);
   };
-  const addTags = (value, id) => {
-    if (value !== '') {
+  const addTags = (value, id, value2) => {
+    console.log(value, value2);
+    if (value !== '' && value !== undefined) {
       setTags([
         ...tags,
         {
@@ -170,10 +189,20 @@ export function UpdateInputSkill({ data, onChange, skills }) {
       setIdTags([...idTags, id]);
       onChange({
         ...data,
-        skills: [...idTags, id],
+        skills: [...data.skills, id],
       });
+      return;
     }
-    return;
+    setTags([
+      ...tags,
+      {
+        name: value2,
+      },
+    ]);
+    onChange({
+      ...data,
+      skills: [...data.skills, value2],
+    });
   };
 
   return (
