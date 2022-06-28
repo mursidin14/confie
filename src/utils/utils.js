@@ -87,38 +87,41 @@ const getMonthYear = (time) => {
 };
 
 const getProfileCompletion = (my_profile) => {
-  let profile_completion = 0;
+  let profile_completion = 0
   const profile = [
-    'about',
-    'certificates',
-    'city_name',
-    'country',
-    'date_of_birth',
-    'educations',
-    'email',
-    'experiences',
     'full_name',
-    'gender',
-    'internships',
+    'date_of_birth',
+    'email',
     'phone_number',
+    'gender',
+    'country',
     'province_name',
+    'city_name',
+    'about',
     'skills',
-  ];
-  const total_data = 14;
+    'educations',
+    'experiences',
+    'certificates',
+    'internships',
+    'volunteers',
+    'url_photo_profile',
+  ]
+  const total_data = profile.length
   profile.forEach((item) => {
-    if (
-      (Array.isArray(my_profile[item]) && my_profile[item].length > 0) ||
-      (Array.isArray(my_profile[item]) === false && my_profile[item] !== '')
-    ) {
-      profile_completion += 1;
+    if (Array.isArray(my_profile[item]) && my_profile[item].length > 0) {
+      console.log(item)
+      profile_completion += 1
     }
-  });
-
-  return Math.round((profile_completion / total_data) * 100);
-};
+    if (Array.isArray(my_profile[item]) === false && (my_profile[item] !== '' && my_profile[item] !== null && my_profile[item] !== undefined)) {
+      console.log(item)
+      profile_completion += 1
+    }
+  })
+  return Math.round((profile_completion / total_data) * 100)
+}
 
 const isWork = (works_experience) => {
-  return works_experience.some((work) => work.is_current == true);
+  return works_experience.some((work) => work.is_current === true);
 };
 
 const getYearMonthDay = (epoch) => {

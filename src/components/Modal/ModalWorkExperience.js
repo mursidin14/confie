@@ -63,14 +63,14 @@ export default function ModalWorkExperience({ section }) {
   let inputs_2 = [
     {
       name: 'start_date',
-      type: 'date',
+      type: 'month',
       label: 'Tahun Mulai',
       max: getTodayDate,
       required: true,
     },
     {
       name: 'end_date',
-      type: 'date',
+      type: 'month',
       label: 'Tahun Selesai',
       max: getTodayDate,
       required: true,

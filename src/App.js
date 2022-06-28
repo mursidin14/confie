@@ -24,6 +24,7 @@ import JobVacancyDetail from 'pages/Business/JobVacancyDetail';
 import TalentPool from 'pages/Business/TalentPool';
 
 import NotFound from 'pages/NotFound';
+import UnderConstruction from 'pages/UnderConstruction';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
         <Route path="/business/talent/:id" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 
+        <Route path='/under' element={<UnderConstruction />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

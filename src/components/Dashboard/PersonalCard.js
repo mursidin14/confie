@@ -1,42 +1,34 @@
-import React from 'react';
-import Status from './Status';
-import Pdf from 'react-to-pdf';
-import CurriculumVitae from 'components/CurriculumVitae';
-import utils from 'utils/utils';
+import React from 'react'
+import Status from './Status'
+import Pdf from 'react-to-pdf'
+import CurriculumVitae from 'components/CurriculumVitae'
+import utils from 'utils/utils'
 
-export default function PersonalCard({data_profile}) {
+export default function PersonalCard({ data_profile }) {
   return (
     <div className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8">
       <div className="flex items-start gap-3 lg:items-stretch">
         <img
-          className="w-28 h-28 md:w-48 md:h-48 rounded-md object-cover"
-          src={data_profile.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data_profile.url_photo_profile}` : data_profile.gender == "L" ? "/male.jpg" : "/female.jpg"}
+          className="h-28 w-28 rounded-md object-cover md:h-48 md:w-48"
+          src={
+            data_profile.url_photo_profile
+              ? `${process.env.REACT_APP_API_URL}/${data_profile.url_photo_profile}`
+              : data_profile.gender == 'L'
+              ? '/male.jpg'
+              : '/female.jpg'
+          }
           alt=""
         />
         <div className="w-full">
           <div className="items-center justify-between lg:flex">
             <div>
               <div className="flex items-center gap-2 lg:gap-3">
-                <h3 className="text-left sm:text-xl text-lg font-semibold">
-                  {data_profile.full_name ? utils.makeCapital(data_profile.full_name) : ''}
+                <h3 className="text-left text-lg font-semibold sm:text-xl">
+                  {data_profile.full_name
+                    ? utils.makeCapital(data_profile.full_name)
+                    : ''}
                 </h3>
-                {/* <svg
-                  className="h-5 w-5"
-                  width="30"
-                  height="30"
-                  viewBox="0 0 30 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.6016 4.6552C13.6061 2.70543 16.3939 2.70543 17.3984 4.6552C18.002 5.82679 19.3636 6.39083 20.6189 5.98919C22.7079 5.3208 24.6791 7.29201 24.0108 9.38101C23.6091 10.6363 24.1731 11.998 25.3448 12.6016C27.2945 13.6061 27.2945 16.3938 25.3448 17.3983C24.1731 18.002 23.6091 19.3637 24.0108 20.6188C24.6791 22.7078 22.7079 24.6791 20.6189 24.0107C19.3638 23.6091 18.002 24.1731 17.3984 25.3447C16.3939 27.2945 13.6061 27.2945 12.6016 25.3447C11.998 24.1731 10.6363 23.6091 9.38108 24.0107C7.29208 24.6791 5.32086 22.7078 5.98925 20.6188C6.39089 19.3637 5.82685 18.002 4.65526 17.3983C2.70549 16.3938 2.70549 13.6061 4.65526 12.6016C5.82685 11.998 6.39089 10.6363 5.98925 9.38101C5.32086 7.29201 7.29208 5.3208 9.38108 5.98919C10.6363 6.39083 11.998 5.82679 12.6016 4.6552Z"
-                    fill="#00A3FF"
-                  />
-                  <path
-                    d="M18.5704 11.4878C18.8258 11.1873 19.2214 11.1731 19.5219 11.4286C19.8225 11.6841 19.7786 12.0804 19.5231 12.381L14.8288 18.3197C14.5693 18.6251 14.1095 18.6572 13.81 18.391L10.5957 15.5338C10.3009 15.2717 10.2743 14.8203 10.5364 14.5255C10.7985 14.2306 11.25 14.2041 11.5448 14.4661L14.2133 16.8381L18.5704 11.4878Z"
-                    fill="white"
-                  />
-                </svg> */}
+                <Badge completion={utils.getProfileCompletion(data_profile)} />
               </div>
               <EmploymentStatus work={utils.isWork(data_profile.experiences)} />
             </div>
@@ -44,9 +36,15 @@ export default function PersonalCard({data_profile}) {
               <ButtonDashboard data={data_profile} />
             </div>
           </div>
-          <JobStatus data={data_profile.experiences.filter(exp => exp.is_current == true)[0]} />
+          <JobStatus
+            data={
+              data_profile.experiences.filter(
+                (exp) => exp.is_current == true
+              )[0]
+            }
+          />
           <div className="hidden md:block">
-            <Status data={data_profile}/>
+            <Status data={data_profile} />
           </div>
         </div>
       </div>
@@ -57,49 +55,57 @@ export default function PersonalCard({data_profile}) {
         <ButtonDashboard data={data_profile} />
       </div>
     </div>
-  );
+  )
 }
 
-function ButtonDashboard({data}) {
-  const cv = React.createRef();
+function ButtonDashboard({ data }) {
+  const cv = React.createRef()
   return (
     <>
-      <div className='absolute -top-[3000px]' ref={cv}>
+      <div className="absolute -top-[3000px]" ref={cv}>
         <CurriculumVitae data={data}></CurriculumVitae>
       </div>
       <div className="my-3 flex w-full">
-      <div className="flex items-center sm:justify-start justify-between w-full gap-3">
-      <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
-        {({ toPdf }) => (
-          <button
-            onClick={toPdf}
-            className="secondary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
-            href=""
+        <div className="flex w-full items-center justify-between gap-3 sm:justify-start">
+          <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
+            {({ toPdf }) => (
+              <button
+                onClick={toPdf}
+                className="secondary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
+                href=""
+              >
+                Download CV
+              </button>
+            )}
+          </Pdf>
 
+          <a
+            className="primary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
+            href={`/profile/`}
           >
-            Download CV
-          </button>
-        )}
-      </Pdf>
-        
-        <a className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit " href={`/profile/`}>
-          <p>Edit Profile</p>
-        </a>
+            <p>Edit Profile</p>
+          </a>
+        </div>
       </div>
-    </div>
     </>
-  );
+  )
 }
 
-function EmploymentStatus({work}) {
+function EmploymentStatus({ work }) {
   return (
-    <p className={`my-2 w-fit rounded-md px-2 py-1 text-[10px] ${work ? 'text-[#50CD89] bg-[#50CD89]/20' : 'text-[#F1416C] bg-[#F1416C]/20'}`}>
-      {work? 'Bekerja' : 'Belum Bekerja'}
+    <p
+      className={`my-2 w-fit rounded-md px-2 py-1 text-[10px] ${
+        work
+          ? 'bg-[#50CD89]/20 text-[#50CD89]'
+          : 'bg-[#F1416C]/20 text-[#F1416C]'
+      }`}
+    >
+      {work ? 'Bekerja' : 'Belum Bekerja'}
     </p>
-  );
+  )
 }
 
-function JobStatus({data}) {
+function JobStatus({ data }) {
   return (
     <div className="">
       <div className="mb-3 flex items-center gap-3">
@@ -121,7 +127,9 @@ function JobStatus({data}) {
           />
         </svg>
 
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data ? data.position : 'Belum Bekerja'}</p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">
+          {data ? data.position : 'Belum Bekerja'}
+        </p>
       </div>
       <div className="mt flex items-center gap-3">
         <svg
@@ -141,8 +149,51 @@ function JobStatus({data}) {
             fill="#4B5783"
           />
         </svg>
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">{data ? data.agency : 'Belum Bekerja'}</p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">
+          {data ? data.agency : 'Belum Bekerja'}
+        </p>
       </div>
     </div>
-  );
+  )
+}
+
+function Badge({ completion }) {
+  return (
+    <>
+      {completion < 70 && (
+        <svg
+          className="h-7 w-7 sm:h-7 sm:w-7"
+          viewBox="0 0 30 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.6016 4.65525C13.6061 2.70547 16.3939 2.70547 17.3984 4.65525C18.002 5.82684 19.3636 6.39087 20.6189 5.98924C22.7079 5.32085 24.6791 7.29206 24.0108 9.38106C23.6091 10.6363 24.1731 11.998 25.3448 12.6016C27.2945 13.6061 27.2945 16.3939 25.3448 17.3984C24.1731 18.002 23.6091 19.3637 24.0108 20.6189C24.6791 22.7079 22.7079 24.6791 20.6189 24.0107C19.3638 23.6091 18.002 24.1731 17.3984 25.3447C16.3939 27.2945 13.6061 27.2945 12.6016 25.3447C11.998 24.1731 10.6363 23.6091 9.38108 24.0107C7.29208 24.6791 5.32086 22.7079 5.98925 20.6189C6.39089 19.3637 5.82685 18.002 4.65526 17.3984C2.70549 16.3939 2.70549 13.6061 4.65526 12.6016C5.82685 11.998 6.39089 10.6363 5.98925 9.38106C5.32086 7.29206 7.29208 5.32085 9.38108 5.98924C10.6363 6.39087 11.998 5.82684 12.6016 4.65525Z"
+            fill="#BCC5CB"
+          />
+          <path
+            d="M18.5704 11.4879C18.8258 11.1873 19.2214 11.1731 19.5219 11.4286C19.8225 11.6841 19.7786 12.0804 19.5231 12.381L14.8288 18.3198C14.5693 18.6251 14.1095 18.6573 13.81 18.391L10.5957 15.5339C10.3009 15.2718 10.2743 14.8204 10.5364 14.5255C10.7985 14.2306 11.25 14.2041 11.5448 14.4661L14.2133 16.8381L18.5704 11.4879Z"
+            fill="white"
+          />
+        </svg>
+      )}
+      {completion > 70 && (
+        <svg
+          className="h-7 w-7 sm:h-7 sm:w-7"
+          viewBox="0 0 30 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.6016 4.65525C13.6061 2.70547 16.3939 2.70547 17.3984 4.65525C18.002 5.82684 19.3636 6.39087 20.6189 5.98924C22.7079 5.32085 24.6791 7.29206 24.0108 9.38106C23.6091 10.6363 24.1731 11.998 25.3448 12.6016C27.2945 13.6061 27.2945 16.3939 25.3448 17.3984C24.1731 18.002 23.6091 19.3637 24.0108 20.6189C24.6791 22.7079 22.7079 24.6791 20.6189 24.0107C19.3638 23.6091 18.002 24.1731 17.3984 25.3447C16.3939 27.2945 13.6061 27.2945 12.6016 25.3447C11.998 24.1731 10.6363 23.6091 9.38108 24.0107C7.29208 24.6791 5.32086 22.7079 5.98925 20.6189C6.39089 19.3637 5.82685 18.002 4.65526 17.3984C2.70549 16.3939 2.70549 13.6061 4.65526 12.6016C5.82685 11.998 6.39089 10.6363 5.98925 9.38106C5.32086 7.29206 7.29208 5.32085 9.38108 5.98924C10.6363 6.39087 11.998 5.82684 12.6016 4.65525Z"
+            fill="#0AA824"
+          />
+          <path
+            d="M18.5704 11.4879C18.8258 11.1873 19.2214 11.1731 19.5219 11.4286C19.8225 11.6841 19.7786 12.0804 19.5231 12.381L14.8288 18.3198C14.5693 18.6251 14.1095 18.6573 13.81 18.391L10.5957 15.5339C10.3009 15.2718 10.2743 14.8204 10.5364 14.5255C10.7985 14.2306 11.25 14.2041 11.5448 14.4661L14.2133 16.8381L18.5704 11.4879Z"
+            fill="white"
+          />
+        </svg>
+      )}
+    </>
+  )
 }

@@ -6,7 +6,6 @@ import TargetCard from 'components/Dashboard/TargetCard';
 import ProfileService from 'services/Profile/ProfileService';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
 import EmailVerifiedCard from 'components/EmailVerifiedCard';
 import DashboardService from 'services/Dashboard/Dashboard';
 

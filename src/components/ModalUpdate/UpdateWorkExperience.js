@@ -71,14 +71,14 @@ export default function UpdateWorkExperience({ item, id }) {
   let inputs_2 = [
     {
       name: 'start_date',
-      type: 'date',
+      type: 'month',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
-      type: 'date',
+      type: 'month',
       errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,

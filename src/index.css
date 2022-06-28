@@ -17,10 +17,10 @@
     @apply w-full h-[35px] rounded-md bg-soft-gray p-5;
   }
   .primary-btn{
-    @apply text-white bg-orange rounded-md w-full;
+    @apply text-white bg-orange rounded-md w-full hover:bg-orange/80 transition-all;
   }
   .secondary-btn{
-    @apply text-orange border-2 border-orange rounded-md w-full ;
+    @apply text-orange border-2 border-orange rounded-md w-full hover:bg-orange/20  transition-all;
   }
   .label{
     @apply text-left text-sm font-semibold block mb-2 text-black;
