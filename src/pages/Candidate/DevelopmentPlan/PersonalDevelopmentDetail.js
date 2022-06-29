@@ -1,71 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import Layout from 'components/Layout/Layout';
-import ProgressBar from 'components/Widgets/ProgressBar';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { useParams } from 'react-router-dom';
-import ModalMilestone from 'components/Modal/ModalMilestone';
-import UpdateMilestone from 'components/ModalUpdate/UpdateMilestone';
-import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
-import SweetAlert from 'components/Widgets/SweetAlert';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment} from 'react';
+import React, { useEffect, useState } from 'react'
+import Layout from 'components/Layout/Layout'
+import ProgressBar from 'components/Widgets/ProgressBar'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { useParams } from 'react-router-dom'
+import ModalMilestone from 'components/Modal/ModalMilestone'
+import UpdateMilestone from 'components/ModalUpdate/UpdateMilestone'
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan'
+import SweetAlert from 'components/Widgets/SweetAlert'
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+import ModalUpdateTarget from 'components/Modal/ModalUpdateTarget'
 
 export default function PersonalDevelopmentDetail() {
-  const [targetMilestone, setTargetMilestone] = useState([]);
-  const [target, setTarget] = useState({});
-  const [progress, setProgress] = useState(0);
-  const { id, idDetail } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [isOpenAccept, setIsOpenAccept] = useState(false);
+  const [targetMilestone, setTargetMilestone] = useState([])
+  const [target, setTarget] = useState({})
+  const [progress, setProgress] = useState(0)
+  const { id, idDetail } = useParams()
+  const [loading, setLoading] = useState(true)
+  const [isOpenAccept, setIsOpenAccept] = useState(false)
   const closeModalAccept = () => {
-    setIsOpenAccept(false);
-    window.location.reload();
-  };
+    setIsOpenAccept(false)
+    window.location.reload()
+  }
   useEffect(() => {
     async function getTargetDetail() {
       const response = await PersonalPlanService.getDetailPersonalPlanData(
         idDetail
-      );
-      setTarget(response.data.data);
-      setTargetMilestone(response.data.data.milestone);
-      setProgress(response.data.data.process);
-      setLoading(false);
+      )
+      setTarget(response.data.data)
+      setTargetMilestone(response.data.data.milestone)
+      setProgress(response.data.data.process)
+      setLoading(false)
     }
 
-    getTargetDetail();
-  }, []);
+    getTargetDetail()
+  }, [])
 
   useEffect(() => {
-    let target_checkbox = document.querySelectorAll('.target_checkbox').length;
+    let target_checkbox = document.querySelectorAll('.target_checkbox').length
     let checkbox_checked = document.querySelectorAll(
       '.target_checkbox:checked'
-    ).length;
-    let percentage = Math.ceil((checkbox_checked / target_checkbox) * 100);
+    ).length
+    let percentage = Math.ceil((checkbox_checked / target_checkbox) * 100)
     if (isNaN(percentage)) {
       return
     }
-    setProgress(percentage);
+    setProgress(percentage)
   })
-  
 
   async function handleChange(id, status) {
-    let target_checkbox = document.querySelectorAll('.target_checkbox').length;
+    let target_checkbox = document.querySelectorAll('.target_checkbox').length
     let checkbox_checked = document.querySelectorAll(
       '.target_checkbox:checked'
-    ).length;
-    let percentage = Math.ceil((checkbox_checked / target_checkbox) * 100);
-    setProgress(percentage);
+    ).length
+    let percentage = Math.ceil((checkbox_checked / target_checkbox) * 100)
+    setProgress(percentage)
     const response = await PersonalPlanService.updateQuarterlyPlanData(id, {
-      status: !status,
-      });
-    
+      status: !status
+    })
   }
 
   async function deleteMilestone(id) {
-    const response = await PersonalPlanService.deleteQuarterlyPlanData(id);
+    const response = await PersonalPlanService.deleteQuarterlyPlanData(id)
     if (response.status === 200) {
-      setIsOpenAccept(true);
+      setIsOpenAccept(true)
     }
   }
 
@@ -75,8 +74,9 @@ export default function PersonalDevelopmentDetail() {
         <div className="mt-4 rounded-md bg-white py-5 text-left shadow-mine ">
           <div className="flex items-center justify-between px-8">
             <div>
-              <h3 className="text-2xl font-semibold text-[#181C32]">
+              <h3 className="text-2xl font-semibold text-[#181C32] flex items-center gap-2">
                 {target.title || <Skeleton width={100} />}
+                <ModalUpdateTarget data={target}/>
               </h3>
               <div className="flex items-center gap-3 py-3">
                 <svg
@@ -127,7 +127,7 @@ export default function PersonalDevelopmentDetail() {
           </div>
           <hr className="mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
           {loading && <p className="py-3 text-center text-sm">Loading...</p>}
-          <section className='space-y-2'>
+          <section className="space-y-2">
             <section>
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
                 <p className="font-bold text-[#A1A5B7]">Quarter 1</p>
@@ -161,13 +161,13 @@ export default function PersonalDevelopmentDetail() {
                     <>
                       <MilestoneTarget
                         target={target}
-                         status={target.status}
-                         deleteMilestone={deleteMilestone}
-                         target_milestone={target.target_title}
-                         quarter={target.quarter}
-                         idPlan={idDetail}
-                         id={target.id}
-                         handleChange={handleChange}
+                        status={target.status}
+                        deleteMilestone={deleteMilestone}
+                        target_milestone={target.target_title}
+                        quarter={target.quarter}
+                        idPlan={idDetail}
+                        id={target.id}
+                        handleChange={handleChange}
                       />
                     </>
                   )}
@@ -184,13 +184,13 @@ export default function PersonalDevelopmentDetail() {
                     <>
                       <MilestoneTarget
                         target={target}
-                         status={target.status}
-                         deleteMilestone={deleteMilestone}
-                         target_milestone={target.target_title}
-                         quarter={target.quarter}
-                         idPlan={idDetail}
-                         id={target.id}
-                         handleChange={handleChange}
+                        status={target.status}
+                        deleteMilestone={deleteMilestone}
+                        target_milestone={target.target_title}
+                        quarter={target.quarter}
+                        idPlan={idDetail}
+                        id={target.id}
+                        handleChange={handleChange}
                       />
                     </>
                   )}
@@ -207,13 +207,13 @@ export default function PersonalDevelopmentDetail() {
                     <>
                       <MilestoneTarget
                         target={target}
-                         status={target.status}
-                         deleteMilestone={deleteMilestone}
-                         target_milestone={target.target_title}
-                         quarter={target.quarter}
-                         idPlan={idDetail}
-                         id={target.id}
-                         handleChange={handleChange}
+                        status={target.status}
+                        deleteMilestone={deleteMilestone}
+                        target_milestone={target.target_title}
+                        quarter={target.quarter}
+                        idPlan={idDetail}
+                        id={target.id}
+                        handleChange={handleChange}
                       />
                     </>
                   )}
@@ -283,7 +283,7 @@ export default function PersonalDevelopmentDetail() {
         </Dialog>
       </Transition>
     </Layout>
-  );
+  )
 }
 
 function MilestoneTarget({
@@ -305,7 +305,7 @@ function MilestoneTarget({
             className="target_checkbox"
             name={target_milestone}
             type="checkbox"
-            onChange={()=>{
+            onChange={() => {
               handleChange(id, status)
               setCheck(!check)
             }}
@@ -313,18 +313,22 @@ function MilestoneTarget({
           <p>{target_milestone}</p>
         </div>
         <div className="flex justify-center gap-2">
-          <UpdateMilestone item={target} idPlan={idPlan} idMilestone={id}></UpdateMilestone>
+          <UpdateMilestone
+            item={target}
+            idPlan={idPlan}
+            idMilestone={id}
+          ></UpdateMilestone>
           <SweetAlert item={target} handleDelete={deleteMilestone}></SweetAlert>
         </div>
       </div>
     </>
-  );
+  )
 }
 
 function formatDate(date) {
   return new Date(date).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
-  });
+    day: 'numeric'
+  })
 }

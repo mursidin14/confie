@@ -172,7 +172,6 @@ function Table({ items, loading, handleDelete }) {
                         </svg>
                       </a>
                       <SweetAlert item={item} handleDelete={handleDelete}></SweetAlert>
-                    
                     </div>
                   </td>
                 </tr>

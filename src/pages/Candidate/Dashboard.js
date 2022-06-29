@@ -28,7 +28,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Layout PageName={'Dashboard'}>
+    <Layout PageName={'Dashboard'} slider={true}>
       {loading ? (
         <SkeletonCard />
       ) : (
@@ -45,7 +45,7 @@ export default function Dashboard() {
       ) : (
         <PersonalCard data_profile={data.profile} />
       )}
-      <div className="gap-5 lg:flex">
+      <div className="gap-5 lg:flex mb-20">
         {loading ? <SkeletonCardSmall /> : <ClassCard />}
         {loading ? (
           <SkeletonCardSmall />

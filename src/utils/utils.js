@@ -129,11 +129,8 @@ const getYearMonthDay = (epoch) => {
     return null;
   }
   const date = new Date(epoch * 1000);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}-${
-    day < 10 ? `0${day}` : `${day}`
-  }`;
+  let month = date.getMonth() + 1;
+  return `${date.getFullYear()}-${month < 10 ? `0${month}` : `${month}`}`;
 };
 
 export const getLength = (word) => {

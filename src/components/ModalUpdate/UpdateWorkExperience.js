@@ -203,9 +203,8 @@ export default function UpdateWorkExperience({ item, id }) {
                               });
                             }}
                           >
-                            <option value="onsite">On Site</option>
-                            <option value="freelance">Freelance</option>
-                            <option value="done">Done</option>
+                            <option value="onsite">Full Time</option>
+                            <option value="freelance">Part Time</option>
                           </select>
                         </div>
                       </div>

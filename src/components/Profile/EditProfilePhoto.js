@@ -127,6 +127,9 @@ export default function EditProfilePhoto({ data_profile }) {
           <p className="mt-4 text-xs text-[#A1A5B7] sm:text-sm">
             Allowed file types: png, jpg, jpeg.
           </p>
+          <p className="mt-1 text-xs text-[#A1A5B7] sm:text-sm">
+           Max file size: 2MB.
+          </p>
           <input id="file-input" type="file" onChange={uploadPhoto} />
         </div>
       </div>

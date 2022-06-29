@@ -1,6 +1,8 @@
 import './App.css';
 import Login from 'pages/Login';
 import Register from 'pages/Register/RegisterForm';
+import Forgot from 'pages/Forgot';
+
 import Dashboard from 'pages/Candidate/Dashboard';
 import Profile from 'pages/Candidate/Profile';
 import ProfileCandidate from 'pages/Candidate/ProfileCandidate';
@@ -26,12 +28,16 @@ import TalentPool from 'pages/Business/TalentPool';
 import NotFound from 'pages/NotFound';
 import UnderConstruction from 'pages/UnderConstruction';
 import { Routes, Route } from 'react-router-dom';
+import NewPassword from 'pages/NewPassword';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/new_password" element={<NewPassword />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />

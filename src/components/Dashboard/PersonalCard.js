@@ -80,6 +80,12 @@ function ButtonDashboard({ data }) {
           </Pdf>
 
           <a
+            className="secondary-btn center border-[1px] px-2 py-3 text-xs md:w-fit"
+            href={`/${data.slug}`}
+          >
+            <p>View Profile</p>
+          </a>
+          <a
             className="primary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
             href={`/profile/`}
           >

@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import AsideLogin from 'components/Aside/AsideLogin';
 import AuthService from 'services/Auth/AuthService';
 import ModalError from 'components/Modal/ModalError';
-export default function Login() {
+export default function Forgot() {
   const [error, setError] = useState(false);
   const [error_msg, setError_msg] = useState('');
   useEffect(() => {
-    document.title = 'Login';
+    document.title = 'Forgot Password';
   }, []);
   const [data, setData] = useState({
     email: '',
-    password: '',
   });
   const handleChange = (e) => {
     setData({
@@ -21,15 +20,15 @@ export default function Login() {
   function closeModal() {
     setError(false);
   }
-
   return (
     <main className="min-h-screen lg:flex">
       <AsideLogin />
       <section className="relative items-center justify-center bg-pale-orange p-5 pb-32 sm:flex lg:w-5/12 lg:bg-white lg:pb-5">
         <div className="relative bottom-10 z-10 w-full rounded-md bg-white px-4 py-8 lg:static">
-          <h3 className="mb-4 text-lg font-semibold lg:text-2xl">
-            Login to your Account
+          <h3 className="mb-1 text-lg font-semibold lg:text-2xl">
+            Forgot Password ?
           </h3>
+          <p className="mb-5 font-semibold">Enter your email to reset your password</p>
           <form className="" action="">
             <label className="mt-5  mb-2 block text-left text-sm font-semibold text-dark-blue">
               Email
@@ -41,25 +40,7 @@ export default function Login() {
               type="email"
               name="email"
             />
-            <div className="mt-5 flex justify-between">
-              <label className="mb-2 block text-sm font-semibold text-dark-blue">
-                Password
-              </label>
-              <a
-                href="/forgot"
-                className="mb-2 block text-sm font-semibold text-dark-blue"
-              >
-                Forget Password?
-              </a>
-            </div>
-            <input
-              onChange={handleChange}
-              required
-              className="input-form "
-              type="password"
-              name="password"
-            />
-
+           
             <button
               type="submit"
               className="primary-btn mt-10 px-5 py-3 text-center"
@@ -74,15 +55,15 @@ export default function Login() {
                 }
               }}
             >
-              LOGIN
+              Submit
             </button>
           </form>
           <p className="my-3 font-semibold">OR</p>
           <a
             className="secondary-btn flex items-center justify-center px-5 py-3"
-            href="/register"
+            href="/"
           >
-            REGISTER
+            Back to Login
           </a>
         </div>
         <img
@@ -97,5 +78,5 @@ export default function Login() {
         error_msg={error_msg}
       ></ModalError>
     </main>
-  );
+  )
 }
