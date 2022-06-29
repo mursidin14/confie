@@ -143,6 +143,18 @@ export default function ModalInternship({section}) {
                       {inputs2.map((input, index) => (
                         <InputFormProfile data={dataInternship} key={index} {...input} handleChange={handleChange} />
                       ))}
+                      <div className="my-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input type="file" name='file' onChange={(e)=>{
+                            setDataInternship({...dataInternship, file: e.target.files[0]})
+                          }}/>
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" htmlFor="">

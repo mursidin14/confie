@@ -137,6 +137,18 @@ export default function ModalCertification({section}) {
                       {inputs.map((input, index) => (
                         <InputFormProfile key={index} handleChange={handleChange} {...input} />
                       ))}
+                      <div className="my-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input type="file" name='file' onChange={(e)=>{
+                            setDataCertificate({...dataCertificate, file: e.target.files[0]})
+                          }}/>
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" for="">

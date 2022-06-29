@@ -1,40 +1,39 @@
-import React from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import ProfileService from 'services/Profile/ProfileService';
-import utils from 'utils/utils';
-export default function ModalEducation({section}) {
-  let [isOpen, setIsOpen] = useState(false);
-  const [dataEducation, setDataEducation] = useState({
-  });
-  const [error, setError] = useState([]);
+import React from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react'
+import ProfileService from 'services/Profile/ProfileService'
+import utils from 'utils/utils'
+export default function ModalEducation({ section }) {
+  let [isOpen, setIsOpen] = useState(false)
+  const [dataEducation, setDataEducation] = useState({})
+  const [error, setError] = useState([])
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function handleChange(e) {
-    setDataEducation({ ...dataEducation, [e.target.name]: e.target.value });
+    setDataEducation({ ...dataEducation, [e.target.name]: e.target.value })
   }
 
   async function handleSubmit() {
     const data = {
-      ...dataEducation,
-    };
-    const response = await ProfileService.addEducation(data);
-    if (response.data.meta.status == 'error') {
-      let errors = [];
-      let error = response.data.data;
-      for (let key in error) {
-        errors.push(error[key][0]);
-      }
-      setError(errors);
-      return;
+      ...dataEducation
     }
-    window.location.reload();
+    const response = await ProfileService.addEducation(data)
+    if (response.data.meta.status == 'error') {
+      let errors = []
+      let error = response.data.data
+      for (let key in error) {
+        errors.push(error[key][0])
+      }
+      setError(errors)
+      return
+    }
+    window.location.reload()
   }
 
   let inputs = [
@@ -43,49 +42,56 @@ export default function ModalEducation({section}) {
       type: 'text',
       name: 'school',
       pattern: '^[A-Za-z0-9]{3,16}$',
-      required: true,
+      required: true
     },
     {
       name: 'major',
       label: 'Jurusan',
       type: 'text',
-      required: true,
-    },
-  ];
+      required: true
+    }
+  ]
   let inputs2 = [
     {
       name: 'start_date',
       type: 'number',
       label: 'Tahun Mulai',
       required: true,
-      min: 0,
+      min: 0
     },
     {
       name: 'end_date',
       type: 'number',
       label: 'Tahun Selesai',
       required: true,
-      min: 0,
-    },
-  ];
+      min: 0
+    }
+  ]
   return (
     <>
       <div className="flex items-center justify-center">
-      {section ? (
+        {section ? (
           <>
-            <button
-              type="button"
-              onClick={openModal}
-              className="modal-section"
-            >
-              <div className='flex items-center gap-2'>
-              <svg width="18" height="18" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.332 3.2L4 4.8L8 2.4L4 0L0 2.4H4V3.2H1.332ZM0 3.2V6.4L0.8 5.512V3.68L0 3.2ZM4 8L2 6.8L1.2 6.32V3.92L4 5.6L6.8 3.92V6.32L4 8Z" fill="white"/>
-</svg>
+            <button type="button" onClick={openModal} className="modal-section">
+              <div className="flex items-center gap-2">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 8 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.332 3.2L4 4.8L8 2.4L4 0L0 2.4H4V3.2H1.332ZM0 3.2V6.4L0.8 5.512V3.68L0 3.2ZM4 8L2 6.8L1.2 6.32V3.92L4 5.6L6.8 3.92V6.32L4 8Z"
+                    fill="white"
+                  />
+                </svg>
 
-              <p>Education</p>
+                <p>Education</p>
               </div>
-              <p className='text-xs font-thin mt-2'>Show off your primary education, college degrees, etc.</p>
+              <p className="mt-2 text-xs font-thin">
+                Show off your primary education, college degrees, etc.
+              </p>
             </button>
           </>
         ) : (
@@ -151,6 +157,18 @@ export default function ModalEducation({section}) {
                           {...input}
                         />
                       ))}
+                      <div className="my-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input type="file" name='file' onChange={(e)=>{
+                            setDataEducation({...dataEducation, file: e.target.files[0]})
+                          }}/>
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" htmlFor="">
@@ -196,14 +214,12 @@ export default function ModalEducation({section}) {
         </Dialog>
       </Transition>
     </>
-  );
+  )
 }
 
 function InputFormProfile({ data, label, handleChange, ...inputProps }) {
   return (
-    <div
-      className={`items-center lg:flex`}
-    >
+    <div className={`items-center lg:flex`}>
       <div className="w-5/12">
         <label className="text-xs lg:text-base" htmlFor="">
           {label}
@@ -218,5 +234,5 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
         />
       </div>
     </div>
-  );
+  )
 }
