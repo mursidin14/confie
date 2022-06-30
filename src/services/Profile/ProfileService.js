@@ -1,5 +1,12 @@
 import { httpAuthClient } from 'utils/http-common';
 
+export const sendEmailVefification = () =>
+  httpAuthClient
+    .post('/api/email/verify/resend')
+    .then((response) => response)
+    .catch((error) => error.response);
+    
+
 const getProfileData = () =>
   httpAuthClient
     .get('/api/profile')

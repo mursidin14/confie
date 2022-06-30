@@ -56,11 +56,11 @@ export default function Layout({ PageName, children, slider }) {
           <section
             className={`${
               !offCanvas ? 'w-full' : 'w-full'
-            } relative min-h-screen bg-[#FFFFFF]`}
+            } min-h-screen bg-[#FFFFFF]`}
           >
             <Header data={data} handleNav={handleNav} PageName={PageName} />
             <div className="my-4 mx-3 py-5 lg:mx-7">{children}</div>
-            {slider && (
+            {/* {slider && (
               <>
                 <div className="absolute bottom-0 w-full bg-gray-600 p-4 text-white">
                 <p className='font-semibold'>Tau Gak Sih?</p>
@@ -69,7 +69,7 @@ export default function Layout({ PageName, children, slider }) {
                   })}
                 </div>
               </>
-            )}
+            )} */}
           </section>
         </main>
       ) : null}

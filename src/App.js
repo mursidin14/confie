@@ -27,8 +27,9 @@ import TalentPool from 'pages/Business/TalentPool';
 
 import NotFound from 'pages/NotFound';
 import UnderConstruction from 'pages/UnderConstruction';
-import { Routes, Route } from 'react-router-dom';
 import NewPassword from 'pages/NewPassword';
+import VerifyEmail from 'pages/VerifyEmail';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/new_password" element={<NewPassword />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
 
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
