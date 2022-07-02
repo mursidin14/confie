@@ -2,7 +2,8 @@ import React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan'
-export default function ModalUpdateTarget({data}) {
+import { getFullDate } from 'utils/utils'
+export default function ModalUpdateTarget({data: {title, start_date, id}}) {
   let [isOpen, setIsOpen] = useState(false)
   const [error, setError] = useState([])
   function closeModal() {
@@ -13,8 +14,8 @@ export default function ModalUpdateTarget({data}) {
     setIsOpen(true)
   }
   const [plan, setPlan] = useState({
-    title: data.title,
-    start_date: data.start_date,
+    title: title,
+    start_date: getFullDate(start_date),
   })
   function handleChange(e) {
     if (e.target.name === 'start_date') {
@@ -30,8 +31,8 @@ export default function ModalUpdateTarget({data}) {
     }
   }
   async function submitData() {
-    const response = await PersonalPlanService.updatePersonalPlanData(data.id, plan)
-    if (response.data.meta.status == 'error') {
+    const response = await PersonalPlanService.updatePersonalPlanData(id, plan)
+    if (response.data.meta.status === 'error') {
       let errors = []
       let error = response.data.data
       for (let key in error) {

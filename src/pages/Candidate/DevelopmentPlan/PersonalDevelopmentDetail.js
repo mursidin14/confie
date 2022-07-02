@@ -72,7 +72,7 @@ export default function PersonalDevelopmentDetail() {
     <Layout userId={id} PageName={'Personal Development Plan'}>
       <div className="lg:relative">
         <div className="mt-4 rounded-md bg-white py-5 text-left shadow-mine ">
-          <div className="flex items-center justify-between px-8">
+          <div className="sm:flex items-center justify-between px-8">
             <div>
               <h3 className="text-2xl font-semibold text-[#181C32] flex items-center gap-2">
                 {target.title || <Skeleton width={100} />}
@@ -111,7 +111,7 @@ export default function PersonalDevelopmentDetail() {
                 </p>
               </div>
             </div>
-            <div className="w-5/12">
+            <div className="sm:w-5/12">
               <div className="flex items-center justify-between">
                 <p className="text-[#181C32]">Progress</p>
                 <p className="pb-3 text-sm text-[#181C32]">{progress}%</p>
@@ -126,7 +126,6 @@ export default function PersonalDevelopmentDetail() {
             <ModalMilestone idDetail={idDetail}></ModalMilestone>
           </div>
           <hr className="mt-2 w-full border-b-[1px] border-[#3F4254]/10" />
-          {loading && <p className="py-3 text-center text-sm">Loading...</p>}
           <section className="space-y-2">
             <section>
               <div className="w-full bg-[#F5F8FA] py-5 px-10">
