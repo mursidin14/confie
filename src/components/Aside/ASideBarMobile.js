@@ -205,7 +205,7 @@ function BasicDisclosureNav({ subNav, title, icon_inactive, icon_active }) {
               {title}
             </p>
           </Disclosure.Button>
-          <Disclosure.Panel className="pl-10 pt-1 text-sm text-gray-500">
+          <Disclosure.Panel className="pl-10 pt-1 sm:text-sm text-xs text-gray-500">
             <ul className="requirments text-left">
               {subNav.map((item, index) => (
                 <li className="my-2" key={index}>

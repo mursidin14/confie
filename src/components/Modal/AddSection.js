@@ -6,6 +6,7 @@ import ModalInternship from './ModalInternship';
 import ModalCertification from './ModalCertification';
 import ModalOrganization from './ModalOrganization';
 import ModalWorkExperience from './ModalWorkExperience';
+import ModalPublication from './ModalPublication';
 export default function AddSection({
   action,
   awards,
@@ -104,6 +105,9 @@ export default function AddSection({
                     )}
                     {awards.length === 0 && (
                       <ModalCertification section={true}></ModalCertification>
+                    )}
+                    {true && (
+                      <ModalPublication section={true}></ModalPublication>
                     )}
                   </section>
                 </Dialog.Panel>
