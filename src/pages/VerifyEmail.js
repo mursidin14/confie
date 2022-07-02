@@ -26,22 +26,43 @@ export default function VerifyEmail() {
 
   return (
     <main className="min-h-screen bg-pale-orange p-10">
-      <img className="mx-auto mb-10 sm:w-[240px] w-[200px]" src="/logo.png" alt="" />
+      <img
+        className="mx-auto mb-10 w-[200px] sm:w-[240px]"
+        src="/logo.png"
+        alt=""
+      />
       {loading ? null : (
         <>
           {' '}
-          <section className="flex flex-col items-center justify-center w-full">
-            <div className=" w-full shadow-lg max-w-2xl flex flex-col items-center justify-center rounded-md bg-white px-4 py-8 lg:static">
-              {!error ? <>
-                <img src="/email_approve.png" alt=""/>
-                <h4 className='mt-5 sm:mb-1 font-semibold sm:text-3xl text-lg text-orange'>Congratulations!</h4>
-                <p className='text-sm sm:text-base text-gray-400'>Email Verifed!!</p>
-                <a className='secondary-btn text-sm font-semibold mt-4 w-fit px-4 py-3' href="/">Back to login</a>
-              </> : <>
-              <img src="/email_reject.png" alt=""/>
-                <h4 className='mt-5 sm:mb-1 font-semibold sm:text-3xl text-lg text-orange'>Sorry, something goes wrong!</h4>
-                <p className='text-sm sm:text-base text-gray-400'>Your Email Verification Failed!!</p></>}
-                <a className='secondary-btn text-sm font-semibold mt-4 w-fit px-4 py-3' href="/">Back to login</a>
+          <section className="flex w-full flex-col items-center justify-center">
+            <div className=" flex w-full max-w-2xl flex-col items-center justify-center rounded-md bg-white px-4 py-8 shadow-lg lg:static">
+              {true ? (
+                <>
+                  <img src="/email_approve.png" alt="" />
+                  <h4 className="mt-5 text-lg font-semibold text-orange sm:mb-1 sm:text-3xl">
+                    Congratulations!
+                  </h4>
+                  <p className="text-sm text-gray-400 sm:text-base">
+                    Email Verifed!!
+                  </p>
+                </>
+              ) : (
+                <>
+                  <img src="/email_reject.png" alt="" />
+                  <h4 className="mt-5 text-lg font-semibold text-orange sm:mb-1 sm:text-3xl">
+                    Sorry, something goes wrong!
+                  </h4>
+                  <p className="text-sm text-gray-400 sm:text-base">
+                    Your Email Verification Failed!!
+                  </p>
+                </>
+              )}
+              <a
+                className="secondary-btn mt-4 w-fit px-4 py-3 text-sm font-semibold"
+                href="/"
+              >
+                Back to login
+              </a>
             </div>
           </section>
         </>
