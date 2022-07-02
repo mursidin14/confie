@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan'
 import { getFullDate } from 'utils/utils'
-export default function ModalUpdateTarget({data: {title, start_date, id}}) {
+export default function ModalUpdateTarget({ data: { title, start_date, id } }) {
   let [isOpen, setIsOpen] = useState(false)
   const [error, setError] = useState([])
   function closeModal() {
@@ -15,7 +15,7 @@ export default function ModalUpdateTarget({data: {title, start_date, id}}) {
   }
   const [plan, setPlan] = useState({
     title: title,
-    start_date: getFullDate(start_date),
+    start_date: getFullDate(start_date)
   })
   function handleChange(e) {
     if (e.target.name === 'start_date') {
@@ -61,7 +61,7 @@ export default function ModalUpdateTarget({data: {title, start_date, id}}) {
     <>
       <svg
         onClick={openModal}
-        className="w-6 h-6 fill-current text-gray-500 hover:text-gray-700 cursor-pointer"
+        className="h-6 w-6 cursor-pointer fill-current text-gray-500 hover:text-gray-700"
         viewBox="0 0 8 8"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

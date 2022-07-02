@@ -10,16 +10,21 @@ export default function PersonalDevelopment() {
   const [target, setTarget] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isOpenAccept, setIsOpenAccept] = useState(false);
+  const [isVerified, setIsVerifed] = useState(true)
   const closeModalAccept = () => {
     setIsOpenAccept(false);
     window.location.reload();
   };
+  const closeModalVerified = () => {
+
+  }
   useEffect(() => {
-    document.title = 'Personal Development';
     async function getTarget() {
       const response = await PersonalPlanService.getPersonalPlanData();
       setTarget(response.data.data);
       setLoading(false);
+      const email = JSON.parse(localStorage.getItem('user')).email_verified_at
+      setIsVerifed(email) 
     }
     getTarget();
   }, []);
@@ -103,13 +108,57 @@ export default function PersonalDevelopment() {
           </div>
         </Dialog>
       </Transition>
+      <Transition appear show={!isVerified} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10 overflow-y-auto"
+          onClose={closeModalVerified}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-50" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <div>
+                    <div className="flex items-center justify-center p-8">
+                      <img src="/email_alert.png" alt=""/>
+                    </div>
+                    <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
+                      Your email haven't verified. Please verifiy before access this page. 
+                    </p>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </Layout>
   );
 }
 function Table({ items, loading, handleDelete }) {
   return (
     <div>
-      {items == 'Not found' ? (
+      {items === 'Not found' ? (
         <div className="text-center">There's No Plan</div>
       ) : (
         <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
