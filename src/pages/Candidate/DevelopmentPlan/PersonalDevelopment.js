@@ -145,6 +145,7 @@ export default function PersonalDevelopment() {
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
                       Your email hasn't verified!. Please verify your email address before access this page. 
                     </p>
+                    <a className='mt-1 text-xs font-semibold' href="/dashboard">Back to home</a>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
