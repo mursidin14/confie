@@ -109,11 +109,9 @@ const getProfileCompletion = (my_profile) => {
   const total_data = profile.length
   profile.forEach((item) => {
     if (Array.isArray(my_profile[item]) && my_profile[item].length > 0) {
-      console.log(item)
       profile_completion += 1
     }
     if (Array.isArray(my_profile[item]) === false && (my_profile[item] !== '' && my_profile[item] !== null && my_profile[item] !== undefined)) {
-      console.log(item)
       profile_completion += 1
     }
   })

@@ -9,7 +9,7 @@ export default function NavBar({ is_verified, page, offCanvas }) {
     pageName = 'dashboard'
   }
 
-  let menu = [
+  const menu = [
     {
       alias: 'dashboard',
       name: 'Dashboard',
@@ -35,7 +35,7 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       can_access: true
     }
   ]
-  let menu2 = [
+  const menu2 = [
     {
       alias: 'lowongan kerja',
       name: 'Lowongan Kerja',
@@ -97,22 +97,21 @@ export default function NavBar({ is_verified, page, offCanvas }) {
             </a>
           </li>
         ))}
-        <li className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
-          <BasicDisclosureNav
-            subNav={[
-              {
-                name: 'Peta Karir',
-                link: '/peta-karir'
-              },
-              {
-                name: 'Eksplorasi Profesi',
-                link: '/eksplorasi-profesi'
-              }
-            ]}
-            icon_inactive={'/nav_icon/i_carrer.png'}
-            title={'Panduan Karir'}
-          />
-        </li>
+        <BasicDisclosureNav
+          offCanvas={offCanvas}
+          subNav={[
+            {
+              name: 'Peta Karir',
+              link: '/peta-karir'
+            },
+            {
+              name: 'Eksplorasi Profesi',
+              link: '/eksplorasi-profesi'
+            }
+          ]}
+          icon_inactive={'/nav_icon/i_carrer.png'}
+          title={'Panduan Karir'}
+        />
         {menu2.map((item, index) => (
           <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
             <a
@@ -141,19 +140,20 @@ export default function NavBar({ is_verified, page, offCanvas }) {
           </li>
         ))}
         <BasicDisclosureNav
-            subNav={[
-              {
-                name: 'FAQ',
-                link: '/faq'
-              },
-              {
-                name: 'Billing',
-                link: '/billing'
-              }
-            ]}
-            icon_inactive={'/nav_icon/i_help.png'}
-            title={'Help'}
-          />
+          offCanvas={offCanvas}
+          subNav={[
+            {
+              name: 'FAQ',
+              link: '/faq'
+            },
+            {
+              name: 'Billing',
+              link: '/billing'
+            }
+          ]}
+          icon_inactive={'/nav_icon/i_help.png'}
+          title={'Help'}
+        />
         <li className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
           <button
             onClick={clickLogout}
@@ -174,7 +174,7 @@ export default function NavBar({ is_verified, page, offCanvas }) {
   )
 }
 
-function BasicDisclosureNav({ subNav, title, icon_inactive, icon_active }) {
+function BasicDisclosureNav({ subNav, title, icon_inactive, offCanvas }) {
   return (
     <Disclosure>
       {({ open }) => (
@@ -183,7 +183,7 @@ function BasicDisclosureNav({ subNav, title, icon_inactive, icon_active }) {
             <img className="w-4 sm:w-5" src={icon_inactive} alt="" />
             <p
               className={`text-xs sm:text-[13px] ${
-                false ? 'hidden' : 'block'
+                offCanvas ? 'hidden' : 'block'
               } text-white/40 transition-all group-hover:text-white`}
             >
               {title}
@@ -192,11 +192,8 @@ function BasicDisclosureNav({ subNav, title, icon_inactive, icon_active }) {
           <Disclosure.Panel className="pl-10 pt-1 text-sm text-gray-500">
             <ul className="requirments text-left">
               {subNav.map((item, index) => (
-                <li className="my-2">
-                  <a
-                    href={`/under`}
-                    className="relative left-5 text-[#7E8299]"
-                  >
+                <li className="my-2" key={index}>
+                  <a href={`/under`} className="relative left-5 text-[#7E8299]">
                     {item.name}
                   </a>
                 </li>

@@ -8,7 +8,7 @@ export default function VerifyEmail() {
     const url = queryString.slice(5)
     async function VerifyEmail() {
       try {
-        const response = await axios({
+        await axios({
           method: 'GET',
           url: `${url}`,
           headers: {
@@ -25,21 +25,25 @@ export default function VerifyEmail() {
   }, [])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-pale-orange">
-      <img className="mb-10 w-[240px]" src="/logo.png" alt="" />
+    <main className="min-h-screen bg-pale-orange p-10">
+      <img className="mx-auto mb-10 sm:w-[240px] w-[200px]" src="/logo.png" alt="" />
       {loading ? null : (
         <>
           {' '}
-          <div className="relative bottom-20 z-10 mt-20 rounded-md bg-white px-4 py-8 lg:static">
-            <h3 className="mb-10 text-lg font-semibold lg:text-2xl">
-              {!error
-                ? 'Congratulations! Your email is now verified, you can start using'
-                : 'Email verification failed'}
-            </h3>
-            <a className="primary-btn py-2 px-3 " href="/">
-              Back to login
-            </a>
-          </div>
+          <section className="flex flex-col items-center justify-center w-full">
+            <div className=" w-full shadow-lg max-w-2xl flex flex-col items-center justify-center rounded-md bg-white px-4 py-8 lg:static">
+              {!error ? <>
+                <img src="/email_approve.png" alt=""/>
+                <h4 className='mt-5 sm:mb-1 font-semibold sm:text-3xl text-lg text-orange'>Congratulations!</h4>
+                <p className='text-sm sm:text-base text-gray-400'>Email Verifed!!</p>
+                <a className='secondary-btn text-sm font-semibold mt-4 w-fit px-4 py-3' href="/">Back to login</a>
+              </> : <>
+              <img src="/email_reject.png" alt=""/>
+                <h4 className='mt-5 sm:mb-1 font-semibold sm:text-3xl text-lg text-orange'>Sorry, something goes wrong!</h4>
+                <p className='text-sm sm:text-base text-gray-400'>Your Email Verification Failed!!</p></>}
+                <a className='secondary-btn text-sm font-semibold mt-4 w-fit px-4 py-3' href="/">Back to login</a>
+            </div>
+          </section>
         </>
       )}
     </main>
