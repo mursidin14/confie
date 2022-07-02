@@ -143,7 +143,7 @@ export default function PersonalDevelopment() {
                       <img src="/email_alert.png" alt=""/>
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                      Your email haven't verified. Please verifiy before access this page. 
+                      Your email hasn't verified!. Please verify your email address before access this page. 
                     </p>
                   </div>
                 </Dialog.Panel>
