@@ -10,7 +10,7 @@ export default function PersonalDevelopment() {
   const [target, setTarget] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isOpenAccept, setIsOpenAccept] = useState(false);
-  const [isVerified, setIsVerifed] = useState(true)
+  const [isVerified, setIsVerifed] = useState(false)
   const closeModalAccept = () => {
     setIsOpenAccept(false);
     window.location.reload();
@@ -24,7 +24,12 @@ export default function PersonalDevelopment() {
       setTarget(response.data.data);
       setLoading(false);
       const email = JSON.parse(localStorage.getItem('user')).email_verified_at
-      setIsVerifed(email) 
+      if (typeof email === 'string') {
+        setIsVerifed(false) 
+      }else{
+        console.log(email)
+        setIsVerifed(true)
+      }
     }
     getTarget();
   }, []);
@@ -108,7 +113,7 @@ export default function PersonalDevelopment() {
           </div>
         </Dialog>
       </Transition>
-      <Transition appear show={true} as={Fragment}>
+      <Transition appear show={isVerified} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-10 overflow-y-auto"
