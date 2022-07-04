@@ -76,12 +76,12 @@ body {
 @media screen and (max-width: 1022px) {
   .gradient-login-mobile {
     background: linear-gradient(
-      0deg, rgba(6,26,121,0.8015581232492998) 100%, rgba(56,0,1,1) 100%
+      0deg, rgba(4, 18, 87, 0.802) 100%, rgba(56,0,1,1) 100%
       ),
       url('/public/bg_login.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 120vh;
+    height: 100vh;
   }
 }

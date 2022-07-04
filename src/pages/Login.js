@@ -28,10 +28,10 @@ export default function Login() {
         <title>Login</title>
       </Helmet>
       <AsideLogin />
-      <section className="gradient-login-mobile sm:bg-white relative items-center justify-center p-5 pb-32 sm:flex lg:w-5/12 lg:bg-white lg:pb-5">
+      <section className="gradient-login-mobile sm:bg-white relative items-center justify-center p-5 pb-32 lg:flex lg:w-5/12 lg:bg-white lg:pb-5">
       <div className="mt-3 text-left sm:mt-28 sm:ml-9 text-white mb-5 lg:hidden">
       <img className="w-60 mb-7" src="/logo-login.png" alt="" />
-        <h1 className="block lg:w-[500px] text-lg sm:text-4xl">
+        <h1 className="block lg:w-[500px] text-2xl sm:text-4xl">
           Menemukan Pekerjaan Impian Jadi Lebih Mudah!
         </h1>
         <p className="sm:mt-3 lg:w-10/12 text-sm sm:text-base">
@@ -97,7 +97,7 @@ pilihan pertama yang akan membantu kamu membangun karir impianmu!
           >
             REGISTER
           </a>
-        </div>
+      </div>
       </section>
       <ModalError
         closeModal={closeModal}
