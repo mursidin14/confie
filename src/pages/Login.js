@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import AsideLogin from 'components/Aside/AsideLogin'
-import AuthService from 'services/Auth/AuthService'
-import ModalError from 'components/Modal/ModalError'
-import { Helmet } from 'react-helmet'
+import React, { useEffect, useState } from 'react';
+import AsideLogin from 'components/Aside/AsideLogin';
+import AuthService from 'services/Auth/AuthService';
+import ModalError from 'components/Modal/ModalError';
+import { Helmet } from 'react-helmet';
 export default function Login() {
-  const [error, setError] = useState(false)
-  const [error_msg, setError_msg] = useState('')
-
+  const [error, setError] = useState(false);
+  const [error_msg, setError_msg] = useState('');
+  
   const [data, setData] = useState({
     email: '',
-    password: ''
-  })
+    password: '',
+  });
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
   function closeModal() {
-    setError(false)
+    setError(false);
   }
 
   return (
@@ -28,18 +28,18 @@ export default function Login() {
         <title>Login</title>
       </Helmet>
       <AsideLogin />
-      <section className="gradient-login-mobile relative items-center justify-center p-5 pb-32 sm:flex sm:bg-white lg:w-5/12 lg:bg-white lg:pb-5">
-        <div className="mt-3 mb-5 text-left text-white sm:mt-28 sm:ml-9 lg:hidden">
-          <img className="mb-7 w-60" src="/logo-login.png" alt="" />
-          <h1 className="block text-sm sm:text-4xl lg:w-[500px]">
-            Menemukan Pekerjaan Impian Jadi Lebih Mudah!
-          </h1>
-          <p className="text-sm sm:mt-3 sm:text-base lg:w-10/12">
-            Kembangkan potensi terbaikmu dan bergabung bersama kami di platform
-            pilihan pertama yang akan membantu kamu membangun karir impianmu!
-          </p>
-        </div>
-        <div className="z-10 w-full rounded-md bg-white px-4 py-8 lg:static">
+      <section className="gradient-login-mobile sm:bg-white relative items-center justify-center p-5 pb-32 sm:flex lg:w-5/12 lg:bg-white lg:pb-5">
+      <div className="mt-3 text-left sm:mt-28 sm:ml-9 text-white mb-5 lg:hidden">
+      <img className="w-60 mb-7" src="/logo-login.png" alt="" />
+        <h1 className="block lg:w-[500px] text-lg sm:text-4xl">
+          Menemukan Pekerjaan Impian Jadi Lebih Mudah!
+        </h1>
+        <p className="sm:mt-3 lg:w-10/12 text-sm sm:text-base">
+        Kembangkan potensi terbaikmu dan bergabung bersama kami di platform
+pilihan pertama yang akan membantu kamu membangun karir impianmu!
+        </p>
+      </div>
+      <div className="z-10 w-full rounded-md bg-white px-4 py-8 lg:static">
           <h3 className="mb-4 text-lg font-semibold lg:text-2xl">
             Login to your Account
           </h3>
@@ -77,12 +77,12 @@ export default function Login() {
               type="submit"
               className="primary-btn mt-10 px-5 py-3 text-center"
               onClick={async (e) => {
-                e.preventDefault()
-                const respon = await AuthService.login(data)
+                e.preventDefault();
+                const respon = await AuthService.login(data);
                 if (respon.statusText === 'OK') {
-                  window.location.href = `/dashboard`
-                } else {
-                  setError(true)
+                  window.location.href = `/dashboard`;
+                }else{
+                  setError(true);
                   setError_msg(respon.data.meta.message)
                 }
               }}
@@ -105,5 +105,5 @@ export default function Login() {
         error_msg={error_msg}
       ></ModalError>
     </main>
-  )
+  );
 }
