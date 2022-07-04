@@ -3,44 +3,43 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-
-@layer base{
-  h1{
+@layer base {
+  h1 {
     @apply text-4xl font-semibold;
   }
-  h2{
-    @apply font-semibold text-2xl my-6;
+  h2 {
+    @apply my-6 text-2xl font-semibold;
   }
 }
 @layer components {
-  .input-form{
-    @apply w-full h-[35px] rounded-md bg-soft-gray p-5;
+  .input-form {
+    @apply h-[35px] w-full rounded-md bg-soft-gray p-5;
   }
-  .primary-btn{
-    @apply text-white bg-orange rounded-md w-full hover:bg-orange/80 transition-all;
+  .primary-btn {
+    @apply w-full rounded-md bg-orange text-white transition-all hover:bg-orange/80;
   }
-  .secondary-btn{
-    @apply text-orange border-2 border-orange rounded-md w-full hover:bg-orange/20  transition-all;
+  .secondary-btn {
+    @apply w-full rounded-md border-2 border-orange text-orange transition-all  hover:bg-orange/20;
   }
-  .label{
-    @apply text-left text-sm font-semibold block mb-2 text-black;
+  .label {
+    @apply mb-2 block text-left text-sm font-semibold text-black;
   }
-  .center{
-    @apply flex justify-center items-center;
+  .center {
+    @apply flex items-center justify-center;
   }
-  .modal-section{
-    @apply rounded-md bg-[#FE9A00] h-full w-full px-3 py-2 text-white hover:bg-opacity-70 hover:scale-105 transition-all text-left flex flex-col gap-2;
+  .modal-section {
+    @apply flex h-full w-full flex-col gap-2 rounded-md bg-[#FE9A00] px-3 py-2 text-left text-white transition-all hover:scale-105 hover:bg-opacity-70;
   }
 }
-body{
-  font-family: 'Poppins', sans-serif
+body {
+  font-family: 'Poppins', sans-serif;
 }
 
-.image-upload>input {
+.image-upload > input {
   display: none;
 }
 
-.requirments{
+.requirments {
   list-style-type: '\2212';
 }
 
@@ -51,7 +50,38 @@ body{
   transform: translate(-50%, -50%);
 }
 
-.bg-banner{
-  background: rgb(27,27,29);
-  background: linear-gradient(0deg, rgba(27,27,29,1) 0%, rgba(0,0,0,0) 100%); 
+.bg-banner {
+  background: rgb(27, 27, 29);
+  background: linear-gradient(
+    0deg,
+    rgba(27, 27, 29, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.gradient-login {
+  background: linear-gradient(
+    0deg, rgba(6,26,121,0.8015581232492998) 100%, rgba(56,0,1,1) 100%
+    ),
+    url('/public/bg_login.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 110vh;
+}
+.gradient-login-mobile {
+  background-color: #FFF5E5;
+}
+
+@media screen and (max-width: 1022px) {
+  .gradient-login-mobile {
+    background: linear-gradient(
+      0deg, rgba(6,26,121,0.8015581232492998) 100%, rgba(56,0,1,1) 100%
+      ),
+      url('/public/bg_login.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 120vh;
+  }
 }
