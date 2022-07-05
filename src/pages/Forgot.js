@@ -24,7 +24,7 @@ export default function Forgot() {
     <main className="min-h-screen lg:flex">
       <AsideLogin />
       <section className="relative items-center justify-center bg-pale-orange p-5 pb-32 sm:flex lg:w-5/12 lg:bg-white lg:pb-5">
-        <div className="relative bottom-10 z-10 w-full rounded-md bg-white px-4 py-8 lg:static">
+        <div className="relative bottom-10 z-10 w-full rounded-md bg-white px-4 py-8 lg:static lg:mt-0 mt-32">
           <h3 className="mb-1 text-lg font-semibold lg:text-2xl">
             Forgot Password ?
           </h3>

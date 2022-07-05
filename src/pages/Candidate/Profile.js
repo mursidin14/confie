@@ -14,6 +14,7 @@ import OrganizationCard from 'components/Profile/OrganizationCard';
 import AddSection from 'components/Modal/AddSection';
 import { isEmpty } from 'utils/utils';
 import PaperCard from 'components/Profile/PaperCard';
+import CurriculumVitaeModel from 'components/Profile/CurriculumVitaeModel';
 
 export default function Profile() {
   const [data, setData] = useState({});
@@ -33,6 +34,11 @@ export default function Profile() {
 
   return (
     <Layout PageName={'Profile'}>
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <CurriculumVitaeModel data_profile={data.profile} />
+      )}
       {loading ? (
         <SkeletonCard />
       ) : (
