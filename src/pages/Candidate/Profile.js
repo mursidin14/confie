@@ -54,7 +54,7 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.experiences.length > 0 ? (
+          {data.profile.experiences?.length > 0 ? (
             <WorkExperienceCard data_profile={data.profile.experiences} />
           ) : null}
         </>
@@ -63,7 +63,7 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.internships.length > 0 ? (
+          {data.profile.internships?.length > 0 ? (
             <InternExperienceCard data_profile={data.profile.internships} />
           ) : null}
         </>
@@ -72,7 +72,7 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.educations.length > 0 ? (
+          {data.profile.educations?.length > 0 ? (
             <EducationCard data_profile={data.profile.educations} />
           ) : null}
         </>
@@ -81,7 +81,7 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.volunteers.length > 0 ? (
+          {data.profile.volunteers?.length > 0 ? (
             <OrganizationCard data_profile={data.profile.volunteers} />
           ) : null}
         </>
@@ -90,7 +90,7 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.certificates.length > 0 ? (
+          {data.profile.certificates?.length > 0 ? (
             <CertificationCard data_profile={data.profile.certificates} />
           ) : null}
         </>
@@ -99,7 +99,7 @@ export default function Profile() {
         <SkeletonCard />
       ) : (
         <>
-          {data.profile.papers.length > 0 ? (
+          {data.profile.papers?.length > 0 ? (
             <PaperCard data_profile={data.profile.papers} />
           ) : null}
         </>

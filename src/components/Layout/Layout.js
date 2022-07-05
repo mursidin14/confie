@@ -4,8 +4,6 @@ import ASideBar from 'components/Aside/AsideBar'
 import ASideBarMobile from 'components/Aside/ASideBarMobile'
 import ProfileService from 'services/Profile/ProfileService'
 import ErrorModal from 'components/Widgets/ErrorModal'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import { getCurrentUser } from 'services/Auth/AuthService'
 import { Helmet } from 'react-helmet'
 
@@ -17,8 +15,13 @@ export default function Layout({ PageName, children, slider }) {
   useEffect(() => {
     async function fetchData() {
       const profile = getCurrentUser()
-      setData(profile)
-      setLoading(false)
+      const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.status === 'error') {
+        setIsOpen(true);
+      } else {
+        setData(profile)
+        setLoading(false);
+      }
     }
     fetchData()
   }, [])
@@ -31,7 +34,7 @@ export default function Layout({ PageName, children, slider }) {
   }
   return (
     <>
-      {!loading && !isOpen ? (
+      {!loading ? (
         <main className="flex">
           <Helmet>
             <title>{PageName}</title>
@@ -55,7 +58,6 @@ export default function Layout({ PageName, children, slider }) {
           >
             <Header data={data} handleNav={handleNav} PageName={PageName} />
             <div className={`${slider ? '' : 'my-4 mx-3 py-5 lg:mx-7'}`}>{children}</div>
-            
           </section>
         </main>
       ) : null}
