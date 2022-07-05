@@ -1,83 +1,78 @@
-import React from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import ProfileService from 'services/Profile/ProfileService'
-import utils from 'utils/utils'
-export default function ModalPublication({ section }) {
-  let [isOpen, setIsOpen] = useState(false)
-  const [error, setError] = useState([])
-  const [dataPublication, setDataPublication] = useState({})
+import React from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import ProfileService from 'services/Profile/ProfileService';
+export default function UpdatePublicationModal({ item, id }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [dataPublication, setDataPublication] = useState({
+    _method: 'PUT',
+    title: item.title,
+  });
+  const [error, setError] = useState([]);
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
   function handleChange(e) {
-    let { name, value } = e.target
-    setDataPublication({ ...dataPublication, [name]: value })
-  }
-  async function handleSubmit() {
-      const response = await ProfileService.addPublication(dataPublication)
-      if (response.data.meta.status == 'error') {
-        let errors = []
-        let error = response.data.data
-        for (let key in error) {
-          errors.push(error[key][0])
-        }
-        setError(errors)
-        return
-      }
-      window.location.reload()    
+      setDataPublication({ ...dataPublication, [e.target.name]: e.target.value });
   }
 
-  const inputs = [
-    {
-      name: 'title',
-      type: 'text',
-      label: 'Judul',
-      required: true
+  async function handleSubmit() {
+    const data = {
+      ...dataPublication,
+    };
+    const response = await ProfileService.updatePublication(id, data);
+    if (response.data.meta.status === 'error') {
+      let errors = [];
+      let error = response.data.data;
+      for (let key in error) {
+        errors.push(error[key][0]);
+      }
+      setError(errors);
+      return;
     }
-  ]
+    window.location.reload();
+  }
+
+  let inputs = [
+    {
+      label: 'Judul Karya Ilmiah',
+      type: 'text',
+      name: 'title',
+      required: true,
+    },
+   
+  ];
+ 
   return (
     <>
       <div className="flex items-center justify-center">
-        {section ? (
-          <>
-            <button type="button" onClick={openModal} className="modal-section">
-              <div className="flex items-center gap-2">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 8 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.33333 0.666656H2C1.598 0.666656 1 0.93299 1 1.66666V6.33332C1 7.06699 1.598 7.33332 2 7.33332H7V6.66666H2.004C1.85 6.66266 1.66667 6.60199 1.66667 6.33332C1.66667 6.29966 1.66967 6.26966 1.67467 6.24232C1.712 6.05032 1.86933 6.00332 2.004 5.99999H7V1.33332C7 1.15651 6.92976 0.986943 6.80474 0.861919C6.67971 0.736894 6.51014 0.666656 6.33333 0.666656ZM6.33333 3.66666L5.66667 3.33332L5 3.66666V1.33332H6.33333V3.66666Z"
-                    fill="white"
-                  />
-                </svg>
-
-                <p>Publication</p>
-              </div>
-              <p className="mt-2 text-xs font-thin">
-                Academic publications or book releases have a dedicated place
-                here.
-              </p>
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              type="button"
-              onClick={openModal}
-              className="rounded-md bg-[#FE9A00] px-5 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-            >
-              Tambah
-            </button>
-          </>
-        )}
+        <button onClick={openModal}>
+          <svg
+            className="w-11"
+            width="34"
+            height="34"
+            viewBox="0 0 34 34"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
+              fill="#FFF8DD"
+            />
+            <path
+              opacity="0.3"
+              d="M25.05 14.2649L23.4307 15.8833L19.1137 11.5663L20.7322 9.94705C21.0186 9.66076 21.4069 9.5 21.8119 9.5C22.2168 9.5 22.6051 9.66076 22.8915 9.94705L25.05 12.1056C25.3363 12.3919 25.4971 12.7803 25.4971 13.1852C25.4971 13.5901 25.3363 13.9785 25.05 14.2649ZM11.7652 24.4491L16.4152 22.8988L12.0982 18.5818L10.548 23.2318C10.4911 23.4016 10.4828 23.5841 10.5239 23.7584C10.565 23.9328 10.654 24.0922 10.7808 24.2187C10.9077 24.3451 11.0673 24.4337 11.2417 24.4744C11.4162 24.5152 11.5985 24.5064 11.7682 24.4491H11.7652Z"
+              fill="#FE9A00"
+            />
+            <path
+              d="M13.1805 23.975L11.769 24.446C11.5995 24.5024 11.4175 24.5106 11.2436 24.4695C11.0697 24.4284 10.9106 24.3398 10.7842 24.2134C10.6578 24.0871 10.5691 23.9281 10.5279 23.7542C10.4867 23.5803 10.4947 23.3984 10.551 23.2288L11.022 21.8165L13.1805 23.975ZM12.1013 18.5787L16.4183 22.8957L23.4338 15.8802L19.1168 11.5632L12.1013 18.5787Z"
+              fill="#FE9A00"
+            />
+          </svg>
+        </button>
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -108,18 +103,17 @@ export default function ModalPublication({ section }) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                      Tambah Karya Tulis Ilmiah
+                      Edit Karya Tulis Ilmiah
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
                   <div className="my-5">
-                    <div className="px-2 lg:px-8">
+                    <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
                           data={dataPublication}
-                          key={index}
-                          {...input}
                           handleChange={handleChange}
+                          {...input}
                         />
                       ))}
                       <div className="my-4 lg:flex">
@@ -159,7 +153,7 @@ export default function ModalPublication({ section }) {
                       onClick={handleSubmit}
                       className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
                     >
-                      Submit
+                      Edit
                     </button>
                   </div>
                 </Dialog.Panel>
@@ -169,25 +163,24 @@ export default function ModalPublication({ section }) {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }
-
-function InputFormProfile({ data, label, handleChange, ...inputProps }) {
+function InputFormProfile({data, label, handleChange, ...inputProps }) {
   return (
-    <div className={`items-center lg:flex`}>
+    <div className='lg:flex items-center'>
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" htmlFor="">
+        <label className="text-xs lg:text-base" for="">
           {label}
         </label>
       </div>
       <div className="lg:w-7/12">
         <input
-          {...inputProps}
-          className="input-form my-2 lg:my-5 lg:py-3"
-          onChange={handleChange}
           value={data[inputProps.name]}
+          onChange={handleChange}
+          {...inputProps}
+          className="input-form my-2 lg:my-5 lg:py-3 "
         />
       </div>
     </div>
-  )
+  );
 }

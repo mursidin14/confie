@@ -13,6 +13,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import OrganizationCard from 'components/Profile/OrganizationCard';
 import AddSection from 'components/Modal/AddSection';
 import { isEmpty } from 'utils/utils';
+import PaperCard from 'components/Profile/PaperCard';
 
 export default function Profile() {
   const [data, setData] = useState({});
@@ -85,6 +86,15 @@ export default function Profile() {
         <>
           {data.profile.certificates.length > 0 ? (
             <CertificationCard data_profile={data.profile.certificates} />
+          ) : null}
+        </>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <>
+          {data.profile.papers.length > 0 ? (
+            <PaperCard data_profile={data.profile.papers} />
           ) : null}
         </>
       )}

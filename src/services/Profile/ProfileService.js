@@ -200,6 +200,7 @@ const addOrganization = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
+
 const addCertificate = (data) =>
   httpAuthClient
     .post('/api/profile/certificates', data, {
@@ -225,6 +226,35 @@ const deleteCertificate = (id) =>
     .delete(`/api/profile/certificates/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
+    
+const addPublication = (data) => {
+  return httpAuthClient
+    .post('/api/profile/papers', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
+const updatePublication = (id, data) => {
+  return httpAuthClient
+    .post(`/api/profile/papers/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
+const deletePublication = (id) => {
+  return httpAuthClient
+    .delete(`/api/profile/papers/${id}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
 
 const LogoutProfile = () =>
   httpAuthClient
@@ -258,6 +288,9 @@ const ProfileService = {
   addCertificate,
   updateCertificate,
   deleteCertificate,
+  addPublication,
+  updatePublication,
+  deletePublication,
   LogoutProfile,
 };
 
