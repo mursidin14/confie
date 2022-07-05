@@ -76,7 +76,7 @@ export default function PersonalDevelopmentDetail() {
             <div>
               <h3 className="text-2xl font-semibold text-[#181C32] flex items-center gap-2">
                 {target.title || <Skeleton width={100} />}
-                <ModalUpdateTarget data={target}/>
+                {loading ? <Skeleton width={10} />: <ModalUpdateTarget data={target}/>}
               </h3>
               <div className="flex items-center gap-3 py-3">
                 <svg
