@@ -8,7 +8,7 @@ export default function ModalUpdateTarget({data}) {
   const [error, setError] = useState([])
   const [plan, setPlan] = useState({
     title: data.title,
-    start_date: data.start_date,
+    start_date: data.start_date
   })
   function closeModal() {
     setIsOpen(false)

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 export default function Slider() {
   const [indexTips, setIndexTips] = useState(0)
-  const tips = ['jan lupa mandihh biar ga bau', `jan lupa eek'`, 'jan lupa mam']
+  const tips = ['tips 1', 'tips 2', ]
 
   React.useEffect(() => {
     const timer = setInterval(() => {
