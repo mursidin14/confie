@@ -141,6 +141,7 @@ export default function UpdateCertificationModal({ item, id }) {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataCertificate}
                           handleChange={handleChange}
                           {...input}

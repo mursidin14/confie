@@ -2,7 +2,9 @@ import React from 'react'
 import Status from './Status'
 import Pdf from 'react-to-pdf'
 import CurriculumVitae from 'components/CurriculumVitae'
-import utils from 'utils/utils'
+import CompleteResume from 'components/CompleteResume'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import utils, { getModelCV } from 'utils/utils'
 
 export default function PersonalCard({ data_profile }) {
   return (
@@ -67,26 +69,59 @@ function ButtonDashboard({ data }) {
       </div>
       <div className="my-3 flex w-full">
         <div className="flex w-full items-center justify-between gap-3 sm:justify-start">
-          <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
-            {({ toPdf }) => (
-              <button
-                onClick={toPdf}
-                className="secondary-btn center border-[1px] px-2 py-3 sm:text-xs text-[8px] md:w-fit "
-                href=""
+          {getModelCV() === 'simple' ? (
+            <>
+              <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
+                {({ toPdf }) => (
+                  <button
+                    onClick={toPdf}
+                    className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
+                    href=""
+                  >
+                    Download CV
+                  </button>
+                )}
+              </Pdf>
+            </>
+          ) : (
+            <>
+              <PDFDownloadLink
+                document={<CompleteResume data={data}/>}
+                fileName={`${data.full_name}_CV.pdf`}
               >
-                Download CV
-              </button>
-            )}
-          </Pdf>
+                {({ blob, url, loading, error }) =>
+                  loading ? (
+                    <>
+                      <button
+                        className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
+                        href=""
+                      >
+                        Loading...
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
+                        href=""
+                      >
+                        Download CV
+                      </button>
+                    </>
+                  )
+                }
+              </PDFDownloadLink>
+            </>
+          )}
 
           <a
-            className="secondary-btn center border-[1px] px-2 py-3 sm:text-xs text-[8px] md:w-fit"
+            className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit"
             href={`/${data.slug}`}
           >
             <p>View Profile</p>
           </a>
           <a
-            className="primary-btn center border-[1px] px-2 py-3 sm:text-xs text-[8px] md:w-fit "
+            className="primary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
             href={`/profile/`}
           >
             <p>Edit Profile</p>

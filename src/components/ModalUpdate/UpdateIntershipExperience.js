@@ -143,6 +143,7 @@ export default function UpdateIntershipExperience({ item, id }) {
                     <div className="px-2 lg:px-8">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataInternship}
                           {...input}
                           handleChange={handleChange}
@@ -150,6 +151,7 @@ export default function UpdateIntershipExperience({ item, id }) {
                       ))}
                       {inputs2.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataInternship}
                           {...input}
                           handleChange={handleChange}

@@ -155,6 +155,18 @@ export const getLength = (word) => {
 export const isEmpty = (fields) => {
   return fields.some((field) => field?.length == 0)
 }
+export const getModelCV = () => {
+  if (!localStorage.getItem('modelCV')) {
+    localStorage.setItem(
+      'modelCV',
+      JSON.stringify({
+        model: 'simple'
+      })
+    )
+    return 'simple'
+  }
+  return JSON.parse(localStorage.getItem('modelCV')).model
+}
 const utils = {
   authHeader,
   makeCapital,
