@@ -24,6 +24,9 @@ export default function Profile() {
     document.title = 'Profile';
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.status === 'error') {
+        return 
+      }
       setData({
         profile: response_profile.data.data,
       });

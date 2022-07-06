@@ -17,8 +17,13 @@ export default function Layout({ PageName, children, slider }) {
   useEffect(() => {
     async function fetchData() {
       const profile = getCurrentUser()
-      setData(profile)
-      setLoading(false)
+      const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.status === 'error') {
+        setIsOpen(true);
+      } else {
+        setData(profile)
+        setLoading(false);
+      }
     }
     fetchData()
   }, [])
