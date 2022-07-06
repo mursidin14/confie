@@ -8,7 +8,7 @@ export default function ModalUpdateTarget({data}) {
   const [error, setError] = useState([])
   const [plan, setPlan] = useState({
     title: data.title,
-    start_date: getFullDate(data.start_date)
+    start_date: data.start_date,
   })
   function closeModal() {
     setIsOpen(false)
@@ -151,7 +151,7 @@ function InputFormProfile({ handleChange, label, data, ...inputProps }) {
       </div>
       <div className="lg:w-7/12">
         <input
-          value={data[inputProps.name]}
+          value={inputProps.name === 'title' ? data[inputProps.name] : getFullDate(data[inputProps.name])}
           onChange={handleChange}
           {...inputProps}
           className="input-form my-2 lg:my-5 lg:py-3 "
