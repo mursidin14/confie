@@ -98,8 +98,8 @@ const addJobExperience = (data) =>
   httpAuthClient
     .post('/api/profile/experiences', data, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     })
     .then((response) => response)

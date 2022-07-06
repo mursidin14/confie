@@ -172,7 +172,7 @@ function SkillInfomation({ data }) {
       <p className="mb-6 text-left text-xl font-semibold">Skills</p>
       <div className="text-left text-sm">
         {data.map((skill, index) => (
-          <p>{skill.name}</p>
+          <p key={index}>{skill.name}</p>
         ))}
       </div>
     </section>
