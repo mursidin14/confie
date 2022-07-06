@@ -11,7 +11,7 @@ export function authHeader() {
 export function makeCapital(name) {
   name = name.toLowerCase()
   const nameArray = name.split(' ')
-  if (nameArray?.length > 1) {
+  if (nameArray.length > 1) {
     let capitalName = ''
     nameArray.forEach((name) => {
       capitalName += name.slice(0, 1).toUpperCase() + name.slice(1) + ' '
@@ -106,9 +106,9 @@ const getProfileCompletion = (my_profile) => {
     'volunteers',
     'url_photo_profile'
   ]
-  const total_data = profile?.length
+  const total_data = profile.length
   profile.forEach((item) => {
-    if (Array.isArray(my_profile[item]) && my_profile[item]?.length > 0) {
+    if (Array.isArray(my_profile[item]) && my_profile[item].length > 0) {
       profile_completion += 1
     }
     if (
@@ -150,10 +150,10 @@ export const getLength = (word) => {
   if (word == undefined) {
     return true
   }
-  return word?.length > 24 ? true : false
+  return word.length > 24 ? true : false
 }
 export const isEmpty = (fields) => {
-  return fields.some((field) => field?.length == 0)
+  return fields.some((field) => field.length == 0)
 }
 export const getModelCV = () => {
   if (!localStorage.getItem('modelCV')) {
