@@ -98,8 +98,8 @@ const addJobExperience = (data) =>
   httpAuthClient
     .post('/api/profile/experiences', data, {
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -109,7 +109,8 @@ const updateJobExperience = (id, data) =>
   httpAuthClient
     .put(`/api/profile/experiences/${id}`, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -125,7 +126,8 @@ const addIntershipExperience = (data) =>
   httpAuthClient
     .post('/api/profile/internships', data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -135,7 +137,8 @@ const updateIntershipExperience = (id, data) =>
   httpAuthClient
     .put(`/api/profile/internships/${id}`, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -151,7 +154,8 @@ const addEducation = (data) =>
   httpAuthClient
     .post('/api/profile/educations', data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -161,7 +165,8 @@ const updateEducation = (id, data) =>
   httpAuthClient
     .put(`/api/profile/educations/${id}`, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -188,7 +193,8 @@ const addOrganization = (data) =>
   httpAuthClient
     .put(`/api/profile/volunteers/${id}`, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -205,7 +211,8 @@ const addCertificate = (data) =>
   httpAuthClient
     .post('/api/profile/certificates', data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -215,7 +222,8 @@ const updateCertificate = (id, data) =>
   httpAuthClient
     .put(`/api/profile/certificates/${id}`, data, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'multipart/form-data',
       },
     })
     .then((response) => response)
