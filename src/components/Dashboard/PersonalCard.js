@@ -2,7 +2,7 @@ import React from 'react'
 import Status from './Status'
 import Pdf from 'react-to-pdf'
 import CurriculumVitae from 'components/CurriculumVitae'
-import utils from 'utils/utils'
+import utils, { getModelCV } from 'utils/utils'
 
 export default function PersonalCard({ data_profile }) {
   return (

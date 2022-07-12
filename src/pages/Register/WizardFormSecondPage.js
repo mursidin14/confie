@@ -9,9 +9,7 @@ export default function WizardFormSecondPage(props) {
         data.role === 'personal' ? 'Full Name' : 'Company Name'
       }`,
       type: 'text',
-      name: `${
-        data.role === 'personal' ? 'full_name' : 'company_name'
-      }`,
+      name: `full_name`,
       errorMessage:
         "Name should be 3-16 characters and shouldn't include any special character!",
       required: true,

@@ -34,6 +34,13 @@ const register = (data) =>
         return err.response;
       })
   );
+  
+  const forgetPassword = (data) => {
+    return httpClient
+      .post('/api/forgot-password', data)
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
 
   const getListSkill = () => {
     return httpClient
@@ -41,6 +48,16 @@ const register = (data) =>
       .then((response) => response)
       .catch((error) => error.response);
   }
+  
+  const getListField = () => {
+    return httpClient
+      .get('/api/listbusinessfield')
+      .then((response) => response)
+      .catch((error) => error.response);
+  }
+  
+  
+    
 
   const logout = () =>
   httpAuthClient.post('/api/logout').then((response) => {
@@ -63,7 +80,9 @@ const register = (data) =>
 const AuthService = {
   login,
   register,
+  forgetPassword,
   getListSkill,
+  getListField,
   logout,
   getCurrentUser,
   getMetadata,

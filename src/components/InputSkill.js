@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import AuthService from 'services/Auth/AuthService';
 
-function InputTag({ addTags, people }) {
+function InputTag({ addTags, people, role }) {
   const [nameSkill, setNameSkill] = useState('');
   const [selected, setSelected] = useState('');
   const [query, setQuery] = useState('');
@@ -13,7 +13,7 @@ function InputTag({ addTags, people }) {
           person.name
             .toLowerCase()
             .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, ''))
+            .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
   function handleChange(event) {
     setQuery(event.target.value);
@@ -35,7 +35,7 @@ function InputTag({ addTags, people }) {
               addTags(selected.name, selected.id, nameSkill);
             }
           }}
-          placeholder="Add Skill"
+          placeholder={role === 'personal' ? 'Add Skill' : 'Add Field'}
         />
 
         <Transition
@@ -88,8 +88,13 @@ export default function InputSkill({ data, onChange }) {
   const [people, setPeople] = useState([]);
   useEffect(() => {
     const getSkill = async () => {
-      const response = await AuthService.getListSkill();
-      setPeople(response.data.data);
+      if (data.role === 'personal') {
+        const response = await AuthService.getListSkill();
+        setPeople(response.data.data);
+      } else {
+        const response = await AuthService.getListField();
+        setPeople(response.data);
+      }
     };
     getSkill();
   }, []);
@@ -106,26 +111,49 @@ export default function InputSkill({ data, onChange }) {
       if (tags.includes(value)) {
         if (value2) {
           setTags([...tags, value2]);
-          onChange({
-            ...data,
-            skills: [...data.skills, value2],
-          });
+          if(data.role === 'personal'){
+            onChange({
+              ...data,
+              skills: [...data.skills, value2],
+            });  
+          }else{
+            onChange({
+              ...data,
+              fields: [...data.fields, value2],
+            });
+          }
+          
         }
         return;
       }
       setTags([...tags, value]);
-      onChange({
-        ...data,
-        skills: [...data.skills, id],
-      });
+      if(data.role === 'personal'){
+        onChange({
+          ...data,
+          skills: [...data.skills, id],
+        });
+      }else{
+        onChange({
+          ...data,
+          fields: [...data.fields, id],
+        });
+      }
+      
       return;
     }
     if (value2) {
       setTags([...tags, value2]);
-      onChange({
-        ...data,
-        skills: [...data.skills, value2],
-      });
+      if (data.role === 'personal') {
+        onChange({
+          ...data,
+          skills: [...data.skills, value2],
+        });  
+      }else{
+        onChange({
+          ...data,
+          fields: [...data.fields, value2],
+        });
+      }
     }
   };
 
@@ -144,7 +172,7 @@ export default function InputSkill({ data, onChange }) {
           </li>
         ))}
       </ul>
-      <InputTag people={people} addTags={addTags}></InputTag>
+      <InputTag people={people} addTags={addTags} role={data.role}></InputTag>
     </div>
   );
 }
@@ -179,18 +207,21 @@ export function UpdateInputSkill({ data, onChange, skills }) {
   const addTags = (value, id, value2) => {
     console.log(value, value2);
     if (value !== '' && value !== undefined) {
-      if(tags.map(tag => tag.name).includes(value)){
-        if(tags.map(tag => tag.name).includes(value2)){
-          return
+      if (tags.map((tag) => tag.name).includes(value)) {
+        if (tags.map((tag) => tag.name).includes(value2)) {
+          return;
         }
-        setTags([...tags, {
-          name: value2
-        }]);
+        setTags([
+          ...tags,
+          {
+            name: value2,
+          },
+        ]);
         onChange({
           ...data,
           skills: [...data.skills, value2],
         });
-        return
+        return;
       }
       setTags([
         ...tags,

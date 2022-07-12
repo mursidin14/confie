@@ -46,9 +46,9 @@ export default function Forgot() {
               className="primary-btn mt-10 px-5 py-3 text-center"
               onClick={async (e) => {
                 e.preventDefault();
-                const respon = await AuthService.login(data);
+                const respon = await AuthService.forgetPassword(data);
                 if (respon.statusText === 'OK') {
-                  window.location.href = `/dashboard`;
+                  alert('Please check your email to reset your password');
                 }else{
                   setError(true);
                   setError_msg(respon.data.meta.message)
