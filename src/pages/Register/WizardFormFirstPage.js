@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import LayoutRegister from './LayoutRegister';
 export default function WizardFormFirstPage(props) {
     const [typeAccount, setTypeAccount] = useState('personal')
-    let {data, onChange} = props
-    let active_element = 'bg-[#F1FAFF] border-2 border-[#009EF7] flex justify-center items-center gap-5 px-5 py-6 rounded-md'
-    let inactive_element = 'bg-white border-2 border-[#E4E6EF] flex justify-center items-center gap-5 px-5 py-6 rounded-md'
+    const {data, onChange} = props
+    const active_element = 'bg-[#F1FAFF] border-2 border-[#009EF7] flex justify-center items-center gap-5 px-5 py-6 rounded-md'
+    const inactive_element = 'bg-white border-2 border-[#E4E6EF] flex justify-center items-center gap-5 px-5 py-6 rounded-md'
     function handleChange(e) {
         onChange({
             ...data,

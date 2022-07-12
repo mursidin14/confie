@@ -17,7 +17,7 @@ export default function Dashboard() {
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
       const dashboard_profile = await DashboardService.getDashboardData();
-
+      localStorage.setItem('userComplete', JSON.stringify(response_profile.data.data));
       setData({
         dashboard_profile: dashboard_profile.data.data,
         profile: response_profile.data.data,

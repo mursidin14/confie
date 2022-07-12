@@ -1,8 +1,8 @@
-import React from 'react'
-import Status from './Status'
-import Pdf from 'react-to-pdf'
-import CurriculumVitae from 'components/CurriculumVitae'
-import utils, { getModelCV } from 'utils/utils'
+import React from 'react';
+import Status from './Status';
+import Pdf from 'react-to-pdf';
+import CurriculumVitae from 'components/CurriculumVitae';
+import utils, { getModelCV } from 'utils/utils';
 
 export default function PersonalCard({ data_profile }) {
   return (
@@ -39,7 +39,7 @@ export default function PersonalCard({ data_profile }) {
           <JobStatus
             data={
               data_profile.experiences.filter(
-                (exp) => exp.is_current == true
+                (exp) => exp.is_current === true,
               )[0]
             }
           />
@@ -55,11 +55,11 @@ export default function PersonalCard({ data_profile }) {
         <ButtonDashboard data={data_profile} />
       </div>
     </div>
-  )
+  );
 }
 
 function ButtonDashboard({ data }) {
-  const cv = React.createRef()
+  const cv = React.createRef();
   return (
     <>
       <div className="absolute -top-[3000px]" ref={cv}>
@@ -67,26 +67,40 @@ function ButtonDashboard({ data }) {
       </div>
       <div className="my-3 flex w-full">
         <div className="flex w-full items-center justify-between gap-3 sm:justify-start">
-          <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
-            {({ toPdf }) => (
+          {getModelCV() === 'simple' ? (
+            <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
+              {({ toPdf }) => (
+                <button
+                  onClick={toPdf}
+                  className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
+                  href=""
+                >
+                  Download CV
+                </button>
+              )}
+            </Pdf>
+          ) : (
+            <>
               <button
-                onClick={toPdf}
-                className="secondary-btn center border-[1px] px-2 py-3 sm:text-xs text-[8px] md:w-fit "
+                onClick={()=>{
+                  window.location.href = `/cv/preview`
+                }}
+                className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
                 href=""
               >
                 Download CV
               </button>
-            )}
-          </Pdf>
+            </>
+          )}
 
           <a
-            className="secondary-btn center border-[1px] px-2 py-3 sm:text-xs text-[8px] md:w-fit"
+            className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit"
             href={`/${data.slug}`}
           >
             <p>View Profile</p>
           </a>
           <a
-            className="primary-btn center border-[1px] px-2 py-3 sm:text-xs text-[8px] md:w-fit "
+            className="primary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
             href={`/profile/`}
           >
             <p>Edit Profile</p>
@@ -94,7 +108,7 @@ function ButtonDashboard({ data }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 function EmploymentStatus({ work }) {
@@ -108,7 +122,7 @@ function EmploymentStatus({ work }) {
     >
       {work ? 'Bekerja' : 'Belum Bekerja'}
     </p>
-  )
+  );
 }
 
 function JobStatus({ data }) {
@@ -160,7 +174,7 @@ function JobStatus({ data }) {
         </p>
       </div>
     </div>
-  )
+  );
 }
 
 function Badge({ completion }) {
@@ -201,5 +215,5 @@ function Badge({ completion }) {
         </svg>
       )}
     </>
-  )
+  );
 }

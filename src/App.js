@@ -4,6 +4,7 @@ import Register from 'pages/Register/RegisterForm';
 import Forgot from 'pages/Forgot';
 
 import Dashboard from 'pages/Candidate/Dashboard';
+import ResumeComplete from 'pages/Candidate/ResumeComplete';
 import Profile from 'pages/Candidate/Profile';
 import ProfileCandidate from 'pages/Candidate/ProfileCandidate';
 import AccountSetting from 'pages/Candidate/AccountSetting';
@@ -42,6 +43,7 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/cv/preview" element={<ResumeComplete />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/:id" element={<ProfileCandidate />} />
         <Route path="/setting" element={<AccountSetting />} />
