@@ -119,10 +119,10 @@ export default function Forgot() {
                       {!error && (
                         <>
                           <p className="text-lg font-semibold">
-                            Your Password has been reset!
+                            We have sent you an email with a link to reset your password!
                           </p>
                           <p className="text-sm text-gray-400">
-                            You can now login with your new password.
+                            check your spam email if you don't see it in your inbox. 
                           </p>
                           <img
                             className="mx-auto mt-2"

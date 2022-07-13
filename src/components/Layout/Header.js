@@ -3,7 +3,6 @@ import AuthService from 'services/Auth/AuthService';
 import { makeCapital } from 'utils/utils';
 
 export default function Header({data, handleNav, PageName }) {
-  console.log(data)
   const [open, setOpen] = useState(false);
   function clickProfile() {
     setOpen(!open);
