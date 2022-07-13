@@ -1,3 +1,5 @@
+import ProfileService from 'services/Profile/ProfileService';
+
 const { createContext, useContext, useState, useEffect } = require('react');
 
 const UserBusinessProfileContext = createContext({
@@ -10,10 +12,19 @@ export const useBusinessProfileContext = () => {
 
 export default function BusinessProfileProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {}, []);
+  const [businessProfile, setBusinessProfile] = useState({});
+  useEffect(() => {
+    const getProfileData = async () => {
+      setIsLoading(true);
+      const response = await ProfileService.getProfileData();
+      setBusinessProfile(response.data.data);
+      setIsLoading(false);
+    }
+    getProfileData();
+  }, []);
   const businessProfileContextValue = {
     isLoading,
-    businessProfile: {},
+    businessProfile
   };
   return (
     <UserBusinessProfileContext.Provider value={businessProfileContextValue}>

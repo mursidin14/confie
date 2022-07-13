@@ -3,7 +3,7 @@ import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import { useParams } from 'react-router-dom';
 import { BusinessProvider, useBusinessContext } from 'context/business-context';
-import utils, { getFullYear } from 'utils/utils';
+import utils, { getFullYear, getYear } from 'utils/utils';
 
 export default function Index() {
   const { id } = useParams();
@@ -344,7 +344,7 @@ function CompanyInformation({}) {
         </svg>
 
         <p className="text-xs text-[#B5B5C3] sm:text-sm">
-          Berdiri Sejak Tahun {getFullYear(business.date_of_birth)}
+          Berdiri Sejak Tahun {getYear(business.date_of_birth)}
         </p>
       </div>
     </div>

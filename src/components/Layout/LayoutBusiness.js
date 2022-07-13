@@ -7,7 +7,6 @@ export default function LayoutBusiness({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
   const context = useBusinessContext()
   const {business} = context
-  console.log(context)
   const data = business
   function handleNav() {
     setOffCanvas(!offCanvas);

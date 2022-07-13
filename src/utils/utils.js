@@ -167,7 +167,7 @@ export const getModelCV = () => {
   }
   return JSON.parse(localStorage.getItem('modelCV')).model
 }
-export const getFullYear = (epoch) => {
+export const getYear = (epoch) => {
   if (epoch === null) {
     return null
   }
