@@ -80,7 +80,11 @@ pilihan pertama yang akan membantu kamu membangun karir impianmu!
                 e.preventDefault();
                 const respon = await AuthService.login(data);
                 if (respon.statusText === 'OK') {
-                  window.location.href = `/dashboard`;
+                  if(respon.data.data.roles[0].name === 'business'){
+                    window.location.href = '/business';
+                  }else{
+                    window.location.href = `/dashboard`;
+                  }
                 }else{
                   setError(true);
                   setError_msg(respon.data.meta.message)

@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import Header from 'components/Layout/Header';
 import ASideBarBusiness from 'components/Aside/AsideBarBusiness';
 import ASideBarMobileBusiness from 'components/Aside/ASideBarMobileBusiness';
+import { useBusinessContext } from 'context/business-context';
 export default function LayoutBusiness({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
-  const [data, setData] = useState({
-    email_verified_at: null,
-    full_name: 'Annas Casmawan Ahmad',
-    email: 'annas@gmail.com',
-    gender: 'L',
-  });
+  const context = useBusinessContext()
+  const {business} = context
+  console.log(context)
+  const data = business
   function handleNav() {
     setOffCanvas(!offCanvas);
   }

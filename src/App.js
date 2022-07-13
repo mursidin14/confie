@@ -56,8 +56,8 @@ function App() {
         <Route path="/kelas" element={<Class />} />
         <Route path="/kelas/detailKelas/detail" element={<ClassDetail />} />
 
-        <Route path="/business/:id" element={<Business />} />
-        <Route path="/business/profile/:id" element={<BusinessProfile />} />
+        <Route path="/business" element={<Business />} />
+        <Route path="/business/profile" element={<BusinessProfile />} />
         <Route path="/business/team/:id" element={<TeamMember />} />
         <Route path="/business/job/:id" element={<JobVacancy />} />
         <Route path="/business/:id/job/create" element={<OpenJobVacancy />} />

@@ -167,6 +167,13 @@ export const getModelCV = () => {
   }
   return JSON.parse(localStorage.getItem('modelCV')).model
 }
+export const getFullYear = (epoch) => {
+  if (epoch === null) {
+    return null
+  }
+  const date = new Date(epoch * 1000)
+  return date.getFullYear()
+}
 const utils = {
   authHeader,
   makeCapital,
