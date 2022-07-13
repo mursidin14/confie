@@ -1,32 +1,39 @@
-import Layout from 'components/Layout/Layout';
-import React, { useEffect, useState } from 'react';
-import ProgressBar from 'components/Widgets/ProgressBar';
-import ModalTarget from 'components/Modal/ModalTarget';
-import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
-import SweetAlert from 'components/Widgets/SweetAlert';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment} from 'react';
+import Layout from 'components/Layout/Layout'
+import React, { useEffect, useState } from 'react'
+import ProgressBar from 'components/Widgets/ProgressBar'
+import ModalTarget from 'components/Modal/ModalTarget'
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan'
+import SweetAlert from 'components/Widgets/SweetAlert'
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 export default function PersonalDevelopment() {
-  const [target, setTarget] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isOpenAccept, setIsOpenAccept] = useState(false);
+  const [target, setTarget] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [isOpenAccept, setIsOpenAccept] = useState(false)
+  const [isVerified, setIsVerifed] = useState(false)
   const closeModalAccept = () => {
-    setIsOpenAccept(false);
-    window.location.reload();
-  };
+    setIsOpenAccept(false)
+    window.location.reload()
+  }
+  const closeModalVerified = () => {}
   useEffect(() => {
-    document.title = 'Personal Development';
     async function getTarget() {
-      const response = await PersonalPlanService.getPersonalPlanData();
-      setTarget(response.data.data);
-      setLoading(false);
+      const response = await PersonalPlanService.getPersonalPlanData()
+      setTarget(response.data.data)
+      setLoading(false)
+      const email = JSON.parse(localStorage.getItem('user')).email_verified_at
+      if (typeof email === 'string') {
+        setIsVerifed(false)
+      } else {
+        setIsVerifed(true)
+      }
     }
-    getTarget();
-  }, []);
+    getTarget()
+  }, [])
   async function handleDelete(id) {
-    const response = await PersonalPlanService.deletePersonalPlanData(id);
+    const response = await PersonalPlanService.deletePersonalPlanData(id)
     if (response.status === 200) {
-      setIsOpenAccept(true);
+      setIsOpenAccept(true)
     }
   }
 
@@ -40,7 +47,11 @@ export default function PersonalDevelopment() {
           </div>
           <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
           <div className="overflow-auto">
-            <Table handleDelete={handleDelete} items={target} loading={loading}></Table>
+            <Table
+              handleDelete={handleDelete}
+              items={target}
+              loading={loading}
+            ></Table>
           </div>
         </div>
       </div>
@@ -103,13 +114,66 @@ export default function PersonalDevelopment() {
           </div>
         </Dialog>
       </Transition>
+      <Transition appear show={isVerified} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10 overflow-y-auto"
+          onClose={closeModalVerified}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-50" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <div>
+                    <div className="flex items-center justify-center p-8">
+                      <img src="/email_alert.png" alt="" />
+                    </div>
+                    <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
+                      Your email hasn't verified!. Please verify your email
+                      address before access this page.
+                    </p>
+                    <button
+                      onClick={() => {
+                        window.location.href = '/dashboard'
+                      }}
+                      className="mt-1 w-full text-center text-xs font-semibold outline-none"
+                    >
+                      <p>Back to home</p>
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </Layout>
-  );
+  )
 }
 function Table({ items, loading, handleDelete }) {
   return (
     <div>
-      {items == 'Not found' ? (
+      {items === 'Not found' ? (
         <div className="text-center">There's No Plan</div>
       ) : (
         <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
@@ -171,15 +235,20 @@ function Table({ items, loading, handleDelete }) {
                           />
                         </svg>
                       </a>
-                      <SweetAlert item={item} handleDelete={handleDelete}></SweetAlert>
-                    
+                      <SweetAlert
+                        item={item}
+                        handleDelete={handleDelete}
+                      ></SweetAlert>
                     </div>
                   </td>
                 </tr>
               ))}
             {!items.length > 0 && (
               <tr>
-                <td colSpan="4" className="text-center py-4 font-semibold text-xs italic text-[#7E8299]">
+                <td
+                  colSpan="4"
+                  className="py-4 text-center text-xs font-semibold italic text-[#7E8299]"
+                >
                   Tidak ada data
                 </td>
               </tr>
@@ -188,13 +257,13 @@ function Table({ items, loading, handleDelete }) {
         </table>
       )}
     </div>
-  );
+  )
 }
 
 function formatDate(date) {
   return new Date(date).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
-  });
+    day: 'numeric'
+  })
 }

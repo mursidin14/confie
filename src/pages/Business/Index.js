@@ -1,7 +1,9 @@
 import React from 'react';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import ProgressBar from 'components/Widgets/ProgressBar';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { BusinessProvider, useBusinessContext } from 'context/business-context';
+import utils, { getFullYear } from 'utils/utils';
 
 export default function Index() {
   const { id } = useParams();
@@ -29,12 +31,13 @@ export default function Index() {
     },
   ];
   return (
-    <LayoutBusiness userId={id} PageName="Dashboard">
-      <PersonalCard id={id} />
-      
-      <StatusApplication items={status_application} />
-      <StatusClass />
-    </LayoutBusiness>
+    <BusinessProvider>
+      <LayoutBusiness userId={id} PageName="Dashboard">
+        <PersonalCard id={id} />
+        <StatusApplication items={status_application} />
+        <StatusClass />
+      </LayoutBusiness>
+    </BusinessProvider>
   );
 }
 
@@ -52,13 +55,15 @@ function StatusClass({}) {
     </section>
   );
 }
-
 function StatusApplication({ items }) {
   return (
-    <section className="my-7 font-semibold grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 gap-6">
+    <section className="my-7 grid grid-cols-2 gap-6 font-semibold md:grid-cols-2 lg:grid-cols-4">
       {items.map((item, index) => (
-        <div key={index} className="flex flex-col items-center lg:space-y-16 space-y-10 rounded-md bg-white py-4 px-3 shadow-mine sm:px-8">
-          <item.icon  />
+        <div
+          key={index}
+          className="flex flex-col items-center space-y-10 rounded-md bg-white py-4 px-3 shadow-mine sm:px-8 lg:space-y-16"
+        >
+          <item.icon />
           <p className="text-3xl font-semibold">{item.value}</p>
           <p className="text-[#7E8299]">{item.title}</p>
         </div>
@@ -66,7 +71,6 @@ function StatusApplication({ items }) {
     </section>
   );
 }
-
 function IconOne() {
   return (
     <svg
@@ -160,7 +164,9 @@ function IconFour() {
   );
 }
 
-function PersonalCard({id}) {
+function PersonalCard({ id }) {
+  const context = useBusinessContext()
+  const {business} = context
   return (
     <section className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-center gap-3">
@@ -169,7 +175,7 @@ function PersonalCard({id}) {
         </div>
         <div className="flex items-center gap-1 md:hidden lg:gap-3">
           <h3 className="text-left text-base font-semibold sm:text-xl">
-            PT. Upana Pelopor Aplikasi Adikarya
+           {utils.makeCapital(business.full_name)}
           </h3>
           <svg
             className="h-5 w-5"
@@ -199,7 +205,7 @@ function PersonalCard({id}) {
             <div>
               <div className="hidden items-center gap-2 md:flex lg:gap-3">
                 <h3 className="text-left text-lg font-semibold sm:text-xl">
-                  PT. Upana Pelopor Aplikasi Adikarya
+                 {utils.makeCapital(business.full_name)}
                 </h3>
                 <svg
                   className="h-5 w-5"
@@ -223,7 +229,7 @@ function PersonalCard({id}) {
             </div>
             <div className="flex w-full flex-col justify-between lg:items-end">
               <div className="hidden md:block">
-                <ButtonDashboard id={id} />
+                <ButtonDashboard />
               </div>
               <div className="hidden w-full md:block ">
                 <ProfileCompletion />
@@ -236,7 +242,7 @@ function PersonalCard({id}) {
         <ProfileCompletion />
       </div>
       <div className="block md:hidden">
-        <ButtonDashboard id={id} />
+        <ButtonDashboard />
       </div>
     </section>
   );
@@ -246,9 +252,7 @@ function ProfileCompletion({}) {
   return (
     <div className="mt-3 w-full ">
       <div className="flex justify-between text-xs sm:text-base">
-        <p className="mb-2 text-left  text-[#B5B5C3]">
-          Company Completion
-        </p>
+        <p className="mb-2 text-left  text-[#B5B5C3]">Company Completion</p>
         <p>80%</p>
       </div>
       <ProgressBar progressPercentage={80} />
@@ -256,15 +260,14 @@ function ProfileCompletion({}) {
   );
 }
 
-function ButtonDashboard({id}) {
-
+function ButtonDashboard() {
   return (
     <>
       <div className="my-3 flex w-full">
         <div className="flex w-full items-center justify-between gap-3 sm:justify-start">
           <a
             className="secondary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
-            href={`/business/profile/${id}`}
+            href={`/business/profile`}
           >
             Halaman Profile
           </a>
@@ -282,6 +285,8 @@ function ButtonDashboard({id}) {
 }
 
 function CompanyInformation({}) {
+  const context = useBusinessContext()
+  const {business} = context
   return (
     <div className="mt-4 space-y-2">
       <div className="flex gap-3">
@@ -299,8 +304,7 @@ function CompanyInformation({}) {
         </svg>
 
         <p className="w-fit text-left text-xs text-[#B5B5C3] sm:text-sm md:w-[400px]">
-          Ruko I Walk J/10 Ciputra Citraland Celebes, Jl. Tun Abdul Razak,
-          Tombolo, Kec. Somba Opu, Kabupaten Gowa, Sulawesi Selatan 92114
+          {`${business.address} ${utils.makeCapital(business.city_name)}, ${utils.makeCapital(business.province_name)}`}
         </p>
       </div>
       <div className="flex items-center gap-3">
@@ -318,7 +322,7 @@ function CompanyInformation({}) {
         </svg>
 
         <p className="text-xs text-[#B5B5C3] sm:text-sm">
-          upanastudio@gmail.com
+          {business.email}
         </p>
       </div>
       <div className="flex items-center gap-3">
@@ -340,7 +344,7 @@ function CompanyInformation({}) {
         </svg>
 
         <p className="text-xs text-[#B5B5C3] sm:text-sm">
-          Berdiri Sejak Tahun 2017
+          Berdiri Sejak Tahun {getFullYear(business.date_of_birth)}
         </p>
       </div>
     </div>

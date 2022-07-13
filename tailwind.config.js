@@ -17,7 +17,33 @@ module.exports = {
       },
       boxShadow: {
         'mine': '0px 1px 10px 2px rgba(0,0,0,0.17);',
-      }
+      },
+      keyframes: {
+        bounceOne: {
+          '0%, 100%' : {
+            transform: 'scale(1) ',
+            opacity: 1,
+          },
+          '50%': {
+            transform: 'scale(1.1) ',
+            opacity: 0.5,
+          },
+        },
+        bounceTwo: {
+          '0%, 100%': {
+            transform: 'scale(1.1)',
+            opacity: 0.5,
+          },
+          '50%': {
+            transform: 'scale(1)',
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        bounceOne: 'bounceOne 1s ease-in-out infinite',
+        bounceTwo: 'bounceTwo 1s ease-in-out infinite',
+      },
     },
   },
   plugins: [],  

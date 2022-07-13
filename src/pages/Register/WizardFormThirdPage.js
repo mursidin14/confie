@@ -107,7 +107,7 @@ export default function WizardFormThirdPage(props) {
                 <input
                   onChange={handleChange}
                   className="input-form peer mb-3"
-                  name="company_address"
+                  name="address"
                 />
               </div>
             )}

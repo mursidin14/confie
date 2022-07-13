@@ -1,7 +1,10 @@
 import './App.css';
 import Login from 'pages/Login';
 import Register from 'pages/Register/RegisterForm';
+import Forgot from 'pages/Forgot';
+
 import Dashboard from 'pages/Candidate/Dashboard';
+import ResumeComplete from 'pages/Candidate/ResumeComplete';
 import Profile from 'pages/Candidate/Profile';
 import ProfileCandidate from 'pages/Candidate/ProfileCandidate';
 import AccountSetting from 'pages/Candidate/AccountSetting';
@@ -24,6 +27,9 @@ import JobVacancyDetail from 'pages/Business/JobVacancyDetail';
 import TalentPool from 'pages/Business/TalentPool';
 
 import NotFound from 'pages/NotFound';
+import UnderConstruction from 'pages/UnderConstruction';
+import NewPassword from 'pages/NewPassword';
+import VerifyEmail from 'pages/VerifyEmail';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -31,8 +37,13 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/reset-password" element={<NewPassword />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/cv/preview" element={<ResumeComplete />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/:id" element={<ProfileCandidate />} />
         <Route path="/setting" element={<AccountSetting />} />
@@ -45,8 +56,8 @@ function App() {
         <Route path="/kelas" element={<Class />} />
         <Route path="/kelas/detailKelas/detail" element={<ClassDetail />} />
 
-        <Route path="/business/:id" element={<Business />} />
-        <Route path="/business/profile/:id" element={<BusinessProfile />} />
+        <Route path="/business" element={<Business />} />
+        <Route path="/business/profile" element={<BusinessProfile />} />
         <Route path="/business/team/:id" element={<TeamMember />} />
         <Route path="/business/job/:id" element={<JobVacancy />} />
         <Route path="/business/:id/job/create" element={<OpenJobVacancy />} />
@@ -54,6 +65,7 @@ function App() {
         <Route path="/business/talent/:id" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 
+        <Route path='/under' element={<UnderConstruction />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

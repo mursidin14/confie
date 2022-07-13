@@ -1,38 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import Header from 'components/Layout/Header';
-import ASideBar from 'components/Aside/AsideBar';
-import ASideBarMobile from 'components/Aside/ASideBarMobile';
-import ProfileService from 'services/Profile/ProfileService';
-import ErrorModal from 'components/Widgets/ErrorModal';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { getCurrentUser } from 'services/Auth/AuthService';
+import React, { useEffect, useState } from 'react'
+import Header from 'components/Layout/Header'
+import ASideBar from 'components/Aside/AsideBar'
+import ASideBarMobile from 'components/Aside/ASideBarMobile'
+import ProfileService from 'services/Profile/ProfileService'
+import ErrorModal from 'components/Widgets/ErrorModal'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { getCurrentUser } from 'services/Auth/AuthService'
+import { Helmet } from 'react-helmet'
 
-export default function Layout({ PageName, children }) {
-  const [offCanvas, setOffCanvas] = useState(false);
-  const [data, setData] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+export default function Layout({ PageName, children, slider }) {
+  const [offCanvas, setOffCanvas] = useState(false)
+  const [data, setData] = useState({})
+  const [isOpen, setIsOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     async function fetchData() {
-       const profile = getCurrentUser();
-       setData(profile)
-       setLoading(false);
+      const profile = getCurrentUser()
+      const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.status === 'error') {
+        setIsOpen(true);
+      } else {
+        setData(profile)
+        setLoading(false);
+      }
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
   function closeModal() {
-    setIsOpen(false);
-    window.location.href = '/';
+    setIsOpen(false)
+    window.location.href = '/'
   }
   function handleNav() {
-    setOffCanvas(!offCanvas);
+    setOffCanvas(!offCanvas)
   }
   return (
     <>
-      {!loading && !isOpen ?  (
-      
+      {!loading && !isOpen ? (
         <main className="flex">
+          <Helmet>
+            <title>{PageName}</title>
+          </Helmet>
           <ASideBar
             is_verified={data.email_verified_at}
             offCanvas={offCanvas}
@@ -51,11 +59,18 @@ export default function Layout({ PageName, children }) {
             } min-h-screen bg-[#FFFFFF]`}
           >
             <Header data={data} handleNav={handleNav} PageName={PageName} />
-            <div className="main-layout my-4 mx-3 py-5 lg:mx-7">{children}</div>
+            <div className={`${slider ? '' : 'my-4 mx-3 py-5 lg:mx-7'}`}>{children}</div>
+            
           </section>
         </main>
       ) : null}
-      {isOpen && <ErrorModal error_msg={['Unauthorized!']} isOpen={isOpen} closeModal={closeModal}></ErrorModal>}
+      {isOpen && (
+        <ErrorModal
+          error_msg={['Unauthorized!']}
+          isOpen={isOpen}
+          closeModal={closeModal}
+        ></ErrorModal>
+      )}
     </>
-  );
+  )
 }

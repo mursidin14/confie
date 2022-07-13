@@ -63,14 +63,14 @@ export default function ModalWorkExperience({ section }) {
   let inputs_2 = [
     {
       name: 'start_date',
-      type: 'date',
+      type: 'month',
       label: 'Tahun Mulai',
       max: getTodayDate,
       required: true,
     },
     {
       name: 'end_date',
-      type: 'date',
+      type: 'month',
       label: 'Tahun Selesai',
       max: getTodayDate,
       required: true,
@@ -178,6 +178,21 @@ export default function ModalWorkExperience({ section }) {
                           {...input}
                         />
                       ))}
+                      <div className="my-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input type="file" name='file' onChange={(e)=>{
+                            setDataWorkExperience({
+                              ...dataWorkExperience,
+                              file: e.target.files[0]
+                            })
+                          }}/>
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" htmlFor="">
@@ -198,9 +213,8 @@ export default function ModalWorkExperience({ section }) {
                               });
                             }}
                           >
-                            <option value="onsite">On Site</option>
-                            <option value="freelance">Freelance</option>
-                            <option value="done">Done</option>
+                            <option value="onsite">Full Time</option>
+                            <option value="freelance">Part Time</option>
                           </select>
                         </div>
                       </div>

@@ -1,7 +1,7 @@
-import React from 'react';
-import InformationTitle from 'pages/Candidate/OnlineProfile/InformationTitle';
-import utils from 'utils/utils';
-export default function CurriculumVitae({data}) {
+import React from 'react'
+import InformationTitle from 'pages/Candidate/OnlineProfile/InformationTitle'
+import utils from 'utils/utils'
+export default function CurriculumVitae({ data }) {
   // const data = {
   //   about: "Annas",
   //   address: null,
@@ -30,7 +30,17 @@ export default function CurriculumVitae({data}) {
     <main className="flex ">
       <section className="h-[2480px] bg-dark-blue py-10 px-7 text-white sm:w-[35%]">
         <div className="mx-auto w-fit ">
-          <img className="rounded-full" src="/person.png" alt="" />
+          <img
+            className="rounded-full"
+            src={
+              data.url_photo_profile
+                ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}`
+                : data.gender == 'L'
+                ? '/male.jpg'
+                : '/female.jpg'
+            }
+            alt=""
+          />
           <div className="mt-5 flex items-center gap-3">
             <p className="text-lg">{utils.makeCapital(data.full_name)}</p>
             {/* <svg
@@ -64,7 +74,7 @@ export default function CurriculumVitae({data}) {
         <EducationHistory data={data.educations}></EducationHistory>
       </section>
     </main>
-  );
+  )
 }
 
 function EmploymentStatus({}) {
@@ -72,7 +82,7 @@ function EmploymentStatus({}) {
     <p className="my-3 mx-auto w-fit rounded-sm bg-[#E8FFF3] px-5 py-1 text-[10px] text-[#50CD89]">
       Bekerja
     </p>
-  );
+  )
 }
 
 function BasicInformation({ data }) {
@@ -116,7 +126,7 @@ function BasicInformation({ data }) {
           />
         </svg>
 
-        <p className='max-w-[170px] break-all'>{data.email}</p>
+        <p className="max-w-[170px] break-all">{data.email}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
         <svg
@@ -153,7 +163,7 @@ function BasicInformation({ data }) {
         <p>{data.url_linkedin}</p>
       </div> */}
     </section>
-  );
+  )
 }
 
 function SkillInfomation({ data }) {
@@ -162,38 +172,38 @@ function SkillInfomation({ data }) {
       <p className="mb-6 text-left text-xl font-semibold">Skills</p>
       <div className="text-left text-sm">
         {data.map((skill, index) => (
-          <p>{skill.name}</p>
+          <p key={index}>{skill.name}</p>
         ))}
       </div>
     </section>
-  );
+  )
 }
 
-function CertificationInformation({data}) {
-  const certificates = data;
-    return (
-      <section className="mt-10 sm:mt-20">
-        <p className="mb-2 text-left text-sm font-semibold sm:mb-6 sm:text-xl">
-          Award & Certification
-        </p>
-        <div className="space-y-1 pr-10 text-left text-xs sm:w-[240px] sm:space-y-3 sm:text-sm">
-          {certificates.map((certificate, index) => (
-            <div key={index}>
-              <p>
-                {certificate.name} {utils.getMonthYear(certificate.year)}
-              </p>
-              <div className="flex items-center gap-4">
-                <hr className="w-2 border-b-[0.5px] border-white" />
-                <p className="mt-1 text-xs">{certificate.agency}</p>
-              </div>
+function CertificationInformation({ data }) {
+  const certificates = data
+  return (
+    <section className="mt-10 sm:mt-20">
+      <p className="mb-2 text-left text-sm font-semibold sm:mb-6 sm:text-xl">
+        Award & Certification
+      </p>
+      <div className="space-y-1 pr-10 text-left text-xs sm:w-[240px] sm:space-y-3 sm:text-sm">
+        {certificates.map((certificate, index) => (
+          <div key={index}>
+            <p>
+              {certificate.name} {utils.getMonthYear(certificate.year)}
+            </p>
+            <div className="flex items-center gap-4">
+              <hr className="w-2 border-b-[0.5px] border-white" />
+              <p className="mt-1 text-xs">{certificate.agency}</p>
             </div>
-          ))}
-        </div>
-      </section>
-    );
+          </div>
+        ))}
+      </div>
+    </section>
+  )
 }
 
-function AboutMe({data}) {
+function AboutMe({ data }) {
   return (
     <article className="mt-10">
       <div className="bg-[#7E8299] py-4">
@@ -205,11 +215,11 @@ function AboutMe({data}) {
         {data}
       </p>
     </article>
-  );
+  )
 }
 
-function WorkExperience({data}) {
-  let works = data;
+function WorkExperience({ data }) {
+  let works = data
   return (
     <article>
       <InformationTitle title={'Work Experience'} />
@@ -219,57 +229,57 @@ function WorkExperience({data}) {
             <p className="text-base text-[#3F4254] sm:text-xl">
               {work.position}
             </p>
-            <p className="my-1 text-[#3F4254]">{work.agency} {utils.getMonthYear(work.start_date)}</p>
-            <p>
-              {work.description}
+            <p className="my-1 text-[#3F4254]">
+              {work.agency} {utils.getMonthYear(work.start_date)}
             </p>
+            <p>{work.description}</p>
           </div>
         ))}
       </div>
     </article>
-  );
+  )
 }
 
-function IntershipExperience({data}) {
+function IntershipExperience({ data }) {
   let interns = data
   return (
     <article>
       <InformationTitle title={'Intern Experience'} />
       <div className="px-3 sm:pl-8">
-      {interns.map((intern, index) => (
+        {interns.map((intern, index) => (
           <div key={index} className="my-8 w-fit text-left text-xs md:text-sm">
             <p className="text-base text-[#3F4254] sm:text-xl">
               {intern.position}
             </p>
-            <p className="my-1 text-[#3F4254]">{intern.agency} {utils.getMonthYear(intern.start_date)}</p>
-            <p>
-              {intern.description}
+            <p className="my-1 text-[#3F4254]">
+              {intern.agency} {utils.getMonthYear(intern.start_date)}
             </p>
+            <p>{intern.description}</p>
           </div>
         ))}
       </div>
     </article>
-  );
+  )
 }
 
-function EducationHistory({data}) {
+function EducationHistory({ data }) {
   let educations = data
   return (
     <article>
       <InformationTitle title={'Education History'} />
       <div className="px-3 sm:pl-8">
-      {educations.map((education, index) => (
+        {educations.map((education, index) => (
           <div key={index} className="my-8 w-fit text-left text-xs md:text-sm">
             <p className="text-base text-[#3F4254] sm:text-xl">
               {education.major}
             </p>
-            <p className="my-1 text-[#3F4254]">{education.school} {utils.getMonthYear(education.start_date)}</p>
-            <p>
-              {education.description}
+            <p className="my-1 text-[#3F4254]">
+              {education.school} {utils.getMonthYear(education.start_date)}
             </p>
+            <p>{education.description}</p>
           </div>
         ))}
       </div>
     </article>
-  );
+  )
 }

@@ -14,7 +14,8 @@ export default function Register() {
     role: 'personal',
     gender: 'L',
     country: 'INDONESIA',
-    skills: []
+    skills: [],
+    fields: []
   });
   const [isOpen, setIsOpenFailed] = useState(false);
   function closeModal() {
@@ -26,6 +27,11 @@ export default function Register() {
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
     if (page === 4) {
+      if(dataAccount.role === 'personal'){
+        delete dataAccount.fields;
+      }else{
+        delete dataAccount.skills;
+      }
       const respon = await AuthService.register(dataAccount);
       if (respon.statusText !== 'Created') {
         let message_error = [];

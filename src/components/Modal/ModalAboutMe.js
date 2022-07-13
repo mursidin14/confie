@@ -29,8 +29,12 @@ export default function ModalAboutMe({data_profile}) {
     setIsOpen(true);
   }
   async function handleClick() {
+    if (dataProfile.about.length > 100) {
+      setError(['About me harus kurang dari 100 karakter']);
+      return
+    }
     const response = await ProfileService.updateAbout(dataProfile);
-    if (response.data.meta.status == 'error') {
+    if (response.data.meta.status === 'error') {
       let errors = [];
       let error = response.data.data;
       for (let key in error) {
@@ -86,6 +90,8 @@ export default function ModalAboutMe({data_profile}) {
       <div className="my-5">
         <div className="sm:px-8 px-2">
          <textarea onChange={handleChange} className='w-full bg-[#F5F8FA] p-5 lg:h-[200px]' name="about" value={dataProfile.about}></textarea> 
+        <p className={`text-xs ${dataProfile.about.length > 90 ? 'text-red-500' : 'text-gray-500'}`}>Sisa Karakter: {100 - dataProfile.about.length}</p>
+
         </div>
       </div>
       <section className="px-8 text-left text-sm text-red-500">
@@ -114,15 +120,3 @@ export default function ModalAboutMe({data_profile}) {
   );
 }
 
-function InputFormProfile({ label, ...inputProps }) {
-  return (
-    <div className=" items-center lg:flex">
-      <div className="w-5/12">
-        <label className="text-xs lg:text-base">{label}</label>
-      </div>
-      <div className="lg:w-7/12">
-        <input {...inputProps} className="input-form my-2 lg:my-5 lg:py-3 " />
-      </div>
-    </div>
-  );
-}

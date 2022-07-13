@@ -13,6 +13,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import OrganizationCard from 'components/Profile/OrganizationCard';
 import AddSection from 'components/Modal/AddSection';
 import { isEmpty } from 'utils/utils';
+import PaperCard from 'components/Profile/PaperCard';
+import CurriculumVitaeModel from 'components/Profile/CurriculumVitaeModel';
 
 export default function Profile() {
   const [data, setData] = useState({});
@@ -22,6 +24,9 @@ export default function Profile() {
     document.title = 'Profile';
     async function fetchData() {
       const response_profile = await ProfileService.getProfileData();
+      if (response_profile.data.meta.status === 'error') {
+        return 
+      }
       setData({
         profile: response_profile.data.data,
       });
@@ -32,6 +37,11 @@ export default function Profile() {
 
   return (
     <Layout PageName={'Profile'}>
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <CurriculumVitaeModel data_profile={data.profile} />
+      )}
       {loading ? (
         <SkeletonCard />
       ) : (
@@ -85,6 +95,15 @@ export default function Profile() {
         <>
           {data.profile.certificates.length > 0 ? (
             <CertificationCard data_profile={data.profile.certificates} />
+          ) : null}
+        </>
+      )}
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <>
+          {data.profile.papers.length > 0 ? (
+            <PaperCard data_profile={data.profile.papers} />
           ) : null}
         </>
       )}

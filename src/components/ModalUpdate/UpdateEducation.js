@@ -27,8 +27,6 @@ export default function UpdateEducation({ item, id }) {
     const data = {
       ...dataEducation,
     };
-    data['start_date'] = utils.timeEpoch(data['start_date']);
-    data['end_date'] = utils.timeEpoch(data['end_date']);
     const response = await ProfileService.updateEducation(id, data);
     if (response.data.meta.status == 'error') {
       let errors = [];
@@ -143,6 +141,7 @@ export default function UpdateEducation({ item, id }) {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataEducation}
                           handleChange={handleChange}
                           {...input}
@@ -150,11 +149,24 @@ export default function UpdateEducation({ item, id }) {
                       ))}
                       {inputs2.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataEducation}
                           handleChange={handleChange}
                           {...input}
                         />
                       ))}
+                      <div className="my-4 lg:flex">
+                        <div className="w-5/12">
+                          <label className="text-xs lg:text-base" htmlFor="">
+                            File
+                          </label>
+                        </div>
+                        <div className="lg:w-7/12">
+                          <input type="file" name='file' onChange={(e)=>{
+                            setDataEducation({...dataEducation, file: e.target.files[0]})
+                          }}/>
+                        </div>
+                      </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
                           <label className="text-xs lg:text-base" for="">
