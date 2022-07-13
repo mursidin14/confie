@@ -8,7 +8,7 @@ export default function Header({data, handleNav, PageName }) {
     setOpen(!open);
   }
   async function clickLogout() {
-    const response = await AuthService.logout();
+    await AuthService.logout();
     window.location.href = '/';
   }
   return (
@@ -84,7 +84,7 @@ export default function Header({data, handleNav, PageName }) {
           <img
             onClick={clickProfile}
             className="w-10 h-10 object-cover cursor-pointer rounded-md"
-            src={data.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}` : data.gender == "L" ? "/male.jpg" : "/female.jpg"}
+            src={data.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}` : data.gender === "L" ? "/male.jpg" : "/female.jpg"}
             alt=""
           />
           <section
@@ -93,7 +93,7 @@ export default function Header({data, handleNav, PageName }) {
             } transition-all max-w-xs`}
           >
             <div className='text-left'>
-            <a href='/profile' className='font-semibold sm:text-base text-sm hover:underline'>{makeCapital(data.full_name)}</a>
+            <p className='font-semibold sm:text-base text-sm'>{makeCapital(data.full_name)}</p>
             <p className='text-xs text-[#7E8299]'>{data.email}</p>
             <hr className='my-2'/>
             <a href="/setting" className='text-black hover:underline sm:text-sm text-xs'>Account Setting</a>

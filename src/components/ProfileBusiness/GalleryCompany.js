@@ -10,7 +10,7 @@ export default function GalleryCompany({children}) {
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="px-8 flex flex-wrap items-stretch sm:justify-between justify-center gap-6 my-5">
         {img_company.map((img, index) => 
-            <img className="w-52" src="/company_1.png" alt="" />
+            <img  key={index} className="w-52" src="/company_1.png" alt="" />
         )}
       {children}
       </div>

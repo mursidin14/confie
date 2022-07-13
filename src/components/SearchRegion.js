@@ -410,8 +410,7 @@ export function SearchCountryProfile({ data, onChange }) {
         <div className="w-5/12">
             <label className="text-xs lg:text-base">Country</label>
           </div>
-          <div className="lg:w-7/12">
-
+          <div className="lg:w-7/12 relative">
           <Combobox.Input
             className="input-form peer mb-3"
             displayValue={(person) => {
@@ -420,7 +419,7 @@ export function SearchCountryProfile({ data, onChange }) {
             }}
             onChange={handleChange}
           />
-          <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 top-5 flex items-center pr-2">
+          <Combobox.Button className="absolute inset-y-0 right-0 lg:-top-3 bottom-3 flex items-center pr-2">
             <SelectorIcon
               className="h-5 w-5 text-gray-400"
               aria-hidden="true"
@@ -435,7 +434,8 @@ export function SearchCountryProfile({ data, onChange }) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute mt-1 h-[100px] max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg">
+          <div>
+          <Combobox.Options className="mt-1 h-[120px] lg:w-7/12 w-full absolute right-0 overflow-auto rounded-md bg-white shadow-lg">
             {filteredCountry.length === 0 && query !== '' ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
@@ -446,7 +446,7 @@ export function SearchCountryProfile({ data, onChange }) {
                   key={country.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      data.country === country.name ? 'bg-orange text-white' : 'text-gray-900'
+                      active ? 'bg-orange text-white' : 'text-gray-900'
                     }`
                   }
                   value={country}
@@ -468,6 +468,7 @@ export function SearchCountryProfile({ data, onChange }) {
               ))
             )}
           </Combobox.Options>
+          </div>
         </Transition>
       </div>
     </Combobox>

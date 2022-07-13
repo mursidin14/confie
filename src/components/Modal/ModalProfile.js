@@ -74,14 +74,14 @@ export default function ModalProfile({ data_profile }) {
     setDataProfile({ ...dataProfile, [name]: value });
   }
   async function handleClick() {
-    if (dataProfile.city == undefined) {
+    if (dataProfile.city === undefined) {
       dataProfile.city = data_profile.city;
     }
     dataProfile['date_of_birth'] = utils.timeEpoch(
       dataProfile['date_of_birth']
     );
     const response = await ProfileService.updateProfileData(dataProfile);
-    if (response.data.meta.status == 'error') {
+    if (response.data.meta.status === 'error') {
       let errors = [];
       let error = response.data.data;
       for (let key in error) {
@@ -160,7 +160,7 @@ export default function ModalProfile({ data_profile }) {
                             id="male"
                             name="gender"
                             value="L"
-                            checked={dataProfile.gender == 'L'}
+                            checked={dataProfile.gender === 'L'}
                             onChange={handleOnChange}
                           />
                           <label className="mr-5 text-sm " htmlFor="male">
@@ -172,7 +172,7 @@ export default function ModalProfile({ data_profile }) {
                             id="female"
                             name="gender"
                             value="P"
-                            checked={dataProfile.gender == 'P'}
+                            checked={dataProfile.gender === 'P'}
                             onChange={handleOnChange}
                           />
                           <label className="mr-5 text-sm " htmlFor="female">
