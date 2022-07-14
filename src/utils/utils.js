@@ -1,3 +1,5 @@
+import { getCurrentUser } from "services/Auth/AuthService"
+
 export function authHeader() {
   const metadata = JSON.parse(localStorage.getItem('metadata'))
   if (metadata && metadata.access_token) {
@@ -173,6 +175,10 @@ export const getYear = (epoch = null) => {
   }
   const date = new Date(epoch * 1000)
   return date.getFullYear()
+}
+export const getRoles = () => {
+  const user = getCurrentUser()
+  console.log(user)
 }
 const utils = {
   authHeader,

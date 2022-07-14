@@ -13,7 +13,7 @@ export default function PersonalCard({ data_profile }) {
           src={
             data_profile.url_photo_profile
               ? `${process.env.REACT_APP_API_URL}/${data_profile.url_photo_profile}`
-              : data_profile.gender == 'L'
+              : data_profile.gender === 'L'
               ? '/male.jpg'
               : '/female.jpg'
           }
@@ -62,37 +62,19 @@ function ButtonDashboard({ data }) {
   const cv = React.createRef();
   return (
     <>
-      <div className="absolute -top-[3000px]" ref={cv}>
-        <CurriculumVitae data={data}></CurriculumVitae>
-      </div>
       <div className="my-3 flex w-full">
         <div className="flex w-full items-center justify-between gap-3 sm:justify-start">
-          {getModelCV() === 'simple' ? (
-            <Pdf targetRef={cv} filename={`${data.full_name}_CV.pdf`}>
-              {({ toPdf }) => (
-                <button
-                  onClick={toPdf}
-                  className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
-                  href=""
-                >
-                  Download CV
-                </button>
-              )}
-            </Pdf>
-          ) : (
-            <>
-              <button
-                onClick={()=>{
-                  window.location.href = `/cv/preview`
-                }}
-                className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
-                href=""
-              >
-                Download CV
-              </button>
-            </>
-          )}
-
+          <>
+            <button
+              onClick={() => {
+                window.location.href = `/cv/preview`;
+              }}
+              className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit "
+              href=""
+            >
+              Download CV
+            </button>
+          </>
           <a
             className="secondary-btn center border-[1px] px-2 py-3 text-[8px] sm:text-xs md:w-fit"
             href={`/${data.slug}`}

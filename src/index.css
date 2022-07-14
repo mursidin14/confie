@@ -34,8 +34,8 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
-.complete-cv{
-  font-family: 'Times New Roman', Times, serif
+.complete-cv {
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .image-upload > input {
@@ -64,7 +64,9 @@ body {
 
 .gradient-login {
   background: linear-gradient(
-    0deg, rgba(6,26,121,0.8015581232492998) 100%, rgba(56,0,1,1) 100%
+      0deg,
+      rgba(6, 26, 121, 0.8015581232492998) 100%,
+      rgba(56, 0, 1, 1) 100%
     ),
     url('/public/bg_login.png');
   background-size: cover;
@@ -73,13 +75,207 @@ body {
   height: 110vh;
 }
 .gradient-login-mobile {
-  background-color: #FFF5E5;
+  background-color: #fff5e5;
+}
+
+.page {
+  text-align: left;
+  width: 210mm;
+  height: 297mm;
+  padding: 2mm;
+  margin: 10mm auto;
+  border: 1px #d3d3d3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  position: relative;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 2mm;
+  margin: 10mm auto;
+  border: 1px #d3d3d3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  position: relative;
+}
+
+.subpage {
+  /*padding: 0 1.5cm 0 1.5cm;*/
+  /* border: 5px red solid; */
+  height: 297mm;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid black;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.table thead th {
+  border-color: black;
+}
+
+.table {
+  border: 2px solid black;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-container-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container .fb-10 {
+  flex-basis: 10%;
+}
+
+.flex-container .fb-20 {
+  flex-basis: 20%;
+}
+
+.flex-container .fb-40 {
+  flex-basis: 40%;
+}
+
+.flex-container .fb-60 {
+  flex-basis: 60%;
+}
+
+.flex-container .fb-90 {
+  flex-basis: 90%;
+}
+
+.sidebar {
+  background-color: #335384;
+  padding: 40px 20px;
+  height: 1100px;
+}
+
+.content {
+  background-color: #ededed;
+  padding: 40px 20px;
+  height: 1100px;
+}
+
+.img-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 100px;
+  /*align-items: center;
+  justify-content: center;*/
+}
+
+.judul-section {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.content-section {
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.content-section p {
+  margin-top: 0px;
+  margin-bottom: 7.5px;
+}
+
+.content-section ul li {
+  color: #fff;
+  font-size: 0.85rem;
+  margin-bottom: 7.5px;
+}
+
+.content-section .deskripsi-item li {
+  color: #6b6b6b;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+.cv-name {
+  font-size: 2.5rem;
+  color: #335384;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.garis {
+  border-top: 3px solid black;
+  margin-bottom: 10px;
+}
+
+.judul-section-content {
+  color: #68add3;
+}
+
+.clr-blk {
+  color: #464642;
+}
+
+.judul-item {
+  font-size: 1rem;
+  color: #464642;
+  font-weight: 500;
+  margin-bottom: 0px !important;
+}
+
+.durasi-item,
+.deskripsi-item {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+}
+
+@page {
+  size: A4;
+  margin: 2mm;
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
+  button{
+    display: none;
+  }
+  .page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+    padding: 0;
+  }
+
+  .subpage {
+    font: 12pt 'Poppins';
+    height: 297mm;
+  }
 }
 
 @media screen and (max-width: 1022px) {
   .gradient-login-mobile {
     background: linear-gradient(
-      0deg, rgba(4, 18, 87, 0.802) 100%, rgba(56,0,1,1) 100%
+        0deg,
+        rgba(4, 18, 87, 0.802) 100%,
+        rgba(56, 0, 1, 1) 100%
       ),
       url('/public/bg_login.png');
     background-size: cover;
