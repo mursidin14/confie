@@ -10,9 +10,14 @@ export default function UnderConstruction() {
       <p className="text-sm text-[#000000] sm:text-base">
         We are currently working on this page. Thanks!
       </p>
-      <a href="/dashboard" className="mt-2 text-xs font-bold underline">
-        Back To Home
-      </a>
+      <p
+        onClick={() => {
+          window.history.back();
+        }}
+        className="mt-2 text-xs font-bold underline cursor-pointer"
+      >
+        Go back
+      </p>
     </div>
   );
 }

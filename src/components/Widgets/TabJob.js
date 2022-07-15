@@ -3,7 +3,7 @@ import { Tab } from '@headlessui/react';
 import BasicCard from 'components/Widgets/BasicCard';
 import { useParams } from 'react-router-dom';
 import { useBusinessContext } from 'context/business-context';
-import utils, { getFullDate } from 'utils/utils';
+import { getDate } from 'utils/utils';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -21,21 +21,21 @@ export default function TabJob() {
     },
   });
   useEffect(() => {
-    if (jobVacancy.length === 0) {
+    if (jobVacancy?.length === 0) {
       return;
     }
     setCategories({
       Aktif: {
-        content: <FeedJob id={id} items={jobVacancy.filter(item => item.is_publish)} />,
+        content: <FeedJob id={id} items={jobVacancy?.filter(item => item.is_publish)} />,
       },
       Arsip: {
-        content: <FeedJob id={id} items={jobVacancy.filter(item => !item.is_publish)} archive={true} />,
+        content: <FeedJob id={id} items={jobVacancy?.filter(item => !item.is_publish)} archive={true} />,
       },
     });
   }, [jobVacancy]);
   return (
     <div className="w-full px-2 sm:px-0">
-      {jobVacancy.length === 0 ? (
+      {jobVacancy?.length === 0 ? (
         <div>Loading...</div>
       ) : (
         <>
@@ -48,7 +48,7 @@ export default function TabJob() {
                     classNames(
                       'w-full py-2.5 font-semibold leading-5',
                       selected
-                        ? 'border-b-4 border-[#FE9A00]'
+                        ? 'border-b-4 border-[#FE9A00] outline-none'
                         : 'border-b-4 border-white text-[#7E8299]',
                     )
                   }
@@ -74,15 +74,15 @@ export default function TabJob() {
 function FeedJob({ archive, id, items }) {
   return (
     <>
-      {items.length < 1 && <p>No Data</p>}
-      {items.map((item) => (
-        <CardJobVacany key={item} detailJob={item} id={id} archive={archive} />
+      {items?.length < 1 && <p className='text-xs text-gray-300 italic'>No Data</p>}
+      {items?.map((item, index) => (
+        <CardJobVacany key={index} detailJob={item} id={id} archive={archive} />
       ))}
     </>
   );
 }
 
-function CardJobVacany({ archive, id, detailJob: {title, location, max_salary, min_salary, registration_end_date} }) {
+function CardJobVacany({ archive, detailJob: {title, location, max_salary, min_salary, registration_end_date, id} }) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-6">
@@ -93,7 +93,7 @@ function CardJobVacany({ archive, id, detailJob: {title, location, max_salary, m
           <div>
             <div className="flex items-center gap-2">
               <a
-                href={`/business/${id}/job/detail/`}
+                href={`/business/job/detail/${id}`}
                 className="text-base font-semibold hover:underline md:text-xl"
               >
                 {title}
@@ -152,7 +152,6 @@ function CardJobVacany({ archive, id, detailJob: {title, location, max_salary, m
                     fill="#4B5783"
                   />
                 </svg>
-
                 <p>IDR {min_salary} - {max_salary}</p>
               </div>
               <div className="flex items-center gap-3">
@@ -226,7 +225,7 @@ function CardJobVacany({ archive, id, detailJob: {title, location, max_salary, m
                   />
                 </svg>
 
-                <p>{getFullDate(registration_end_date)}</p>
+                <p>{getDate(registration_end_date)}</p>
               </div>
               <p className="md:hidden">
                 <span className="font-bold">Pelamar</span>: 30

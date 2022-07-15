@@ -17,3 +17,10 @@ export const getJobVacancy = () => {
     .then((response) => response)
     .catch((error) => error.response);
 }
+
+export const getDetailJobVacancy = (id) => {
+  return httpAuthClient
+    .get(`/api/jobvacancy/${id}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}

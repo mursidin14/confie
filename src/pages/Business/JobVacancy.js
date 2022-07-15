@@ -8,7 +8,6 @@ import AlertEmailNotVerifiedBusiness from 'components/Modal/AlertEmailNotVerifie
 import { BusinessProvider } from 'context/business-context';
 export default function JobVacancy() {
   const { id } = useParams();
-  
   return (
     <BusinessProvider>
       <LayoutBusiness userId={id} PageName="Lowongan Kerja">
@@ -30,7 +29,7 @@ export default function JobVacancy() {
           <section className="p-5">
             <TabJob></TabJob>
             <div className="mt-5 flex w-full justify-end pr-8">
-              <Pagination></Pagination>
+              {/* <Pagination></Pagination> */}
             </div>
           </section>
           <AlertEmailNotVerifiedBusiness />

@@ -50,7 +50,7 @@ function App() {
         <Route path="/pdp" element={<PersonalDevelopment />} />
         <Route path="/pdp/detail/:idDetail" element={<PersonalDevelopmentDetail />} />
         <Route path="/lowongan" element={<Jobs />}/>
-        <Route path="/lowongan/detailJob/:idDetail" element={<JobDetail />} />
+        <Route path="/lowongan/detail-job/:idDetail" element={<JobDetail />} />
         <Route path="/lamaran/" element={<Application />} />
         <Route path="/detailApplication" element={<ApplicationDetail />} />
         <Route path="/kelas" element={<Class />} />
@@ -61,7 +61,7 @@ function App() {
         <Route path="/business/team" element={<TeamMember />} />
         <Route path="/business/job" element={<JobVacancy />} />
         <Route path="/business/job/create" element={<OpenJobVacancy />} />
-        <Route path="/business/:id/job/detail/:idJob" element={<JobVacancyDetail />} />
+        <Route path="/business/job/detail/:idJob" element={<JobVacancyDetail />} />
         <Route path="/business/talent/:id" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 

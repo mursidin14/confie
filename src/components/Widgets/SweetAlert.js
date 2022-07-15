@@ -3,7 +3,6 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 export default function SweetAlert({item, handleDelete }) {
   let [isOpen, setIsOpen] = useState(false);
-  let [isOpenAccept, setIsOpenAccept] = useState(false);
   function closeModal() {
     setIsOpen(false);
   }
@@ -11,7 +10,6 @@ export default function SweetAlert({item, handleDelete }) {
   function handleAccept() {
     closeModal();
     handleDelete(item.id);
-    setIsOpenAccept(true);
   }
   function openModal() {
     setIsOpen(true);

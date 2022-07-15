@@ -1,11 +1,8 @@
 import { Disclosure } from '@headlessui/react';
 
-export default function BasicDisclosure({title}) {
+export default function BasicDisclosure({title,items}) {
   let requirments = [
-    'Ngoding',
-    'Makan',
-    'Tidur',
-    
+    ...items
   ]
   return (
     <div className="w-full">
@@ -27,7 +24,7 @@ export default function BasicDisclosure({title}) {
               <Disclosure.Panel className="pl-10 pt-4 pb-2 text-sm text-gray-500">
                 <ul className='requirments'>
                   {requirments.map((item, index) => (
-                    <li className='my-2'><span className='relative left-5 text-[#7E8299]'>{item}</span></li>
+                    <li key={index} className='my-2'><span className='relative left-5 text-[#7E8299]'>{item}</span></li>
                   ))}
                 </ul>
               </Disclosure.Panel>

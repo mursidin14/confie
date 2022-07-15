@@ -1,5 +1,5 @@
 import React from 'react';
-export default function AsideLogin({}) {
+export default function AsideLogin() {
 
   return (
     <section className="gradient-login text-white lg:w-7/12 hidden lg:flex flex-col justify-center">

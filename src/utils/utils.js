@@ -58,6 +58,10 @@ const getCity = (data) => {
   return city
 }
 
+export const getLocalStringRupiah = (rupiah) => {
+  return rupiah.toLocaleString("id-ID")
+}
+
 const timeEpoch = (time) => {
   if (time === undefined) {
     return 0

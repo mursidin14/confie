@@ -1,38 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import BasicCard from 'components/Widgets/BasicCard';
 import { Tab } from '@headlessui/react';
 import { useParams } from 'react-router-dom';
 import Pagination from 'components/Widgets/Pagination';
+import { BusinessProvider } from 'context/business-context';
+import { getDetailJobVacancy } from 'services/Business/JobVacancy/JobVacancy';
+import SkeletonCard from 'components/SkeletonCard';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function JobVacancyDetail() {
-  const { id } = useParams();
+  const [detailJob, setDetailJob] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { idJob } = useParams();
+  useEffect(() => {
+    const getDetail = async () => {
+      const response = await getDetailJobVacancy(idJob);
+      setDetailJob(response.data);
+      console.log(response.data)
+      setLoading(false);
+    };
+    getDetail();
+  }, []);
+
   return (
-    <LayoutBusiness userId={id} PageName="Lowongan Kerja">
-      <div className="py-5 lg:mx-5">
-        <CardJobVacany></CardJobVacany>
-      </div>
-    </LayoutBusiness>
+    <BusinessProvider>
+      <LayoutBusiness PageName="Lowongan Kerja">
+        {loading && <SkeletonCard />}
+        {!loading && (
+          <div className="py-5 lg:mx-5">
+            <CardJobVacany detailjob={detailJob}></CardJobVacany>
+          </div>
+        )}
+      </LayoutBusiness>
+    </BusinessProvider>
   );
 }
 
 function CardJobVacany({ archive, id, detailjob }) {
   const [open, setOpen] = useState(false);
-  let [categories] = useState({
-    ['Berkas']: {
+  const [categories] = useState({
+    Berkas: {
       content: <StepOne />,
     },
-    ['Seleksi Tes Online']: {
+    'Seleksi Tes Online': {
       content: <StepTwo />,
     },
-    ['Tes Wawancara']: {
+    'Tes Wawancara': {
       content: <StepThree />,
     },
-    ['Hasil Akhir']: {
+    'Hasil Akhir': {
       content: <StepFour />,
     },
   });
@@ -46,12 +66,9 @@ function CardJobVacany({ archive, id, detailjob }) {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <a
-                  href={`/business/${id}/job/detail/${detailjob}`}
-                  className="text-lg font-semibold hover:underline md:text-xl"
-                >
+                <p className="text-lg font-semibold hover:underline md:text-xl">
                   Junior React Developer
-                </a>
+                </p>
                 <div
                   className={`${
                     !archive ? 'bg-[#E8FFF3]' : 'bg-[#F5F8FA]'
@@ -110,14 +127,14 @@ function CardJobVacany({ archive, id, detailjob }) {
                     <path
                       d="M4.4997 5.64328C5.36878 5.64328 6.07331 5.00368 6.07331 4.2147C6.07331 3.42573 5.36878 2.78613 4.4997 2.78613C3.63062 2.78613 2.92609 3.42573 2.92609 4.2147C2.92609 5.00368 3.63062 5.64328 4.4997 5.64328Z"
                       stroke="#4B5783"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M7.64722 5.64286C6.46702 8.14286 4.5 11 4.5 11C4.5 11 2.53298 8.14286 1.35278 5.64286C0.172567 3.14286 2.13958 1 4.5 1C6.86042 1 8.82743 3.14286 7.64722 5.64286Z"
                       stroke="#4B5783"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
 
@@ -259,13 +276,13 @@ function CardJobVacany({ archive, id, detailjob }) {
             </div>
             <div className="relative flex flex-col items-center">
               <button
-              className='bg-[#EAECF0] px-3 py-4 rounded-md group hover:opacity-95 transition-all'
+                className="group rounded-md bg-[#EAECF0] px-3 py-4 transition-all hover:opacity-95"
                 onClick={() => {
                   setOpen(!open);
                 }}
               >
                 <svg
-                  className="group-hover:fill-[#161618] transition-all fill-[#97979c]"
+                  className="fill-[#97979c] transition-all group-hover:fill-[#161618]"
                   width="23"
                   height="5"
                   viewBox="0 0 23 5"
@@ -279,9 +296,7 @@ function CardJobVacany({ archive, id, detailjob }) {
               </button>
               <div
                 className={`absolute top-3 flex flex-col space-y-2 rounded-md bg-white p-6 text-sm shadow-mine ${
-                  !open
-                    ? 'translate-y-0  opacity-0'
-                    : ' translate-y-1 opacity-100'
+                  !open ? 'hidden  translate-y-0' : ' block translate-y-8'
                 } transition-all`}
               >
                 <button className="rounded-md bg-[#FFF5F8] px-4 py-2 text-[#F1416C]">
@@ -305,8 +320,8 @@ function CardJobVacany({ archive, id, detailjob }) {
                   classNames(
                     'w-full py-2.5 text-sm font-semibold leading-5',
                     selected
-                      ? 'border-b-4 border-[#FE9A00]'
-                      : 'border-b-4 border-white text-[#7E8299]'
+                      ? 'border-b-4 border-[#FE9A00] outline-none'
+                      : 'border-b-4 border-white text-[#7E8299]',
                   )
                 }
               >
@@ -754,8 +769,8 @@ function IconFour() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M34.681 11.2569C34.7829 11.3585 34.8637 11.4792 34.9188 11.6121C34.974 11.7449 35.0024 11.8874 35.0024 12.0313C35.0024 12.1751 34.974 12.3176 34.9188 12.4505C34.8637 12.5833 34.7829 12.704 34.681 12.8056L28.1185 19.3681C28.0169 19.47 27.8962 19.5508 27.7634 19.6059C27.6305 19.6611 27.488 19.6895 27.3442 19.6895C27.2003 19.6895 27.0578 19.6611 26.925 19.6059C26.7921 19.5508 26.6714 19.47 26.5698 19.3681L23.2885 16.0869C23.0832 15.8815 22.9678 15.6029 22.9678 15.3125C22.9678 15.0221 23.0832 14.7435 23.2885 14.5381C23.4939 14.3327 23.7725 14.2174 24.0629 14.2174C24.3534 14.2174 24.6319 14.3327 24.8373 14.5381L27.3442 17.0472L33.1323 11.2569C33.2339 11.155 33.3546 11.0742 33.4875 11.0191C33.6203 10.9639 33.7628 10.9355 33.9067 10.9355C34.0505 10.9355 34.193 10.9639 34.3259 11.0191C34.4587 11.0742 34.5794 11.155 34.681 11.2569Z"
         fill="#494B74"
       />
