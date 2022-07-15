@@ -2,8 +2,8 @@ import React from 'react';
 export default function AsideLogin({}) {
 
   return (
-    <section className="gradient-login text-white px-10 py-10 sm:px-14 sm:py-10 lg:w-7/12 hidden lg:block">
-      <div className="mt-10 text-left sm:mt-28 sm:ml-9">
+    <section className="gradient-login text-white lg:w-7/12 hidden lg:flex flex-col justify-center">
+      <div className="text-left relative left-10 bottom-12">
       <img className="w-60 mb-7" src="/logo-login.png" alt="" />
         <h1 className="block lg:w-[500px] text-sm sm:text-4xl">
           Menemukan Pekerjaan Impian Jadi Lebih Mudah!
