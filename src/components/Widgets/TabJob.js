@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 import BasicCard from 'components/Widgets/BasicCard';
 import { useParams } from 'react-router-dom';
+import { useBusinessContext } from 'context/business-context';
+import utils, { getFullDate } from 'utils/utils';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -9,74 +11,103 @@ function classNames(...classes) {
 
 export default function TabJob() {
   const { id } = useParams();
-  let items = [1,2,3]
-  let [categories] = useState({
-    ['Aktif']: {
-      content: <FeedJob id={id} items={items} />,
+  const { jobVacancy } = useBusinessContext();
+  const [categories, setCategories] = useState({
+    Aktif: {
+      content: <FeedJob id={id} items={[]} />,
     },
-    ['Arsip']: {
-      content: <FeedJob id={id} items={items} archive={true} />,
+    Arsip: {
+      content: <FeedJob id={id} items={[]} archive={true} />,
     },
   });
+  useEffect(() => {
+    if (jobVacancy.length === 0) {
+      return;
+    }
+    setCategories({
+      Aktif: {
+        content: <FeedJob id={id} items={jobVacancy.filter(item => item.is_publish)} />,
+      },
+      Arsip: {
+        content: <FeedJob id={id} items={jobVacancy.filter(item => !item.is_publish)} archive={true} />,
+      },
+    });
+  }, [jobVacancy]);
   return (
     <div className="w-full px-2 sm:px-0">
-      <Tab.Group>
-        <Tab.List className="flex max-w-xs space-x-1">
-          {Object.keys(categories).map((category) => (
-            <Tab
-              key={category}
-              className={({ selected }) =>
-                classNames(
-                  'w-full py-2.5 font-semibold leading-5',
-                  selected
-                    ? 'border-b-4 border-[#FE9A00]'
-                    : 'border-b-4 border-white text-[#7E8299]'
-                )
-              }
-            >
-              {category}
-            </Tab>
-          ))}
-        </Tab.List>
-        <Tab.Panels className="mt-2 w-full">
-          {Object.values(categories).map((posts, idx) => (
-            <Tab.Panel key={idx} className={classNames()}>
-              <div>{posts.content}</div>
-            </Tab.Panel>
-          ))}
-        </Tab.Panels>
-      </Tab.Group>
+      {jobVacancy.length === 0 ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <Tab.Group>
+            <Tab.List className="flex max-w-xs space-x-1 border-none outline-none">
+              {Object.keys(categories).map((category, index) => (
+                <Tab
+                  key={category}
+                  className={({ selected }) =>
+                    classNames(
+                      'w-full py-2.5 font-semibold leading-5',
+                      selected
+                        ? 'border-b-4 border-[#FE9A00]'
+                        : 'border-b-4 border-white text-[#7E8299]',
+                    )
+                  }
+                >
+                  {category}
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels className="mt-2 w-full">
+              {Object.values(categories).map((posts, idx) => (
+                <Tab.Panel key={idx} className={classNames()}>
+                  <div>{posts.content}</div>
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
+        </>
+      )}
     </div>
   );
 }
 
-function FeedJob({archive, id, items}) {
+function FeedJob({ archive, id, items }) {
   return (
     <>
+      {items.length < 1 && <p>No Data</p>}
       {items.map((item) => (
-        <CardJobVacany key={item} detailjob={item} id={id} archive={archive} />
+        <CardJobVacany key={item} detailJob={item} id={id} archive={archive} />
       ))}
     </>
   );
 }
 
-function CardJobVacany({archive, id, detailjob}) {
+function CardJobVacany({ archive, id, detailJob: {title, location, max_salary, min_salary, registration_end_date} }) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-6">
-        <section className="md:flex items-center gap-4 space-y-2">
-          <div className="rounded-md bg-[#F5F8FA] px-5 py-10 flex justify-center items-center">
+        <section className="items-center gap-4 space-y-2 md:flex">
+          <div className="flex items-center justify-center rounded-md bg-[#F5F8FA] px-5 py-10">
             <img src="/upana_logo.png" alt="" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <a href={`/business/${id}/job/detail/${detailjob}`} className="md:text-xl text-base font-semibold hover:underline">Junior React Developer</a>
+              <a
+                href={`/business/${id}/job/detail/`}
+                className="text-base font-semibold hover:underline md:text-xl"
+              >
+                {title}
+              </a>
               <div
                 className={`${
                   !archive ? 'bg-[#E8FFF3]' : 'bg-[#F5F8FA]'
                 } rounded-md px-3 py-1 text-xs`}
               >
-                <p className={`${!archive ? 'text-[#50CD89]' : 'text-[#7E8299]'}`}>
+                <p
+                  className={`${
+                    !archive ? 'text-[#50CD89]' : 'text-[#7E8299]'
+                  }`}
+                >
                   {!archive ? 'Aktif' : 'Arsip'}
                 </p>
               </div>
@@ -94,18 +125,18 @@ function CardJobVacany({archive, id, detailjob}) {
                   <path
                     d="M4.4997 5.64328C5.36878 5.64328 6.07331 5.00368 6.07331 4.2147C6.07331 3.42573 5.36878 2.78613 4.4997 2.78613C3.63062 2.78613 2.92609 3.42573 2.92609 4.2147C2.92609 5.00368 3.63062 5.64328 4.4997 5.64328Z"
                     stroke="#4B5783"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M7.64722 5.64286C6.46702 8.14286 4.5 11 4.5 11C4.5 11 2.53298 8.14286 1.35278 5.64286C0.172567 3.14286 2.13958 1 4.5 1C6.86042 1 8.82743 3.14286 7.64722 5.64286Z"
                     stroke="#4B5783"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
-                <p>Makassar</p>
+                <p>{location}</p>
               </div>
               <div className="flex items-center gap-3">
                 <svg
@@ -122,7 +153,7 @@ function CardJobVacany({archive, id, detailjob}) {
                   />
                 </svg>
 
-                <p>IDR 4.000.000 - 5.000.000</p>
+                <p>IDR {min_salary} - {max_salary}</p>
               </div>
               <div className="flex items-center gap-3">
                 <svg
@@ -195,13 +226,15 @@ function CardJobVacany({archive, id, detailjob}) {
                   />
                 </svg>
 
-                <p>15 April 2022</p>
+                <p>{getFullDate(registration_end_date)}</p>
               </div>
-              <p className='md:hidden'><span className='font-bold'>Pelamar</span>: 30</p>
+              <p className="md:hidden">
+                <span className="font-bold">Pelamar</span>: 30
+              </p>
             </div>
           </div>
         </section>
-        <section className="md:flex hidden flex-col items-center space-y-2 pr-7">
+        <section className="hidden flex-col items-center space-y-2 pr-7 md:flex">
           <svg
             className="h-10 w-10"
             width="25"

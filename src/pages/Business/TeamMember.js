@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import BasicCard from 'components/Widgets/BasicCard';
 import ModalTeamMember from 'components/Modal/ModalTeamMember';
 import Pagination from 'components/Widgets/Pagination';
+import { BusinessProvider } from 'context/business-context';
+import AlertEmailNotVerifiedBusiness from 'components/Modal/AlertEmailNotVerifiedBusiness';
 export default function TeamMember() {
   const { id } = useParams();
 
@@ -19,24 +21,26 @@ export default function TeamMember() {
   ];
 
   return (
-    <LayoutBusiness userId={id} PageName="Team Member">
-      <BasicCard>
-        <section>
-          <div className="flex items-center justify-between px-8">
-            <h3 className="text-base font-semibold ">List Team Member</h3>
-            <ModalTeamMember></ModalTeamMember>
-          </div>
-          <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-        </section>
-        <section className="my-2 overflow-y-auto">
-          <Table items={internExperience}></Table>
-          <div className="flex w-full justify-end pr-8 mt-5">
-          <Pagination></Pagination>
-        </div>
-        </section>
-        
-      </BasicCard>
-    </LayoutBusiness>
+    <BusinessProvider>
+      <LayoutBusiness userId={id} PageName="Team Member">
+        <BasicCard>
+          <section>
+            <div className="flex items-center justify-between px-8">
+              <h3 className="text-base font-semibold ">List Team Member</h3>
+              <ModalTeamMember></ModalTeamMember>
+            </div>
+            <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+          </section>
+          <section className="my-2 overflow-y-auto">
+            <Table items={internExperience}></Table>
+            <div className="mt-5 flex w-full justify-end pr-8">
+              <Pagination></Pagination>
+            </div>
+          </section>
+        </BasicCard>
+        <AlertEmailNotVerifiedBusiness />
+      </LayoutBusiness>
+    </BusinessProvider>
   );
 }
 

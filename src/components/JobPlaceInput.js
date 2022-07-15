@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-const people = [
+const skills = [
   { id: 1, name: 'Wade Cooper' },
   { id: 2, name: 'Arlene Mccoy' },
   { id: 3, name: 'Devon Webb' },
@@ -17,9 +17,9 @@ export default function JobPlaceInput() {
 
   const filteredPeople =
     query === ''
-      ? people
-      : people.filter((person) =>
-          person.name
+      ? skills
+      : skills.filter((skill) =>
+          skill.name
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, ''))
@@ -32,7 +32,7 @@ export default function JobPlaceInput() {
           <div className="relative w-full cursor-default sm:text-sm">
             <Combobox.Input
               className="input-form my-2 lg:my-5 lg:py-3 w-full border-none text-sm "
-              displayValue={(person) => person.name}
+              displayValue={(skill) => skill.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -55,15 +55,15 @@ export default function JobPlaceInput() {
                   Nothing found.
                 </div>
               ) : (
-                filteredPeople.map((person) => (
+                filteredPeople.map((skill) => (
                   <Combobox.Option
-                    key={person.id}
+                    key={skill.id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
                         active ? 'bg-teal-600 text-white' : 'text-gray-900'
                       }`
                     }
-                    value={person}
+                    value={skill}
                   >
                     {({ selected, active }) => (
                       <>
@@ -72,7 +72,7 @@ export default function JobPlaceInput() {
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {person.name}
+                          {skill.name}
                         </span>
                         {selected ? (
                           <span

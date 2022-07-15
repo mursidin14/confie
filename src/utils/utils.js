@@ -152,7 +152,7 @@ export const getLength = (word) => {
   if (word === undefined) {
     return true
   }
-  return word.length > 24 ? true : false
+  return word?.length > 24 ? true : false
 }
 export const isEmpty = (fields) => {
   return fields.some((field) => field.length === 0)

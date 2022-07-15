@@ -58,9 +58,9 @@ function App() {
 
         <Route path="/business" element={<Business />} />
         <Route path="/business/profile" element={<BusinessProfile />} />
-        <Route path="/business/team/:id" element={<TeamMember />} />
-        <Route path="/business/job/:id" element={<JobVacancy />} />
-        <Route path="/business/:id/job/create" element={<OpenJobVacancy />} />
+        <Route path="/business/team" element={<TeamMember />} />
+        <Route path="/business/job" element={<JobVacancy />} />
+        <Route path="/business/job/create" element={<OpenJobVacancy />} />
         <Route path="/business/:id/job/detail/:idJob" element={<JobVacancyDetail />} />
         <Route path="/business/talent/:id" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />

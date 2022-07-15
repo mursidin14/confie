@@ -170,8 +170,8 @@ function Skill({ skills }) {
       <p class="judul-section">SKILL SUMMARY</p>
       <div class="content-section">
         <ul>
-          {skills.map((skill) => (
-            <li>{skill?.name.toUpperCase()}</li>
+          {skills.map((skill, index) => (
+            <li key={index}>{skill?.name.toUpperCase()}</li>
           ))}
         </ul>
       </div>
@@ -184,8 +184,8 @@ function Award({ awards }) {
     <section>
       <p class="judul-section">AWARDS RECIEVED</p>
       <div class="content-section">
-        {awards.map((award) => (
-          <div class="flex-container-row">
+        {awards.map((award, index) => (
+          <div  key={index} class="flex-container-row">
             <div class="flex-container">
               <div class="fb-10">
                 <p>
@@ -214,8 +214,8 @@ function EducationHistory({ educations }) {
         {educations.length < 1 ? (
           <p>No Education History</p>
         ) : (
-          educations.map((education) => (
-            <div class="flex-container-row mb-1">
+          educations.map((education, index) => (
+            <div key={index} class="flex-container-row mb-1">
               <p class="judul-item">{education.school}</p>
               <p class="durasi-item">
                 {education.major} | {education.start_date} -{' '}
@@ -237,8 +237,8 @@ function IntershipExperience({ interns }) {
     <section>
       <p class="judul-section judul-section-content">INTERNSHIP EXPERIENCE</p>
       <div class="content-section clr-blk">
-        {interns.map((intern) => (
-          <div class="flex-container-row mb-1">
+        {interns.map((intern, index) => (
+          <div key={index} class="flex-container-row mb-1">
             <p class="judul-item">{intern.position}</p>
             <p class="durasi-item">{utils.getMonthYear(intern.start_date)} - {utils.getMonthYear(intern.end_date)}</p>
             <p class="deskripsi-item">
@@ -256,8 +256,8 @@ function WorkExperience({works}) {
     <section>
       <p class="judul-section judul-section-content">WORK EXPERIENCE</p>
       <div class="content-section clr-blk">
-      {works.map((work) => (
-          <div class="flex-container-row mb-1">
+      {works.map((work, index) => (
+          <div key={index} class="flex-container-row mb-1">
             <p class="judul-item">{work.position}</p>
             <p class="durasi-item">{utils.getMonthYear(work.start_date)} - {utils.getMonthYear(work.end_date) === '-' ? 'Sekarng' : utils.getMonthYear(work.end_date)}</p>
             <p class="deskripsi-item">

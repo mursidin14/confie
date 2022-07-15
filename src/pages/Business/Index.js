@@ -4,6 +4,7 @@ import ProgressBar from 'components/Widgets/ProgressBar';
 import { useParams } from 'react-router-dom';
 import { BusinessProvider, useBusinessContext } from 'context/business-context';
 import utils, { getYear } from 'utils/utils';
+import EmailVerifiedCard from 'components/EmailVerifiedCard';
 
 export default function Index() {
   const { id } = useParams();
@@ -165,94 +166,106 @@ function IconFour() {
 }
 
 function PersonalCard({ id }) {
-  const context = useBusinessContext()
-  const {business} = context
+  const context = useBusinessContext();
+  const { business } = context;
+  
   return (
-    <section className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
-      <div className="flex items-center gap-3">
-        <div className="block md:hidden">
-          <img className="w-fit object-cover " src={
-                  business.url_photo_profile
-                    ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
-                    : '/company_default.png'
-                } alt="" />
-        </div>
-        <div className="flex items-center gap-1 md:hidden lg:gap-3">
-          <h3 className="text-left text-base font-semibold sm:text-xl">
-           {utils.makeCapital(business.full_name)}
-          </h3>
-          <svg
-            className="h-5 w-5"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.60164 1.65525C10.6061 -0.294527 13.3939 -0.294527 14.3984 1.65525C15.002 2.82684 16.3636 3.39087 17.6189 2.98924C19.7079 2.32085 21.6791 4.29206 21.0108 6.38106C20.6091 7.63631 21.1731 8.99802 22.3448 9.60162C24.2945 10.6061 24.2945 13.3939 22.3448 14.3984C21.1731 15.002 20.6091 16.3637 21.0108 17.6189C21.6791 19.7079 19.7079 21.6791 17.6189 21.0107C16.3638 20.6091 15.002 21.1731 14.3984 22.3447C13.3939 24.2945 10.6061 24.2945 9.60164 22.3447C8.99804 21.1731 7.63633 20.6091 6.38108 21.0107C4.29208 21.6791 2.32086 19.7079 2.98925 17.6189C3.39089 16.3637 2.82685 15.002 1.65526 14.3984C-0.294512 13.3939 -0.294512 10.6061 1.65526 9.60162C2.82685 8.99802 3.39089 7.63631 2.98925 6.38106C2.32086 4.29206 4.29208 2.32085 6.38108 2.98924C7.63633 3.39087 8.99804 2.82684 9.60164 1.65525Z"
-              fill="#FE9A00"
+    <>
+      {business.email_verified_at ? <></> : <EmailVerifiedCard />}
+      <section className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
+        <div className="flex items-center gap-3">
+          <div className="block md:hidden">
+            <img
+              className="w-fit object-cover "
+              src={
+                business.url_photo_profile
+                  ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
+                  : '/company_default.png'
+              }
+              alt=""
             />
-            <path
-              d="M15.5704 8.48787C15.8258 8.1873 16.2214 8.17312 16.5219 8.42861C16.8225 8.6841 16.7786 9.08041 16.5231 9.381L11.8288 15.3198C11.5693 15.6251 11.1095 15.6573 10.81 15.391L7.5957 12.5339C7.30085 12.2718 7.2743 11.8204 7.53639 11.5255C7.79847 11.2306 8.24996 11.2041 8.54479 11.4661L11.2133 13.8381L15.5704 8.48787Z"
-              fill="white"
+          </div>
+          <div className="flex items-center gap-1 md:hidden lg:gap-3">
+            <h3 className="text-left text-base font-semibold sm:text-xl">
+              {utils.makeCapital(business.full_name)}
+            </h3>
+            <svg
+              className="h-5 w-5"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.60164 1.65525C10.6061 -0.294527 13.3939 -0.294527 14.3984 1.65525C15.002 2.82684 16.3636 3.39087 17.6189 2.98924C19.7079 2.32085 21.6791 4.29206 21.0108 6.38106C20.6091 7.63631 21.1731 8.99802 22.3448 9.60162C24.2945 10.6061 24.2945 13.3939 22.3448 14.3984C21.1731 15.002 20.6091 16.3637 21.0108 17.6189C21.6791 19.7079 19.7079 21.6791 17.6189 21.0107C16.3638 20.6091 15.002 21.1731 14.3984 22.3447C13.3939 24.2945 10.6061 24.2945 9.60164 22.3447C8.99804 21.1731 7.63633 20.6091 6.38108 21.0107C4.29208 21.6791 2.32086 19.7079 2.98925 17.6189C3.39089 16.3637 2.82685 15.002 1.65526 14.3984C-0.294512 13.3939 -0.294512 10.6061 1.65526 9.60162C2.82685 8.99802 3.39089 7.63631 2.98925 6.38106C2.32086 4.29206 4.29208 2.32085 6.38108 2.98924C7.63633 3.39087 8.99804 2.82684 9.60164 1.65525Z"
+                fill="#FE9A00"
+              />
+              <path
+                d="M15.5704 8.48787C15.8258 8.1873 16.2214 8.17312 16.5219 8.42861C16.8225 8.6841 16.7786 9.08041 16.5231 9.381L11.8288 15.3198C11.5693 15.6251 11.1095 15.6573 10.81 15.391L7.5957 12.5339C7.30085 12.2718 7.2743 11.8204 7.53639 11.5255C7.79847 11.2306 8.24996 11.2041 8.54479 11.4661L11.2133 13.8381L15.5704 8.48787Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="flex items-start gap-5 lg:items-stretch">
+          <div className="hidden items-center md:flex">
+            <img
+              className="w-fit rounded-md object-cover"
+              src={
+                business.url_photo_profile
+                  ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
+                  : '/company_default.png'
+              }
+              alt=""
             />
-          </svg>
-        </div>
-      </div>
-      <div className="flex items-start gap-5 lg:items-stretch">
-        <div className="hidden items-center md:flex">
-          <img className="w-fit object-cover rounded-md" src={
-                  business.url_photo_profile
-                    ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
-                    : '/company_default.png'
-                } alt="" />
-        </div>
-        <div className="w-full">
-          <div className="justify-between h-full lg:flex">
-            <div>
-              <div className="hidden items-center gap-2 md:flex lg:gap-3">
-                <h3 className="text-left text-lg font-semibold sm:text-xl">
-                 {utils.makeCapital(business.full_name)}
-                </h3>
-                <svg
-                  className="h-5 w-5"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.60164 1.65525C10.6061 -0.294527 13.3939 -0.294527 14.3984 1.65525C15.002 2.82684 16.3636 3.39087 17.6189 2.98924C19.7079 2.32085 21.6791 4.29206 21.0108 6.38106C20.6091 7.63631 21.1731 8.99802 22.3448 9.60162C24.2945 10.6061 24.2945 13.3939 22.3448 14.3984C21.1731 15.002 20.6091 16.3637 21.0108 17.6189C21.6791 19.7079 19.7079 21.6791 17.6189 21.0107C16.3638 20.6091 15.002 21.1731 14.3984 22.3447C13.3939 24.2945 10.6061 24.2945 9.60164 22.3447C8.99804 21.1731 7.63633 20.6091 6.38108 21.0107C4.29208 21.6791 2.32086 19.7079 2.98925 17.6189C3.39089 16.3637 2.82685 15.002 1.65526 14.3984C-0.294512 13.3939 -0.294512 10.6061 1.65526 9.60162C2.82685 8.99802 3.39089 7.63631 2.98925 6.38106C2.32086 4.29206 4.29208 2.32085 6.38108 2.98924C7.63633 3.39087 8.99804 2.82684 9.60164 1.65525Z"
-                    fill="#FE9A00"
-                  />
-                  <path
-                    d="M15.5704 8.48787C15.8258 8.1873 16.2214 8.17312 16.5219 8.42861C16.8225 8.6841 16.7786 9.08041 16.5231 9.381L11.8288 15.3198C11.5693 15.6251 11.1095 15.6573 10.81 15.391L7.5957 12.5339C7.30085 12.2718 7.2743 11.8204 7.53639 11.5255C7.79847 11.2306 8.24996 11.2041 8.54479 11.4661L11.2133 13.8381L15.5704 8.48787Z"
-                    fill="white"
-                  />
-                </svg>
+          </div>
+          <div className="w-full">
+            <div className="h-full justify-between lg:flex">
+              <div>
+                <div className="hidden items-center gap-2 md:flex lg:gap-3">
+                  <h3 className="text-left text-lg font-semibold sm:text-xl">
+                    {utils.makeCapital(business.full_name)}
+                  </h3>
+                  <svg
+                    className="h-5 w-5"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.60164 1.65525C10.6061 -0.294527 13.3939 -0.294527 14.3984 1.65525C15.002 2.82684 16.3636 3.39087 17.6189 2.98924C19.7079 2.32085 21.6791 4.29206 21.0108 6.38106C20.6091 7.63631 21.1731 8.99802 22.3448 9.60162C24.2945 10.6061 24.2945 13.3939 22.3448 14.3984C21.1731 15.002 20.6091 16.3637 21.0108 17.6189C21.6791 19.7079 19.7079 21.6791 17.6189 21.0107C16.3638 20.6091 15.002 21.1731 14.3984 22.3447C13.3939 24.2945 10.6061 24.2945 9.60164 22.3447C8.99804 21.1731 7.63633 20.6091 6.38108 21.0107C4.29208 21.6791 2.32086 19.7079 2.98925 17.6189C3.39089 16.3637 2.82685 15.002 1.65526 14.3984C-0.294512 13.3939 -0.294512 10.6061 1.65526 9.60162C2.82685 8.99802 3.39089 7.63631 2.98925 6.38106C2.32086 4.29206 4.29208 2.32085 6.38108 2.98924C7.63633 3.39087 8.99804 2.82684 9.60164 1.65525Z"
+                      fill="#FE9A00"
+                    />
+                    <path
+                      d="M15.5704 8.48787C15.8258 8.1873 16.2214 8.17312 16.5219 8.42861C16.8225 8.6841 16.7786 9.08041 16.5231 9.381L11.8288 15.3198C11.5693 15.6251 11.1095 15.6573 10.81 15.391L7.5957 12.5339C7.30085 12.2718 7.2743 11.8204 7.53639 11.5255C7.79847 11.2306 8.24996 11.2041 8.54479 11.4661L11.2133 13.8381L15.5704 8.48787Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <CompanyInformation />
               </div>
-              <CompanyInformation />
-            </div>
-            <div className="flex w-full h-full flex-col justify-between lg:items-end">
-              <div className="hidden md:block">
-                <ButtonDashboard />
-              </div>
-              <div className="hidden w-full md:block ">
-                <ProfileCompletion />
+              <div className="flex h-full w-full flex-col justify-between lg:items-end">
+                <div className="hidden md:block">
+                  <ButtonDashboard />
+                </div>
+                <div className="hidden w-full md:block ">
+                  <ProfileCompletion />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="block md:hidden">
-        <ProfileCompletion />
-      </div>
-      <div className="block md:hidden">
-        <ButtonDashboard />
-      </div>
-    </section>
+        <div className="block md:hidden">
+          <ProfileCompletion />
+        </div>
+        <div className="block md:hidden">
+          <ButtonDashboard />
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -293,8 +306,8 @@ function ButtonDashboard() {
 }
 
 function CompanyInformation() {
-  const context = useBusinessContext()
-  const {business} = context
+  const context = useBusinessContext();
+  const { business } = context;
   return (
     <div className="mt-4 space-y-2">
       <div className="flex gap-3">
@@ -312,7 +325,9 @@ function CompanyInformation() {
         </svg>
 
         <p className="w-fit text-left text-xs text-[#B5B5C3] sm:text-sm md:w-[400px]">
-          {`${business.address} ${utils.makeCapital(business.city_name)}, ${utils.makeCapital(business.province_name)}`}
+          {`${business.address} ${utils.makeCapital(
+            business.city_name,
+          )}, ${utils.makeCapital(business.province_name)}`}
         </p>
       </div>
       <div className="flex items-center gap-3">
@@ -329,9 +344,7 @@ function CompanyInformation() {
           />
         </svg>
 
-        <p className="text-xs text-[#B5B5C3] sm:text-sm">
-          {business.email}
-        </p>
+        <p className="text-xs text-[#B5B5C3] sm:text-sm">{business.email}</p>
       </div>
       <div className="flex items-center gap-3">
         <svg
