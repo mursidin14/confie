@@ -11,42 +11,42 @@ export default function ASideBarMobileBusiness({
     {
       alias: 'dashboard',
       name: 'Dashboard',
-      link: `/business/${userId}`,
+      link: `/business/`,
       icon_active: '/nav_icon/dashboard.png',
       icon_inactive: '/nav_icon/i_dashboard.png',
     },
     {
       alias: 'profile perusahaan',
       name: 'Profile Perusahaan',
-      link: `/business/profile/${userId}`,
+      link: `/business/profile/`,
       icon_active: '/nav_icon/profile.png',
       icon_inactive: '/nav_icon/i_profile.png',
     },
     {
       alias: 'team member',
       name: 'Team Member',
-      link: `/business/team/${userId}`,
+      link: `/business/team/`,
       icon_active: '/nav_icon/plan.png',
       icon_inactive: '/nav_icon/i_plan.png',
     },
     {
       alias: 'lowongan kerja',
       name: 'Lowongan Kerja',
-      link: `/business/job/${userId}`,
+      link: `/business/job/`,
       icon_active: '/nav_icon/job_offer.png',
       icon_inactive: '/nav_icon/i_job_offer.png',
     },
     {
       alias: 'kelas bisnis',
       name: 'Kelas Bisinis',
-      link: `/notcreateyet/${userId}`,
+      link: `/notcreateyet/`,
       icon_active: '/nav_icon/applicant.png',
       icon_inactive: '/nav_icon/i_applicant.png',
     },
     {
       alias: 'talent pool',
       name: 'Talent Pool',
-      link: `/business/talent/${userId}`,
+      link: `/business/talent/`,
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
     },
@@ -58,7 +58,7 @@ export default function ASideBarMobileBusiness({
     },
   ];
   let page = PageName.toLowerCase();
-  if (page == 'account setting') {
+  if (page === 'account setting') {
     page = 'dashboard';
   }
   return (

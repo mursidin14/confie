@@ -42,7 +42,6 @@ export default function ASideBar({ offCanvas, handleNav, PageName, userId }) {
         </div>
         <div className='pl-6'>
           <NavBarBusiness page={PageName} offCanvas={offCanvas} userId={userId} />
-  
         </div>
         </div>
        

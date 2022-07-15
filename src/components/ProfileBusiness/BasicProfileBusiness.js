@@ -3,10 +3,12 @@ import BasicCard from 'components/Widgets/BasicCard';
 import ModalProfileBusiness from 'components/Modal/ModalProfileBusiness';
 import { useBusinessProfileContext } from 'context/business-profile-context';
 import SkeletonCard from 'components/SkeletonCard';
-import utils, { getFullYear, getYear } from 'utils/utils';
+import  utils, { getYear } from 'utils/utils';
+import EditLogoCompany from './EditLogoCompany';
 
 export default function BasicProfileBusiness({ input, index }) {
-  const { isLoading, businessProfile } = useBusinessProfileContext();
+  const { businessProfile } = useBusinessProfileContext();
+  let isEmpty = Object.keys(businessProfile).length === 0
   let inputs = [
     {
       label: 'Nama Perusahaan',
@@ -18,19 +20,19 @@ export default function BasicProfileBusiness({ input, index }) {
     },
     {
       label: 'Negara',
-      value: businessProfile.country,
+      value: utils.makeCapital(businessProfile.country),
     },
     {
       label: 'Provinsi',
-      value: businessProfile.province_name,
+      value: utils.makeCapital(businessProfile.province_name),
     },
     {
       label: 'Kota',
-      value: businessProfile.city_name,
+      value: utils.makeCapital(businessProfile.city_name),
     },
     {
       label: 'Alamat Perusahaan',
-      value: businessProfile.address,
+      value: utils.makeCapital(businessProfile.address),
     },
     {
       label: 'Tahun Berdiri',
@@ -39,8 +41,8 @@ export default function BasicProfileBusiness({ input, index }) {
   ];
   return (
     <>
-      {isLoading && <SkeletonCard />}
-      {!isLoading && (
+      {isEmpty && <SkeletonCard />}
+      {!isEmpty && (
         <BasicCard>
           <section className="text-left">
             <div className="flex items-center justify-between px-8">
@@ -53,16 +55,7 @@ export default function BasicProfileBusiness({ input, index }) {
             <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
             <div className="my-5">
               <div className="px-8">
-                <div className="mb-5 lg:flex">
-                  <div className="w-5/12">
-                    <label className="text-xs after:text-pink-500 after:content-['*'] lg:text-base">
-                      Logo Perusahaan
-                    </label>
-                  </div>
-                  <div className="w-7/12">
-                    <img className="w-20 sm:w-32" src="/person.png" alt="" />
-                  </div>
-                </div>
+                <EditLogoCompany />
                 <div className="mb-5 lg:flex">
                   <div className="lg:w-5/12">
                     <label className="text-xs after:text-pink-500 after:content-['*'] lg:text-base">

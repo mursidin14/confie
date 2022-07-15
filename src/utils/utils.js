@@ -1,3 +1,5 @@
+import { getCurrentUser } from "services/Auth/AuthService"
+
 export function authHeader() {
   const metadata = JSON.parse(localStorage.getItem('metadata'))
   if (metadata && metadata.access_token) {
@@ -8,7 +10,7 @@ export function authHeader() {
     return {}
   }
 }
-export function makeCapital(name) {
+export function makeCapital(name = '') {
   name = name.toLowerCase()
   const nameArray = name.split(' ')
   if (nameArray.length > 1) {
@@ -64,7 +66,7 @@ const timeEpoch = (time) => {
   return date.getTime() / 1000
 }
 export function getGender(gender) {
-  return gender == 'L' ? 'Laki-laki' : 'Perempuan'
+  return gender === 'L' ? 'Laki-laki' : 'Perempuan'
 }
 
 export const getDate = (time) => {
@@ -147,13 +149,13 @@ export const getFullDate = (epoch) => {
 }
 
 export const getLength = (word) => {
-  if (word == undefined) {
+  if (word === undefined) {
     return true
   }
   return word.length > 24 ? true : false
 }
 export const isEmpty = (fields) => {
-  return fields.some((field) => field.length == 0)
+  return fields.some((field) => field.length === 0)
 }
 export const getModelCV = () => {
   if (!localStorage.getItem('modelCV')) {
@@ -167,12 +169,16 @@ export const getModelCV = () => {
   }
   return JSON.parse(localStorage.getItem('modelCV')).model
 }
-export const getYear = (epoch) => {
+export const getYear = (epoch = null) => {
   if (epoch === null) {
     return null
   }
   const date = new Date(epoch * 1000)
   return date.getFullYear()
+}
+export const getRoles = () => {
+  const user = getCurrentUser()
+  console.log(user)
 }
 const utils = {
   authHeader,

@@ -3,7 +3,7 @@ import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import { useParams } from 'react-router-dom';
 import { BusinessProvider, useBusinessContext } from 'context/business-context';
-import utils, { getFullYear, getYear } from 'utils/utils';
+import utils, { getYear } from 'utils/utils';
 
 export default function Index() {
   const { id } = useParams();
@@ -41,7 +41,7 @@ export default function Index() {
   );
 }
 
-function StatusClass({}) {
+function StatusClass() {
   return (
     <section className="my-7 flex flex-col justify-between gap-5 font-semibold lg:flex-row lg:gap-5">
       <div className="flex grow items-center justify-evenly rounded-md bg-white py-8 px-3 shadow-mine sm:px-8 lg:w-fit">
@@ -171,7 +171,11 @@ function PersonalCard({ id }) {
     <section className="rounded-md bg-white py-7 px-3 shadow-mine sm:px-8 ">
       <div className="flex items-center gap-3">
         <div className="block md:hidden">
-          <img className="w-fit object-cover " src="/upana_logo.png" alt="" />
+          <img className="w-fit object-cover " src={
+                  business.url_photo_profile
+                    ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
+                    : '/company_default.png'
+                } alt="" />
         </div>
         <div className="flex items-center gap-1 md:hidden lg:gap-3">
           <h3 className="text-left text-base font-semibold sm:text-xl">
@@ -198,10 +202,14 @@ function PersonalCard({ id }) {
       </div>
       <div className="flex items-start gap-5 lg:items-stretch">
         <div className="hidden items-center md:flex">
-          <img className="w-fit object-cover " src="/upana_logo.png" alt="" />
+          <img className="w-fit object-cover rounded-md" src={
+                  business.url_photo_profile
+                    ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
+                    : '/company_default.png'
+                } alt="" />
         </div>
         <div className="w-full">
-          <div className="justify-between lg:flex">
+          <div className="justify-between h-full lg:flex">
             <div>
               <div className="hidden items-center gap-2 md:flex lg:gap-3">
                 <h3 className="text-left text-lg font-semibold sm:text-xl">
@@ -227,7 +235,7 @@ function PersonalCard({ id }) {
               </div>
               <CompanyInformation />
             </div>
-            <div className="flex w-full flex-col justify-between lg:items-end">
+            <div className="flex w-full h-full flex-col justify-between lg:items-end">
               <div className="hidden md:block">
                 <ButtonDashboard />
               </div>
@@ -248,7 +256,7 @@ function PersonalCard({ id }) {
   );
 }
 
-function ProfileCompletion({}) {
+function ProfileCompletion() {
   return (
     <div className="mt-3 w-full ">
       <div className="flex justify-between text-xs sm:text-base">
@@ -284,7 +292,7 @@ function ButtonDashboard() {
   );
 }
 
-function CompanyInformation({}) {
+function CompanyInformation() {
   const context = useBusinessContext()
   const {business} = context
   return (

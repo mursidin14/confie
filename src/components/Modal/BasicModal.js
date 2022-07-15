@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-export default function BasicModal({ action, title, children }) {
+export default function BasicModal({ action, title, handleSubmit, children }) {
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
@@ -60,7 +60,7 @@ export default function BasicModal({ action, title, children }) {
                     >
                       Cancel
                     </button>
-                    <button className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button onClick={handleSubmit} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
                       Submit
                     </button>
                   </div>

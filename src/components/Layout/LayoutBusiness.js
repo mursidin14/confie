@@ -3,6 +3,7 @@ import Header from 'components/Layout/Header';
 import ASideBarBusiness from 'components/Aside/AsideBarBusiness';
 import ASideBarMobileBusiness from 'components/Aside/ASideBarMobileBusiness';
 import { useBusinessContext } from 'context/business-context';
+import { Helmet } from 'react-helmet';
 export default function LayoutBusiness({PageName, children, userId}) {
   const [offCanvas, setOffCanvas] = useState(false);
   const context = useBusinessContext()
@@ -31,6 +32,9 @@ export default function LayoutBusiness({PageName, children, userId}) {
         } min-h-screen bg-[#FFFFFF]`}
       >
         <Header data={data} handleNav={handleNav} PageName={PageName} />
+        <Helmet>
+          <title>{PageName}</title>
+        </Helmet>
         <div className="my-4 lg:mx-7 mx-3 py-5">{children}</div>
       </section>
     </main>

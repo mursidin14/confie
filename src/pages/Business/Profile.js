@@ -6,10 +6,8 @@ import { useParams } from 'react-router-dom';
 import GalleryCompany from 'components/ProfileBusiness/GalleryCompany';
 import BusinessProfileProvider from 'context/business-profile-context';
 import { BusinessProvider } from 'context/business-context';
-import Skeleton from 'react-loading-skeleton';
 export default function Profile() {
   const { id } = useParams();
-
   return (
     <BusinessProfileProvider>
       <BusinessProvider>
@@ -19,7 +17,7 @@ export default function Profile() {
           <InformationCompany></InformationCompany>
           <GalleryCompany>
             <div className="image-upload">
-              <label className="cursor-pointer" for="file-input">
+              <label className="cursor-pointer" htmlFor="file-input">
                 <div className="flex h-full w-fit flex-col items-center justify-center gap-5 rounded-md bg-[#A1A5B7] p-10 text-white">
                   <svg
                     width="63"
@@ -45,7 +43,6 @@ export default function Profile() {
                       fill="white"
                     />
                   </svg>
-
                   <p>Tambah Gambar</p>
                 </div>
               </label>

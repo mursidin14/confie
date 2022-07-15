@@ -4,11 +4,12 @@ import ModalAboutCompany from 'components/Modal/ModalAboutCompany';
 import { useBusinessProfileContext } from 'context/business-profile-context';
 import SkeletonCard from 'components/SkeletonCard';
 export default function AboutCompany() {
-  const { isLoading, businessProfile } = useBusinessProfileContext();
+  const {businessProfile } = useBusinessProfileContext();
+  let isEmpty = Object.keys(businessProfile).length === 0
   return (
     <>
-      {isLoading && <SkeletonCard />}
-      {!isLoading && (
+      {isEmpty && <SkeletonCard />}
+      {!isEmpty && (
         <BasicCard>
           <section className="text-left">
             <div className="flex items-center justify-between px-8">
@@ -16,12 +17,13 @@ export default function AboutCompany() {
               <ModalAboutCompany
                 title={'Tentang Perusahaan'}
                 action={'Edit'}
+                data={businessProfile}
               ></ModalAboutCompany>
             </div>
             <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
             <div className="px-8">
               <div className="my-5 h-[200px] rounded-md bg-[#F5F8FA] ">
-                <p className="p-4 text-xs text-[#2A2F32] md:text-base">
+                <p className="p-4 text-[#2A2F32] md:text-base">
                   {businessProfile.about}
                 </p>
               </div>

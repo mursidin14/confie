@@ -6,7 +6,7 @@ import utils, { getTodayDate } from 'utils/utils';
 export default function ModalWorkExperience({ section }) {
   const [isOpen, setIsOpen] = useState(false);
   const [dataWorkExperience, setDataWorkExperience] = useState({
-    is_current: false,
+    is_current: 1,
     status: 'onsite',
   });
   const [error, setError] = useState([]);
@@ -161,11 +161,11 @@ export default function ModalWorkExperience({ section }) {
                             onChange={() => {
                               setDataWorkExperience({
                                 ...dataWorkExperience,
-                                is_current: !dataWorkExperience['is_current'],
+                                is_current: dataWorkExperience['is_current'] === 1 ? 0 : 1,
                               });
                             }}
                             type="checkbox"
-                            checked={dataWorkExperience.is_current === true}
+                            checked={dataWorkExperience.is_current === 1}
                           />
                           <label htmlFor="">Ya</label>
                         </div>

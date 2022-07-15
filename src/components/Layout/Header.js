@@ -8,7 +8,7 @@ export default function Header({data, handleNav, PageName }) {
     setOpen(!open);
   }
   async function clickLogout() {
-    const response = await AuthService.logout();
+    await AuthService.logout();
     window.location.href = '/';
   }
   return (
@@ -29,7 +29,7 @@ export default function Header({data, handleNav, PageName }) {
         </svg>
       </button>
       <h4 className="hidden text-[18px] font-semibold lg:block">{PageName}</h4>
-      <img className="block w-24 lg:hidden" src="/logo.png" alt="" />
+      <img className="block w-24 lg:hidden" src="/logo.png" alt="logo_config" />
       <div className="flex items-center gap-6 py-3">
         <svg
           width="23"
@@ -84,8 +84,8 @@ export default function Header({data, handleNav, PageName }) {
           <img
             onClick={clickProfile}
             className="w-10 h-10 object-cover cursor-pointer rounded-md"
-            src={data.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}` : data.gender == "L" ? "/male.jpg" : "/female.jpg"}
-            alt=""
+            src={data?.roles[0]?.name === 'business' ? data.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}` : '/company_default.png' : data.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}` : data.gender === "L" ? "/male.jpg" : "/female.jpg"}
+            alt="photo_profile"
           />
           <section
             className={`absolute right-9 rounded-md bg-white px-5 py-2 shadow-mine top-14 z-10 text-left ${
@@ -93,7 +93,7 @@ export default function Header({data, handleNav, PageName }) {
             } transition-all max-w-xs`}
           >
             <div className='text-left'>
-            <a href='/profile' className='font-semibold sm:text-base text-sm hover:underline'>{makeCapital(data.full_name)}</a>
+            <p className='font-semibold sm:text-base text-sm'>{makeCapital(data.full_name)}</p>
             <p className='text-xs text-[#7E8299]'>{data.email}</p>
             <hr className='my-2'/>
             <a href="/setting" className='text-black hover:underline sm:text-sm text-xs'>Account Setting</a>
