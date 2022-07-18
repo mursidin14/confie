@@ -5,7 +5,7 @@ import { Disclosure } from '@headlessui/react'
 export default function NavBar({ is_verified, page, offCanvas }) {
   let pageName = page.toLowerCase()
 
-  if (pageName == 'account setting') {
+  if (pageName === 'account setting') {
     pageName = 'dashboard'
   }
 
@@ -102,13 +102,15 @@ export default function NavBar({ is_verified, page, offCanvas }) {
           subNav={[
             {
               name: 'Peta Karir',
-              link: '/peta-karir'
+              link: '/guide/map'
             },
             {
               name: 'Eksplorasi Profesi',
-              link: '/eksplorasi-profesi'
+              link: '/guide/exploration'
             }
           ]}
+          is_active={pageName === 'panduan karir'}
+          icon_active={'/nav_icon/carrer.png'}
           icon_inactive={'/nav_icon/i_carrer.png'}
           title={'Panduan Karir'}
         />
@@ -151,6 +153,8 @@ export default function NavBar({ is_verified, page, offCanvas }) {
               link: '/billing'
             }
           ]}
+          is_active={pageName === 'help'}
+          icon_active={'/nav_icon/help.png'}
           icon_inactive={'/nav_icon/i_help.png'}
           title={'Help'}
         />
@@ -174,17 +178,17 @@ export default function NavBar({ is_verified, page, offCanvas }) {
   )
 }
 
-function BasicDisclosureNav({ subNav, title, icon_inactive, offCanvas }) {
+function BasicDisclosureNav({is_active, subNav, title, icon_inactive, icon_active, offCanvas }) {
   return (
-    <Disclosure>
+    <Disclosure defaultOpen={is_active}>
       {({ open }) => (
         <>
           <Disclosure.Button className="group flex items-center gap-5">
-            <img className="w-4 sm:w-5" src={icon_inactive} alt="" />
+            <img className="w-4 sm:w-5" src={is_active ? icon_active : icon_inactive} alt="" />
             <p
               className={`text-xs sm:text-[13px] ${
                 offCanvas ? 'hidden' : 'block'
-              } text-white/40 transition-all group-hover:text-white`}
+              } ${is_active ? 'text-white' : 'text-white/40'} transition-all group-hover:text-white`}
             >
               {title}
             </p>
@@ -193,7 +197,7 @@ function BasicDisclosureNav({ subNav, title, icon_inactive, offCanvas }) {
             <ul className="requirments text-left">
               {subNav.map((item, index) => (
                 <li className="my-2" key={index}>
-                  <a href={`/under`} className="relative left-5 text-[#7E8299]">
+                  <a href={`${item.link}`} className={"relative left-5 text-[#7E8299]"}>
                     {item.name}
                   </a>
                 </li>

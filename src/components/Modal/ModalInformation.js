@@ -1,63 +1,64 @@
-
 import React from 'react';
 import BasicModal from './BasicModal';
 import InputForm from 'components/Widgets/InputForm';
+import { updateCompanyInformation } from 'services/Profile/ProfileService';
 
 export default function ModalInformation({ action, title }) {
-    let inputs = [
-        {
-          label: 'Jenis Industri',
-          type: 'text',
-          name: 'full_name',
-          errorMessage:
-            "Name should be 3-16 characters and shouldn't include any special character!",
-          pattern: '^[A-Za-z0-9]{3,16}$',
-          required: true,
-        },
-        {
-          label: 'Company Size',
-          type: 'number',
-          name: 'full_name',
-          errorMessage:
-            "Name should be 3-16 characters and shouldn't include any special character!",
-          pattern: '^[A-Za-z0-9]{3,16}$',
-          required: false,
-        },
-        {
-          label: 'Link Website',
-          type: 'text',
-          name: 'full_name',
-          errorMessage:
-            "Name should be 3-16 characters and shouldn't include any special character!",
-          pattern: '^[A-Za-z0-9]{3,16}$',
-          required: false,
-        },
-        {
-          label: 'Link Facebook Page',
-          type: 'text',
-          name: 'full_name',
-          errorMessage:
-            "Name should be 3-16 characters and shouldn't include any special character!",
-          pattern: '^[A-Za-z0-9]{3,16}$',
-          required: false,
-        },
-        {
-          label: 'Link Instagram        ',
-          type: 'text',
-          name: 'full_name',
-          errorMessage:
-            "Name should be 3-16 characters and shouldn't include any special character!",
-          pattern: '^[A-Za-z0-9]{3,16}$',
-          required: false,
-        },
-        
-      ];
+  const [dataInformation, setDataInformation] = React.useState({
+    company_type: '',
+    company_size: '',
+    link_website: '',
+    link_facebook_page: '',
+    link_instagram: '',
+  });
+  const handleChange = (e) => {
+    setDataInformation({
+      ...dataInformation,
+      [e.target.name]: e.target.value,
+    });
+  }
+  const handleSubmit =  async () => {
+    await updateCompanyInformation(dataInformation)
+    window.location.reload()
+  };
+  const inputs = [
+    {
+      label: 'Jenis Industri',
+      type: 'text',
+      name: 'company_type',
+      required: true,
+    },
+    {
+      label: 'Company Size',
+      type: 'text',
+      name: 'company_size',
+      required: false,
+    },
+    {
+      label: 'Link Website',
+      type: 'text',
+      name: 'link_website',
+      required: false,
+    },
+    {
+      label: 'Link Facebook Page',
+      type: 'text',
+      name: 'link_facebook_page',
+      required: false,
+    },
+    {
+      label: 'Link Instagram',
+      type: 'text',
+      name: 'link_instagram',
+      required: false,
+    },
+  ];
   return (
-    <BasicModal action={action} title={title}>
+    <BasicModal handleSubmit={handleSubmit} action={action} title={title}>
       <div className="my-5">
         <div className="px-8">
-        {inputs.map((input, index) => (
-            <InputForm key={index} {...input} />
+          {inputs.map((input, index) => (
+            <InputForm key={index} {...input} data={dataInformation} handleChange={handleChange} />
           ))}
         </div>
       </div>

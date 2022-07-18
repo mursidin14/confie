@@ -24,3 +24,12 @@ export const getDetailJobVacancy = (id) => {
     .then((response) => response)
     .catch((error) => error.response);
 }
+
+export const deleteJobVacancy = (id) => {
+  return httpAuthClient
+    .delete(`/api/jobvacancy/${id}`, {
+      _method: "DELETE",
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+}

@@ -31,6 +31,10 @@ import UnderConstruction from 'pages/UnderConstruction';
 import NewPassword from 'pages/NewPassword';
 import VerifyEmail from 'pages/VerifyEmail';
 import { Routes, Route } from 'react-router-dom';
+import CarrerMap from 'pages/Candidate/CarrerGuide/CarrerMap';
+import ExplorationCarrer from 'pages/Candidate/CarrerGuide/ExplorationCarrer';
+import FAQ from 'pages/Candidate/Help/FAQ';
+import Billing from 'pages/Candidate/Help/Billing';
 
 function App() {
   return (
@@ -49,20 +53,24 @@ function App() {
         <Route path="/setting" element={<AccountSetting />} />
         <Route path="/pdp" element={<PersonalDevelopment />} />
         <Route path="/pdp/detail/:idDetail" element={<PersonalDevelopmentDetail />} />
+        <Route path="/guide/map" element={<CarrerMap />} />
+        <Route path="/guide/exploration" element={<ExplorationCarrer />} />
         <Route path="/lowongan" element={<Jobs />}/>
         <Route path="/lowongan/detail-job/:idDetail" element={<JobDetail />} />
         <Route path="/lamaran/" element={<Application />} />
-        <Route path="/detailApplication" element={<ApplicationDetail />} />
+        <Route path="/lamaran/detail/:id" element={<ApplicationDetail />} />
         <Route path="/kelas" element={<Class />} />
         <Route path="/kelas/detailKelas/detail" element={<ClassDetail />} />
-
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/billing" element={<Billing />} />
+        
         <Route path="/business" element={<Business />} />
         <Route path="/business/profile" element={<BusinessProfile />} />
         <Route path="/business/team" element={<TeamMember />} />
         <Route path="/business/job" element={<JobVacancy />} />
         <Route path="/business/job/create" element={<OpenJobVacancy />} />
         <Route path="/business/job/detail/:idJob" element={<JobVacancyDetail />} />
-        <Route path="/business/talent/:id" element={<TalentPool />} />
+        <Route path="/business/talent/" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 
         <Route path='/under' element={<UnderConstruction />} />

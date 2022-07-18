@@ -5,7 +5,6 @@ export const sendEmailVefification = () =>
     .post('/api/email/verify/resend')
     .then((response) => response)
     .catch((error) => error.response);
-    
 
 const getProfileData = () =>
   httpAuthClient
@@ -14,16 +13,16 @@ const getProfileData = () =>
     .catch((error) => error.response);
 
 const updateProfileData = (data) =>
-    httpAuthClient
-      .put('/api/profile', data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => response)
-      .catch((error) => error.response);
+  httpAuthClient
+    .put('/api/profile', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
 
-const updateAbout = (data) => 
+const updateAbout = (data) =>
   httpAuthClient
     .put('/api/profile/about', data, {
       headers: {
@@ -33,24 +32,49 @@ const updateAbout = (data) =>
     .then((response) => response)
     .catch((error) => error.response);
 
+export const updateCompanyInformation = (data) =>
+  httpAuthClient
+    .put('/api/profile/information', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+    
+export const updateBannerCompany = (data) =>
+  httpAuthClient
+    .post('/api/profile/banner', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+export const deleteBannerCompany = () =>
+  httpAuthClient
+    .delete('/api/profile/banner')
+    .then((response) => response)
+    .catch((error) => error.response);
+
 const updateProfilePicture = (data) =>
   httpAuthClient
     .post('/api/profile/photo', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
-      
     })
     .then((response) => response)
-    .catch((error) => error.response);
-
+    .catch((error) => error.response);    
+    
 const deletePhotoProfile = () =>
   httpAuthClient
     .delete('/api/profile/photo')
     .then((response) => response)
     .catch((error) => error.response);
-
 
 const updateSettingProfile = (data) =>
   httpAuthClient
@@ -99,7 +123,7 @@ const addJobExperience = (data) =>
     .post('/api/profile/experiences', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -110,7 +134,7 @@ const updateJobExperience = (id, data) =>
     .put(`/api/profile/experiences/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -127,7 +151,7 @@ const addIntershipExperience = (data) =>
     .post('/api/profile/internships', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -138,7 +162,7 @@ const updateIntershipExperience = (id, data) =>
     .put(`/api/profile/internships/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -155,7 +179,7 @@ const addEducation = (data) =>
     .post('/api/profile/educations', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -166,7 +190,7 @@ const updateEducation = (id, data) =>
     .put(`/api/profile/educations/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -183,36 +207,35 @@ const addOrganization = (data) =>
     .post('/api/profile/volunteers', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
     .catch((error) => error.response);
 
-  const updateOrganization = (id, data) =>
+const updateOrganization = (id, data) =>
   httpAuthClient
     .put(`/api/profile/volunteers/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
     .catch((error) => error.response);
 
-  const deleteOrganization = (id) =>
+const deleteOrganization = (id) =>
   httpAuthClient
     .delete(`/api/profile/volunteers/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
-
 
 const addCertificate = (data) =>
   httpAuthClient
     .post('/api/profile/certificates', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -223,7 +246,7 @@ const updateCertificate = (id, data) =>
     .put(`/api/profile/certificates/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Accept': 'multipart/form-data',
+        Accept: 'multipart/form-data',
       },
     })
     .then((response) => response)
@@ -234,7 +257,7 @@ const deleteCertificate = (id) =>
     .delete(`/api/profile/certificates/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
-    
+
 const addPublication = (data) => {
   return httpAuthClient
     .post('/api/profile/papers', data, {
@@ -244,7 +267,7 @@ const addPublication = (data) => {
     })
     .then((response) => response)
     .catch((error) => error.response);
-}
+};
 
 const updatePublication = (id, data) => {
   return httpAuthClient
@@ -255,14 +278,14 @@ const updatePublication = (id, data) => {
     })
     .then((response) => response)
     .catch((error) => error.response);
-}
+};
 
 const deletePublication = (id) => {
   return httpAuthClient
     .delete(`/api/profile/papers/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
-}
+};
 
 const LogoutProfile = () =>
   httpAuthClient

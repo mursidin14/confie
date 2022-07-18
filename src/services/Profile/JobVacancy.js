@@ -21,9 +21,9 @@ export const getJobVacancyDetail = (id) => {
     .catch((error) => error.response);
 };
 
-export const applyJobVacancy = (id) => {
+export const applyJobVacancy = (id, data) => {
   return httpAuthClient
-    .post(`/api/listjobvacancy/applyjob/${id}`)
+    .post(`/api/listjobvacancy/applyjob/${id}`, data)
     .then((response) => response)
     .catch((error) => error.response);
 }

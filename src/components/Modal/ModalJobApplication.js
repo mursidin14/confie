@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { applyJobVacancy } from 'services/Profile/JobVacancy';
-export default function ModalJobApplication({ id }) {
+export default function ModalJobApplication({ item }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isApply, setIsApply] = useState(true);
@@ -13,7 +13,10 @@ export default function ModalJobApplication({ id }) {
   async function handleAccept() {
     setLoading(true);
     const error_respon = [];
-    const response = await applyJobVacancy(id);
+    const response = await applyJobVacancy(item.id, {
+      expected_salary: item.min_salary,
+      start_date_expectation_work: item.registration_end_date
+    });
     if (response.status === 422) {
       const error_apply = response.data.data;
       Object.keys(error_apply).forEach((key) => {

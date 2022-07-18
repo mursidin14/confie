@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Layout from 'components/Layout/Layout';
 import SearchClass from './SearchClass';
 import ClassFeed from './ClassFeed';
@@ -11,13 +11,13 @@ export default function Class() {
   }, [])
   return (
     <>
-      {false && (
+      {true && (
         <Layout PageName={'Kelas Online'}>
           <SearchClass></SearchClass>
           <ClassFeed></ClassFeed>
         </Layout>
       )}
-      {true && <UnderConstruction></UnderConstruction>}
+      {false && <UnderConstruction></UnderConstruction>}
     </>
   );
 }

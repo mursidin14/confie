@@ -3,21 +3,24 @@ import { useParams } from 'react-router-dom';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import SearchTalent from 'components/SearchTalent';
 import Pagination from 'components/Widgets/Pagination';
+import { BusinessProvider } from 'context/business-context';
 export default function TalentPool() {
   const { id } = useParams();
 
   return (
-    <LayoutBusiness userId={id} PageName="Talent Pool">
-      <SearchTalent></SearchTalent>
-      <section className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <TalentCard />
-        <TalentCard />
-        <TalentCard />
-      </section>
-      <div className="flex justify-center">
-        <Pagination></Pagination>
-      </div>
-    </LayoutBusiness>
+    <BusinessProvider>
+      <LayoutBusiness userId={id} PageName="Talent Pool">
+        <SearchTalent></SearchTalent>
+        <section className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <TalentCard />
+          <TalentCard />
+          <TalentCard />
+        </section>
+        <div className="flex justify-center">
+          <Pagination></Pagination>
+        </div>
+      </LayoutBusiness>
+    </BusinessProvider>
   );
 }
 

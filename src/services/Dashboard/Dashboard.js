@@ -6,6 +6,12 @@ const getDashboardData = () =>
     .then((response) => response)
     .catch((error) => error);
 
+export const getSliderInformation = () => {
+  return httpAuthClient
+    .get('/api/slidinginformation')
+    .then((response) => response)
+    .catch((error) => error);
+}
 const DashboardService = {
   getDashboardData,
 };

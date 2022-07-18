@@ -5,6 +5,7 @@ import { useBusinessProfileContext } from 'context/business-profile-context';
 import SkeletonCard from 'components/SkeletonCard';
 import  utils, { getYear } from 'utils/utils';
 import EditLogoCompany from './EditLogoCompany';
+import EditBannerCompany from './EditBannerCompany';
 
 export default function BasicProfileBusiness({ input, index }) {
   const { businessProfile } = useBusinessProfileContext();
@@ -56,16 +57,7 @@ export default function BasicProfileBusiness({ input, index }) {
             <div className="my-5">
               <div className="px-8">
                 <EditLogoCompany />
-                <div className="mb-5 lg:flex">
-                  <div className="lg:w-5/12">
-                    <label className="text-xs after:text-pink-500 after:content-['*'] lg:text-base">
-                      Banner Perusahaan
-                    </label>
-                  </div>
-                  <div className="w-7/12">
-                    <img src="/banner.png" alt="" />
-                  </div>
-                </div>
+                <EditBannerCompany />
                 {inputs.map((input, index) => (
                   <DataPersonal key={index} {...input} />
                 ))}

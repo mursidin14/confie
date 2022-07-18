@@ -79,7 +79,7 @@ export default function JobDetail() {
                 </ul>
               </div>
             </div>
-            <ModalJobApplication id={item.id}></ModalJobApplication>
+            <ModalJobApplication item={item}></ModalJobApplication>
           </section>
         </>
       )}

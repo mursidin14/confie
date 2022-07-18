@@ -4,7 +4,10 @@ import BasicCard from 'components/Widgets/BasicCard';
 import { useParams } from 'react-router-dom';
 import { useBusinessContext } from 'context/business-context';
 import { getDate } from 'utils/utils';
-
+import SweetAlert from './SweetAlert';
+import { deleteJobVacancy } from 'services/Business/JobVacancy/JobVacancy';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -26,17 +29,28 @@ export default function TabJob() {
     }
     setCategories({
       Aktif: {
-        content: <FeedJob id={id} items={jobVacancy?.filter(item => item.is_publish)} />,
+        content: (
+          <FeedJob
+            id={id}
+            items={jobVacancy?.filter((item) => item.is_publish)}
+          />
+        ),
       },
       Arsip: {
-        content: <FeedJob id={id} items={jobVacancy?.filter(item => !item.is_publish)} archive={true} />,
+        content: (
+          <FeedJob
+            id={id}
+            items={jobVacancy?.filter((item) => !item.is_publish)}
+            archive={true}
+          />
+        ),
       },
     });
   }, [jobVacancy]);
   return (
     <div className="w-full px-2 sm:px-0">
       {jobVacancy?.length === 0 ? (
-        <div>Loading...</div>
+        <p className="text-sm italic text-gray-300">No Data</p>
       ) : (
         <>
           <Tab.Group>
@@ -74,7 +88,9 @@ export default function TabJob() {
 function FeedJob({ archive, id, items }) {
   return (
     <>
-      {items?.length < 1 && <p className='text-xs text-gray-300 italic'>No Data</p>}
+      {items?.length < 1 && (
+        <p className="text-xs italic text-gray-300">No Data</p>
+      )}
       {items?.map((item, index) => (
         <CardJobVacany key={index} detailJob={item} id={id} archive={archive} />
       ))}
@@ -82,10 +98,13 @@ function FeedJob({ archive, id, items }) {
   );
 }
 
-function CardJobVacany({ archive, detailJob: {title, location, max_salary, min_salary, registration_end_date, id} }) {
+function CardJobVacany({ archive, detailJob }) {
+  const [isOpenAccept, setIsOpenAccept] = useState(false);
+  const { title, location, max_salary, min_salary, registration_end_date, id } =
+    detailJob;
   return (
     <BasicCard>
-      <div className="flex items-center justify-between px-6">
+      <div className="relative flex items-center justify-between px-6">
         <section className="items-center gap-4 space-y-2 md:flex">
           <div className="flex items-center justify-center rounded-md bg-[#F5F8FA] px-5 py-10">
             <img src="/upana_logo.png" alt="" />
@@ -152,7 +171,9 @@ function CardJobVacany({ archive, detailJob: {title, location, max_salary, min_s
                     fill="#4B5783"
                   />
                 </svg>
-                <p>IDR {min_salary} - {max_salary}</p>
+                <p>
+                  IDR {min_salary} - {max_salary}
+                </p>
               </div>
               <div className="flex items-center gap-3">
                 <svg
@@ -227,9 +248,42 @@ function CardJobVacany({ archive, detailJob: {title, location, max_salary, min_s
 
                 <p>{getDate(registration_end_date)}</p>
               </div>
-              <p className="md:hidden">
-                <span className="font-bold">Pelamar</span>: 30
-              </p>
+              <div className="flex items-center gap-2 md:hidden">
+                <svg
+                  className="h-5 w-5"
+                  width="25"
+                  height="25"
+                  viewBox="0 0 25 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.33328 11.2083H7.72911C6.90464 11.1785 6.08283 11.3185 5.31471 11.6195C4.54658 11.9206 3.84851 12.3763 3.26383 12.9583L3.09717 13.1528V18.9028H5.9305V15.6389L6.31245 15.2083L6.48606 15.0069C7.39017 14.0781 8.51576 13.3946 9.75689 13.0208C9.1355 12.548 8.64542 11.9241 8.33328 11.2083Z"
+                    fill="#494B74"
+                  />
+                  <path
+                    d="M21.7639 12.9375C21.1793 12.3554 20.4812 11.8997 19.7131 11.5987C18.9449 11.2977 18.1231 11.1577 17.2987 11.1875C17.0458 11.1882 16.7931 11.2021 16.5417 11.2292C16.2237 11.9006 15.747 12.4846 15.1528 12.9306C16.4778 13.2971 17.6781 14.0173 18.6251 15.0139L18.7987 15.2083L19.1737 15.6389V18.9097H21.9098V13.1319L21.7639 12.9375Z"
+                    fill="#494B74"
+                  />
+                  <path
+                    d="M7.70841 9.85417H7.92369C7.82366 8.99531 7.97436 8.12585 8.3576 7.35076C8.74083 6.57566 9.34022 5.92806 10.0834 5.48611C9.81401 5.07455 9.44234 4.74001 9.0048 4.51524C8.56726 4.29048 8.07885 4.1832 7.58739 4.20391C7.09593 4.22462 6.61828 4.37261 6.2012 4.63339C5.78412 4.89417 5.44192 5.25879 5.2081 5.69156C4.97428 6.12433 4.85686 6.61041 4.86734 7.10219C4.87783 7.59397 5.01585 8.0746 5.26789 8.49702C5.51994 8.91943 5.87736 9.26915 6.30518 9.51192C6.73299 9.75469 7.21651 9.88219 7.70841 9.88194V9.85417Z"
+                    fill="#494B74"
+                  />
+                  <path
+                    d="M16.9652 9.33333C16.9737 9.49294 16.9737 9.65289 16.9652 9.8125C17.0985 9.83363 17.2331 9.84523 17.368 9.84722H17.4999C17.9897 9.82111 18.4643 9.66863 18.8776 9.40464C19.2909 9.14065 19.6288 8.77413 19.8585 8.34078C20.0881 7.90742 20.2016 7.422 20.1879 6.93176C20.1742 6.44152 20.0338 5.96318 19.7804 5.5433C19.527 5.12343 19.1692 4.77632 18.7418 4.53578C18.3144 4.29525 17.832 4.16947 17.3416 4.17071C16.8511 4.17194 16.3694 4.30014 15.9432 4.54282C15.517 4.78551 15.161 5.13441 14.9097 5.55556C15.5382 5.96593 16.055 6.52591 16.4138 7.18526C16.7726 7.84461 16.962 8.5827 16.9652 9.33333Z"
+                    fill="#494B74"
+                  />
+                  <path
+                    d="M12.4098 12.4444C14.1242 12.4444 15.514 11.0547 15.514 9.34028C15.514 7.62589 14.1242 6.23611 12.4098 6.23611C10.6954 6.23611 9.30566 7.62589 9.30566 9.34028C9.30566 11.0547 10.6954 12.4444 12.4098 12.4444Z"
+                    fill="#494B74"
+                  />
+                  <path
+                    d="M12.5764 14.0972C11.6695 14.0606 10.7646 14.2078 9.91605 14.5301C9.06752 14.8523 8.29295 15.3429 7.63894 15.9722L7.46533 16.1667V20.5625C7.46804 20.7057 7.49893 20.8469 7.55624 20.9782C7.61355 21.1094 7.69616 21.2281 7.79934 21.3274C7.90252 21.4267 8.02426 21.5047 8.1576 21.557C8.29093 21.6092 8.43326 21.6347 8.57644 21.6319H16.5556C16.6988 21.6347 16.8411 21.6092 16.9745 21.557C17.1078 21.5047 17.2295 21.4267 17.3327 21.3274C17.4359 21.2281 17.5185 21.1094 17.5758 20.9782C17.6331 20.8469 17.664 20.7057 17.6667 20.5625V16.1806L17.5001 15.9722C16.8503 15.3409 16.0784 14.849 15.2318 14.5266C14.3851 14.2041 13.4816 14.058 12.5764 14.0972Z"
+                    fill="#494B74"
+                  />
+                </svg>
+                <p>30</p>
+              </div>
             </div>
           </div>
         </section>
@@ -271,6 +325,67 @@ function CardJobVacany({ archive, detailJob: {title, location, max_salary, min_s
           <p className="text-sm">Pelamar</p>
         </section>
       </div>
+      <Transition appear show={isOpenAccept} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10 overflow-y-auto"
+          onClose={() => {
+            window.location.reload();
+          }}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-50" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <div>
+                    <div className="flex items-center justify-center p-8">
+                      <svg
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M50 93.75C38.3968 93.75 27.2688 89.1406 19.0641 80.9359C10.8594 72.7312 6.25 61.6032 6.25 50C6.25 38.3968 10.8594 27.2688 19.0641 19.0641C27.2688 10.8594 38.3968 6.25 50 6.25C61.6032 6.25 72.7312 10.8594 80.9359 19.0641C89.1406 27.2688 93.75 38.3968 93.75 50C93.75 61.6032 89.1406 72.7312 80.9359 80.9359C72.7312 89.1406 61.6032 93.75 50 93.75ZM50 100C63.2608 100 75.9785 94.7322 85.3553 85.3553C94.7322 75.9785 100 63.2608 100 50C100 36.7392 94.7322 24.0215 85.3553 14.6447C75.9785 5.26784 63.2608 0 50 0C36.7392 0 24.0215 5.26784 14.6447 14.6447C5.26784 24.0215 0 36.7392 0 50C0 63.2608 5.26784 75.9785 14.6447 85.3553C24.0215 94.7322 36.7392 100 50 100Z"
+                          fill="#50CD89"
+                        />
+                        <path
+                          d="M68.5624 31.0625C68.5179 31.1057 68.4761 31.1516 68.4374 31.2L46.7312 58.8563L33.6499 45.7688C32.7613 44.9408 31.586 44.49 30.3717 44.5115C29.1573 44.5329 27.9986 45.0248 27.1398 45.8837C26.281 46.7425 25.789 47.9011 25.7676 49.1155C25.7461 50.3299 26.1969 51.5052 27.0249 52.3938L43.5624 68.9375C44.0079 69.3822 44.5384 69.7327 45.1223 69.9679C45.7062 70.2031 46.3315 70.3183 46.9608 70.3067C47.5902 70.295 48.2108 70.1567 48.7855 69.9C49.3603 69.6433 49.8774 69.2735 50.3062 68.8125L75.2562 37.625C76.1057 36.7334 76.5702 35.5431 76.5492 34.3117C76.5283 33.0803 76.0235 31.9066 75.144 31.0444C74.2645 30.1822 73.0811 29.7007 71.8495 29.7041C70.6179 29.7075 69.4371 30.1955 68.5624 31.0625Z"
+                          fill="#50CD89"
+                        />
+                      </svg>
+                    </div>
+                    <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
+                      Data berhasil dihapus!
+                    </p>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </BasicCard>
   );
 }
