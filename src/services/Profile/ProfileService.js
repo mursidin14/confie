@@ -6,12 +6,15 @@ export const sendEmailVefification = () =>
     .then((response) => response)
     .catch((error) => error.response);
 
-const getProfileData = () =>
-  httpAuthClient
-    .get('/api/profile')
-    .then((response) => response)
-    .catch((error) => error.response);
-
+const getProfileData = async () => {
+  try {
+    const response = await httpAuthClient.get('/api/profile');
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+ 
 const updateProfileData = (data) =>
   httpAuthClient
     .put('/api/profile', data, {

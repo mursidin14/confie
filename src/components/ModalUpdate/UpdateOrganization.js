@@ -128,6 +128,7 @@ export default function UpdateOrganization({ item, id }) {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataOrganization}
                           handleChange={handleChange}
                           {...input}
@@ -135,6 +136,7 @@ export default function UpdateOrganization({ item, id }) {
                       ))}
                       {inputs2.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataOrganization}
                           handleChange={handleChange}
                           {...input}

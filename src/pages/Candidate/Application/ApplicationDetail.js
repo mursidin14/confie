@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from 'components/Layout/Layout';
 import BasicJobInformation from 'pages/Candidate/Job/BasicJobInformation';
 import useGetApplicationDetail from './useGetApplicationDetail';
+import CandidateProvider from 'context/candidate-context';
 export default function ApplicationDetail() {
   const { item, loading } = useGetApplicationDetail();
 
   return (
-    <Layout userId={'1'} PageName={'Lamaran Saya'}>
+    <CandidateProvider PageName={'Lamaran Saya'}>
       {!loading && (
         <>
           <JobDetail item={item} />
@@ -17,7 +17,7 @@ export default function ApplicationDetail() {
           <StepDescription />
         </>
       )}
-    </Layout>
+    </CandidateProvider>
   );
 }
 

@@ -3,7 +3,6 @@ import AuthService from 'services/Auth/AuthService'
 import { Disclosure } from '@headlessui/react'
 
 export default function ASideBarMobile({
-  is_verified,
   offCanvas,
   handleNav,
   PageName
@@ -15,7 +14,6 @@ export default function ASideBarMobile({
       link: `/dashboard`,
       icon_active: '/nav_icon/dashboard.png',
       icon_inactive: '/nav_icon/i_dashboard.png',
-      can_access: true
     },
     {
       alias: 'profile',
@@ -23,7 +21,6 @@ export default function ASideBarMobile({
       link: `/profile`,
       icon_active: '/nav_icon/profile.png',
       icon_inactive: '/nav_icon/i_profile.png',
-      can_access: true
     },
     {
       alias: 'personal development plan',
@@ -31,7 +28,6 @@ export default function ASideBarMobile({
       link: `/pdp`,
       icon_active: '/nav_icon/plan.png',
       icon_inactive: '/nav_icon/i_plan.png',
-      can_access: true
     }
   ]
   const menu2 = [
@@ -41,7 +37,6 @@ export default function ASideBarMobile({
       link: `/lowongan`,
       icon_active: '/nav_icon/job_offer.png',
       icon_inactive: '/nav_icon/i_job_offer.png',
-      can_access: true
     },
     {
       alias: 'lamaran saya',
@@ -49,7 +44,6 @@ export default function ASideBarMobile({
       link: `/lamaran`,
       icon_active: '/nav_icon/applicant.png',
       icon_inactive: '/nav_icon/i_applicant.png',
-      can_access: true
     },
     {
       alias: 'kelas online',
@@ -57,11 +51,10 @@ export default function ASideBarMobile({
       link: `/kelas`,
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
-      can_access: true
     }
   ]
   let page = PageName.toLowerCase()
-  if (page == 'account setting') {
+  if (page === 'account setting') {
     page = 'dashboard'
   }
   async function clickLogout() {
@@ -97,7 +90,7 @@ export default function ASideBarMobile({
           {menu.map((item, index) => (
             <li key={index} className={`${!offCanvas ? 'my-3' : 'my-4'}`}>
               <a
-                href={item.can_access ? item.link : 'javascript:void(0)'}
+                href={item.link}
                 className="flex items-center gap-5"
               >
                 <img
@@ -136,7 +129,7 @@ export default function ASideBarMobile({
           {menu2.map((item, index) => (
             <li key={index} className={`${!offCanvas ? 'my-3' : 'my-4'}`}>
               <a
-                href={item.can_access ? item.link : 'javascript:void(0)'}
+                href={item.link}
                 className="flex items-center gap-5"
               >
                 <img
@@ -174,7 +167,7 @@ export default function ASideBarMobile({
           </li>
           <li className={`${!offCanvas ? 'my-3' : 'my-4'}`}>
             <button onClick={clickLogout} className="flex items-center gap-5">
-              <img className="w-4" src="/nav_icon/i_logout.png" />
+              <img className="w-4" src="/nav_icon/i_logout.png" alt='nav'/>
               <p
                 className={`text-xs text-white/40 ${
                   !offCanvas ? 'hidden' : 'block'

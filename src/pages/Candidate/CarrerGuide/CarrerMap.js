@@ -1,5 +1,6 @@
 import Layout from 'components/Layout/Layout';
 import BasicCard from 'components/Widgets/BasicCard';
+import CandidateProvider from 'context/candidate-context';
 import React from 'react';
 import UseCarrerMap from './UseCarrerMap';
 
@@ -7,13 +8,13 @@ export default function CarrerMap() {
   const [currentStep, setCurrentStep] = React.useState(1);
   const items = UseCarrerMap();
   return (
-    <Layout PageName={'Panduan Karir'}>
+    <CandidateProvider PageName={'Panduan Karir'}>
       <ButtonStepContainer
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
       />
       <ArticleGuide />
-    </Layout>
+    </CandidateProvider>
   );
 }
 function ButtonStepContainer({ currentStep, setCurrentStep }) {

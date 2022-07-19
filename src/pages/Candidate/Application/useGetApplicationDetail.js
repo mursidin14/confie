@@ -9,7 +9,6 @@ export default function useGetApplicationDetail() {
   React.useEffect(() => {
     const getApplicationItems = async () => {
       const response = await getDetailApplication(id)
-      console.log(response)
       setItem(response)
       setLoading(false)
     }

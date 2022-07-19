@@ -1,14 +1,15 @@
 import Layout from 'components/Layout/Layout';
 import BasicCard from 'components/Widgets/BasicCard';
+import CandidateProvider from 'context/candidate-context';
 import React from 'react';
 import SearchExploration from './SearchExploration';
 
 export default function ExplorationCarrer() {
   return (
-    <Layout PageName={'Panduan Karir'}>
+    <CandidateProvider PageName={'Panduan Karir'}>
       <SearchExploration></SearchExploration>
       <ExplorationFeed />
-    </Layout>
+    </CandidateProvider>
   );
 }
 
@@ -27,7 +28,6 @@ function ExplorationCard() {
     </BasicCard>
   );
 }
-
 function ExplorationFeed() {
   return (
     <section className="mt-10 grid grid-cols-3 gap-3">

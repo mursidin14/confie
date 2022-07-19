@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Layout from 'components/Layout/Layout';
 import BasicJobInformation from 'pages/Candidate/Job/BasicJobInformation';
 import BasicDisclosure from 'components/Widgets/BasicDisclosure';
 import ModalJobApplication from 'components/Modal/ModalJobApplication';
 import { getJobVacancyDetail } from 'services/Profile/JobVacancy';
 import { useParams } from 'react-router-dom';
+import CandidateProvider from 'context/candidate-context';
 export default function JobDetail() {
   const [loading, setLoading] = useState(true);
   const [item, setItem] = useState([]);
@@ -18,8 +18,7 @@ export default function JobDetail() {
     getJobVacancy();
   }, []);
   return (
-    <Layout userId={'1'} PageName={'Lowongan Kerja'}>
-      {}
+    <CandidateProvider PageName={'Lowongan Kerja'}>
       {!loading && (
         <>
           <section className="w-full bg-white  p-8 text-left text-[#3F4254] shadow-mine">
@@ -83,6 +82,6 @@ export default function JobDetail() {
           </section>
         </>
       )}
-    </Layout>
+    </CandidateProvider>
   );
 }

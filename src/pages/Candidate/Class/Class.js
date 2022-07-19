@@ -11,13 +11,13 @@ export default function Class() {
   }, [])
   return (
     <>
-      {true && (
+      {false && (
         <Layout PageName={'Kelas Online'}>
           <SearchClass></SearchClass>
           <ClassFeed></ClassFeed>
         </Layout>
       )}
-      {false && <UnderConstruction></UnderConstruction>}
+      {true && <UnderConstruction></UnderConstruction>}
     </>
   );
 }

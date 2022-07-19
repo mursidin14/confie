@@ -4,8 +4,12 @@ import SearchJob from 'pages/Candidate/Job/SearchJob';
 import Pagination from 'components/Widgets/Pagination';
 import JobFeed from './JobFeed';
 import UnderConstruction from 'pages/UnderConstruction';
-import { getAllJobVacancy, getFilteredJobVacancy } from 'services/Profile/JobVacancy';
+import {
+  getAllJobVacancy,
+  getFilteredJobVacancy,
+} from 'services/Profile/JobVacancy';
 import SkeletonCard from 'components/SkeletonCard';
+import CandidateProvider from 'context/candidate-context';
 
 export default function Jobs() {
   const [isFilter, setisFilter] = useState(false);
@@ -37,24 +41,23 @@ export default function Jobs() {
     });
     const response = await getAllJobVacancy();
     setItems(response.data.data.data);
-  }
+  };
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilter({ ...filter, [name]: value });
-  }
+  };
   const handleFilter = async () => {
     setisFilter(true);
     setLoading(true);
     const { data } = await getFilteredJobVacancy(filter);
-    setItems(data.data.data)
+    setItems(data.data.data);
     setLoading(false);
-  }
+  };
   return (
     <>
-      {true && (
-        <Layout PageName={'Lowongan Kerja'}>
-          {loading && <SkeletonCard />}
-          {!loading && (
+      <CandidateProvider PageName={'Lowongan Kerja'}>
+      {loading && <SkeletonCard />}
+      {!loading && (
             <>
               <SearchJob handleFilter={handleFilter} handleFilterChange={handleFilterChange} handleResetFilter={resetFilter} isFilter={isFilter}></SearchJob>
               <JobFeed
@@ -70,13 +73,10 @@ export default function Jobs() {
               </div>
             </>
           )}
-        </Layout>
-      )}
-      {false && (
-        <>
-          <UnderConstruction></UnderConstruction>
-        </>
-      )}
+      </CandidateProvider>
+      
     </>
   );
 }
+
+  

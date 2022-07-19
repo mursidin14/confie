@@ -1,10 +1,10 @@
-import Layout from 'components/Layout/Layout'
+import CandidateProvider from 'context/candidate-context'
 import React from 'react'
 
 export default function Billing() {
   return (
-    <Layout PageName={'Help'}>
+    <CandidateProvider PageName={'Help'}>
       <div>Billing</div>
-    </Layout>
+      </CandidateProvider>
   )
 }

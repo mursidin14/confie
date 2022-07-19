@@ -3,7 +3,7 @@ const { httpAuthClient } = require("utils/http-common");
 export const getAllApplication = async() => {
   try {
     const response = await httpAuthClient.get(`/api/listjobvacancy/checkstatus`);
-    return response.data.data.data;
+    return response;
   } catch (error) {
     return error;
   }

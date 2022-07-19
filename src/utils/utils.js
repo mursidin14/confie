@@ -186,9 +186,9 @@ export const getRoles = () => {
 };
 export const getStatusApplication = (status) => {
   switch (status) {
-    case '2':
+    case '1':
       return 'Lamaran Diterima';
-    case '3':
+    case '2':
       return 'Seleksi Berkas';
     default:
       return 'Lamaran Ditolak';

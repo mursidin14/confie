@@ -168,7 +168,7 @@ function IconFour() {
 function PersonalCard({ id }) {
   const context = useBusinessContext();
   const { business } = context;
-  
+
   return (
     <>
       {business.email_verified_at ? <></> : <EmailVerifiedCard />}

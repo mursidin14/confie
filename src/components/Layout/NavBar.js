@@ -2,7 +2,7 @@ import React from 'react'
 import AuthService from 'services/Auth/AuthService'
 import { Disclosure } from '@headlessui/react'
 
-export default function NavBar({ is_verified, page, offCanvas }) {
+export default function NavBar({ page, offCanvas }) {
   let pageName = page.toLowerCase()
 
   if (pageName === 'account setting') {
@@ -16,7 +16,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/dashboard`,
       icon_active: '/nav_icon/dashboard.png',
       icon_inactive: '/nav_icon/i_dashboard.png',
-      can_access: true
     },
     {
       alias: 'profile',
@@ -24,7 +23,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/profile`,
       icon_active: '/nav_icon/profile.png',
       icon_inactive: '/nav_icon/i_profile.png',
-      can_access: true
     },
     {
       alias: 'personal development plan',
@@ -32,7 +30,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/pdp`,
       icon_active: '/nav_icon/plan.png',
       icon_inactive: '/nav_icon/i_plan.png',
-      can_access: true
     }
   ]
   const menu2 = [
@@ -42,7 +39,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/lowongan`,
       icon_active: '/nav_icon/job_offer.png',
       icon_inactive: '/nav_icon/i_job_offer.png',
-      can_access: true
     },
     {
       alias: 'lamaran saya',
@@ -50,7 +46,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/lamaran`,
       icon_active: '/nav_icon/applicant.png',
       icon_inactive: '/nav_icon/i_applicant.png',
-      can_access: true
     },
     {
       alias: 'kelas online',
@@ -58,7 +53,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/kelas`,
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
-      can_access: true
     }
   ]
 
@@ -73,7 +67,7 @@ export default function NavBar({ is_verified, page, offCanvas }) {
         {menu.map((item, index) => (
           <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
             <a
-              href={item.can_access ? item.link : 'javascript:void(0)'}
+              href={`${item.link}`}
               className="group flex items-center gap-5"
             >
               <img
@@ -117,7 +111,7 @@ export default function NavBar({ is_verified, page, offCanvas }) {
         {menu2.map((item, index) => (
           <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
             <a
-              href={item.can_access ? item.link : 'javascript:void(0)'}
+              href={`${item.link}`}
               className="group flex items-center gap-5"
             >
               <img

@@ -7,7 +7,10 @@ export default function useGetApplication() {
   React.useEffect(() => {
     const getApplicationItems = async () => {
       const response = await getAllApplication()
-      setItems(response)
+      if(response.data.data.data === undefined){
+        setItems([])
+      }
+      setItems(response.data.data.data)
       setLoading(false)
     }
     getApplicationItems()
