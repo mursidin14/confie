@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from 'components/Layout/NavBar';
 
-export default function ASideBar({is_verified, offCanvas, handleNav, PageName }) {
+export default function ASideBar({offCanvas, handleNav, PageName }) {
     return (
       <aside
         className={`bg-[#1E1E2D] transition-all hidden lg:block  ${
@@ -41,7 +41,7 @@ export default function ASideBar({is_verified, offCanvas, handleNav, PageName })
           </button>
         </div>
         <div className='pl-6'>
-          <NavBar is_verified={is_verified} page={PageName} offCanvas={offCanvas}/>
+          <NavBar page={PageName} offCanvas={offCanvas}/>
         </div>
         </div>
        

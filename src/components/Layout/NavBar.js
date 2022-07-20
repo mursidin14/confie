@@ -2,10 +2,10 @@ import React from 'react'
 import AuthService from 'services/Auth/AuthService'
 import { Disclosure } from '@headlessui/react'
 
-export default function NavBar({ is_verified, page, offCanvas }) {
+export default function NavBar({ page, offCanvas }) {
   let pageName = page.toLowerCase()
 
-  if (pageName == 'account setting') {
+  if (pageName === 'account setting') {
     pageName = 'dashboard'
   }
 
@@ -16,7 +16,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/dashboard`,
       icon_active: '/nav_icon/dashboard.png',
       icon_inactive: '/nav_icon/i_dashboard.png',
-      can_access: true
     },
     {
       alias: 'profile',
@@ -24,7 +23,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/profile`,
       icon_active: '/nav_icon/profile.png',
       icon_inactive: '/nav_icon/i_profile.png',
-      can_access: true
     },
     {
       alias: 'personal development plan',
@@ -32,7 +30,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/pdp`,
       icon_active: '/nav_icon/plan.png',
       icon_inactive: '/nav_icon/i_plan.png',
-      can_access: true
     }
   ]
   const menu2 = [
@@ -42,7 +39,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/lowongan`,
       icon_active: '/nav_icon/job_offer.png',
       icon_inactive: '/nav_icon/i_job_offer.png',
-      can_access: true
     },
     {
       alias: 'lamaran saya',
@@ -50,7 +46,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/lamaran`,
       icon_active: '/nav_icon/applicant.png',
       icon_inactive: '/nav_icon/i_applicant.png',
-      can_access: true
     },
     {
       alias: 'kelas online',
@@ -58,7 +53,6 @@ export default function NavBar({ is_verified, page, offCanvas }) {
       link: `/kelas`,
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
-      can_access: true
     }
   ]
 
@@ -73,7 +67,7 @@ export default function NavBar({ is_verified, page, offCanvas }) {
         {menu.map((item, index) => (
           <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
             <a
-              href={item.can_access ? item.link : 'javascript:void(0)'}
+              href={`${item.link}`}
               className="group flex items-center gap-5"
             >
               <img
@@ -102,20 +96,22 @@ export default function NavBar({ is_verified, page, offCanvas }) {
           subNav={[
             {
               name: 'Peta Karir',
-              link: '/peta-karir'
+              link: '/guide/map'
             },
             {
               name: 'Eksplorasi Profesi',
-              link: '/eksplorasi-profesi'
+              link: '/guide/exploration'
             }
           ]}
+          is_active={pageName === 'panduan karir'}
+          icon_active={'/nav_icon/carrer.png'}
           icon_inactive={'/nav_icon/i_carrer.png'}
           title={'Panduan Karir'}
         />
         {menu2.map((item, index) => (
           <li key={index} className={`${offCanvas ? 'my-[0.60rem]' : 'my-5'}`}>
             <a
-              href={item.can_access ? item.link : 'javascript:void(0)'}
+              href={`${item.link}`}
               className="group flex items-center gap-5"
             >
               <img
@@ -151,6 +147,8 @@ export default function NavBar({ is_verified, page, offCanvas }) {
               link: '/billing'
             }
           ]}
+          is_active={pageName === 'help'}
+          icon_active={'/nav_icon/help.png'}
           icon_inactive={'/nav_icon/i_help.png'}
           title={'Help'}
         />
@@ -174,17 +172,17 @@ export default function NavBar({ is_verified, page, offCanvas }) {
   )
 }
 
-function BasicDisclosureNav({ subNav, title, icon_inactive, offCanvas }) {
+function BasicDisclosureNav({is_active, subNav, title, icon_inactive, icon_active, offCanvas }) {
   return (
-    <Disclosure>
+    <Disclosure defaultOpen={is_active}>
       {({ open }) => (
         <>
           <Disclosure.Button className="group flex items-center gap-5">
-            <img className="w-4 sm:w-5" src={icon_inactive} alt="" />
+            <img className="w-4 sm:w-5" src={is_active ? icon_active : icon_inactive} alt="" />
             <p
               className={`text-xs sm:text-[13px] ${
                 offCanvas ? 'hidden' : 'block'
-              } text-white/40 transition-all group-hover:text-white`}
+              } ${is_active ? 'text-white' : 'text-white/40'} transition-all group-hover:text-white`}
             >
               {title}
             </p>
@@ -193,7 +191,7 @@ function BasicDisclosureNav({ subNav, title, icon_inactive, offCanvas }) {
             <ul className="requirments text-left">
               {subNav.map((item, index) => (
                 <li className="my-2" key={index}>
-                  <a href={`/under`} className="relative left-5 text-[#7E8299]">
+                  <a href={`${item.link}`} className={"relative left-5 text-[#7E8299]"}>
                     {item.name}
                   </a>
                 </li>

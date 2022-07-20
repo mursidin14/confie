@@ -1,60 +1,28 @@
-import Layout from 'components/Layout/Layout'
-import React, { useEffect, useState } from 'react'
-import ProgressBar from 'components/Widgets/ProgressBar'
-import ModalTarget from 'components/Modal/ModalTarget'
-import PersonalPlanService from 'services/PersonalPlan/PersonalPlan'
-import SweetAlert from 'components/Widgets/SweetAlert'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react';
+import Layout from 'components/Layout/Layout';
+import ModalTarget from 'components/Modal/ModalTarget';
+import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
+import { Dialog, Transition } from '@headlessui/react';
+import ProgressBar from 'components/Widgets/ProgressBar';
+import SweetAlert from 'components/Widgets/SweetAlert';
+import CandidateProvider, {
+  useCandidateContext,
+} from 'context/candidate-context';
 export default function PersonalDevelopment() {
-  const [target, setTarget] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [isOpenAccept, setIsOpenAccept] = useState(false)
-  const [isVerified, setIsVerifed] = useState(false)
+  const [isOpenAccept, setIsOpenAccept] = useState(false);
   const closeModalAccept = () => {
-    setIsOpenAccept(false)
-    window.location.reload()
-  }
-  const closeModalVerified = () => {}
-  useEffect(() => {
-    async function getTarget() {
-      const response = await PersonalPlanService.getPersonalPlanData()
-      setTarget(response.data.data)
-      setLoading(false)
-      const email = JSON.parse(localStorage.getItem('user')).email_verified_at
-      if (typeof email === 'string') {
-        setIsVerifed(false)
-      } else {
-        setIsVerifed(true)
-      }
-    }
-    getTarget()
-  }, [])
+    setIsOpenAccept(false);
+    window.location.reload();
+  };
   async function handleDelete(id) {
-    const response = await PersonalPlanService.deletePersonalPlanData(id)
+    const response = await PersonalPlanService.deletePersonalPlanData(id);
     if (response.status === 200) {
-      setIsOpenAccept(true)
+      setIsOpenAccept(true);
     }
   }
-
   return (
-    <Layout PageName={'Personal Development Plan'}>
-      <div className="lg:relative">
-        <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
-          <div className="flex items-center justify-between px-8">
-            <h3 className="text-base font-semibold ">Target Tahunan</h3>
-            <ModalTarget></ModalTarget>
-          </div>
-          <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-          <div className="overflow-auto">
-            <Table
-              handleDelete={handleDelete}
-              items={target}
-              loading={loading}
-            ></Table>
-          </div>
-        </div>
-      </div>
+    <CandidateProvider PageName={'Personal Development Plan'} needPlan>
+      <PlanContainer handleDelete={handleDelete} />
       <Transition appear show={isOpenAccept} as={Fragment}>
         <Dialog
           as="div"
@@ -114,7 +82,37 @@ export default function PersonalDevelopment() {
           </div>
         </Dialog>
       </Transition>
-      <Transition appear show={isVerified} as={Fragment}>
+    </CandidateProvider>
+  );
+}
+function PlanContainer({ handleDelete }) {
+  const { loading, plan, profile } = useCandidateContext();
+  const closeModalVerified = () => {};
+  return (
+    <>
+      <section>
+        <div className="lg:relative">
+          <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
+            <div className="flex items-center justify-between px-8">
+              <h3 className="text-base font-semibold ">Target Tahunan</h3>
+              <ModalTarget></ModalTarget>
+            </div>
+            <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+            <div className="overflow-auto">
+              <Table
+                handleDelete={handleDelete}
+                items={plan}
+                loading={loading}
+              ></Table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Transition
+        appear
+        show={typeof profile.email_verified_at !== 'string'}
+        as={Fragment}
+      >
         <Dialog
           as="div"
           className="relative z-10 overflow-y-auto"
@@ -154,7 +152,7 @@ export default function PersonalDevelopment() {
                     </p>
                     <button
                       onClick={() => {
-                        window.location.href = '/dashboard'
+                        window.location.href = '/dashboard';
                       }}
                       className="mt-1 w-full text-center text-xs font-semibold outline-none"
                     >
@@ -167,8 +165,8 @@ export default function PersonalDevelopment() {
           </div>
         </Dialog>
       </Transition>
-    </Layout>
-  )
+    </>
+  );
 }
 function Table({ items, loading, handleDelete }) {
   return (
@@ -257,13 +255,12 @@ function Table({ items, loading, handleDelete }) {
         </table>
       )}
     </div>
-  )
+  );
 }
-
 function formatDate(date) {
   return new Date(date).toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
-  })
+    day: 'numeric',
+  });
 }

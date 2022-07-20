@@ -1,14 +1,14 @@
 import React from 'react';
-export default function AsideLogin({}) {
+export default function AsideLogin() {
 
   return (
-    <section className="gradient-login text-white px-10 py-10 sm:px-14 sm:py-10 lg:w-7/12 hidden lg:block">
-      <div className="mt-10 text-left sm:mt-28 sm:ml-9">
+    <section className="gradient-login text-white lg:w-7/12 hidden lg:flex flex-col justify-center">
+      <div className="text-left relative pl-10 bottom-12">
       <img className="w-60 mb-7" src="/logo-login.png" alt="" />
-        <h1 className="block lg:w-[500px] text-sm sm:text-4xl">
+        <h1 className="block text-sm sm:text-[2.5rem] leading-[3.2rem] tracking-[1.5px]">
           Menemukan Pekerjaan Impian Jadi Lebih Mudah!
         </h1>
-        <p className="sm:mt-3 lg:w-10/12 text-sm sm:text-base">
+        <p className="sm:mt-[1.2rem] lg:w-8/12 text-[1.2rem] leading-[1.8rem] tracking-[0.3px] sm:text-base">
         Kembangkan potensi terbaikmu dan bergabung bersama kami di platform
 pilihan pertama yang akan membantu kamu membangun karir impianmu!
         </p>

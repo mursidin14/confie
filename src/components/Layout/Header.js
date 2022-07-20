@@ -96,7 +96,7 @@ export default function Header({data, handleNav, PageName }) {
             <p className='font-semibold sm:text-base text-sm'>{makeCapital(data.full_name)}</p>
             <p className='text-xs text-[#7E8299]'>{data.email}</p>
             <hr className='my-2'/>
-            <a href="/setting" className='text-black hover:underline sm:text-sm text-xs'>Account Setting</a>
+            <a href={data?.roles[0]?.name === 'business' ? '/setting-business' : '/setting'} className='text-black hover:underline sm:text-sm text-xs'>Account Setting</a>
             <hr className='my-2'/>
             </div>
             <button onClick={clickLogout} className='hover:text-red-500 text-black transition-all sm:text-sm text-xs'>Logout</button>

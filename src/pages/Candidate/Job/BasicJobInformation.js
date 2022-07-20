@@ -1,6 +1,7 @@
 import React from 'react';
+import { getDate, getLocalStringRupiah } from 'utils/utils';
 
-export default function BasicJobInformation({}) {
+export default function BasicJobInformation({item: {location, max_salary, min_salary, min_experience, max_experience, registration_end_date}}) {
   return (
     <div>
       <div className="mt-6 space-y-2">
@@ -16,18 +17,18 @@ export default function BasicJobInformation({}) {
             <path
               d="M4.4997 5.64328C5.36878 5.64328 6.07331 5.00368 6.07331 4.2147C6.07331 3.42573 5.36878 2.78613 4.4997 2.78613C3.63062 2.78613 2.92609 3.42573 2.92609 4.2147C2.92609 5.00368 3.63062 5.64328 4.4997 5.64328Z"
               stroke="#4B5783"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M7.64722 5.64286C6.46702 8.14286 4.5 11 4.5 11C4.5 11 2.53298 8.14286 1.35278 5.64286C0.172567 3.14286 2.13958 1 4.5 1C6.86042 1 8.82743 3.14286 7.64722 5.64286Z"
               stroke="#4B5783"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
 
-          <p>Makassar</p>
+          <p>{location}</p>
         </div>
         <div className="flex items-center gap-3">
           <svg
@@ -44,7 +45,7 @@ export default function BasicJobInformation({}) {
             />
           </svg>
 
-          <p>IDR 4.000.000 - 5.000.000</p>
+          <p>IDR {getLocalStringRupiah(min_salary)} - {getLocalStringRupiah(max_salary)}</p>
         </div>
         <div className="flex items-center gap-3">
           <svg
@@ -61,7 +62,7 @@ export default function BasicJobInformation({}) {
             />
           </svg>
 
-          <p>1 - 3 Tahun</p>
+          <p>{min_experience} - {max_experience} Tahun</p>
         </div>
         <div className="flex items-center gap-3">
           <svg
@@ -133,8 +134,7 @@ export default function BasicJobInformation({}) {
               fill="white"
             />
           </svg>
-
-          <p>15 April 2022</p>
+          <p>{getDate(registration_end_date)}</p>
         </div>
       </div>
       <div className="mt-5 flex items-center gap-2">

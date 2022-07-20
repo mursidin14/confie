@@ -1,13 +1,20 @@
 import React from 'react';
 import SalaryFilter from 'pages/Candidate/Job/SalaryFilter';
 
-export default function SearchJob() {
+export default function SearchJob({
+  handleFilterChange,
+  handleFilter,
+  handleResetFilter,
+  isFilter,
+}) {
   return (
     <div className="flex flex-col justify-between gap-3 rounded-md bg-white p-3 text-xs shadow-mine sm:flex-row sm:gap-7 sm:p-7 lg:text-sm">
       <input
         className="w-full rounded-md bg-[#F5F8FA] p-3 placeholder:italic sm:px-5"
         type="text"
+        name="position"
         placeholder="Developer..."
+        onChange={handleFilterChange}
       />
       <input
         className="w-full rounded-md bg-[#F5F8FA] p-3 placeholder:italic sm:px-5"
@@ -15,7 +22,16 @@ export default function SearchJob() {
         placeholder="Makassar..."
       />
       <SalaryFilter></SalaryFilter>
-      <button className="primary-btn flex w-fit items-center justify-center gap-2 rounded-md px-5 py-2">
+      <button
+        onClick={() => {
+          if (isFilter) {
+            handleResetFilter();
+          } else {
+            handleFilter();
+          }
+        }}
+        className="primary-btn flex w-fit items-center justify-center gap-2 rounded-md px-5 py-2"
+      >
         <svg
           width="15"
           height="15"
@@ -28,8 +44,7 @@ export default function SearchJob() {
             fill="white"
           />
         </svg>
-
-        <p>Filter</p>
+        <p>{isFilter ? 'Reset' : 'Filter'}</p>
       </button>
     </div>
   );

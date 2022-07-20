@@ -24,8 +24,8 @@ export default function SelectBox({menus}) {
                 <path
                   d="M1 1L3.72 3L6.43999 1"
                   stroke="#7E8299"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>

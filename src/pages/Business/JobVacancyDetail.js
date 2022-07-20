@@ -1,41 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import BasicCard from 'components/Widgets/BasicCard';
 import { Tab } from '@headlessui/react';
 import { useParams } from 'react-router-dom';
 import Pagination from 'components/Widgets/Pagination';
-
+import { BusinessProvider } from 'context/business-context';
+import {
+  deleteJobVacancy,
+  getDetailJobVacancy,
+} from 'services/Business/JobVacancy/JobVacancy';
+import SkeletonCard from 'components/SkeletonCard';
+import SweetAlert from 'components/Widgets/SweetAlert';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function JobVacancyDetail() {
-  const { id } = useParams();
+  const [detailJob, setDetailJob] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { idJob } = useParams();
+  useEffect(() => {
+    const getDetail = async () => {
+      const response = await getDetailJobVacancy(idJob);
+      setDetailJob(response.data.data);
+      setLoading(false);
+    };
+    getDetail();
+  }, []);
+
   return (
-    <LayoutBusiness userId={id} PageName="Lowongan Kerja">
-      <div className="py-5 lg:mx-5">
-        <CardJobVacany></CardJobVacany>
-      </div>
-    </LayoutBusiness>
+    <BusinessProvider>
+      <LayoutBusiness PageName="Lowongan Kerja">
+        {loading && <SkeletonCard />}
+        {!loading && (
+          <div className="py-5 lg:mx-5">
+            <CardJobVacany detailJob={detailJob}></CardJobVacany>
+          </div>
+        )}
+      </LayoutBusiness>
+    </BusinessProvider>
   );
 }
 
-function CardJobVacany({ archive, id, detailjob }) {
+function CardJobVacany({ archive, id, detailJob }) {
+  console.log(detailJob);
   const [open, setOpen] = useState(false);
-  let [categories] = useState({
-    ['Berkas']: {
+  const [isOpenAccept, setIsOpenAccept] = useState(false);
+  const [categories] = useState({
+    Berkas: {
       content: <StepOne />,
     },
-    ['Seleksi Tes Online']: {
+    'Seleksi Tes Online': {
       content: <StepTwo />,
     },
-    ['Tes Wawancara']: {
+    'Tes Wawancara': {
       content: <StepThree />,
     },
-    ['Hasil Akhir']: {
+    'Hasil Akhir': {
       content: <StepFour />,
     },
   });
+  const handleDelete = async (id) => {
+    const response = await deleteJobVacancy(id);
+    if (response.status === 204) {
+      setIsOpenAccept(true);
+    }
+  };
   return (
     <>
       <BasicCard>
@@ -46,12 +78,9 @@ function CardJobVacany({ archive, id, detailjob }) {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <a
-                  href={`/business/${id}/job/detail/${detailjob}`}
-                  className="text-lg font-semibold hover:underline md:text-xl"
-                >
+                <p className="text-lg font-semibold hover:underline md:text-xl">
                   Junior React Developer
-                </a>
+                </p>
                 <div
                   className={`${
                     !archive ? 'bg-[#E8FFF3]' : 'bg-[#F5F8FA]'
@@ -88,9 +117,11 @@ function CardJobVacany({ archive, id, detailjob }) {
                         : ' translate-y-1 opacity-100'
                     } transition-all`}
                   >
-                    <button className="rounded-md bg-[#FFF5F8] px-4 py-2 text-[#F1416C]">
-                      Hapus
-                    </button>
+                    <SweetAlert
+                      business={true}
+                      item={detailJob}
+                      handleDelete={handleDelete}
+                    />
                     <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                       Arsipkan
                     </button>
@@ -110,14 +141,14 @@ function CardJobVacany({ archive, id, detailjob }) {
                     <path
                       d="M4.4997 5.64328C5.36878 5.64328 6.07331 5.00368 6.07331 4.2147C6.07331 3.42573 5.36878 2.78613 4.4997 2.78613C3.63062 2.78613 2.92609 3.42573 2.92609 4.2147C2.92609 5.00368 3.63062 5.64328 4.4997 5.64328Z"
                       stroke="#4B5783"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M7.64722 5.64286C6.46702 8.14286 4.5 11 4.5 11C4.5 11 2.53298 8.14286 1.35278 5.64286C0.172567 3.14286 2.13958 1 4.5 1C6.86042 1 8.82743 3.14286 7.64722 5.64286Z"
                       stroke="#4B5783"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
 
@@ -259,13 +290,13 @@ function CardJobVacany({ archive, id, detailjob }) {
             </div>
             <div className="relative flex flex-col items-center">
               <button
-              className='bg-[#EAECF0] px-3 py-4 rounded-md group hover:opacity-95 transition-all'
+                className="group rounded-md bg-[#EAECF0] px-3 py-4 transition-all hover:opacity-95"
                 onClick={() => {
                   setOpen(!open);
                 }}
               >
                 <svg
-                  className="group-hover:fill-[#161618] transition-all fill-[#97979c]"
+                  className="fill-[#97979c] transition-all group-hover:fill-[#161618]"
                   width="23"
                   height="5"
                   viewBox="0 0 23 5"
@@ -279,14 +310,14 @@ function CardJobVacany({ archive, id, detailjob }) {
               </button>
               <div
                 className={`absolute top-3 flex flex-col space-y-2 rounded-md bg-white p-6 text-sm shadow-mine ${
-                  !open
-                    ? 'translate-y-0  opacity-0'
-                    : ' translate-y-1 opacity-100'
+                  !open ? 'hidden  translate-y-0' : ' block translate-y-8'
                 } transition-all`}
               >
-                <button className="rounded-md bg-[#FFF5F8] px-4 py-2 text-[#F1416C]">
-                  Hapus
-                </button>
+                <SweetAlert
+                  business={true}
+                  item={detailJob}
+                  handleDelete={handleDelete}
+                />
                 <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                   Arsipkan
                 </button>
@@ -305,8 +336,8 @@ function CardJobVacany({ archive, id, detailjob }) {
                   classNames(
                     'w-full py-2.5 text-sm font-semibold leading-5',
                     selected
-                      ? 'border-b-4 border-[#FE9A00]'
-                      : 'border-b-4 border-white text-[#7E8299]'
+                      ? 'border-b-4 border-[#FE9A00] outline-none'
+                      : 'border-b-4 border-white text-[#7E8299]',
                   )
                 }
               >
@@ -324,6 +355,67 @@ function CardJobVacany({ archive, id, detailjob }) {
           </Tab.Panels>
         </Tab.Group>
       </div>
+      <Transition appear show={isOpenAccept} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10 overflow-y-auto"
+          onClose={() => {
+            window.location.href = 'business/job/';
+          }}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-50" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <div>
+                    <div className="flex items-center justify-center p-8">
+                      <svg
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M50 93.75C38.3968 93.75 27.2688 89.1406 19.0641 80.9359C10.8594 72.7312 6.25 61.6032 6.25 50C6.25 38.3968 10.8594 27.2688 19.0641 19.0641C27.2688 10.8594 38.3968 6.25 50 6.25C61.6032 6.25 72.7312 10.8594 80.9359 19.0641C89.1406 27.2688 93.75 38.3968 93.75 50C93.75 61.6032 89.1406 72.7312 80.9359 80.9359C72.7312 89.1406 61.6032 93.75 50 93.75ZM50 100C63.2608 100 75.9785 94.7322 85.3553 85.3553C94.7322 75.9785 100 63.2608 100 50C100 36.7392 94.7322 24.0215 85.3553 14.6447C75.9785 5.26784 63.2608 0 50 0C36.7392 0 24.0215 5.26784 14.6447 14.6447C5.26784 24.0215 0 36.7392 0 50C0 63.2608 5.26784 75.9785 14.6447 85.3553C24.0215 94.7322 36.7392 100 50 100Z"
+                          fill="#50CD89"
+                        />
+                        <path
+                          d="M68.5624 31.0625C68.5179 31.1057 68.4761 31.1516 68.4374 31.2L46.7312 58.8563L33.6499 45.7688C32.7613 44.9408 31.586 44.49 30.3717 44.5115C29.1573 44.5329 27.9986 45.0248 27.1398 45.8837C26.281 46.7425 25.789 47.9011 25.7676 49.1155C25.7461 50.3299 26.1969 51.5052 27.0249 52.3938L43.5624 68.9375C44.0079 69.3822 44.5384 69.7327 45.1223 69.9679C45.7062 70.2031 46.3315 70.3183 46.9608 70.3067C47.5902 70.295 48.2108 70.1567 48.7855 69.9C49.3603 69.6433 49.8774 69.2735 50.3062 68.8125L75.2562 37.625C76.1057 36.7334 76.5702 35.5431 76.5492 34.3117C76.5283 33.0803 76.0235 31.9066 75.144 31.0444C74.2645 30.1822 73.0811 29.7007 71.8495 29.7041C70.6179 29.7075 69.4371 30.1955 68.5624 31.0625Z"
+                          fill="#50CD89"
+                        />
+                      </svg>
+                    </div>
+                    <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
+                      Data berhasil dihapus!
+                    </p>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 }
@@ -754,8 +846,8 @@ function IconFour() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M34.681 11.2569C34.7829 11.3585 34.8637 11.4792 34.9188 11.6121C34.974 11.7449 35.0024 11.8874 35.0024 12.0313C35.0024 12.1751 34.974 12.3176 34.9188 12.4505C34.8637 12.5833 34.7829 12.704 34.681 12.8056L28.1185 19.3681C28.0169 19.47 27.8962 19.5508 27.7634 19.6059C27.6305 19.6611 27.488 19.6895 27.3442 19.6895C27.2003 19.6895 27.0578 19.6611 26.925 19.6059C26.7921 19.5508 26.6714 19.47 26.5698 19.3681L23.2885 16.0869C23.0832 15.8815 22.9678 15.6029 22.9678 15.3125C22.9678 15.0221 23.0832 14.7435 23.2885 14.5381C23.4939 14.3327 23.7725 14.2174 24.0629 14.2174C24.3534 14.2174 24.6319 14.3327 24.8373 14.5381L27.3442 17.0472L33.1323 11.2569C33.2339 11.155 33.3546 11.0742 33.4875 11.0191C33.6203 10.9639 33.7628 10.9355 33.9067 10.9355C34.0505 10.9355 34.193 10.9639 34.3259 11.0191C34.4587 11.0742 34.5794 11.155 34.681 11.2569Z"
         fill="#494B74"
       />

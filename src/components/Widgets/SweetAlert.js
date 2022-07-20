@@ -1,53 +1,55 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-export default function SweetAlert({item, handleDelete }) {
+export default function SweetAlert({ item, handleDelete, business }) {
   let [isOpen, setIsOpen] = useState(false);
-  let [isOpenAccept, setIsOpenAccept] = useState(false);
-  function closeModal() {
-    setIsOpen(false);
-  }
-  
   function handleAccept() {
     closeModal();
     handleDelete(item.id);
-    setIsOpenAccept(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
   }
   function openModal() {
     setIsOpen(true);
   }
   return (
     <>
-      <button
-        onClick={openModal}
-      >
-        <svg
-          className="w-11"
-          width="34"
-          height="34"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
-            fill="#FFF5F8"
-          />
-          <path
-            d="M11.75 14.75C11.75 14.3358 12.0858 14 12.5 14H21.5C21.9142 14 22.25 14.3358 22.25 14.75V21.5C22.25 22.7427 21.2427 23.75 20 23.75H14C12.7574 23.75 11.75 22.7427 11.75 21.5V14.75Z"
-            fill="#F1416C"
-          />
-          <path
-            opacity="0.5"
-            d="M11.75 11.75C11.75 11.3358 12.0858 11 12.5 11H21.5C21.9142 11 22.25 11.3358 22.25 11.75C22.25 12.1642 21.9142 12.5 21.5 12.5H12.5C12.0858 12.5 11.75 12.1642 11.75 11.75Z"
-            fill="#F1416C"
-          />
-          <path
-            opacity="0.5"
-            d="M14.75 11C14.75 10.5858 15.0858 10.25 15.5 10.25H18.5C18.9142 10.25 19.25 10.5858 19.25 11H14.75Z"
-            fill="#F1416C"
-          />
-        </svg>
-      </button>
+      {business && (
+        <button onClick={openModal} className="rounded-md bg-[#FFF5F8] px-4 py-2 text-[#F1416C]">
+          Hapus
+        </button>
+      )}
+      {!business && (
+        <button onClick={openModal}>
+          <svg
+            className="w-11"
+            width="34"
+            height="34"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 4.225C0 1.8916 1.8916 0 4.225 0H29.775C32.1084 0 34 1.8916 34 4.225V29.775C34 32.1084 32.1084 34 29.775 34H4.225C1.8916 34 0 32.1084 0 29.775V4.225Z"
+              fill="#FFF5F8"
+            />
+            <path
+              d="M11.75 14.75C11.75 14.3358 12.0858 14 12.5 14H21.5C21.9142 14 22.25 14.3358 22.25 14.75V21.5C22.25 22.7427 21.2427 23.75 20 23.75H14C12.7574 23.75 11.75 22.7427 11.75 21.5V14.75Z"
+              fill="#F1416C"
+            />
+            <path
+              opacity="0.5"
+              d="M11.75 11.75C11.75 11.3358 12.0858 11 12.5 11H21.5C21.9142 11 22.25 11.3358 22.25 11.75C22.25 12.1642 21.9142 12.5 21.5 12.5H12.5C12.0858 12.5 11.75 12.1642 11.75 11.75Z"
+              fill="#F1416C"
+            />
+            <path
+              opacity="0.5"
+              d="M14.75 11C14.75 10.5858 15.0858 10.25 15.5 10.25H18.5C18.9142 10.25 19.25 10.5858 19.25 11H14.75Z"
+              fill="#F1416C"
+            />
+          </svg>
+        </button>
+      )}
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
@@ -122,7 +124,6 @@ export default function SweetAlert({item, handleDelete }) {
           </div>
         </Dialog>
       </Transition>
-      
     </>
   );
 }

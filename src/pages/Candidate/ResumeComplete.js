@@ -11,7 +11,6 @@ export default function ResumeComplete() {
     const user = getCurrentUserComplete();
     setUserComplete(user);
     setIsLoading(false);
-    console.log(user)
     return () => {};
   }, []);
 
