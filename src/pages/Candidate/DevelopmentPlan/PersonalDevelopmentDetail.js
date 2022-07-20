@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 import { useParams } from 'react-router-dom';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import Skeleton from 'react-loading-skeleton';
 import ModalUpdateTarget from 'components/Modal/ModalUpdateTarget';
 import ModalMilestone from 'components/Modal/ModalMilestone';
 import PersonalPlanService from 'services/PersonalPlan/PersonalPlan';
-import { Dialog, Transition } from '@headlessui/react';
 import 'react-loading-skeleton/dist/skeleton.css';
 import UpdateMilestone from 'components/ModalUpdate/UpdateMilestone';
 import SweetAlert from 'components/Widgets/SweetAlert';

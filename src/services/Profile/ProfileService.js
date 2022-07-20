@@ -13,8 +13,8 @@ const getProfileData = async () => {
   } catch (error) {
     return error.response;
   }
-}
- 
+};
+
 const updateProfileData = (data) =>
   httpAuthClient
     .put('/api/profile', data, {
@@ -44,7 +44,23 @@ export const updateCompanyInformation = (data) =>
     })
     .then((response) => response)
     .catch((error) => error.response);
-    
+
+export const updateGallery = (data) =>
+  httpAuthClient
+    .put('/api/profile/galleries', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+
+export const deleteGallery = (id) =>
+  httpAuthClient
+    .delete(`/api/profile/galleries/${id}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+
 export const updateBannerCompany = (data) =>
   httpAuthClient
     .post('/api/profile/banner', data, {
@@ -71,8 +87,8 @@ const updateProfilePicture = (data) =>
       },
     })
     .then((response) => response)
-    .catch((error) => error.response);    
-    
+    .catch((error) => error.response);
+
 const deletePhotoProfile = () =>
   httpAuthClient
     .delete('/api/profile/photo')

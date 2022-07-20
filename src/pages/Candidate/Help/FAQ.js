@@ -5,6 +5,7 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import BasicCard from 'components/Widgets/BasicCard';
 import CandidateProvider from 'context/candidate-context';
+import UnderConstruction from 'pages/UnderConstruction';
 export default function FAQ() {
   const [items, setItems] = React.useState([
     { title: 'Badge Leveling', content: <LevelBadge /> },
@@ -38,24 +39,32 @@ export default function FAQ() {
     ]);
   };
   return (
-    <CandidateProvider PageName={'Help'}>
-      <Search
-        search={search}
-        handleSearchChange={handleSearchChange}
-        handleSearch={handleSearch}
-        handleReset={handleReset}
-      />
-      <BasicCard>
-        <section className="px-8 text-left">
-          <h3 className="text-2xl font-semibold underline decoration-orange underline-offset-4">
-            FAQ
-          </h3>
-          {items.map((item) => (
-            <DisclosureContainer title={item.title} content={item.content} />
-          ))}
-        </section>
-      </BasicCard>
-    </CandidateProvider>
+    <>
+      {false && (
+        <CandidateProvider PageName={'Help'}>
+          <Search
+            search={search}
+            handleSearchChange={handleSearchChange}
+            handleSearch={handleSearch}
+            handleReset={handleReset}
+          />
+          <BasicCard>
+            <section className="px-8 text-left">
+              <h3 className="text-2xl font-semibold underline decoration-orange underline-offset-4">
+                FAQ
+              </h3>
+              {items.map((item) => (
+                <DisclosureContainer
+                  title={item.title}
+                  content={item.content}
+                />
+              ))}
+            </section>
+          </BasicCard>
+        </CandidateProvider>
+      )}
+      {true && <UnderConstruction />}
+    </>
   );
 }
 
@@ -88,7 +97,7 @@ function LevelBadge() {
     { title: 'Basic', description: '😪', color: '#E2E1DF' },
     { title: 'Intermediate', description: '😐', color: '#7ED957' },
     { title: 'Advanced', description: '😀', color: '#2283E8' },
-    {title: 'Expert', description: '😍', color: '#FFCA0E'},
+    { title: 'Expert', description: '😍', color: '#FFCA0E' },
   ];
   return (
     <article>

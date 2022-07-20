@@ -1,27 +1,48 @@
-import React from 'react'
-import BasicCard from 'components/Widgets/BasicCard'
-import ModalInformation from 'components/Modal/ModalInformation'
+import React from 'react';
+import BasicCard from 'components/Widgets/BasicCard';
+import ModalInformation from 'components/Modal/ModalInformation';
+import { useBusinessProfileContext } from 'context/business-profile-context';
+import { getValue } from '@testing-library/user-event/dist/utils';
 export default function Information() {
-  let inputs = [
+  const { businessProfile } = useBusinessProfileContext();
+  const [data, setData] = React.useState({
+    company_size: '',
+    company_type: '',
+    link_facebook_page: '',
+    link_instagram: '',
+    link_website: '',
+  });
+  React.useEffect(() => {
+    if (Array.isArray(businessProfile.businessData)) {
+      setData(businessProfile.businessData[0]);
+    }
+  }, [businessProfile]);
+
+  const inputs = [
     {
       label: 'Jenis Industri',
-      require: true
+      require: true,
+      value: data.company_type,
     },
     {
       label: 'Company Size',
-      require: false
+      require: false,
+      value: data.company_size,
     },
     {
       label: 'Link Website',
-      require: false
+      require: false,
+      value: data.link_website,
     },
     {
       label: 'Link Facebook page',
-      require: false
+      require: false,
+      value: data.link_facebook_page,
     },
     {
       label: 'Link Instagram',
-      require: false
+      require: false,
+      value: data.link_instagram,
     },
   ];
   return (
@@ -30,30 +51,35 @@ export default function Information() {
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">Informasi Lengkap</h3>
           <ModalInformation
+            data={data}
             action={'Edit'}
             title={'Informasi Lengkap'}
           ></ModalInformation>
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="my-5 px-8">
-            {inputs.map((input, index) => (
-              <DataPersonal key={index} {...input} />
-            ))}
+          {inputs.map((input, index) => (
+            <DataPersonal key={index} {...input} />
+          ))}
         </div>
       </section>
     </BasicCard>
-  )
+  );
 }
-function DataPersonal({ label, require }) {
+function DataPersonal({ label, require, value }) {
   return (
     <div className=" items-center lg:flex ">
       <div className="w-5/12">
-        <label className={`text-xs lg:text-base after:content-['*'] ${require ?'after:text-pink-500' : 'after:text-white'}`}>
+        <label
+          className={`text-xs after:content-['*'] lg:text-base ${
+            require ? 'after:text-pink-500' : 'after:text-white'
+          }`}
+        >
           {label}
         </label>
       </div>
       <div className="lg:w-7/12">
-        <p className="input-form my-2 lg:my-5 lg:py-3 "></p>
+        <p className="w-full rounded-md bg-soft-gray p-5 py-3">{value}</p>
       </div>
     </div>
   );

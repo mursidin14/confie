@@ -1,10 +1,16 @@
-import CandidateProvider from 'context/candidate-context'
-import React from 'react'
+import CandidateProvider from 'context/candidate-context';
+import UnderConstruction from 'pages/UnderConstruction';
+import React from 'react';
 
 export default function Billing() {
   return (
-    <CandidateProvider PageName={'Help'}>
-      <div>Billing</div>
-      </CandidateProvider>
-  )
+    <>
+      {false && (
+        <CandidateProvider PageName={'Help'}>
+          <div>Billing</div>
+        </CandidateProvider>
+      )}
+      {true && <UnderConstruction />}
+    </>
+  );
 }

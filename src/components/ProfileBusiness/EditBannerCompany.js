@@ -8,8 +8,16 @@ import {
 
 export default function EditBannerCompany() {
   const {
-    businessProfile: { url_banner_company },
+    businessProfile: { businessData  },
   } = useBusinessProfileContext();
+  const [url_photo_banner, setUrl_photo_banner] = useState(undefined);
+  React.useEffect(() => {
+    if (Array.isArray(businessData)) {
+      const {url_photo_banner} = businessData[0];
+      setUrl_photo_banner(url_photo_banner);
+    }
+  }, [])
+  
   const [errorMessage, setErrorMessage] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -23,8 +31,7 @@ export default function EditBannerCompany() {
     setIsUpload(true);
     if (isDelete) {
       const response = await deleteBannerCompany();
-      if (response?.data?.meta?.code === 200) {
-        localStorage.setItem('user', JSON.stringify(response.data.data));
+      if (response.status === 204) {
         window.location.reload();
         return;
       }
@@ -34,7 +41,6 @@ export default function EditBannerCompany() {
     setIsLoading(true);
     const response = await updateBannerCompany(dataProfile);
     if (response?.data?.meta?.code === 200) {
-      localStorage.setItem('user', JSON.stringify(response.data.data));
       setIsLoading(false);
       window.location.reload();
       return;
@@ -66,7 +72,7 @@ export default function EditBannerCompany() {
         <div className="image-upload w-7/12">
           <div className="relative mt-2 w-fit">
             <div className="absolute -top-3 -right-5 w-fit cursor-pointer rounded-full bg-white p-2 shadow-lg">
-              <label for="banner-input">
+              <label htmlFor="banner-input">
                 <svg
                   className="h-3 w-3"
                   width="11"
@@ -89,7 +95,11 @@ export default function EditBannerCompany() {
             </div>
             <img
               className="rounded-md"
-              src={'/banner.png'}
+              src={
+                url_photo_banner
+                  ? `${process.env.REACT_APP_API_URL}/${url_photo_banner}`
+                  : '/banner.png'
+              }
               alt="logo-company"
             />
             <button
@@ -179,8 +189,8 @@ export default function EditBannerCompany() {
                         </div>
                         <p className="mx-auto mb-5 w-full text-center text-[#7E8299] lg:w-[400px]">
                           {isDelete
-                            ? 'Apakah anda ingin menghapus photo ini?'
-                            : 'Apakah Anda ingin mengubah foto ini?'}
+                            ? 'Apakah anda ingin menghapus banner ini?'
+                            : 'Apakah Anda ingin mengubah banner ini?'}
                         </p>
                       </>
                     )}

@@ -17,6 +17,7 @@ export default function Dashboard() {
       needDashboard
     >
       <PersonalCardContainer />
+      <div className='lg:my-28'></div>
       <Slider></Slider>
     </CandidateProvider>
   );
