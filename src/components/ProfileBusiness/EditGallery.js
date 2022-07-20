@@ -14,20 +14,9 @@ export default function EditGallery() {
   });
   async function handleEditPhoto() {
     setIsUpload(true);
-    if (isDelete) {
-      const response = await deleteGallery(dataProfile);
-      if (response?.data?.meta?.code === 200) {
-        localStorage.setItem('user', JSON.stringify(response.data.data));
-        window.location.reload();
-        return;
-      }
-      setError(true);
-      return;
-    }
     setIsLoading(true);
     const response = await updateGallery(dataProfile);
-    if (response?.data?.meta?.code === 200) {
-      localStorage.setItem('user', JSON.stringify(response.data.data));
+    if (response?.status === 201) {
       setIsLoading(false);
       window.location.reload();
       return;
@@ -35,6 +24,7 @@ export default function EditGallery() {
     setErrorMessage(response.data.data.photo_profile[0]);
     setError(true);
     setIsLoading(false);
+    window.location.reload();
   }
   const uploadPhoto = (e) => {
     e.preventDefault();

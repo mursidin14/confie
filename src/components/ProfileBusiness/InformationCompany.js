@@ -68,7 +68,7 @@ export default function Information() {
 }
 function DataPersonal({ label, require, value }) {
   return (
-    <div className=" items-center lg:flex ">
+    <div className=" items-center lg:flex my-4">
       <div className="w-5/12">
         <label
           className={`text-xs after:content-['*'] lg:text-base ${

@@ -35,6 +35,7 @@ import CarrerMap from 'pages/Candidate/CarrerGuide/CarrerMap';
 import ExplorationCarrer from 'pages/Candidate/CarrerGuide/ExplorationCarrer';
 import FAQ from 'pages/Candidate/Help/FAQ';
 import Billing from 'pages/Candidate/Help/Billing';
+import AccountSettingBusiness from 'pages/Candidate/AccountSettingBusiness ';
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
         <Route path="/business/job" element={<JobVacancy />} />
         <Route path="/business/job/create" element={<OpenJobVacancy />} />
         <Route path="/business/job/detail/:idJob" element={<JobVacancyDetail />} />
+        <Route path='/setting-business' element={<AccountSettingBusiness />} />
         <Route path="/business/talent/" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
 

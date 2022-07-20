@@ -47,7 +47,7 @@ export const updateCompanyInformation = (data) =>
 
 export const updateGallery = (data) =>
   httpAuthClient
-    .put('/api/profile/galleries', data, {
+    .post('/api/profile/galleries', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
