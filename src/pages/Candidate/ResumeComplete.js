@@ -4,14 +4,17 @@ import Simple from 'components/Resume/Simple';
 import Complete from 'components/Resume/Complete';
 import { getModelCV } from 'utils/utils';
 import { Helmet } from 'react-helmet';
+import ProfileService from 'services/Profile/ProfileService';
 export default function ResumeComplete() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [userComplete, setUserComplete] = React.useState(null);
   React.useEffect(() => {
-    const user = getCurrentUserComplete();
-    setUserComplete(user);
-    setIsLoading(false);
-    return () => {};
+    const fetchData = async () => {
+      const response = await ProfileService.getProfileData();
+      setUserComplete(response.data.data);
+      setIsLoading(false);
+    };
+    fetchData();
   }, []);
 
   return (
