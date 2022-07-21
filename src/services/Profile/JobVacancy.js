@@ -7,7 +7,7 @@ export const getAllJobVacancy = () => {
     .catch((error) => error.response);
 };
 
-export const getFilteredJobVacancy = ({ position }) => {
+export const getFilteredJobVacancy = ({ position, location }) => {
   return httpAuthClient
     .get(`/api/listjobvacancy?title=${position}`)
     .then((response) => response)

@@ -7,24 +7,24 @@ function classNames(...classes) {
 
 export default function BasicTab() {
   let [categories] = useState({
-    ["Tentang Perusahaan"]: {
+    "Tentang Perusahaan": {
       content: <AboutCompany />, 
     },
-    ["Info Lowongan"]:  {
-      content: <JobFeed />, 
+    "Info Lowongan":  {
+      content: <JobFeed items={[]}/>, 
     }
   })
 
   return (
     <div className="w-full px-2 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 max-w-lg">
+        <Tab.List className="flex space-x-1 max-w-lg ">
           {Object.keys(categories).map((category) => (
             <Tab
               key={category}
               className={({ selected }) =>
                 classNames(
-                  'w-full py-2.5 font-semibold leading-5', 
+                  'w-full py-2.5 font-semibold leading-5 outline-none', 
                   selected
                     ? 'border-b-4 border-[#FE9A00]'
                     : 'border-b-4 border-white text-[#7E8299]'

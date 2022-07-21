@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import Layout from 'components/Layout/Layout';
 import SearchJob from 'pages/Candidate/Job/SearchJob';
 import Pagination from 'components/Widgets/Pagination';
 import JobFeed from './JobFeed';
@@ -16,6 +15,7 @@ export default function Jobs() {
   const [isFilter, setisFilter] = useState(false);
   const [filter, setFilter] = useState({
     position: '',
+    location: '',
   });
   const [pagination, setPagination] = useState({
     sliceOne: 0,
@@ -39,6 +39,7 @@ export default function Jobs() {
     setisFilter(false);
     setFilter({
       position: '',
+      location: '',
     });
     setPagination({
       sliceOne: 0,
@@ -60,7 +61,7 @@ export default function Jobs() {
   };
   return (
     <>
-      {true && (
+      {false && (
         <>
           <CandidateProvider PageName={'Lowongan Kerja'}>
             {loading && <SkeletonCard />}
@@ -141,7 +142,7 @@ export default function Jobs() {
           </Transition>
         </>
       )}
-      {false && <UnderConstruction />}
+      {!false && <UnderConstruction />}
     </>
   );
 }
