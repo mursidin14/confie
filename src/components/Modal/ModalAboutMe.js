@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import ProfileService from 'services/Profile/ProfileService';
 
-export default function ModalAboutMe({data_profile}) {
+export default function ModalAboutMe({ data_profile }) {
   const [dataProfile, setDataProfile] = useState({
     full_name: data_profile.full_name,
     email: data_profile.email,
@@ -31,7 +31,7 @@ export default function ModalAboutMe({data_profile}) {
   async function handleClick() {
     if (dataProfile.about.length > 100) {
       setError(['About me harus kurang dari 100 karakter']);
-      return
+      return;
     }
     const response = await ProfileService.updateAbout(dataProfile);
     if (response.data.meta.status === 'error') {
@@ -83,18 +83,34 @@ export default function ModalAboutMe({data_profile}) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <div className="flex items-center justify-between px-8">
-        <h3 className="text-base font-semibold ">About Me</h3>
-      </div>
-      <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5">
-        <div className="sm:px-8 px-2">
-         <textarea onChange={handleChange} className='w-full bg-[#F5F8FA] p-5 lg:h-[200px]' name="about" value={dataProfile.about}></textarea> 
-        <p className={`text-xs ${dataProfile.about.length > 90 ? 'text-red-500' : 'text-gray-500'}`}>Sisa Karakter: {100 - dataProfile.about.length}</p>
-
-        </div>
-      </div>
-      <section className="px-8 text-left text-sm text-red-500">
+                  <div className="flex items-center justify-between px-8">
+                    <h3 className="text-base font-semibold ">About Me</h3>
+                  </div>
+                  <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+                  <div className="my-5">
+                    <div className="px-2 sm:px-8">
+                      <textarea
+                        onChange={handleChange}
+                        className="w-full bg-[#F5F8FA] p-5 lg:h-[200px]"
+                        name="about"
+                        value={dataProfile.about}
+                      ></textarea>
+                      {dataProfile.about === null ? (
+                        <><p className='text-xs text-gray-500'>Sisa Karakter: 100</p></>
+                      ) : (
+                        <p
+                          className={`text-xs ${
+                            dataProfile.about.length > 90
+                              ? 'text-red-500'
+                              : 'text-gray-500'
+                          }`}
+                        >
+                          Sisa Karakter: {100 - dataProfile.about.length}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <section className="px-8 text-left text-sm text-red-500">
                     {error.map((err, index) => (
                       <p key={index}>{err}</p>
                     ))}
@@ -106,7 +122,10 @@ export default function ModalAboutMe({data_profile}) {
                     >
                       Cancel
                     </button>
-                    <button onClick={handleClick} className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white">
+                    <button
+                      onClick={handleClick}
+                      className="rounded-md bg-[#FE9A00] px-4 py-2 text-sm text-white"
+                    >
                       Submit
                     </button>
                   </div>
@@ -119,4 +138,3 @@ export default function ModalAboutMe({data_profile}) {
     </>
   );
 }
-
