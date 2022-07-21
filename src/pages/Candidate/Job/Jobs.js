@@ -60,7 +60,7 @@ export default function Jobs() {
   };
   return (
     <>
-      {false && (
+      {true && (
         <>
           <CandidateProvider PageName={'Lowongan Kerja'}>
             {loading && <SkeletonCard />}
@@ -141,7 +141,7 @@ export default function Jobs() {
           </Transition>
         </>
       )}
-      {true && <UnderConstruction />}
+      {false && <UnderConstruction />}
     </>
   );
 }

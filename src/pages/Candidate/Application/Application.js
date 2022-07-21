@@ -7,14 +7,17 @@ import useGetApplication from './useGetApplication';
 import { getStatusApplication } from 'utils/utils';
 import CandidateProvider from 'context/candidate-context';
 export default function Application() {
-  const { items, loading } = useGetApplication();
+  let { items, loading } = useGetApplication();
+  if (items === undefined) {
+    items = [];
+  }
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,
   });
   return (
     <>
-      {false && (
+      {true && (
         <>
           <CandidateProvider PageName={'Lamaran Saya'}>
             <div className="rounded-md bg-white p-6 shadow-mine">
@@ -108,7 +111,7 @@ export default function Application() {
           </CandidateProvider>
         </>
       )}
-      {true && <UnderConstruction />}
+      {false && <UnderConstruction />}
     </>
   );
 }
