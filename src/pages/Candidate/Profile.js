@@ -74,8 +74,9 @@ function ProfileContainer() {
                 profile.certificates,
                 profile.experiences,
                 profile.internships,
-                profile.certificates,
                 profile.educations,
+                profile.volunteers,
+                profile.papers,
               ]) ? (
                 <AddSection
                   action={'Add Section'}
