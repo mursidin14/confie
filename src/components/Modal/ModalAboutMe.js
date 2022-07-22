@@ -29,8 +29,8 @@ export default function ModalAboutMe({ data_profile }) {
     setIsOpen(true);
   }
   async function handleClick() {
-    if (dataProfile.about.length > 100) {
-      setError(['About me harus kurang dari 100 karakter']);
+    if (dataProfile.about.length > 500) {
+      setError(['About me harus kurang dari 500 karakter']);
       return;
     }
     const response = await ProfileService.updateAbout(dataProfile);
@@ -96,16 +96,16 @@ export default function ModalAboutMe({ data_profile }) {
                         value={dataProfile.about}
                       ></textarea>
                       {dataProfile.about === null ? (
-                        <><p className='text-xs text-gray-500'>Sisa Karakter: 100</p></>
+                        <><p className='text-xs text-gray-500'>Sisa Karakter: 500</p></>
                       ) : (
                         <p
                           className={`text-xs ${
-                            dataProfile.about.length > 90
+                            dataProfile.about.length > 490
                               ? 'text-red-500'
                               : 'text-gray-500'
                           }`}
                         >
-                          Sisa Karakter: {100 - dataProfile.about.length}
+                          Sisa Karakter: {500 - dataProfile.about.length}
                         </p>
                       )}
                     </div>
