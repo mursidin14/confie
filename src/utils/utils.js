@@ -57,11 +57,9 @@ const getCity = (data) => {
   });
   return city;
 };
-
 export const getLocalStringRupiah = (rupiah) => {
   return rupiah.toLocaleString('id-ID');
 };
-
 const timeEpoch = (time) => {
   if (time === undefined) {
     return 0;
@@ -196,6 +194,16 @@ export const getStatusApplication = (status) => {
       return 'Lamaran Ditolak';
   }
 };
+// formating function
+// sorting function
+export function sortWorkExperience(items) {
+  return items.sort((a, b) => {
+    if (a.is_current === b.is_current) {
+      return a.time - b.time;
+    }
+    return a.is_current ? -1 : 1;
+  });
+}
 const utils = {
   authHeader,
   makeCapital,

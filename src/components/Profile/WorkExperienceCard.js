@@ -3,12 +3,12 @@ import Pagination from 'components/Widgets/Pagination';
 import ModalWorkExperience from 'components/Modal/ModalWorkExperience';
 import UpdateWorkExperience from 'components/ModalUpdate/UpdateWorkExperience';
 import ProfileService from 'services/Profile/ProfileService';
-import utils, { getLength } from 'utils/utils';
+import utils, { getLength, sortWorkExperience } from 'utils/utils';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment} from 'react';
 export default function WorkExperienceCard({ data_profile }) {
-  let workExperience = data_profile;
+  const workExperience = sortWorkExperience(data_profile);
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,
