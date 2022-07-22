@@ -12,7 +12,7 @@ export default function EditBannerCompany() {
   } = useBusinessProfileContext();
   const [url_photo_banner, setUrl_photo_banner] = useState(undefined);
   React.useEffect(() => {
-    if (Array.isArray(businessData)) {
+    if (Array.isArray(businessData) && businessData.length > 0) {
       const {url_photo_banner} = businessData[0];
       setUrl_photo_banner(url_photo_banner);
     }

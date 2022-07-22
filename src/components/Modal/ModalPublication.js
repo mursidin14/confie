@@ -108,7 +108,7 @@ export default function ModalPublication({ section }) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                      Tambah Karya Tulis Ilmiah
+                      Tambah Porto Karya
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
@@ -127,6 +127,7 @@ export default function ModalPublication({ section }) {
                           <label className="text-xs lg:text-base" htmlFor="">
                             File
                           </label>
+                          <p className='text-xs text-gray-500 mb-2'>Max size: 2 MB</p>
                         </div>
                         <div className="lg:w-7/12">
                           <input
@@ -139,6 +140,7 @@ export default function ModalPublication({ section }) {
                               })
                             }}
                           />
+                          
                         </div>
                       </div>
                     </div>
