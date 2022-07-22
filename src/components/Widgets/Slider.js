@@ -9,8 +9,9 @@ export default function Slider() {
   React.useEffect(()=>{
     const getSliderData = async () => {
       const response = await getSliderInformation()
-      setLoading(response.data.data)
+      setTips(response.data.data.filter(tip => tip.is_active).map(tip => tip.information))      
     }
+    getSliderData()
   }, [])
   React.useEffect(() => {
     const timer = setInterval(() => {
