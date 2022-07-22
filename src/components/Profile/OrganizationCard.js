@@ -6,8 +6,9 @@ import SweetAlert from 'components/Widgets/SweetAlert';
 import ModalOrganization from 'components/Modal/ModalOrganization';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment} from 'react';
+import { sortYear } from 'utils/utils';
 export default function OrganizationCard({ data_profile }) {
-  let organizationHistory = data_profile;
+  const organizationHistory = sortYear(data_profile);
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,

@@ -6,8 +6,9 @@ import ProfileService from 'services/Profile/ProfileService';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment} from 'react';
+import { sortYear } from 'utils/utils';
 export default function CertificationCard({data_profile}) {
-  let certification = data_profile || []
+  const certification = sortYear(data_profile) || []
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,

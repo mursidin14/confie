@@ -204,6 +204,23 @@ export function sortWorkExperience(items) {
     return a.is_current ? -1 : 1;
   });
 }
+
+export function sortItems(items) {
+  return items.sort((a, b) => {
+    if (a.end_date === b.end_date) {
+      return a.end_date - b.end_date;
+    }
+    return a.end_date > b.end_date ? -1 : 1;
+  });
+}
+
+export function sortYear(items) {
+  items.sort((a, b) => {
+    return a.year - b.year;
+  })
+  return items.reverse();
+}
+
 const utils = {
   authHeader,
   makeCapital,

@@ -3,13 +3,12 @@ import Pagination from 'components/Widgets/Pagination';
 import ModalInternship from 'components/Modal/ModalInternship';
 import ProfileService from 'services/Profile/ProfileService';
 import UpdateIntershipExperience from 'components/ModalUpdate/UpdateIntershipExperience';
-import utils, { getLength } from 'utils/utils';
+import utils, { getLength, sortItems } from 'utils/utils';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment} from 'react';
 export default function InternExperienceCard({data_profile}) {
-
-  let internExperience = data_profile
+  const internExperience = sortItems(data_profile);
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,
