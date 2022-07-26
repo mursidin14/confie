@@ -17,7 +17,7 @@ export default function Application() {
   });
   return (
     <>
-      {!true && (
+      {!false && (
         <>
           <CandidateProvider PageName={'Lamaran Saya'}>
             <div className="rounded-md bg-white p-6 shadow-mine">
@@ -111,7 +111,6 @@ export default function Application() {
           </CandidateProvider>
         </>
       )}
-      {!false && <UnderConstruction />}
     </>
   );
 }
