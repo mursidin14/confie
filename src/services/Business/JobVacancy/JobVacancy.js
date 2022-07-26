@@ -11,6 +11,17 @@ export const addJobVacancy = (data) => {
     .catch((error) => error.response);
 };
 
+export const updateJobVacancy = (id ,data) => {
+  return httpAuthClient
+    .put(`/api/jobvacancy/${id}?_method=PUT`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
 export const getJobVacancy = () => {
   return httpAuthClient
     .get('/api/jobvacancy')
@@ -40,6 +51,15 @@ export const changeApplicantJobVacancy = (idJob, idApplicant, status) => {
     .then((response) => response)
     .catch((error) => error.response);
 };
+
+export const rejectApplicant = (idJob, idApplicant) => {
+  return httpAuthClient
+    .post(`/api/jobvacancy/${idJob}/participant/reject/${idApplicant}`, {
+      is_reject: 0,
+    })
+    .then((response) => response)
+    .catch((error) => error.response);
+}
 
 export const deleteJobVacancy = (id) => {
   return httpAuthClient

@@ -295,7 +295,7 @@ function ButtonDashboard() {
 
           <a
             className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit "
-            href="/profile"
+            href="/business/job"
           >
             <p>Buka Lowongan</p>
           </a>

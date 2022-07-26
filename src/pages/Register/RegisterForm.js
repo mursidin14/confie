@@ -43,7 +43,9 @@ export default function Register() {
           message_error.push(msg_error[key]);
         }
         setError_msg(message_error);
-        
+        if (message_error.length === 0) {
+          setError_msg(['Your are not using a valid email address']);
+        }
         return setIsOpenFailed(true);
       }
     }

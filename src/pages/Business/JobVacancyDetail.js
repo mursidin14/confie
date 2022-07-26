@@ -4,12 +4,13 @@ import BasicCard from 'components/Widgets/BasicCard';
 import { Tab } from '@headlessui/react';
 import { useParams } from 'react-router-dom';
 import Pagination from 'components/Widgets/Pagination';
-import { BusinessProvider } from 'context/business-context';
+import { BusinessProvider, useBusinessContext } from 'context/business-context';
 import {
   changeApplicantJobVacancy,
   deleteJobVacancy,
   getApplicantJobVacancy,
   getDetailJobVacancy,
+  rejectApplicant,
 } from 'services/Business/JobVacancy/JobVacancy';
 import SkeletonCard from 'components/SkeletonCard';
 import SweetAlert from 'components/Widgets/SweetAlert';
@@ -62,15 +63,29 @@ function CardJobVacany({ archive, detailJob, applicants }) {
     await changeApplicantJobVacancy(id, idApplicant, status);
     window.location.reload();
   };
+  const rejectCandidate = async (idApplicant) => {
+    await rejectApplicant(id, idApplicant);
+    window.location.reload();
+  };
   const [categories] = useState({
     Berkas: {
       content: (
-        <StepOne id={id} applicants={applicants} changeStatus={changeStatus} />
+        <StepOne
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
       ),
     },
     'Seleksi Tes Online': {
       content: (
-        <StepTwo id={id} applicants={applicants} changeStatus={changeStatus} />
+        <StepTwo
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
       ),
     },
     'Tes Wawancara': {
@@ -79,12 +94,18 @@ function CardJobVacany({ archive, detailJob, applicants }) {
           id={id}
           applicants={applicants}
           changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
         />
       ),
     },
     'Hasil Akhir': {
       content: (
-        <StepFour id={id} applicants={applicants} changeStatus={changeStatus} />
+        <StepFour
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
       ),
     },
   });
@@ -94,13 +115,22 @@ function CardJobVacany({ archive, detailJob, applicants }) {
       setIsOpenAccept(true);
     }
   };
+  const { business } = useBusinessContext();
   return (
     <>
       <BasicCard>
         <div className="items-center justify-between px-6 md:flex">
           <section className="items-center gap-4 space-y-2 md:flex">
             <div className="flex items-center justify-center rounded-md bg-[#F5F8FA] px-5 py-10">
-              <img src="/upana_logo.png" alt="" />
+              <img
+                className="w-20"
+                src={
+                  business.url_photo_profile
+                    ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
+                    : '/company_default.png'
+                }
+                alt=""
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -148,6 +178,12 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                       item={detailJob}
                       handleDelete={handleDelete}
                     />
+                    <a
+                      href={`/business/job/update/${detailJob.id}`}
+                      className="rounded-md bg-orange/10 px-4 py-2 text-orange"
+                    >
+                      Update
+                    </a>
                     <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                       Arsipkan
                     </button>
@@ -379,6 +415,12 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                   item={detailJob}
                   handleDelete={handleDelete}
                 />
+                <a
+                  href={`/business/job/update/${detailJob.id}`}
+                  className="rounded-md bg-orange/10 px-4 py-2 text-orange"
+                >
+                  Update
+                </a>
                 <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                   Arsipkan
                 </button>
@@ -480,7 +522,7 @@ function CardJobVacany({ archive, detailJob, applicants }) {
     </>
   );
 }
-function StepOne({ applicants, id, changeStatus }) {
+function StepOne({ applicants, id, changeStatus, rejectCandidate }) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-8">
@@ -494,15 +536,14 @@ function StepOne({ applicants, id, changeStatus }) {
             (applicant) => applicant.pivot.status === '2',
           )}
           changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
         ></Table>
       </div>
-      <div className="mt-5 flex w-full justify-end pr-14">
-        <Pagination></Pagination>
-      </div>
+      <div className="mt-5 flex w-full justify-end pr-14"></div>
     </BasicCard>
   );
 }
-function StepTwo({ id, applicants, changeStatus }) {
+function StepTwo({ id, applicants, changeStatus ,rejectCandidate}) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-8">
@@ -516,15 +557,14 @@ function StepTwo({ id, applicants, changeStatus }) {
             (applicant) => applicant.pivot.status === '3',
           )}
           changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
         ></TableTwo>
       </div>
-      <div className="mt-5 flex w-full justify-end pr-14">
-        <Pagination></Pagination>
-      </div>
+      <div className="mt-5 flex w-full justify-end pr-14"></div>
     </BasicCard>
   );
 }
-function StepThree({ id, applicants, changeStatus }) {
+function StepThree({ id, applicants, changeStatus, rejectCandidate }) {
   return (
     <>
       <BasicCard>
@@ -539,11 +579,10 @@ function StepThree({ id, applicants, changeStatus }) {
               (applicant) => applicant.pivot.status === '4',
             )}
             changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
           ></TableThree>
         </div>
-        <div className="mt-5 flex w-full justify-end pr-14">
-          <Pagination></Pagination>
-        </div>
+        <div className="mt-5 flex w-full justify-end pr-14"></div>
       </BasicCard>
     </>
   );
@@ -557,13 +596,13 @@ function StepFour({ id, applicants, changeStatus }) {
     },
     {
       title: 'Lulus Berkas',
-      value: applicants.filter((applicant) => applicant.pivot.status === '2')
+      value: applicants.filter((applicant) => applicant.pivot.status === '3')
         .length,
       icon: IconTwo,
     },
     {
       title: 'Lulus Tes Online',
-      value: applicants.filter((applicant) => applicant.pivot.status === '3')
+      value: applicants.filter((applicant) => applicant.pivot.status === '4')
         .length,
       icon: IconThree,
     },
@@ -592,15 +631,13 @@ function StepFour({ id, applicants, changeStatus }) {
             changeStatus={changeStatus}
           ></TableFour>
         </div>
-        <div className="mt-5 flex w-full justify-end pr-14">
-          <Pagination></Pagination>
-        </div>
+        <div className="mt-5 flex w-full justify-end pr-14"></div>
       </BasicCard>
     </>
   );
 }
 
-function Table({ items, changeStatus }) {
+function Table({ items, changeStatus, rejectCandidate }) {
   return (
     <>
       {items.length === 0 ? (
@@ -643,7 +680,7 @@ function Table({ items, changeStatus }) {
                   </button>
                   <button
                     onClick={() => {
-                      changeStatus(item.id, 3);
+                      rejectCandidate(item.id);
                     }}
                     className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]"
                   >
@@ -658,7 +695,7 @@ function Table({ items, changeStatus }) {
     </>
   );
 }
-function TableTwo({ id, items, changeStatus }) {
+function TableTwo({ id, items, changeStatus, rejectCandidate }) {
   return (
     <>
       {items.length === 0 ? (
@@ -708,7 +745,12 @@ function TableTwo({ id, items, changeStatus }) {
                   >
                     Terima
                   </button>
-                  <button className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]">
+                  <button
+                    onClick={() => {
+                      rejectCandidate(item.id);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]"
+                  >
                     Tolak
                   </button>
                 </td>
@@ -720,7 +762,7 @@ function TableTwo({ id, items, changeStatus }) {
     </>
   );
 }
-function TableThree({ id, items, changeStatus }) {
+function TableThree({ id, items, changeStatus, rejectCandidate }) {
   return (
     <>
       {items.length === 0 ? (
@@ -773,7 +815,12 @@ function TableThree({ id, items, changeStatus }) {
                   >
                     Terima
                   </button>
-                  <button className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]">
+                  <button
+                    onClick={() => {
+                      rejectCandidate(item.id);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]"
+                  >
                     Tolak
                   </button>
                 </td>

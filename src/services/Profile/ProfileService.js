@@ -144,18 +144,20 @@ const addJobExperience = (data) =>
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
+      
     })
     .then((response) => response)
     .catch((error) => error.response);
 
 const updateJobExperience = (id, data) =>
   httpAuthClient
-    .put(`/api/profile/experiences/${id}`, data, {
+    .post(`/api/profile/experiences/${id}?_method: `, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
-    })
+    }, 
+    )
     .then((response) => response)
     .catch((error) => error.response);
 

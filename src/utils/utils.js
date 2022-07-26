@@ -190,6 +190,8 @@ export const getStatusApplication = (status) => {
       return 'Seleksi Berkas';
     case '3':
       return 'Tes Online';
+      case '4':
+        return 'Wawancara'
     default:
       return 'Lamaran Ditolak';
   }
