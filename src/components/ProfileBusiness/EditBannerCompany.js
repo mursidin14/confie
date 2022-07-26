@@ -94,7 +94,7 @@ export default function EditBannerCompany() {
               </label>
             </div>
             <img
-              className="rounded-md"
+              className="rounded-md object-cover w-80 h-36"
               src={
                 url_photo_banner
                   ? `${process.env.REACT_APP_API_URL}/${url_photo_banner}`

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Pagination from 'components/Widgets/Pagination';
-import UpdateCertificationModal from 'components/ModalUpdate/UpdateCertificationModal';
 import ProfileService from 'services/Profile/ProfileService';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
