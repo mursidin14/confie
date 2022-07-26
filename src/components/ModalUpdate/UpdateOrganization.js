@@ -24,6 +24,7 @@ export default function UpdateOrganization({ item, id }) {
   async function handleSubmit() {
     const data = {
       ...dataOrganization,
+      _method: 'PUT',
     };
     data['start_date'] = utils.timeEpoch(data['start_date']);
     data['end_date'] = utils.timeEpoch(data['end_date']);

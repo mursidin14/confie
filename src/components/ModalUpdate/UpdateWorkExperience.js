@@ -8,11 +8,12 @@ export default function UpdateWorkExperience({ item, id }) {
   const [dataWorkExperience, setDataWorkExperience] = useState({
     agency: item.agency,
     description: item.description,
-    is_current: item.is_current,
+    is_current: item.is_current ,
     position: item.position,
     start_date: utils.getYearMonthDay(item.start_date),
     end_date: utils.getYearMonthDay(item.end_date),
     status: item.status,
+    
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -30,6 +31,8 @@ export default function UpdateWorkExperience({ item, id }) {
   async function handleSubmit() {
     const data = {
       ...dataWorkExperience,
+      is_current : dataWorkExperience.is_current ? 1 : 0,
+      _method: 'PUT',
     };
     if (data['end_date'] === undefined && data['is_current'] === false) {
       setError(...error, ['End date is required']);

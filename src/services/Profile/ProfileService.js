@@ -151,7 +151,7 @@ const addJobExperience = (data) =>
 
 const updateJobExperience = (id, data) =>
   httpAuthClient
-    .post(`/api/profile/experiences/${id}?_method: `, data, {
+    .post(`/api/profile/experiences/${id} `, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
@@ -180,7 +180,7 @@ const addIntershipExperience = (data) =>
 
 const updateIntershipExperience = (id, data) =>
   httpAuthClient
-    .put(`/api/profile/internships/${id}`, data, {
+    .post(`/api/profile/internships/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
@@ -208,7 +208,7 @@ const addEducation = (data) =>
 
 const updateEducation = (id, data) =>
   httpAuthClient
-    .put(`/api/profile/educations/${id}`, data, {
+    .post(`/api/profile/educations/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
@@ -236,7 +236,7 @@ const addOrganization = (data) =>
 
 const updateOrganization = (id, data) =>
   httpAuthClient
-    .put(`/api/profile/volunteers/${id}`, data, {
+    .post(`/api/profile/volunteers/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
@@ -264,7 +264,7 @@ const addCertificate = (data) =>
 
 const updateCertificate = (id, data) =>
   httpAuthClient
-    .put(`/api/profile/certificates/${id}`, data, {
+    .post(`/api/profile/certificates/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',

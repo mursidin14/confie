@@ -28,6 +28,7 @@ export default function UpdateIntershipExperience({ item, id }) {
   async function handleSubmit() {
     let data = {
       ...dataInternship,
+      _method: 'PUT',
     };
     data['start_date'] = utils.timeEpoch(data['start_date']);
     data['end_date'] = utils.timeEpoch(data['end_date']);

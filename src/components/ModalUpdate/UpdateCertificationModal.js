@@ -30,6 +30,7 @@ export default function UpdateCertificationModal({ item, id }) {
   async function handleSubmit() {
     let data = {
       ...dataCertificate,
+    _method: 'PUT',
     };
     const response = await ProfileService.updateCertificate(id, data);
     if (response.data.meta.status == 'error') {
