@@ -110,12 +110,11 @@ export default function CompanyDetail() {
                 <h3 className="text-base font-semibold">Gallery Company</h3>
               </div>
               <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-              <div className='grid grid-cols-3 gap-5'>
-
+              <div className='grid px-5 gap-5 grid-flow-col'>
               {data.galleries.map((item, index) => (
                 <>
                   <img
-                    className=""
+                    className="w-56 h-48 rounded-md object-cover"
                     src={`${process.env.REACT_APP_API_URL}/${item.url}`}
                     alt=""
                   />
