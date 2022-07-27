@@ -40,6 +40,7 @@ export default function Jobs() {
     setFilter({
       position: '',
       location: '',
+      range: '',
     });
     setPagination({
       sliceOne: 0,
@@ -55,7 +56,20 @@ export default function Jobs() {
   const handleFilter = async () => {
     setisFilter(true);
     setLoading(true);
-    const { data } = await getFilteredJobVacancy(filter);
+    const filteredItem  = () => {
+      for (let key in filter) {
+        if (filter[key] === '') {
+          delete filter[key];
+        }
+      }
+      let filterName = '?'
+      for (let key in filter) {
+        filterName += `${key}=${filter[key]}&`;
+      }
+      return filterName;
+    }
+    const filterItem = filteredItem();
+    const { data } = await getFilteredJobVacancy(filterItem);
     setItems(data.data.data);
     setLoading(false);
   };

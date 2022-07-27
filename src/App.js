@@ -74,9 +74,9 @@ function App() {
         <Route path="/business/job/detail/:idJob" element={<JobVacancyDetail />} />
         <Route path="/business/job/update/:idJob" element={<UpdateJobVacancy />} />
         <Route path='/setting-business' element={<AccountSettingBusiness />} />
-        <Route path="/business/talent/" element={<TalentPool />} />
+        <Route path="/business/talent" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
-
+        
         <Route path='/under' element={<UnderConstruction />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

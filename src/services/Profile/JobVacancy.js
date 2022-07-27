@@ -7,9 +7,9 @@ export const getAllJobVacancy = () => {
     .catch((error) => error.response);
 };
 
-export const getFilteredJobVacancy = ({ position, location }) => {
+export const getFilteredJobVacancy = (filterItem ) => {
   return httpAuthClient
-    .get(`/api/listjobvacancy?title=${position}`)
+    .get(`/api/listjobvacancy${filterItem}`)
     .then((response) => response)
     .catch((error) => error.response);
 };

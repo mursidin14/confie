@@ -12,6 +12,7 @@ export default function JobDetail() {
   useEffect(() => {
     const getJobVacancy = async () => {
       const response = await getJobVacancyDetail(idDetail);
+      console.log(response.data.data)
       setItem(response.data.data);
       setLoading(false);
     };

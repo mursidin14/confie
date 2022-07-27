@@ -4,6 +4,7 @@ import BasicTab from 'components/Widgets/BasicTab';
 import { useParams } from 'react-router-dom';
 import ProfileService from 'services/Profile/ProfileService';
 import { getYear, makeCapital } from 'utils/utils';
+import { Helmet } from 'react-helmet';
 export default function CompanyDetail() {
   const { id } = useParams();
   const [data, setData] = useState({
@@ -25,8 +26,13 @@ export default function CompanyDetail() {
     <>
       {loading && <p>Loading...</p>}
       {!loading && (
+        <>
+        <Helmet>
+          <title>Company | {data.full_name.toUpperCase()}</title>
+        </Helmet>
         <main>
           {/* <Header data={data} PageName={'Profile Perusahaan'} /> */}
+          
           <section
             className="relative h-[500px] bg-cover bg-no-repeat text-left text-white"
             style={{
@@ -124,6 +130,7 @@ export default function CompanyDetail() {
             </BasicCard>
           </div>
         </main>
+        </>
       )}
     </>
   );
