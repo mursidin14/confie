@@ -38,9 +38,7 @@ export default function Jobs() {
   const resetFilter = async () => {
     setisFilter(false);
     setFilter({
-      position: '',
       location: '',
-      range: '',
     });
     setPagination({
       sliceOne: 0,
@@ -53,22 +51,32 @@ export default function Jobs() {
     const { name, value } = e.target;
     setFilter({ ...filter, [name]: value });
   };
+  const handleFilterSalary = (min, max) => {
+    if (min === 10000000) {
+      setFilter({ position: filter.position, location: filter.location , min_salary: min });
+    } else {
+      setFilter({ ...filter, min_salary: min, max_salary: max });
+    }
+  };
   const handleFilter = async () => {
+    console.log(filter)
     setisFilter(true);
     setLoading(true);
-    const filteredItem  = () => {
+    const filteredItem = () => {
       for (let key in filter) {
         if (filter[key] === '') {
           delete filter[key];
         }
       }
-      let filterName = '?'
+      let filterName = '?';
       for (let key in filter) {
         filterName += `${key}=${filter[key]}&`;
       }
       return filterName;
-    }
+    };
+    
     const filterItem = filteredItem();
+    console.log(filterItem)
     const { data } = await getFilteredJobVacancy(filterItem);
     setItems(data.data.data);
     setLoading(false);
@@ -83,6 +91,7 @@ export default function Jobs() {
               <>
                 <SearchJob
                   handleFilter={handleFilter}
+                  handleFilterSalary={handleFilterSalary}
                   handleFilterChange={handleFilterChange}
                   handleResetFilter={resetFilter}
                   isFilter={isFilter}

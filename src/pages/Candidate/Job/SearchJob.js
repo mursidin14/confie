@@ -3,6 +3,7 @@ import SalaryFilter from 'pages/Candidate/Job/SalaryFilter';
 
 export default function SearchJob({
   handleFilterChange,
+  handleFilterSalary,
   handleFilter,
   handleResetFilter,
   isFilter,
@@ -23,7 +24,7 @@ export default function SearchJob({
         placeholder="Makassar..."
         onChange={handleFilterChange}
       />
-      <SalaryFilter></SalaryFilter>
+      <SalaryFilter handleFilterSalary={handleFilterSalary}></SalaryFilter>
       <button
         onClick={() => {
           if (isFilter) {
