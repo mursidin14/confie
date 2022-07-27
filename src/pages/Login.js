@@ -4,6 +4,7 @@ import AuthService from 'services/Auth/AuthService';
 import ModalError from 'components/Modal/ModalError';
 import { Helmet } from 'react-helmet';
 import ErrorModal from 'components/Widgets/ErrorModal';
+import ProfileService from 'services/Profile/ProfileService';
 export default function Login() {
   const [error, setError] = useState(false);
   const [error_msg, setError_msg] = useState('');
@@ -22,16 +23,22 @@ export default function Login() {
     setError(false);
   }
   React.useEffect(() => {
-    const getMetaData = localStorage.getItem('metadata');
-    if (getMetaData) {
-      const getData = JSON.parse(localStorage.getItem('user'));
-      if (getData.roles[0].name === 'personal') {
-        window.location.href = '/dashboard';
-      } else {
-        window.location.href = '/business';
+    const getProfile = async () => {
+      const response = await ProfileService.getProfileData();
+      if (response.status !== 401) {
+        const getMetaData = localStorage.getItem('metadata');
+        if (getMetaData) {
+          const getData = JSON.parse(localStorage.getItem('user'));
+          if (getData.roles[0].name === 'personal') {
+            window.location.href = '/dashboard';
+          } else {
+            window.location.href = '/business';
+          }
+        }
       }
-    }
-  });
+    };
+    getProfile();
+  }, []);
 
   return (
     <>
