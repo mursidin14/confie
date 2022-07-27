@@ -63,8 +63,12 @@ export default function TalentPool() {
                 setIsFilter={setIsFilter}
                 filter={filter}
               ></SearchTalent>
-              {dataTalent.length === 0 && <p className='text-xs italic mt-5 text-gray-400'>No users found!</p> }
-              {!isLoading && (<FeedTalent items={dataTalent} />)}
+              {dataTalent.length === 0 && (
+                <p className="mt-5 text-xs italic text-gray-400">
+                  No users found!
+                </p>
+              )}
+              {!isLoading && <FeedTalent items={dataTalent} />}
               <div className="flex justify-center">
                 {/* <Pagination></Pagination> */}
               </div>
@@ -80,12 +84,20 @@ export default function TalentPool() {
 }
 
 function FeedTalent({ items }) {
+  const { business } = useBusinessContext();
+  const isNotPremium = business.premium_until === null;
   return (
-    <section className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item, index) => (
-        <TalentCard key={index} item={item} />
-      ))}
-    </section>
+    <>
+      {!isNotPremium && (
+        <>
+          <section className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((item, index) => (
+              <TalentCard key={index} item={item} />
+            ))}
+          </section>
+        </>
+      )}
+    </>
   );
 }
 
