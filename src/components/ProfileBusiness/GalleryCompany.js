@@ -42,7 +42,7 @@ export default function GalleryCompany() {
             {galleries.map((img, index) => (
               <div key={index} className="relative bg-red-300 w-fit h-fit">
                 <img
-                  className=""
+                  className="w-10 h-10"
                   src={`${process.env.REACT_APP_API_URL}/${img.url}`}
                   alt=""
                 />

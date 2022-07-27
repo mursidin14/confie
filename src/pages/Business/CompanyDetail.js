@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import Header from 'components/Layout/Header';
 import BasicCard from 'components/Widgets/BasicCard';
 import BasicTab from 'components/Widgets/BasicTab';
-import GalleryCompany from 'components/ProfileBusiness/GalleryCompany';
 import { useParams } from 'react-router-dom';
 import ProfileService from 'services/Profile/ProfileService';
 import { getYear, makeCapital } from 'utils/utils';
 export default function CompanyDetail() {
   const { id } = useParams();
-  const Background = 'https://source.unsplash.com/1000x600/?coding';
   const [data, setData] = useState({
     email_verified_at: null,
     full_name: 'Annas Casmawan Ahmad',
