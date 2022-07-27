@@ -18,7 +18,11 @@ export default function ProfileCandidate() {
   useEffect(() => {
     async function fetchData() {
       const response_profile = await ProfileService.getOnlineProfileData(id);
-      console.log(response_profile);
+      // check if response profile object has galleries property
+      if (response_profile.data.data.businessFields) {
+        window.location.href = `/company/${id}`;
+      }
+        
       if (response_profile?.response?.status === 500) {
         setNotFound(true);
         setLoading(false);

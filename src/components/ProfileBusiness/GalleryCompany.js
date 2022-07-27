@@ -36,13 +36,13 @@ export default function GalleryCompany() {
         <h3 className="text-base font-semibold">Gallery Company</h3>
       </div>
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5 flex flex-wrap items-stretch justify-center gap-6 px-8 sm:justify-between">
+      <div className="my-5 grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-5 gap-5">
         {galleries !== undefined && (
           <>
             {galleries.map((img, index) => (
               <div key={index} className="relative bg-red-300 w-fit h-fit">
                 <img
-                  className="w-10 h-10"
+                  className="w-56 h-48 rounded-md object-cover"
                   src={`${process.env.REACT_APP_API_URL}/${img.url}`}
                   alt=""
                 />
