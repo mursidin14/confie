@@ -9,6 +9,7 @@ export default function UpdateOrganization({ item, id }) {
     agency: item.agency,
     position: item.position,
     year: item.year,
+    description: item.description,
   });
   const [error, setError] = useState([]);
   function closeModal() {
