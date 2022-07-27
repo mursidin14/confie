@@ -282,13 +282,14 @@ function ProfileCompletion() {
 }
 
 function ButtonDashboard() {
+  const {business} = useBusinessContext()
   return (
     <>
       <div className="my-3 flex w-full">
         <div className="flex w-full items-center justify-between gap-3 sm:justify-start">
           <a
             className="secondary-btn center border-[1px] px-2 py-3 text-xs md:w-fit "
-            href={`/business/profile`}
+            href={`/company/${business.slug}`}
           >
             Halaman Profile
           </a>

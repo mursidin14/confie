@@ -45,7 +45,7 @@ export const deleteTeamMember = (id) => {
 
 export const invitationMember = (data) => {
   return httpAuthClient
-    .post("/api/members/invitations", data, {
+    .post("/api/members/invite", data, {
       headers: {
         "Content-Type": "application/json",
       },

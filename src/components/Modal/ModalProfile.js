@@ -7,9 +7,10 @@ import {
   SearchRegionProfile,
 } from 'components/SearchRegion';
 import ProfileService from 'services/Profile/ProfileService';
-import utils from 'utils/utils';
+import utils, { getFullDate } from 'utils/utils';
 
 export default function ModalProfile({ data_profile }) {
+
   const [isOpen, setIsOpen] = useState(false);
   const [dataProfile, setDataProfile] = useState({
     full_name: data_profile.full_name,
@@ -22,7 +23,7 @@ export default function ModalProfile({ data_profile }) {
     address: data_profile.address,
     zip_code: data_profile.zip_code,
     gender: data_profile.gender,
-    date_of_birth: utils.getYearMonthDay(data_profile.date_of_birth),
+    date_of_birth: getFullDate(data_profile.date_of_birth),
   });
   const [city, setCity] = useState([]);
   const [error, setError] = useState([]);

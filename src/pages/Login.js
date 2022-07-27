@@ -20,6 +20,12 @@ export default function Login() {
   function closeModal() {
     setError(false);
   }
+  React.useEffect(()=>{
+    // const getMetaData = localStorage.getItem('metadata');
+    // if(getMetaData){
+    //   window.location.href = '/dashboard';
+    // }
+  })
 
   return (
     <main className="min-h-screen lg:flex">

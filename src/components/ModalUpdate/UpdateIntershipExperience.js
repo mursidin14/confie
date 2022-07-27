@@ -61,13 +61,13 @@ export default function UpdateIntershipExperience({ item, id }) {
   let inputs2 = [
     {
       name: 'start_date',
-      type: 'date',
+      type: 'month',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
-      type: 'date',
+      type: 'month',
       label: 'Tahun Selesai',
       required: true,
     },

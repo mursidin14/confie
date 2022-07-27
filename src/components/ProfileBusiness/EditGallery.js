@@ -36,7 +36,7 @@ export default function EditGallery() {
 
   return (
     <>
-      <div className="image-upload">
+      <div className="image-upload ">
         <label className="cursor-pointer" htmlFor="input-gallery">
           <div className="flex h-full w-fit flex-col items-center justify-center gap-5 rounded-md bg-[#A1A5B7] p-10 text-white">
             <svg

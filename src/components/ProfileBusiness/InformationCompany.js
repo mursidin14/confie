@@ -2,7 +2,6 @@ import React from 'react';
 import BasicCard from 'components/Widgets/BasicCard';
 import ModalInformation from 'components/Modal/ModalInformation';
 import { useBusinessProfileContext } from 'context/business-profile-context';
-import { getValue } from '@testing-library/user-event/dist/utils';
 export default function Information() {
   const { businessProfile } = useBusinessProfileContext();
   const [data, setData] = React.useState({
@@ -22,27 +21,27 @@ export default function Information() {
     {
       label: 'Jenis Industri',
       require: true,
-      value: data?.company_type || '',
+      value: data?.company_type || '-',
     },
     {
       label: 'Company Size',
       require: false,
-      value: data?.company_size || '',
+      value: data?.company_size || '-',
     },
     {
       label: 'Link Website',
       require: false,
-      value: data?.link_website || '',
+      value: data?.link_website || '-',
     },
     {
       label: 'Link Facebook page',
       require: false,
-      value: data?.link_facebook_page || '',
+      value: data?.link_facebook_page || '-',
     },
     {
       label: 'Link Instagram',
       require: false,
-      value: data?.link_instagram || '',
+      value: data?.link_instagram || '-',
     },
   ];
   return (

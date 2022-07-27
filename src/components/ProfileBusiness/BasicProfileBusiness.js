@@ -3,7 +3,7 @@ import BasicCard from 'components/Widgets/BasicCard';
 import ModalProfileBusiness from 'components/Modal/ModalProfileBusiness';
 import { useBusinessProfileContext } from 'context/business-profile-context';
 import SkeletonCard from 'components/SkeletonCard';
-import  utils, { getYear } from 'utils/utils';
+import  utils, { getFullDate, getYear } from 'utils/utils';
 import EditLogoCompany from './EditLogoCompany';
 import EditBannerCompany from './EditBannerCompany';
 
@@ -37,7 +37,7 @@ export default function BasicProfileBusiness({ input, index }) {
     },
     {
       label: 'Tahun Berdiri',
-      value: getYear(businessProfile.date_of_birth),
+      value: getFullDate(businessProfile.date_of_birth).split('-').reverse().join('-'),
     },
   ];
   return (
