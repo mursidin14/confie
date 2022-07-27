@@ -4,27 +4,34 @@ import BasicCard from 'components/Widgets/BasicCard';
 import { Tab } from '@headlessui/react';
 import { useParams } from 'react-router-dom';
 import Pagination from 'components/Widgets/Pagination';
-import { BusinessProvider } from 'context/business-context';
+import { BusinessProvider, useBusinessContext } from 'context/business-context';
 import {
+  changeApplicantJobVacancy,
   deleteJobVacancy,
+  getApplicantJobVacancy,
   getDetailJobVacancy,
+  rejectApplicant,
 } from 'services/Business/JobVacancy/JobVacancy';
 import SkeletonCard from 'components/SkeletonCard';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import { getDate, getLocalStringRupiah } from 'utils/utils';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function JobVacancyDetail() {
   const [detailJob, setDetailJob] = useState({});
+  const [applicants, setApplicants] = useState([]);
   const [loading, setLoading] = useState(true);
   const { idJob } = useParams();
   useEffect(() => {
     const getDetail = async () => {
       const response = await getDetailJobVacancy(idJob);
+      const applicant = await getApplicantJobVacancy(idJob);
       setDetailJob(response.data.data);
+      setApplicants(applicant.data.data.data[0].application);
       setLoading(false);
     };
     getDetail();
@@ -36,7 +43,10 @@ export default function JobVacancyDetail() {
         {loading && <SkeletonCard />}
         {!loading && (
           <div className="py-5 lg:mx-5">
-            <CardJobVacany detailJob={detailJob}></CardJobVacany>
+            <CardJobVacany
+              applicants={applicants}
+              detailJob={detailJob}
+            ></CardJobVacany>
           </div>
         )}
       </LayoutBusiness>
@@ -44,22 +54,59 @@ export default function JobVacancyDetail() {
   );
 }
 
-function CardJobVacany({ archive, id, detailJob }) {
-  console.log(detailJob);
+function CardJobVacany({ archive, detailJob, applicants }) {
+  const { title, location, registration_end_date, min_salary, max_salary, id } =
+    detailJob;
   const [open, setOpen] = useState(false);
   const [isOpenAccept, setIsOpenAccept] = useState(false);
+  const changeStatus = async (idApplicant, status) => {
+    await changeApplicantJobVacancy(id, idApplicant, status);
+    window.location.reload();
+  };
+  const rejectCandidate = async (idApplicant) => {
+    await rejectApplicant(id, idApplicant);
+    window.location.reload();
+  };
   const [categories] = useState({
     Berkas: {
-      content: <StepOne />,
+      content: (
+        <StepOne
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
+      ),
     },
     'Seleksi Tes Online': {
-      content: <StepTwo />,
+      content: (
+        <StepTwo
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
+      ),
     },
     'Tes Wawancara': {
-      content: <StepThree />,
+      content: (
+        <StepThree
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
+      ),
     },
     'Hasil Akhir': {
-      content: <StepFour />,
+      content: (
+        <StepFour
+          id={id}
+          applicants={applicants}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        />
+      ),
     },
   });
   const handleDelete = async (id) => {
@@ -68,18 +115,27 @@ function CardJobVacany({ archive, id, detailJob }) {
       setIsOpenAccept(true);
     }
   };
+  const { business } = useBusinessContext();
   return (
     <>
       <BasicCard>
-        <div className="flex items-center justify-between px-6">
+        <div className="items-center justify-between px-6 md:flex">
           <section className="items-center gap-4 space-y-2 md:flex">
             <div className="flex items-center justify-center rounded-md bg-[#F5F8FA] px-5 py-10">
-              <img src="/upana_logo.png" alt="" />
+              <img
+                className="w-20"
+                src={
+                  business.url_photo_profile
+                    ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
+                    : '/company_default.png'
+                }
+                alt=""
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <p className="text-lg font-semibold hover:underline md:text-xl">
-                  Junior React Developer
+                  {title}
                 </p>
                 <div
                   className={`${
@@ -122,6 +178,12 @@ function CardJobVacany({ archive, id, detailJob }) {
                       item={detailJob}
                       handleDelete={handleDelete}
                     />
+                    <a
+                      href={`/business/job/update/${detailJob.id}`}
+                      className="rounded-md bg-orange/10 px-4 py-2 text-orange"
+                    >
+                      Update
+                    </a>
                     <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                       Arsipkan
                     </button>
@@ -152,7 +214,7 @@ function CardJobVacany({ archive, id, detailJob }) {
                     />
                   </svg>
 
-                  <p>Makassar</p>
+                  <p>{location}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <svg
@@ -169,7 +231,10 @@ function CardJobVacany({ archive, id, detailJob }) {
                     />
                   </svg>
 
-                  <p>IDR 4.000.000 - 5.000.000</p>
+                  <p>
+                    IDR {getLocalStringRupiah(min_salary)} -{' '}
+                    {getLocalStringRupiah(max_salary)}
+                  </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <svg
@@ -241,12 +306,44 @@ function CardJobVacany({ archive, id, detailJob }) {
                       fill="white"
                     />
                   </svg>
-
-                  <p>15 April 2022</p>
+                  <p>{getDate(registration_end_date)}</p>
                 </div>
-                <p className="md:hidden">
-                  <span className="font-bold">Pelamar</span>: 30
-                </p>
+                <div className="flex items-center gap-3">
+                  <svg
+                    className="h-5 w-5"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M8.33328 11.2083H7.72911C6.90464 11.1785 6.08283 11.3185 5.31471 11.6195C4.54658 11.9206 3.84851 12.3763 3.26383 12.9583L3.09717 13.1528V18.9028H5.9305V15.6389L6.31245 15.2083L6.48606 15.0069C7.39017 14.0781 8.51576 13.3946 9.75689 13.0208C9.1355 12.548 8.64542 11.9241 8.33328 11.2083Z"
+                      fill="#494B74"
+                    />
+                    <path
+                      d="M21.7639 12.9375C21.1793 12.3554 20.4812 11.8997 19.7131 11.5987C18.9449 11.2977 18.1231 11.1577 17.2987 11.1875C17.0458 11.1882 16.7931 11.2021 16.5417 11.2292C16.2237 11.9006 15.747 12.4846 15.1528 12.9306C16.4778 13.2971 17.6781 14.0173 18.6251 15.0139L18.7987 15.2083L19.1737 15.6389V18.9097H21.9098V13.1319L21.7639 12.9375Z"
+                      fill="#494B74"
+                    />
+                    <path
+                      d="M7.70841 9.85417H7.92369C7.82366 8.99531 7.97436 8.12585 8.3576 7.35076C8.74083 6.57566 9.34022 5.92806 10.0834 5.48611C9.81401 5.07455 9.44234 4.74001 9.0048 4.51524C8.56726 4.29048 8.07885 4.1832 7.58739 4.20391C7.09593 4.22462 6.61828 4.37261 6.2012 4.63339C5.78412 4.89417 5.44192 5.25879 5.2081 5.69156C4.97428 6.12433 4.85686 6.61041 4.86734 7.10219C4.87783 7.59397 5.01585 8.0746 5.26789 8.49702C5.51994 8.91943 5.87736 9.26915 6.30518 9.51192C6.73299 9.75469 7.21651 9.88219 7.70841 9.88194V9.85417Z"
+                      fill="#494B74"
+                    />
+                    <path
+                      d="M16.9652 9.33333C16.9737 9.49294 16.9737 9.65289 16.9652 9.8125C17.0985 9.83363 17.2331 9.84523 17.368 9.84722H17.4999C17.9897 9.82111 18.4643 9.66863 18.8776 9.40464C19.2909 9.14065 19.6288 8.77413 19.8585 8.34078C20.0881 7.90742 20.2016 7.422 20.1879 6.93176C20.1742 6.44152 20.0338 5.96318 19.7804 5.5433C19.527 5.12343 19.1692 4.77632 18.7418 4.53578C18.3144 4.29525 17.832 4.16947 17.3416 4.17071C16.8511 4.17194 16.3694 4.30014 15.9432 4.54282C15.517 4.78551 15.161 5.13441 14.9097 5.55556C15.5382 5.96593 16.055 6.52591 16.4138 7.18526C16.7726 7.84461 16.962 8.5827 16.9652 9.33333Z"
+                      fill="#494B74"
+                    />
+                    <path
+                      d="M12.4098 12.4444C14.1242 12.4444 15.514 11.0547 15.514 9.34028C15.514 7.62589 14.1242 6.23611 12.4098 6.23611C10.6954 6.23611 9.30566 7.62589 9.30566 9.34028C9.30566 11.0547 10.6954 12.4444 12.4098 12.4444Z"
+                      fill="#494B74"
+                    />
+                    <path
+                      d="M12.5764 14.0972C11.6695 14.0606 10.7646 14.2078 9.91605 14.5301C9.06752 14.8523 8.29295 15.3429 7.63894 15.9722L7.46533 16.1667V20.5625C7.46804 20.7057 7.49893 20.8469 7.55624 20.9782C7.61355 21.1094 7.69616 21.2281 7.79934 21.3274C7.90252 21.4267 8.02426 21.5047 8.1576 21.557C8.29093 21.6092 8.43326 21.6347 8.57644 21.6319H16.5556C16.6988 21.6347 16.8411 21.6092 16.9745 21.557C17.1078 21.5047 17.2295 21.4267 17.3327 21.3274C17.4359 21.2281 17.5185 21.1094 17.5758 20.9782C17.6331 20.8469 17.664 20.7057 17.6667 20.5625V16.1806L17.5001 15.9722C16.8503 15.3409 16.0784 14.849 15.2318 14.5266C14.3851 14.2041 13.4816 14.058 12.5764 14.0972Z"
+                      fill="#494B74"
+                    />
+                  </svg>
+                  <p>{applicants.length} Pelamar</p>
+                </div>
               </div>
             </div>
           </section>
@@ -285,7 +382,7 @@ function CardJobVacany({ archive, id, detailJob }) {
                   fill="#494B74"
                 />
               </svg>
-              <p className="text-5xl font-semibold">33</p>
+              <p className="text-5xl font-semibold">{applicants.length}</p>
               <p className="text-sm">Pelamar</p>
             </div>
             <div className="relative flex flex-col items-center">
@@ -318,6 +415,12 @@ function CardJobVacany({ archive, id, detailJob }) {
                   item={detailJob}
                   handleDelete={handleDelete}
                 />
+                <a
+                  href={`/business/job/update/${detailJob.id}`}
+                  className="rounded-md bg-orange/10 px-4 py-2 text-orange"
+                >
+                  Update
+                </a>
                 <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                   Arsipkan
                 </button>
@@ -360,7 +463,7 @@ function CardJobVacany({ archive, id, detailJob }) {
           as="div"
           className="relative z-10 overflow-y-auto"
           onClose={() => {
-            window.location.href = 'business/job/';
+            window.location.href = '/business/job';
           }}
         >
           <Transition.Child
@@ -419,21 +522,7 @@ function CardJobVacany({ archive, id, detailJob }) {
     </>
   );
 }
-function StepOne() {
-  let educationHistory = [
-    {
-      no: 1,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-    {
-      no: 2,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-  ];
+function StepOne({ applicants, id, changeStatus, rejectCandidate }) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-8">
@@ -441,29 +530,20 @@ function StepOne() {
       </div>
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="flex items-center justify-between overflow-y-auto px-6">
-        <Table items={educationHistory}></Table>
+        <Table
+          id={id}
+          items={applicants.filter(
+            (applicant) => applicant.pivot.status === '2',
+          )}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        ></Table>
       </div>
-      <div className="mt-5 flex w-full justify-end pr-14">
-        <Pagination></Pagination>
-      </div>
+      <div className="mt-5 flex w-full justify-end pr-14"></div>
     </BasicCard>
   );
 }
-function StepTwo() {
-  let educationHistory = [
-    {
-      no: 1,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-    {
-      no: 2,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-  ];
+function StepTwo({ id, applicants, changeStatus ,rejectCandidate}) {
   return (
     <BasicCard>
       <div className="flex items-center justify-between px-8">
@@ -471,29 +551,20 @@ function StepTwo() {
       </div>
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
       <div className="flex items-center justify-between overflow-y-auto px-6">
-        <TableTwo items={educationHistory}></TableTwo>
+        <TableTwo
+          id={id}
+          items={applicants.filter(
+            (applicant) => applicant.pivot.status === '3',
+          )}
+          changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+        ></TableTwo>
       </div>
-      <div className="mt-5 flex w-full justify-end pr-14">
-        <Pagination></Pagination>
-      </div>
+      <div className="mt-5 flex w-full justify-end pr-14"></div>
     </BasicCard>
   );
 }
-function StepThree() {
-  let educationHistory = [
-    {
-      no: 1,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-    {
-      no: 2,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-  ];
+function StepThree({ id, applicants, changeStatus, rejectCandidate }) {
   return (
     <>
       <BasicCard>
@@ -502,52 +573,47 @@ function StepThree() {
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="flex items-center justify-between overflow-y-auto px-6">
-          <TableThree items={educationHistory}></TableThree>
+          <TableThree
+            id={id}
+            items={applicants.filter(
+              (applicant) => applicant.pivot.status === '4',
+            )}
+            changeStatus={changeStatus}
+          rejectCandidate={rejectCandidate}
+          ></TableThree>
         </div>
-        <div className="mt-5 flex w-full justify-end pr-14">
-          <Pagination></Pagination>
-        </div>
+        <div className="mt-5 flex w-full justify-end pr-14"></div>
       </BasicCard>
     </>
   );
 }
-function StepFour() {
-  let status_application = [
+function StepFour({ id, applicants, changeStatus }) {
+  const status_application = [
     {
       title: 'Total Pelamar',
-      value: '3',
+      value: applicants.length,
       icon: IconOne,
     },
     {
       title: 'Lulus Berkas',
-      value: '3',
+      value: applicants.filter((applicant) => applicant.pivot.status === '3')
+        .length,
       icon: IconTwo,
     },
     {
       title: 'Lulus Tes Online',
-      value: '3',
+      value: applicants.filter((applicant) => applicant.pivot.status === '4')
+        .length,
       icon: IconThree,
     },
     {
       title: 'Diterima',
-      value: '3',
+      value: applicants.filter((applicant) => applicant.pivot.status === '5')
+        .length,
       icon: IconFour,
     },
   ];
-  let educationHistory = [
-    {
-      no: 1,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-    {
-      no: 2,
-      full_name: 'Frontend Developer',
-      email: 'PT. Bintang Jaya',
-      link: '/1',
-    },
-  ];
+
   return (
     <>
       <StatusApplication items={status_application} />
@@ -557,189 +623,251 @@ function StepFour() {
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
         <div className="flex items-center justify-between overflow-y-auto px-6">
-          <TableFour items={educationHistory}></TableFour>
+          <TableFour
+            id={id}
+            items={applicants.filter(
+              (applicant) => applicant.pivot.status === '5',
+            )}
+            changeStatus={changeStatus}
+          ></TableFour>
         </div>
-        <div className="mt-5 flex w-full justify-end pr-14">
-          <Pagination></Pagination>
-        </div>
+        <div className="mt-5 flex w-full justify-end pr-14"></div>
       </BasicCard>
     </>
   );
 }
 
-function Table({ items }) {
-  return (
-    <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
-      <thead className=" ">
-        <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
-          <th className="w-[5%] pl-3 text-left">NO</th>
-          <th className="w-[25%] pl-10 text-left">Nama</th>
-          <th className="w-[30%] text-left">E-mail</th>
-          <th className="w-[20%]">Halaman Profile</th>
-          <th className="w-[20%]">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item, index) => (
-          <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
-            <td className="w-[5%] pl-3 text-left">{item.no}</td>
-            <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
-            <td className="w-[30%] text-left">{item.email}</td>
-            <td className="w-[20%]">
-              <a
-                href={item.link}
-                className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
-              >
-                Lihat Profile
-              </a>
-            </td>
-            <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
-              <button className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89]">
-                Terima
-              </button>
-              <button className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]">
-                Tolak
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-function TableTwo({ items }) {
-  return (
-    <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
-      <thead className=" ">
-        <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
-          <th className="w-[5%] pl-3 text-left">NO</th>
-          <th className="w-[25%] pl-10 text-left">Nama</th>
-          <th className="w-[20%] text-left">E-mail</th>
-          <th className="w-[20%]">Halaman Profile</th>
-          <th className="w-[20%]">Hasil Tes</th>
-          <th className="w-[20%]">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item, index) => (
-          <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
-            <td className="w-[5%] pl-3 text-left">{item.no}</td>
-            <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
-            <td className="w-[20%] text-left">{item.email}</td>
-            <td className="w-[20%]">
-              <a
-                href={item.link}
-                className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
-              >
-                Lihat Profile
-              </a>
-            </td>
-            <td className="w-[20%]">
-              <a
-                href={item.link}
-                className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
-              >
-                Lihat Hasil Tes
-              </a>
-            </td>
-            <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
-              <button className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89]">
-                Terima
-              </button>
-              <button className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]">
-                Tolak
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-function TableThree({ items }) {
+function Table({ items, changeStatus, rejectCandidate }) {
   return (
     <>
-      <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
-        <thead className=" ">
-          <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
-            <th className="w-[5%] pl-3 text-left">NO</th>
-            <th className="w-[25%] pl-10 text-left">Nama</th>
-            <th className="w-[20%] text-left">E-mail</th>
-            <th className="w-[20%]">Halaman Profile</th>
-            <th className="w-[20%]">Jadwal Wawancara</th>
-            <th className="w-[20%]">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item, index) => (
-            <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
-              <td className="w-[5%] pl-3 text-left">{item.no}</td>
-              <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
-              <td className="w-[20%] text-left">{item.email}</td>
-              <td className="w-[20%]">
-                <a
-                  href={item.link}
-                  className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
-                >
-                  Lihat Profile
-                </a>
-              </td>
-              <td className="w-[20%]">
-                <div className="flex items-center justify-center gap-2">
-                  <p>12-12-2012</p>
-                  <a
-                    href={item.link}
-                    className="w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
-                  >
-                    Edit
-                  </a>
-                </div>
-              </td>
-              <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
-                <button className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89]">
-                  Terima
-                </button>
-                <button className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]">
-                  Tolak
-                </button>
-              </td>
+      {items.length === 0 ? (
+        <p className="w-full text-center text-xs italic text-gray-300">
+          No Applicant Data
+        </p>
+      ) : (
+        <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
+          <thead className=" ">
+            <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
+              <th className="w-[5%] pl-3 text-left">NO</th>
+              <th className="w-[15%] pl-10 text-left">Nama</th>
+              <th className="w-[30%] text-left">E-mail</th>
+              <th className="w-[20%]">Halaman Profile</th>
+              <th className="w-[20%]">Aksi</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
+                <td className="w-[5%] pl-3 text-left">{index + 1}</td>
+                <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
+                <td className="w-[25%] text-left">{item.email}</td>
+                <td className="w-[20%]">
+                  <a
+                    href={item.slug}
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
+                  >
+                    Lihat Profile
+                  </a>
+                </td>
+                <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
+                  <button
+                    onClick={() => {
+                      changeStatus(item.id, 3);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89]"
+                  >
+                    Terima
+                  </button>
+                  <button
+                    onClick={() => {
+                      rejectCandidate(item.id);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]"
+                  >
+                    Tolak
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
   );
 }
-function TableFour({ items }) {
+function TableTwo({ id, items, changeStatus, rejectCandidate }) {
   return (
     <>
-      <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
-        <thead className=" ">
-          <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
-            <th className="w-[5%] pl-3 text-left">NO</th>
-            <th className="w-[25%] pl-10 text-left">Nama</th>
-            <th className="w-[20%] text-left">E-mail</th>
-            <th className="w-[20%]">Halaman Profile</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item, index) => (
-            <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
-              <td className="w-[5%] pl-3 text-left">{item.no}</td>
-              <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
-              <td className="w-[20%] text-left">{item.email}</td>
-              <td className="w-[20%]">
-                <a
-                  href={item.link}
-                  className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
-                >
-                  Lihat Profile
-                </a>
-              </td>
+      {items.length === 0 ? (
+        <p className="w-full text-center text-xs italic text-gray-300">
+          No Applicant Data
+        </p>
+      ) : (
+        <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
+          <thead className=" ">
+            <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
+              <th className="w-[5%] pl-3 text-left">NO</th>
+              <th className="w-[25%] pl-10 text-left">Nama</th>
+              <th className="w-[20%] text-left">E-mail</th>
+              <th className="w-[20%]">Halaman Profile</th>
+              <th className="w-[20%]">Hasil Tes</th>
+              <th className="w-[20%]">Aksi</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
+                <td className="w-[5%] pl-3 text-left">{item.no}</td>
+                <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
+                <td className="w-[20%] text-left">{item.email}</td>
+                <td className="w-[20%]">
+                  <a
+                    href={item.link}
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
+                  >
+                    Lihat Profile
+                  </a>
+                </td>
+                <td className="w-[20%]">
+                  <a
+                    href={item.link}
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
+                  >
+                    Lihat Hasil Tes
+                  </a>
+                </td>
+                <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
+                  <button
+                    onClick={() => {
+                      changeStatus(item.id, 4);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89]"
+                  >
+                    Terima
+                  </button>
+                  <button
+                    onClick={() => {
+                      rejectCandidate(item.id);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]"
+                  >
+                    Tolak
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+}
+function TableThree({ id, items, changeStatus, rejectCandidate }) {
+  return (
+    <>
+      {items.length === 0 ? (
+        <p className="w-full text-center text-xs italic text-gray-300">
+          No Applicant Data
+        </p>
+      ) : (
+        <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
+          <thead className=" ">
+            <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
+              <th className="w-[5%] pl-3 text-left">NO</th>
+              <th className="w-[25%] pl-10 text-left">Nama</th>
+              <th className="w-[20%] text-left">E-mail</th>
+              <th className="w-[20%]">Halaman Profile</th>
+              <th className="w-[20%]">Jadwal Wawancara</th>
+              <th className="w-[20%]">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
+                <td className="w-[5%] pl-3 text-left">{item.no}</td>
+                <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
+                <td className="w-[20%] text-left">{item.email}</td>
+                <td className="w-[20%]">
+                  <a
+                    href={item.link}
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
+                  >
+                    Lihat Profile
+                  </a>
+                </td>
+                <td className="w-[20%]">
+                  <div className="flex items-center justify-center gap-2">
+                    <p>12-12-2012</p>
+                    <a
+                      href={item.link}
+                      className="w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
+                    >
+                      Edit
+                    </a>
+                  </div>
+                </td>
+                <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
+                  <button
+                    onClick={() => {
+                      changeStatus(item.id, 5);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89]"
+                  >
+                    Terima
+                  </button>
+                  <button
+                    onClick={() => {
+                      rejectCandidate(item.id);
+                    }}
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C]"
+                  >
+                    Tolak
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </>
+  );
+}
+function TableFour({ id, items }) {
+  return (
+    <>
+      {items.length === 0 ? (
+        <p className="w-full text-center text-xs italic text-gray-300">
+          No Applicant Data
+        </p>
+      ) : (
+        <table className="w-full min-w-[700px] table-fixed text-center text-xs sm:text-base">
+          <thead className=" ">
+            <tr className="border-b-solid h-[60px] border-b text-sm text-[#B5B5C3] ">
+              <th className="w-[5%] pl-3 text-left">NO</th>
+              <th className="w-[25%] pl-10 text-left">Nama</th>
+              <th className="w-[20%] text-left">E-mail</th>
+              <th className="w-[20%]">Halaman Profile</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
+                <td className="w-[5%] pl-3 text-left">{item.no}</td>
+                <td className="w-[25%] pl-10 text-left">{item.full_name}</td>
+                <td className="w-[20%] text-left">{item.email}</td>
+                <td className="w-[20%]">
+                  <a
+                    href={item.link}
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
+                  >
+                    Lihat Profile
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
   );
 }

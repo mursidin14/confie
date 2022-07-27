@@ -65,14 +65,12 @@ export default function ModalWorkExperience({ section }) {
       name: 'start_date',
       type: 'month',
       label: 'Tahun Mulai',
-      max: getTodayDate,
       required: true,
     },
     {
       name: 'end_date',
       type: 'month',
       label: 'Tahun Selesai',
-      max: getTodayDate,
       required: true,
     },
   ];

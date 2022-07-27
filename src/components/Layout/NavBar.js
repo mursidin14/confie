@@ -191,7 +191,7 @@ function BasicDisclosureNav({is_active, subNav, title, icon_inactive, icon_activ
             <ul className="requirments text-left">
               {subNav.map((item, index) => (
                 <li className="my-2" key={index}>
-                  <a href={`${item.link}`} className={"relative left-5 text-[#7E8299]"}>
+                  <a href={`${item.link}`} className={"relative left-5 text-[#7E8299] text-xs sm:text-[13px]"}>
                     {item.name}
                   </a>
                 </li>

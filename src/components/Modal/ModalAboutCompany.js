@@ -34,7 +34,7 @@ export default function ModalAboutCompany({ action, title }) {
               setData({ ...data, about: e.target.value });
             }}
           ></textarea>
-        <p className={`text-xs ${data?.about?.length > 90 ? 'text-red-500' : 'text-gray-500'}`}>Sisa Karakter: {data.about === null ? '100' : <>{100 - data?.about?.length}</>}</p>
+        <p className={`text-xs ${data?.about?.length > 490 ? 'text-red-500' : 'text-gray-500'}`}>Sisa Karakter: {data.about === null ? '500' : <>{500 - data?.about?.length}</>}</p>
         </div>
       </div>
       <section className="px-8 text-left text-sm text-red-500">

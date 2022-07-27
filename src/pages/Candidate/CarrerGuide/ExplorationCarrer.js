@@ -1,15 +1,17 @@
 import Layout from 'components/Layout/Layout';
 import BasicCard from 'components/Widgets/BasicCard';
 import CandidateProvider from 'context/candidate-context';
+import UnderConstruction from 'pages/UnderConstruction';
 import React from 'react';
 import SearchExploration from './SearchExploration';
 
 export default function ExplorationCarrer() {
   return (
-    <CandidateProvider PageName={'Panduan Karir'}>
-      <SearchExploration></SearchExploration>
-      <ExplorationFeed />
-    </CandidateProvider>
+    // <CandidateProvider PageName={'Panduan Karir'}>
+    //   <SearchExploration></SearchExploration>
+    //   <ExplorationFeed />
+    // </CandidateProvider>
+    <UnderConstruction />
   );
 }
 

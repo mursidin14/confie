@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Pagination from 'components/Widgets/Pagination';
-import UpdateCertificationModal from 'components/ModalUpdate/UpdateCertificationModal';
 import ProfileService from 'services/Profile/ProfileService';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
@@ -30,7 +29,7 @@ export default function PaperCard({data_profile}) {
       <div className="mt-4 rounded-md bg-white pt-7 pb-2  text-left shadow-mine ">
         <div className="flex items-center justify-between px-8">
           <h3 className="text-base font-semibold ">
-            Karya Tulis Ilmiah
+           Porto Karya
           </h3>
           <ModalPublication></ModalPublication>
         </div>

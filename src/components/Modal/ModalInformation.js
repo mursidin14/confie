@@ -5,11 +5,11 @@ import { updateCompanyInformation } from 'services/Profile/ProfileService';
 
 export default function ModalInformation({ action, title, data }) {
   const [dataInformation, setDataInformation] = React.useState({
-    company_type: data.company_type ?? '',
-    company_size: data.company_size ?? '',
-    link_website: data.link_website ?? '',
-    link_facebook_page: data.link_facebook_page ?? '',
-    link_instagram: data.link_instagram ?? '',
+    company_type: data?.company_type ?? '',
+    company_size: data?.company_size ?? '',
+    link_website: data?.link_website ?? '',
+    link_facebook_page: data?.link_facebook_page ?? '',
+    link_instagram: data?.link_instagram ?? '',
   });
   const [error, setError] = React.useState([])
   const handleChange = (e) => {

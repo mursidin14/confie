@@ -8,6 +8,7 @@ import WizardComplete from './WizardComplete';
 import AuthService from 'services/Auth/AuthService';
 
 export default function Register() {
+  const [loading, setLoading] = useState(false);
   const [error_msg, setError_msg] = useState([]);
   const [page, setPage] = useState(1);
   const [dataAccount, setDataAccount] = useState({
@@ -32,7 +33,9 @@ export default function Register() {
       }else{
         delete dataAccount.skills;
       }
+      setLoading(true);
       const respon = await AuthService.register(dataAccount);
+      setLoading(false);
       if (respon.statusText !== 'Created') {
         let message_error = [];
         let msg_error = respon.data.data;
@@ -40,6 +43,9 @@ export default function Register() {
           message_error.push(msg_error[key]);
         }
         setError_msg(message_error);
+        if (message_error.length === 0) {
+          setError_msg(['Your are not using a valid email address']);
+        }
         return setIsOpenFailed(true);
       }
     }
@@ -79,6 +85,7 @@ export default function Register() {
           onSubmit={nextPage}
           onChange={setDataAccount}
           data={dataAccount}
+          loading={loading}
         >
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog

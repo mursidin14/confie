@@ -8,11 +8,12 @@ export default function UpdateWorkExperience({ item, id }) {
   const [dataWorkExperience, setDataWorkExperience] = useState({
     agency: item.agency,
     description: item.description,
-    is_current: item.is_current,
+    is_current: item.is_current ,
     position: item.position,
     start_date: utils.getYearMonthDay(item.start_date),
     end_date: utils.getYearMonthDay(item.end_date),
     status: item.status,
+    
   });
   const [error, setError] = useState([]);
   function closeModal() {
@@ -30,6 +31,8 @@ export default function UpdateWorkExperience({ item, id }) {
   async function handleSubmit() {
     const data = {
       ...dataWorkExperience,
+      is_current : dataWorkExperience.is_current ? 1 : 0,
+      _method: 'PUT',
     };
     if (data['end_date'] === undefined && data['is_current'] === false) {
       setError(...error, ['End date is required']);
@@ -37,13 +40,13 @@ export default function UpdateWorkExperience({ item, id }) {
     }else if(data['end_date'] !== undefined){
       data['end_date'] = utils.timeEpoch(data['end_date']);
     }
-    if (data['end_date'] == 0) {
+    if (data['end_date'] === 0) {
       //remove end date
       delete data['end_date'];
     }
     data['start_date'] = utils.timeEpoch(data['start_date']);
     const response = await ProfileService.updateJobExperience(id, data);
-    if (response.data.meta.status == 'error') {
+    if (response.data.meta.status === 'error') {
       let errors = [];
       let error = response.data.data;
       for (let key in error) {
@@ -59,16 +62,12 @@ export default function UpdateWorkExperience({ item, id }) {
       label: 'Posisi',
       type: 'text',
       name: 'position',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
-      pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
       name: 'agency',
       label: 'Instansi',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
   ];
@@ -76,14 +75,12 @@ export default function UpdateWorkExperience({ item, id }) {
     {
       name: 'start_date',
       type: 'month',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
       type: 'month',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,
     },
@@ -161,7 +158,7 @@ export default function UpdateWorkExperience({ item, id }) {
                       ))}
                       <div className="mt-4 lg:flex">
                         <div className="sm:w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Bekerja saat ini
                           </label>
                         </div>
@@ -176,7 +173,7 @@ export default function UpdateWorkExperience({ item, id }) {
                             }}
                             type="checkbox"
                           />
-                          <label for="">Ya</label>
+                          <label htmlFor="">Ya</label>
                         </div>
                       </div>
                       {inputs_2.map((input, index) => (
@@ -204,7 +201,7 @@ export default function UpdateWorkExperience({ item, id }) {
                       </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Status
                           </label>
                         </div>
@@ -229,7 +226,7 @@ export default function UpdateWorkExperience({ item, id }) {
                       </div>
                       <div className="mt-4 lg:flex">
                         <div className="w-5/12">
-                          <label className="text-xs lg:text-base" for="">
+                          <label className="text-xs lg:text-base" htmlFor="">
                             Deskripsi
                           </label>
                         </div>
@@ -281,7 +278,7 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
       className={`items-center lg:flex`}
     >
       <div className="w-5/12">
-        <label className="text-xs lg:text-base" for="">
+        <label className="text-xs lg:text-base" htmlFor="">
           {label}
         </label>
       </div>
@@ -289,13 +286,13 @@ function InputFormProfile({ data, label, handleChange, ...inputProps }) {
         <input
           {...inputProps}
           className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? 'hidden' : ''}`}
-          value={inputProps.name === 'start_date' ? data[inputProps.name] : data[inputProps.name]}
+          value={inputProps.name === 'start_date' ? data[inputProps.name] ?? '' : data[inputProps.name] ?? ''}
           onChange={handleChange}
         />
         <input
           {...inputProps}
           className={`input-form my-2 lg:my-5 lg:py-3 ${inputProps.name === 'end_date' ? '' : 'hidden'} ${
-            data.is_current == true && inputProps.name == 'end_date'
+            data.is_current === true && inputProps.name === 'end_date'
               ? 'bg-[#cbcbcc]'
               : 'bg-soft-gray'
           }`}

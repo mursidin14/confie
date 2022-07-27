@@ -7,8 +7,10 @@ export default function WizardComplete({data}) {
         <div className="m-auto mb-5 lg:mb-0 lg:w-8/12">
           <div className='lg:text-left text-center'>
             <h2>Welcome to Confie.id</h2>
-            <p className='lg:w-3/5 lg:m-0 m-auto '>
-              Let’s start your journey with us Login to your account{' '}
+            <p className='lg:w-9/5 lg:m-0 m-auto '>
+              Let’s start your journey with us.
+              <br/>
+              Check your email to directly verify your email or login to your account{' '}
               <a href="/" className="text-[#00A3FF]">
                 {' '}
                 click here

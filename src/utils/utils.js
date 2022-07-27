@@ -57,11 +57,9 @@ const getCity = (data) => {
   });
   return city;
 };
-
 export const getLocalStringRupiah = (rupiah) => {
   return rupiah.toLocaleString('id-ID');
 };
-
 const timeEpoch = (time) => {
   if (time === undefined) {
     return 0;
@@ -190,10 +188,41 @@ export const getStatusApplication = (status) => {
       return 'Lamaran Diterima';
     case '2':
       return 'Seleksi Berkas';
+    case '3':
+      return 'Tes Online';
+      case '4':
+        return 'Wawancara'
     default:
       return 'Lamaran Ditolak';
   }
 };
+// formating function
+// sorting function
+export function sortWorkExperience(items) {
+  return items.sort((a, b) => {
+    if (a.is_current === b.is_current) {
+      return a.time - b.time;
+    }
+    return a.is_current ? -1 : 1;
+  });
+}
+
+export function sortItems(items) {
+  return items.sort((a, b) => {
+    if (a.end_date === b.end_date) {
+      return a.end_date - b.end_date;
+    }
+    return a.end_date > b.end_date ? -1 : 1;
+  });
+}
+
+export function sortYear(items) {
+  items.sort((a, b) => {
+    return a.year - b.year;
+  })
+  return items.reverse();
+}
+
 const utils = {
   authHeader,
   makeCapital,

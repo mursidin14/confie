@@ -26,6 +26,7 @@ export default function UpdateEducation({ item, id }) {
   async function handleSubmit() {
     const data = {
       ...dataEducation,
+    _method: 'PUT',
     };
     const response = await ProfileService.updateEducation(id, data);
     if (response.data.meta.status == 'error') {

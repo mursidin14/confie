@@ -3,12 +3,12 @@ import Pagination from 'components/Widgets/Pagination';
 import ModalEducation from 'components/Modal/ModalEducation';
 import ProfileService from 'services/Profile/ProfileService';
 import UpdateEducation from 'components/ModalUpdate/UpdateEducation';
-import utils, { getLength } from 'utils/utils';
+import utils, { getLength, sortItems } from 'utils/utils';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment} from 'react';
 export default function EducationCard({ data_profile }) {
-  let educationHistory = data_profile;
+  const educationHistory = sortItems(data_profile);
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,

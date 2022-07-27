@@ -102,13 +102,12 @@ function CardJobVacany({ archive, detailJob }) {
   const [isOpenAccept, setIsOpenAccept] = useState(false);
   const { title, location, max_salary, min_salary, registration_end_date, id } =
     detailJob;
+  const {business} = useBusinessContext()
   return (
     <BasicCard>
       <div className="relative flex items-center justify-between px-6">
         <section className="items-center gap-4 space-y-2 md:flex">
-          <div className="flex items-center justify-center rounded-md bg-[#F5F8FA] px-5 py-10">
-            <img src="/upana_logo.png" alt="" />
-          </div>
+          <img className='w-20' src={business.url_photo_profile ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}` : '/company_default.png'} alt=""/> 
           <div>
             <div className="flex items-center gap-2">
               <a

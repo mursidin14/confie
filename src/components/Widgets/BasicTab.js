@@ -5,26 +5,26 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function BasicTab() {
+export default function BasicTab({data}) {
   let [categories] = useState({
-    ["Tentang Perusahaan"]: {
-      content: <AboutCompany />, 
+    "Tentang Perusahaan": {
+      content: <AboutCompany data={data} />, 
     },
-    ["Info Lowongan"]:  {
-      content: <JobFeed />, 
+    "Info Lowongan":  {
+      content: <JobFeed items={[]}/>, 
     }
   })
 
   return (
     <div className="w-full px-2 sm:px-0">
       <Tab.Group>
-        <Tab.List className="flex space-x-1 max-w-lg">
+        <Tab.List className="flex space-x-1 max-w-lg ">
           {Object.keys(categories).map((category) => (
             <Tab
               key={category}
               className={({ selected }) =>
                 classNames(
-                  'w-full py-2.5 font-semibold leading-5', 
+                  'w-full py-2.5 font-semibold leading-5 outline-none', 
                   selected
                     ? 'border-b-4 border-[#FE9A00]'
                     : 'border-b-4 border-white text-[#7E8299]'
@@ -55,10 +55,10 @@ export default function BasicTab() {
   )
 }
 
-function AboutCompany() {
+function AboutCompany({data}) {
   return(
-    <p className='text-left px-2 py-6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p className='text-left px-2 py-6'>
+     {data.about}</p>
   )
 }
 

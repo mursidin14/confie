@@ -12,7 +12,7 @@ export default function EditBannerCompany() {
   } = useBusinessProfileContext();
   const [url_photo_banner, setUrl_photo_banner] = useState(undefined);
   React.useEffect(() => {
-    if (Array.isArray(businessData)) {
+    if (Array.isArray(businessData) && businessData.length > 0) {
       const {url_photo_banner} = businessData[0];
       setUrl_photo_banner(url_photo_banner);
     }
@@ -94,7 +94,7 @@ export default function EditBannerCompany() {
               </label>
             </div>
             <img
-              className="rounded-md"
+              className="rounded-md object-cover w-80 h-36"
               src={
                 url_photo_banner
                   ? `${process.env.REACT_APP_API_URL}/${url_photo_banner}`

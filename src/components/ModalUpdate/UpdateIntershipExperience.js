@@ -28,6 +28,7 @@ export default function UpdateIntershipExperience({ item, id }) {
   async function handleSubmit() {
     let data = {
       ...dataInternship,
+      _method: 'PUT',
     };
     data['start_date'] = utils.timeEpoch(data['start_date']);
     data['end_date'] = utils.timeEpoch(data['end_date']);
@@ -43,21 +44,17 @@ export default function UpdateIntershipExperience({ item, id }) {
     }
     window.location.reload();
   }
-  let inputs = [
+  const inputs = [
     {
       label: 'Posisi',
       type: 'text',
       name: 'position',
-      errorMessage:
-        "Name should be 3-16 characters and shouldn't include any special character!",
-      pattern: '^[A-Za-z0-9]{3,16}$',
       required: true,
     },
     {
       name: 'agency',
       label: 'Instansi',
       type: 'text',
-      errorMessage: 'It should be a valid phone number!',
       required: true,
     },
   ];
@@ -65,14 +62,12 @@ export default function UpdateIntershipExperience({ item, id }) {
     {
       name: 'start_date',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Mulai',
       required: true,
     },
     {
       name: 'end_date',
       type: 'date',
-      errorMessage: 'It should be a valid email address!',
       label: 'Tahun Selesai',
       required: true,
     },

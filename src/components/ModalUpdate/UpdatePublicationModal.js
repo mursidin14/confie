@@ -103,7 +103,7 @@ export default function UpdatePublicationModal({ item, id }) {
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between px-8">
                     <h3 className="text-base font-semibold ">
-                      Edit Karya Tulis Ilmiah
+                      Edit Porto Karya
                     </h3>
                   </div>
                   <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
@@ -111,6 +111,7 @@ export default function UpdatePublicationModal({ item, id }) {
                     <div className="lg:px-8 px-2">
                       {inputs.map((input, index) => (
                         <InputFormProfile
+                          key={index}
                           data={dataPublication}
                           handleChange={handleChange}
                           {...input}

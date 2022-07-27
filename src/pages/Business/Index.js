@@ -176,7 +176,7 @@ function PersonalCard({ id }) {
         <div className="flex items-center gap-3">
           <div className="block md:hidden">
             <img
-              className="w-fit object-cover "
+              className="h-28 w-28 object-cover "
               src={
                 business.url_photo_profile
                   ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
@@ -211,7 +211,7 @@ function PersonalCard({ id }) {
         <div className="flex items-start gap-5 lg:items-stretch">
           <div className="hidden items-center md:flex">
             <img
-              className="w-fit rounded-md object-cover"
+              className="md:h-40 md:w-48 rounded-md object-cover"
               src={
                 business.url_photo_profile
                   ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
@@ -295,7 +295,7 @@ function ButtonDashboard() {
 
           <a
             className="primary-btn center  border-[1px] px-2 py-3 text-xs md:w-fit "
-            href="/profile"
+            href="/business/job"
           >
             <p>Buka Lowongan</p>
           </a>

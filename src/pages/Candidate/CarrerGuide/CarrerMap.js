@@ -46,7 +46,7 @@ function ButtonStepContainer({ currentStep, setCurrentStep }) {
   ];
   return (
     <BasicCard>
-      <section className="flex flex-wrap justify-between gap-1 px-10 lg:flex-nowrap">
+      <section className="flex flex-wrap justify-between gap-1 px-10 ">
         {steps.map((step, index) => (
           <ButtonStep
             step={step}
