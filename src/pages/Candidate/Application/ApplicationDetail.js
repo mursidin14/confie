@@ -11,7 +11,7 @@ export default function ApplicationDetail() {
         <>
           <JobDetail item={item} />
           <StepApplication
-            is_rejected={item.pivot.is_rejected}
+            is_rejected={item.pivot.is_reject}
             step={item.pivot.status}
           />
           <StepDescription />

@@ -55,7 +55,7 @@ export const changeApplicantJobVacancy = (idJob, idApplicant, status) => {
 export const rejectApplicant = (idJob, idApplicant) => {
   return httpAuthClient
     .post(`/api/jobvacancy/${idJob}/participant/reject/${idApplicant}`, {
-      is_reject: 0,
+      is_reject: 1,
     })
     .then((response) => response)
     .catch((error) => error.response);

@@ -5,6 +5,7 @@ import ModalJobApplication from 'components/Modal/ModalJobApplication';
 import { getJobVacancyDetail } from 'services/Profile/JobVacancy';
 import { useParams } from 'react-router-dom';
 import CandidateProvider from 'context/candidate-context';
+import utils from 'utils/utils';
 export default function JobDetail() {
   const [loading, setLoading] = useState(true);
   const [item, setItem] = useState([]);
@@ -12,7 +13,6 @@ export default function JobDetail() {
   useEffect(() => {
     const getJobVacancy = async () => {
       const response = await getJobVacancyDetail(idDetail);
-      console.log(response.data.data)
       setItem(response.data.data);
       setLoading(false);
     };
@@ -26,21 +26,7 @@ export default function JobDetail() {
             <h3 className="top-3 text-2xl lg:relative">{item.title}</h3>
             <div className="flex flex-col justify-between xl:flex-row">
               <BasicJobInformation item={item}></BasicJobInformation>
-              <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">
-                <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
-                  <img className="md:w-fit" src="/job.png" alt="" />
-                </div>
-                <div className="w-[440px] text-left">
-                  <p className="mb-1 text-lg font-semibold">PT. Maju Jaya</p>
-                  <p className="text-sm">Jl. Alamat perusahaan pt jaya</p>
-                  <p className="my-1 text-sm">Berdiri sejak Mei 2012</p>
-                  <p className="text-sm leading-7">
-                    Company about Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.{' '}
-                  </p>
-                </div>
-              </div>
+              <DescriptionCompany item={item.users} />
             </div>
           </section>
           <section className="mt-10 w-full  bg-white p-8 text-left text-[#3F4254] shadow-mine">
@@ -84,5 +70,25 @@ export default function JobDetail() {
         </>
       )}
     </CandidateProvider>
+  );
+}
+
+function DescriptionCompany({
+  item: { full_name, address, cityname, provincename, date_of_birth, about },
+}) {
+  return (
+    <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">
+      <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
+        <img className="md:w-fit" src="/job.png" alt="" />
+      </div>
+      <div className="w-[440px] text-left">
+        <p className="mb-1 text-lg font-semibold">{full_name.toUpperCase()}</p>
+        <p className="text-sm">{`${address} ${utils.makeCapital(
+          cityname,
+        )}, ${utils.makeCapital(provincename)}`}</p>
+        <p className="my-1 text-sm">Berdiri sejak tahun {date_of_birth.slice(0,4)}</p>
+        <p className="text-sm leading-7">{about}</p>
+      </div>
+    </div>
   );
 }

@@ -44,7 +44,7 @@ export default function JobVacancyDetail() {
         {!loading && (
           <div className="py-5 lg:mx-5">
             <CardJobVacany
-              applicants={applicants}
+              applicants={applicants.filter(applicant => applicant.pivot.is_reject === false)}
               detailJob={detailJob}
             ></CardJobVacany>
           </div>

@@ -143,7 +143,7 @@ function Table({ items }) {
                     : 'bg-[#E8FFF3] text-[#50CD89]'
                 }`}
               >
-                <p className="">{getStatusApplication(item.pivot.status)}</p>
+                <p className="">{item.pivot.is_reject ? 'Ditolak' :  getStatusApplication(item.pivot.status)}</p>
               </div>
             </td>
             <td className="w-[15%]">
