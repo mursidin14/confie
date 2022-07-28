@@ -37,12 +37,14 @@ import FAQ from 'pages/Candidate/Help/FAQ';
 import Billing from 'pages/Candidate/Help/Billing';
 import AccountSettingBusiness from 'pages/Candidate/AccountSettingBusiness ';
 import UpdateJobVacancy from 'pages/Business/UpdateJoVacancy';
+import Home from 'pages/Home';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/reset-password" element={<NewPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
