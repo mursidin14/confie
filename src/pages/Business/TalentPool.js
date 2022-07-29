@@ -123,36 +123,37 @@ function TalentCard({ item }) {
 
   return (
     <div className="my-3 flex flex-col items-center justify-between gap-3 rounded-md bg-white py-7 shadow-mine">
-      <img
-        className="h-20 w-20 rounded-full object-cover"
-        src={`${
-          item.url_photo_profile
-            ? `${process.env.REACT_APP_API_URL}/${item.url_photo_profile}`
-            : item.gender === 'L' ? '/male.jpg' : '/female.jpg'
-        }`}
-        alt=""
-      />
-      <p className="text-lg font-semibold">{makeCapital(item.full_name)}</p>
-      <p className="relative bottom-2 text-sm text-[#7E8299]">
-        {getJob(item.experiences)}
-      </p>
-      <div className="relative bottom-2 flex items-center justify-center gap-2">
-        <svg
-          className="fill-[#FFA054]"
-          width="7"
-          height="7"
-          viewBox="0 0 7 7"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="3.5" cy="3.5" r="3.5" />
-        </svg>
-
-        <p className="text-xs text-[#7E8299] ">
-          {utils.isWork(item.experiences) ? 'Bekerja' : 'Belum Bekerja'}
+      <div className='flex flex-col items-center justify-between gap-1'>
+        <img
+          className="h-20 w-20 rounded-full object-cover"
+          src={`${
+            item.url_photo_profile
+              ? `${process.env.REACT_APP_API_URL}/${item.url_photo_profile}`
+              : item.gender === 'L' ? '/male.jpg' : '/female.jpg'
+          }`}
+          alt=""
+        />
+        <p className="text-lg font-semibold">{makeCapital(item.full_name)}</p>
+        <p className="relative bottom-2 text-sm text-[#7E8299]">
+          {getJob(item.experiences)}
         </p>
-      </div>
+        <div className="relative bottom-2 flex items-center justify-center gap-2">
+          <svg
+            className="fill-[#FFA054]"
+            width="7"
+            height="7"
+            viewBox="0 0 7 7"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="3.5" cy="3.5" r="3.5" />
+          </svg>
+          <p className="text-xs text-[#7E8299] ">
+            {utils.isWork(item.experiences) ? 'Bekerja' : 'Belum Bekerja'}
+          </p>
+        </div>
       <SkillContainer skills={item.skills} />
+      </div>
       <a
         className="flex items-center justify-center gap-2 rounded-md bg-[#F5F8FA] px-4 py-3 text-xs"
         href={`/${item.slug}`}

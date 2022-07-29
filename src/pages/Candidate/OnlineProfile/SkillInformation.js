@@ -1,4 +1,5 @@
 import React from 'react'
+import { makeCapital } from 'utils/utils';
 
 export default function SkillInfomation({ data }) {
     return (
@@ -8,7 +9,7 @@ export default function SkillInfomation({ data }) {
         </p>
         <div className="space-y-1 text-left text-xs sm:space-y-3 sm:text-sm">
           {data.map((skill, index) => (
-            <p>{skill.name}</p>
+            <p>{makeCapital(skill.name)}</p>
           ))}
         </div>
       </section>

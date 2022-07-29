@@ -12,7 +12,7 @@ export default function CertificationInformation({ data }) {
           {certificates.map((certificate, index) => (
             <div key={index}>
               <p>
-                {certificate.name} {utils.getMonthYear(certificate.year)}
+                {certificate.name} | {certificate.year}
               </p>
               <div className="flex items-center gap-4">
                 <hr className="w-2 border-b-[0.5px] border-white" />
