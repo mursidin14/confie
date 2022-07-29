@@ -2,7 +2,9 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { applyJobVacancy } from 'services/Profile/JobVacancy';
+import { makeCapital } from 'utils/utils';
 export default function ModalJobApplication({ item }) {
+  console.log(item)
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isApply, setIsApply] = useState(true);
@@ -101,12 +103,12 @@ export default function ModalJobApplication({ item }) {
                             </svg>
                           </div>
                           <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                            Dengan ini anda mengkonformasi bahwa anda akan
+                            Dengan ini anda mengkonfirmasi bahwa anda akan
                             melamar posisi{' '}
                             <span className="font-semibold">
-                              Junior React Developer
+                              {item.title}
                             </span>{' '}
-                            pada <span className="font-semibold">PT. Jaya</span>
+                            pada <span className="font-semibold">{makeCapital(item.users.full_name)}</span>
                           </p>
                           <div className="mt-10 flex items-center justify-center gap-4">
                             <button
