@@ -7,7 +7,7 @@ import { BusinessProvider, useBusinessContext } from 'context/business-context';
 import AlertNotPremiumUser from 'components/Modal/AlertNotPremiumUser';
 import useTalentPool from './useTalentPool';
 import SkeletonCard from 'components/SkeletonCard';
-import { makeCapital } from 'utils/utils';
+import utils, { makeCapital } from 'utils/utils';
 import { getFilteredTalentPool } from 'services/Business/TalentPool/TalentPool';
 export default function TalentPool() {
   const { id } = useParams();
@@ -55,7 +55,7 @@ export default function TalentPool() {
           <main className="flex min-h-screen flex-col items-center justify-center">
             <img className="animate-pulse" src="/logo.png" alt="" />
           </main>
-          </>
+        </>
       )}
       {!loading && (
         <>
@@ -107,13 +107,34 @@ function FeedTalent({ items }) {
   );
 }
 
-function TalentCard({ item: { full_name, slug } }) {
+function TalentCard({ item }) {
+  console.log(item);
+  const getJob = (exp) => {
+    if (exp.length === 0) {
+      return '-';
+    }
+    const current_job = exp.filter((item) => item.is_current === true);
+    if (current_job.length === 0) {
+      return '-';
+    } else {
+      return current_job[0].position;
+    }
+  };
+
   return (
-    <div className="my-3 flex flex-col items-center justify-center gap-3 rounded-md bg-white py-7 shadow-mine">
-      <img className="w-20 rounded-full" src="/person.png" alt="" />
-      <p className="text-lg font-semibold">{makeCapital(full_name)}</p>
+    <div className="my-3 flex flex-col items-center justify-between gap-3 rounded-md bg-white py-7 shadow-mine">
+      <img
+        className="h-20 w-20 rounded-full object-cover"
+        src={`${
+          item.url_photo_profile
+            ? `${process.env.REACT_APP_API_URL}/${item.url_photo_profile}`
+            : item.gender === 'L' ? '/male.jpg' : '/female.jpg'
+        }`}
+        alt=""
+      />
+      <p className="text-lg font-semibold">{makeCapital(item.full_name)}</p>
       <p className="relative bottom-2 text-sm text-[#7E8299]">
-        Front End Developer
+        {getJob(item.experiences)}
       </p>
       <div className="relative bottom-2 flex items-center justify-center gap-2">
         <svg
@@ -127,22 +148,14 @@ function TalentCard({ item: { full_name, slug } }) {
           <circle cx="3.5" cy="3.5" r="3.5" />
         </svg>
 
-        <p className="text-xs text-[#7E8299] ">Belum Bekerja</p>
+        <p className="text-xs text-[#7E8299] ">
+          {utils.isWork(item.experiences) ? 'Bekerja' : 'Belum Bekerja'}
+        </p>
       </div>
-      <div className="flex items-center gap-2 text-xs">
-        <span className="rounded-full bg-[#FFAD89] px-7 py-1 text-white">
-          UI/UX
-        </span>
-        <span className="rounded-full bg-[#FFAD89] px-7 py-1 text-white">
-          UI/UX
-        </span>
-        <span className="rounded-full bg-[#FFAD89] px-7 py-1 text-white">
-          UI/UX
-        </span>
-      </div>
+      <SkillContainer skills={item.skills.slice(0, 3)} />
       <a
         className="flex items-center justify-center gap-2 rounded-md bg-[#F5F8FA] px-4 py-3 text-xs"
-        href={`/${slug}`}
+        href={`/${item.slug}`}
       >
         <svg
           width="12"
@@ -165,6 +178,18 @@ function TalentCard({ item: { full_name, slug } }) {
         </svg>
         <span className="text-[#A1A5B7]">Lihat Profile</span>
       </a>
+    </div>
+  );
+}
+
+function SkillContainer({ skills }) {
+  return (
+    <div className="flex items-center gap-2 text-xs flex-wrap px-5">
+      {skills.map((skill) => (
+        <span className="rounded-full bg-[#FFAD89] px-7 py-1 text-white">
+          {makeCapital(skill.name)}
+        </span>
+      ))}
     </div>
   );
 }
