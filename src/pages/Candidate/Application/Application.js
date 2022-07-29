@@ -4,17 +4,147 @@ import Pagination from 'components/Widgets/Pagination';
 import SelectBox from 'components/SelecBox';
 import UnderConstruction from 'pages/UnderConstruction';
 import useGetApplication from './useGetApplication';
-import { getStatusApplication } from 'utils/utils';
+import {
+  getEpochTime,
+  getStatusApplication,
+  getTimeLastMonth,
+  getTimeLastWeek,
+  getTimeToday,
+  getTodayDate,
+} from 'utils/utils';
 import CandidateProvider from 'context/candidate-context';
 export default function Application() {
-  let { items, loading } = useGetApplication();
-  if (items === undefined) {
-    items = [];
-  }
+  const { items, loading } = useGetApplication();
+  const [dataApplication, setDataApplication] = useState([]);
+  const [isFilter, setIsFilter] = useState(false);
+  React.useEffect(() => {
+    setDataApplication(items);
+  }, [items]);
   const [pagination, setPagination] = useState({
     sliceOne: 0,
     sliceTwo: 4,
   });
+  const [filter, setFilter] = useState({
+    status: '',
+    time: '',
+  });
+  const filterTime = () => {
+    switch (filter.time) {
+      case 'Today':
+        const midnight = getTimeToday();
+        const newData = dataApplication.filter((data) => {
+          return getEpochTime(data.pivot.application_date) >= midnight;
+        });
+        if (filter.status) {
+          return 
+        }
+        setDataApplication(newData);
+        break;
+      case 'Last Week':
+        const last_week = getTimeLastWeek();
+        const newDataLastWeek = dataApplication.filter((data) => {
+          return getEpochTime(data.pivot.application_date) >= last_week;
+        });
+        setDataApplication(newDataLastWeek);
+        break;
+      case 'Last Month':
+        const last_month = getTimeLastMonth();
+        const newDataLastMonth = dataApplication.filter((data) => {
+          return getEpochTime(data.pivot.application_date) >= last_month;
+        });
+        setDataApplication(newDataLastMonth);
+        break;
+      default:
+        break;
+    }
+  };
+  const getFilterStatus = (status) => {
+    switch (status) {
+      case 'Seleksi Berkas':
+        return 2;
+      case 'Tes Online':
+        return 3;
+      case 'Wawancara':
+        return 4;
+      case 'SELESAI':
+        return 5;
+      default:
+        break;
+    }
+  };
+  const filterStatus = () => {
+    const status = getFilterStatus(filter.status);
+    const newData = dataApplication.filter((data) => {
+      return parseInt(data.pivot.status) === status;
+    });
+    setDataApplication(newData);
+  };
+  const filterStatusAndTime = () => {
+    const status = getFilterStatus(filter.status);
+    switch (filter.time) {
+      case 'Today':
+        const midnight = getTimeToday();
+        const newData = dataApplication.filter((data) => {
+          return getEpochTime(data.pivot.application_date) >= midnight;
+        });
+        const newDataStatus = newData.filter((data) => {
+          return parseInt(data.pivot.status) === status;
+        })
+        setDataApplication(newDataStatus);
+        break;
+      case 'Last Week':
+        const last_week = getTimeLastWeek();
+        const newDataLastWeek = dataApplication.filter((data) => {
+          return getEpochTime(data.pivot.application_date) >= last_week;
+        });
+        const newDataStatusLastWeek = newDataLastWeek.filter((data) => {
+          return parseInt(data.pivot.status) === status;
+        })
+        setDataApplication(newDataStatusLastWeek);
+        break;
+      case 'Last Month':
+        const last_month = getTimeLastMonth();
+        const newDataLastMonth = dataApplication.filter((data) => {
+          return getEpochTime(data.pivot.application_date) >= last_month;
+        });
+        const newDataStatusLastMonth = newDataLastMonth.filter((data) => {
+          return parseInt(data.pivot.status) === status;
+        })
+        setDataApplication(newDataStatusLastMonth);
+        break;
+      default:
+        break;
+    }
+  }
+  const handleFilter = (name, value) => {
+    setFilter({
+      ...filter,
+      [name]: value,
+    });
+  };
+  const handleFilterApplicaton = () => {
+    if (filter.status === '' && filter.time === '') {
+      return;
+    }
+    if (filter.status === '' && filter.time) {
+      filterTime();
+    }
+    if (filter.status && filter.time === '') {
+      filterStatus();
+    }
+    if (filter.status && filter.time) {
+      filterStatusAndTime();
+    }
+    setIsFilter(true);
+  };
+  const resetFilter = () => {
+    setFilter({
+      status: '',
+      time: '',
+    });
+    setIsFilter(false);
+    setDataApplication(items);
+  };
   return (
     <>
       {!false && (
@@ -48,24 +178,36 @@ export default function Application() {
                     </div>
                     <div className="mt-3 flex flex-wrap items-center gap-4 text-xs lg:mt-0 lg:justify-end lg:text-sm">
                       <SelectBox
+                        title={'time'}
                         menus={[
                           { name: 'All Time' },
                           { name: 'Today' },
                           { name: 'Last Week' },
                           { name: 'Last Month' },
                         ]}
+                        handleFilter={handleFilter}
                       ></SelectBox>
                       <SelectBox
+                        title={'status'}
                         menus={[
                           { name: 'All Status' },
-                          { name: 'Lamaran Diterima' },
                           { name: 'Seleksi Berkas' },
                           { name: 'Tes Online' },
                           { name: 'Wawancara' },
                           { name: 'SELESAI' },
                         ]}
+                        handleFilter={handleFilter}
                       ></SelectBox>
-                      <button className="primary-btn flex w-fit items-center justify-center gap-2 rounded-md px-5 py-3 text-xs lg:text-sm">
+                      <button
+                        onClick={() => {
+                          if (isFilter) {
+                            resetFilter();
+                          } else {
+                            handleFilterApplicaton();
+                          }
+                        }}
+                        className="primary-btn flex w-fit items-center justify-center gap-2 rounded-md px-5 py-3 text-xs lg:text-sm"
+                      >
                         <svg
                           width="15"
                           height="15"
@@ -78,7 +220,7 @@ export default function Application() {
                             fill="white"
                           />
                         </svg>
-                        <p>Filter</p>
+                        <p>{isFilter ? 'Reset' : 'Filter'}</p>
                       </button>
                     </div>
                   </div>
@@ -90,7 +232,7 @@ export default function Application() {
                       </p>
                     ) : (
                       <Table
-                        items={items.slice(
+                        items={dataApplication.slice(
                           pagination.sliceOne,
                           pagination.sliceTwo,
                         )}
@@ -143,7 +285,11 @@ function Table({ items }) {
                     : 'bg-[#E8FFF3] text-[#50CD89]'
                 }`}
               >
-                <p className="">{item.pivot.is_reject ? 'Ditolak' :  getStatusApplication(item.pivot.status)}</p>
+                <p className="">
+                  {item.pivot.is_reject
+                    ? 'Ditolak'
+                    : getStatusApplication(item.pivot.status)}
+                </p>
               </div>
             </td>
             <td className="w-[15%]">

@@ -4,7 +4,7 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 
 
 
-export default function SelectBox({menus}) {
+export default function SelectBox({title, menus, handleFilter}) {
   const [selected, setSelected] = useState(menus[0]);
 
   return (
@@ -45,6 +45,9 @@ export default function SelectBox({menus}) {
                       active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                     }`
                   }
+                  onClick={() => {
+                    handleFilter(title, person.name);
+                  }}
                   value={person}
                 >
                   {({ selected }) => (

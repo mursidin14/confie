@@ -191,7 +191,9 @@ export const getStatusApplication = (status) => {
     case '3':
       return 'Tes Online';
       case '4':
-        return 'Wawancara'
+        return 'Wawancara';
+        case '5':
+          return 'Selesai'
     default:
       return 'Lamaran Ditolak';
   }
@@ -222,7 +224,29 @@ export function sortYear(items) {
   })
   return items.reverse();
 }
-
+// filter time 
+export const getTimeToday = () => {
+  const midnight = new Date();
+  midnight.setHours(0, 0, 0, 0);
+  const epoch = midnight.getTime() / 1000;
+  return epoch;
+};
+export const getTimeLastWeek = () => {
+  const lastWeek = new Date();
+  lastWeek.setDate(lastWeek.getDate() - 7);
+  const epoch = lastWeek.getTime() / 1000;
+  return epoch;
+}
+export const getTimeLastMonth = () => {
+  const lastMonth = new Date();
+  lastMonth.setMonth(lastMonth.getMonth() - 1);
+  const epoch = lastMonth.getTime() / 1000;
+  return epoch;
+}
+export const getEpochTime = (time) => {
+  const date = new Date(time);
+  return date.getTime() / 1000;
+}
 const utils = {
   authHeader,
   makeCapital,
