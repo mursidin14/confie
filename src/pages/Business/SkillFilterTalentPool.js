@@ -49,13 +49,14 @@ export default function SkillFilterTalentPool({ data, onChange }) {
       });
     }
   };
+  const [defaultValue, setDefaultValue] = useState('Filter by skills');
   return (
     <div className='relative w-full'>
       <button
         onClick={handleClick}
         className="flex h-[100%] w-full items-center justify-between rounded-md bg-[#F5F8FA] p-3 text-center text-[#9CA3AF] transition-all placeholder:italic hover:bg-[#edf0f3] sm:px-5"
       >
-        <span className="italic">Filter by skills</span>
+        <span className="italic">{defaultValue}</span>
         <svg
           width="24"
           height="24"
@@ -99,6 +100,7 @@ export default function SkillFilterTalentPool({ data, onChange }) {
         </div>
         <div className="mx-auto mt-7 w-full">
           <button onClick={()=>{
+            setDefaultValue(tags.map(tag => tag).join(', '));
             setOpen(true);
           }} className="rounded-md bg-[#FE9A00] px-5  py-2 text-sm text-white">
             Tambah Filter

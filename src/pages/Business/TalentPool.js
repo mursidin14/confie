@@ -35,7 +35,11 @@ export default function TalentPool() {
       }
       let filterName = '?';
       for (let key in filter) {
-        filterName += `${key}=${filter[key]}&`;
+        if (key === 'skills') {
+          filterName += `${key}[]=${filter[key]}&`;
+        }else{
+          filterName += `${key}=${filter[key]}&`;
+        }
       }
       return filterName;
     };
@@ -108,7 +112,6 @@ function FeedTalent({ items }) {
 }
 
 function TalentCard({ item }) {
-  console.log(item);
   const getJob = (exp) => {
     if (exp.length === 0) {
       return '-';
