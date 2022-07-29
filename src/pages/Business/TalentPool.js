@@ -152,7 +152,7 @@ function TalentCard({ item }) {
           {utils.isWork(item.experiences) ? 'Bekerja' : 'Belum Bekerja'}
         </p>
       </div>
-      <SkillContainer skills={item.skills.slice(0, 3)} />
+      <SkillContainer skills={item.skills} />
       <a
         className="flex items-center justify-center gap-2 rounded-md bg-[#F5F8FA] px-4 py-3 text-xs"
         href={`/${item.slug}`}
