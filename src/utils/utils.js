@@ -247,6 +247,14 @@ export const getEpochTime = (time) => {
   const date = new Date(time);
   return date.getTime() / 1000;
 }
+export const getLocalTime = (time) => {
+  const date = new Date(time);
+  return date.toLocaleString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
 const utils = {
   authHeader,
   makeCapital,

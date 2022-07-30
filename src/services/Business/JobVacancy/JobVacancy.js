@@ -61,6 +61,13 @@ export const rejectApplicant = (idJob, idApplicant) => {
     .catch((error) => error.response);
 }
 
+export const changeTimeInterview = (idJob, idApplicant, data) => {
+  return httpAuthClient
+    .post(`/api/jobvacancy/${idJob}/participant/interview/${idApplicant}`, data)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
 export const deleteJobVacancy = (id) => {
   return httpAuthClient
     .delete(`/api/jobvacancy/${id}`, {
