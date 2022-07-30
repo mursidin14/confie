@@ -100,7 +100,7 @@ function FeedJob({ archive, id, items }) {
 
 function CardJobVacany({ archive, detailJob }) {
   const [isOpenAccept, setIsOpenAccept] = useState(false);
-  const { title, location, max_salary, min_salary, registration_end_date, id } =
+  const { title, location, max_salary, min_salary, registration_end_date, id, application_count } =
     detailJob;
   const {business} = useBusinessContext()
   return (
@@ -281,7 +281,7 @@ function CardJobVacany({ archive, detailJob }) {
                     fill="#494B74"
                   />
                 </svg>
-                <p>30</p>
+                <p>{application_count} Pelamar</p>
               </div>
             </div>
           </div>
@@ -320,7 +320,7 @@ function CardJobVacany({ archive, detailJob }) {
               fill="#494B74"
             />
           </svg>
-          <p className="text-5xl font-semibold">33</p>
+          <p className="text-5xl font-semibold">{application_count}</p>
           <p className="text-sm">Pelamar</p>
         </section>
       </div>
