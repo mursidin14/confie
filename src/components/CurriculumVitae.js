@@ -35,7 +35,7 @@ export default function CurriculumVitae({ data }) {
             src={
               data.url_photo_profile
                 ? `${process.env.REACT_APP_API_URL}/${data.url_photo_profile}`
-                : data.gender == 'L'
+                : data.gender === 'L'
                 ? '/male.jpg'
                 : '/female.jpg'
             }

@@ -38,6 +38,8 @@ import Billing from 'pages/Candidate/Help/Billing';
 import AccountSettingBusiness from 'pages/Candidate/AccountSettingBusiness ';
 import UpdateJobVacancy from 'pages/Business/UpdateJoVacancy';
 import Home from 'pages/Home';
+import Notification from 'pages/Candidate/Notification';
+import NotificationBusiness from 'pages/Business/NotificationBusiness';
 
 function App() {
   return (
@@ -48,7 +50,7 @@ function App() {
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/reset-password" element={<NewPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
-
+        
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cv/preview" element={<ResumeComplete />} />
@@ -79,6 +81,8 @@ function App() {
         <Route path="/business/talent" element={<TalentPool />} />
         <Route path="/company/:id" element={<CompanyDetail />} />
         
+        <Route path="/notifications" element={<Notification />} />
+        <Route path="/notifications-business" element={<NotificationBusiness />} />
         <Route path='/under' element={<UnderConstruction />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

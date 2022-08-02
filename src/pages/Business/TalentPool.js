@@ -8,11 +8,12 @@ import AlertNotPremiumUser from 'components/Modal/AlertNotPremiumUser';
 import useTalentPool from './useTalentPool';
 import SkeletonCard from 'components/SkeletonCard';
 import utils, { makeCapital } from 'utils/utils';
-import { getFilteredTalentPool } from 'services/Business/TalentPool/TalentPool';
+import { getFilteredTalentPool, getNextTalentPool } from 'services/Business/TalentPool/TalentPool';
 export default function TalentPool() {
   const { id } = useParams();
-  const { items, loading } = useTalentPool();
+  const { items, loading, pages } = useTalentPool();
   const [dataTalent, setDataTalent] = React.useState([]);
+  const [page, setPage] = React.useState({});
   const [isFilter, setIsFilter] = React.useState(false);
   const [filter, setFilter] = useState({
     full_name: '',
@@ -21,8 +22,10 @@ export default function TalentPool() {
     country: '',
   });
   const [isLoading, setIsLoading] = React.useState(false);
+  const [current_page, setCurrentPage] = React.useState(1);
   React.useEffect(() => {
     setDataTalent(items);
+    setPage(pages);
   }, [loading]);
   const handleFilter = async () => {
     setIsLoading(true);
@@ -37,7 +40,7 @@ export default function TalentPool() {
       for (let key in filter) {
         if (key === 'skills') {
           filterName += `${key}[]=${filter[key]}&`;
-        }else{
+        } else {
           filterName += `${key}=${filter[key]}&`;
         }
       }
@@ -51,6 +54,22 @@ export default function TalentPool() {
   const handleReset = () => {
     setIsFilter(false);
     setDataTalent(items);
+  };
+  const handleNext = async () => {
+    setIsLoading(true);
+    const response = await getNextTalentPool(current_page + 1);
+    setDataTalent(response.items);
+    setPage(response.response);
+    setCurrentPage(current_page + 1);
+    setIsLoading(false);
+  };
+  const handlePrevious = async () => {
+    setIsLoading(true);
+    const response = await getNextTalentPool(current_page - 1);
+    setDataTalent(response.items);
+    setPage(response.response);
+    setCurrentPage(current_page - 1);
+    setIsLoading(false);
   };
   return (
     <>
@@ -79,14 +98,16 @@ export default function TalentPool() {
                 </p>
               )}
               {!isLoading && <FeedTalent items={dataTalent} />}
-              <div className="flex justify-center">
-                {/* <Pagination></Pagination> */}
+              <div className='flex items-center'>
+                <button disabled={page?.current_page === 1} className={`${page?.current_page === 1 ? 'bg-gray-500 text-gray-300' : 'bg-orange text-white'}  py-2 px-3 rounded-l-md text-sm`} onClick={handlePrevious}>Previous</button>
+                <button disabled={page?.current_page === page.last_page} className={`${page?.current_page === page.last_page ? 'bg-gray-500 text-gray-300' : 'bg-orange text-white'} py-2 px-3 rounded-r-md text-sm`} onClick={handleNext}>Next</button>
               </div>
             </LayoutBusiness>
             <AlertNotPremiumUser />
           </BusinessProvider>
         </>
       )}
+      <></>
     </>
 
     // <UnderConstruction />
@@ -126,13 +147,15 @@ function TalentCard({ item }) {
 
   return (
     <div className="my-3 flex flex-col items-center justify-between gap-3 rounded-md bg-white py-7 shadow-mine">
-      <div className='flex flex-col items-center justify-between gap-1'>
+      <div className="flex flex-col items-center justify-between gap-1">
         <img
           className="h-20 w-20 rounded-full object-cover"
           src={`${
             item.url_photo_profile
               ? `${process.env.REACT_APP_API_URL}/${item.url_photo_profile}`
-              : item.gender === 'L' ? '/male.jpg' : '/female.jpg'
+              : item.gender === 'L'
+              ? '/male.jpg'
+              : '/female.jpg'
           }`}
           alt=""
         />
@@ -155,7 +178,7 @@ function TalentCard({ item }) {
             {utils.isWork(item.experiences) ? 'Bekerja' : 'Belum Bekerja'}
           </p>
         </div>
-      <SkillContainer skills={item.skills} />
+        <SkillContainer skills={item.skills} />
       </div>
       <a
         className="flex items-center justify-center gap-2 rounded-md bg-[#F5F8FA] px-4 py-3 text-xs"
@@ -188,7 +211,7 @@ function TalentCard({ item }) {
 
 function SkillContainer({ skills }) {
   return (
-    <div className="flex items-center gap-2 text-xs flex-wrap px-5">
+    <div className="flex flex-wrap items-center gap-2 px-5 text-xs">
       {skills.map((skill) => (
         <span className="rounded-full bg-[#FFAD89] px-7 py-1 text-white">
           {makeCapital(skill.name)}
