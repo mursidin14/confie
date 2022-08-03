@@ -127,6 +127,42 @@ const getProfileCompletion = (my_profile) => {
   return Math.round((profile_completion / total_data) * 100);
 };
 
+export const getProfileCompletionBusiness = (my_profile) => {
+  let profile_completion = 0;
+  const profile = [
+    'full_name',
+    'date_of_birth',
+    'email',
+    'phone_number',
+    'gender',
+    'country',
+    'province_name',
+    'city_name',
+    'about',
+    'volunteers',
+    'businessData',
+    'galleries',
+    'email_verified_at',
+    'businessFields',
+    'url_photo_profile',
+  ];
+  profile.forEach((item) => {
+    if (Array.isArray(my_profile[item]) && my_profile[item].length > 0) {
+      profile_completion += 1;
+    }
+    if (
+      Array.isArray(my_profile[item]) === false &&
+      my_profile[item] !== '' &&
+      my_profile[item] !== null &&
+      my_profile[item] !== undefined
+    ) {
+      profile_completion += 1;
+    }
+  });
+  const total_data = profile.length;
+  return Math.round((profile_completion / total_data) * 100);
+}
+
 const isWork = (works_experience) => {
   return works_experience.some((work) => work.is_current === true);
 };

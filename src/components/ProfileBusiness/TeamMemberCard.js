@@ -43,7 +43,7 @@ export default function TeamMemberCard() {
         <section className="my-2 overflow-y-auto">
           <Table items={team} handleDelete={handleDelete}></Table>
           <div className="mt-5 flex w-full justify-end pr-8">
-            <Pagination></Pagination>
+            {/* <Pagination></Pagination> */}
           </div>
         </section>
       )}
