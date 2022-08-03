@@ -7,6 +7,20 @@ export const getAllJobVacancy = () => {
     .catch((error) => error.response);
 };
 
+export const nextPageJobVacancy = (page) => {
+  return httpAuthClient
+    .get(`/api/listjobvacancy?page=${page}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
+export const previousPageJobVacancy = (page) => {
+  return httpAuthClient
+    .get(`/api/listjobvacancy?page=${page}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
 export const getFilteredJobVacancy = (filterItem ) => {
   return httpAuthClient
     .get(`/api/listjobvacancy${filterItem}`)

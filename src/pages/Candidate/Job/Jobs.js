@@ -6,6 +6,8 @@ import UnderConstruction from 'pages/UnderConstruction';
 import {
   getAllJobVacancy,
   getFilteredJobVacancy,
+  nextPageJobVacancy,
+  previousPageJobVacancy,
 } from 'services/Profile/JobVacancy';
 import SkeletonCard from 'components/SkeletonCard';
 import CandidateProvider from 'context/candidate-context';
@@ -23,6 +25,8 @@ export default function Jobs() {
   });
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
+  const [page, setPage] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
   const [notVerified, setNotVerified] = useState(false);
   useEffect(() => {
     const getJobVacancy = async () => {
@@ -30,6 +34,7 @@ export default function Jobs() {
       if (response.data.meta.code === 403) {
         setNotVerified(true);
       }
+      setPage(response.data.data)
       setItems(response.data.data.data);
       setLoading(false);
     };
@@ -76,11 +81,20 @@ export default function Jobs() {
     };
     
     const filterItem = filteredItem();
-    console.log(filterItem)
     const { data } = await getFilteredJobVacancy(filterItem);
     setItems(data.data.data);
     setLoading(false);
   };
+  const handleNext = async () => {
+    const response = await nextPageJobVacancy(currentPage + 1);
+    setItems(response.data.data.data);  
+    setCurrentPage(currentPage + 1);
+  }
+  const handlePrevious = async () => {
+    const response = await previousPageJobVacancy(currentPage - 1);
+    setItems(response.data.data.data);
+    setCurrentPage(currentPage - 1);
+  }
   return (
     <>
       {true && (
@@ -97,16 +111,12 @@ export default function Jobs() {
                   isFilter={isFilter}
                 ></SearchJob>
                 <JobFeed
-                  items={items.slice(pagination.sliceOne, pagination.sliceTwo)}
+                  items={items}
                 ></JobFeed>
-                <div className="mt-3 flex justify-center">
-                  <Pagination
-                    length={items.length}
-                    pagination={pagination}
-                    setPagination={setPagination}
-                    howMany={6}
-                  ></Pagination>
-                </div>
+                <div className='flex items-center mt-5'>
+                <button disabled={currentPage === 1} className={`${currentPage === 1 ? 'bg-gray-500 text-gray-300' : 'bg-orange text-white'}  py-2 px-3 rounded-l-md text-sm`} onClick={handlePrevious}>Previous</button>
+                <button disabled={currentPage === page.last_page} className={`${currentPage === page.last_page ? 'bg-gray-500 text-gray-300' : 'bg-orange text-white'} py-2 px-3 rounded-r-md text-sm`} onClick={handleNext}>Next</button>
+              </div>
               </>
             )}
           </CandidateProvider>
