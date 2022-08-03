@@ -13,17 +13,18 @@ import {
   getTodayDate,
 } from 'utils/utils';
 import CandidateProvider from 'context/candidate-context';
+import { nextPage, prevPage } from 'services/Profile/Application';
 export default function Application() {
-  const { items, loading } = useGetApplication();
+  const { items, loading, pages } = useGetApplication();
   const [dataApplication, setDataApplication] = useState([]);
+  const [page, setPage] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
   const [isFilter, setIsFilter] = useState(false);
   React.useEffect(() => {
     setDataApplication(items);
+    setPage(pages);
   }, [items]);
-  const [pagination, setPagination] = useState({
-    sliceOne: 0,
-    sliceTwo: 4,
-  });
+
   const [filter, setFilter] = useState({
     status: '',
     time: '',
@@ -36,7 +37,7 @@ export default function Application() {
           return getEpochTime(data.pivot.application_date) >= midnight;
         });
         if (filter.status) {
-          return 
+          return;
         }
         setDataApplication(newData);
         break;
@@ -89,7 +90,7 @@ export default function Application() {
         });
         const newDataStatus = newData.filter((data) => {
           return parseInt(data.pivot.status) === status;
-        })
+        });
         setDataApplication(newDataStatus);
         break;
       case 'Last Week':
@@ -99,7 +100,7 @@ export default function Application() {
         });
         const newDataStatusLastWeek = newDataLastWeek.filter((data) => {
           return parseInt(data.pivot.status) === status;
-        })
+        });
         setDataApplication(newDataStatusLastWeek);
         break;
       case 'Last Month':
@@ -109,13 +110,13 @@ export default function Application() {
         });
         const newDataStatusLastMonth = newDataLastMonth.filter((data) => {
           return parseInt(data.pivot.status) === status;
-        })
+        });
         setDataApplication(newDataStatusLastMonth);
         break;
       default:
         break;
     }
-  }
+  };
   const handleFilter = (name, value) => {
     setFilter({
       ...filter,
@@ -145,6 +146,16 @@ export default function Application() {
     setIsFilter(false);
     setDataApplication(items);
   };
+  const handleNext = async () => {
+    const response = await nextPage(currentPage + 1)
+    setDataApplication(response.data.data.data)
+    setCurrentPage(currentPage + 1); 
+  }
+  const handlePrevious = async () => {
+    const response = await prevPage(currentPage - 1)
+    setDataApplication(response.data.data.data)
+    setCurrentPage(currentPage - 1);
+  }
   return (
     <>
       {!false && (
@@ -173,7 +184,7 @@ export default function Application() {
                         />
                       </svg>
                       <p className="text-xs lg:text-sm">
-                        <span>{items?.length}</span> Lamaran Dalam Proses
+                        <span>{dataApplication?.length}</span> Lamaran Dalam Proses
                       </p>
                     </div>
                     <div className="mt-3 flex flex-wrap items-center gap-4 text-xs lg:mt-0 lg:justify-end lg:text-sm">
@@ -231,13 +242,32 @@ export default function Application() {
                         You haven't apply any job.
                       </p>
                     ) : (
-                      <Table
-                        items={dataApplication.slice(
-                          pagination.sliceOne,
-                          pagination.sliceTwo,
-                        )}
-                      ></Table>
+                      <Table items={dataApplication}></Table>
                     )}
+                    <div className="flex items-center">
+                      <button
+                        disabled={currentPage === 1}
+                        className={`${
+                          currentPage === 1
+                            ? 'bg-gray-500 text-gray-300'
+                            : 'bg-orange text-white'
+                        }  rounded-l-md py-2 px-3 text-sm`}
+                        onClick={handlePrevious}
+                      >
+                        Previous
+                      </button>
+                      <button
+                        disabled={currentPage === page.last_page}
+                        className={`${
+                          currentPage === page.last_page
+                            ? 'bg-gray-500 text-gray-300'
+                            : 'bg-orange text-white'
+                        } rounded-r-md py-2 px-3 text-sm`}
+                        onClick={handleNext}
+                      >
+                        Next
+                      </button>
+                    </div>
                   </div>
                 </>
               )}
