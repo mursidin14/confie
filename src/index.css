@@ -238,6 +238,16 @@ body {
   color: #6b6b6b;
 }
 
+.wrap--password{
+  position: relative;
+}
+
+.wrap--password-eye{
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+
 @page {
   size: A4;
   margin: 2mm;

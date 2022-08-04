@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import AsideLogin from 'components/Aside/AsideLogin';
-import AuthService from 'services/Auth/AuthService';
-import ModalError from 'components/Modal/ModalError';
-import { Helmet } from 'react-helmet';
-import ErrorModal from 'components/Widgets/ErrorModal';
-import ProfileService from 'services/Profile/ProfileService';
+import React, { useEffect, useState } from "react";
+import AsideLogin from "components/Aside/AsideLogin";
+import AuthService from "services/Auth/AuthService";
+import ModalError from "components/Modal/ModalError";
+import { Helmet } from "react-helmet";
+import ErrorModal from "components/Widgets/ErrorModal";
+import ProfileService from "services/Profile/ProfileService";
 export default function Login() {
   const [error, setError] = useState(false);
-  const [error_msg, setError_msg] = useState('');
+  const [error_msg, setError_msg] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const [data, setData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const handleChange = (e) => {
     setData({
@@ -19,20 +20,28 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   };
+  const togglePassword = (e) => {
+    e.preventDefault();
+    setPasswordShown(!passwordShown);
+  };
+  const eye = (passwordShown ? "eye-slash-solid.svg" : "eye-solid.svg")
+  console.log(eye)
   function closeModal() {
     setError(false);
   }
+
+  
   React.useEffect(() => {
     const getProfile = async () => {
       const response = await ProfileService.getProfileData();
       if (response.status !== 401) {
-        const getMetaData = localStorage.getItem('metadata');
+        const getMetaData = localStorage.getItem("metadata");
         if (getMetaData) {
-          const getData = JSON.parse(localStorage.getItem('user'));
-          if (getData.roles[0].name === 'personal') {
-            window.location.href = '/dashboard';
+          const getData = JSON.parse(localStorage.getItem("user"));
+          if (getData.roles[0].name === "personal") {
+            window.location.href = "/dashboard";
           } else {
-            window.location.href = '/business';
+            window.location.href = "/business";
           }
         }
       }
@@ -86,13 +95,18 @@ export default function Login() {
                   Forget Password?
                 </a>
               </div>
-              <input
-                onChange={handleChange}
-                required
-                className="input-form "
-                type="password"
-                name="password"
-              />
+              <div className="wrap--password">
+                <input
+                  onChange={handleChange}
+                  required
+                  className="input-form "
+                  type={passwordShown ? "text" : "password"}
+                  name="password"
+                />
+                <button className="wrap--password-eye" onClick={togglePassword}>
+                  <img src={`/${eye}`} width="18px"/>
+                </button>
+              </div>
 
               <button
                 type="submit"
@@ -100,9 +114,9 @@ export default function Login() {
                 onClick={async (e) => {
                   e.preventDefault();
                   const respon = await AuthService.login(data);
-                  if (respon.statusText === 'OK') {
-                    if (respon.data.data.roles[0].name === 'business') {
-                      window.location.href = '/business';
+                  if (respon.statusText === "OK") {
+                    if (respon.data.data.roles[0].name === "business") {
+                      window.location.href = "/business";
                     } else {
                       window.location.href = `/dashboard`;
                     }
