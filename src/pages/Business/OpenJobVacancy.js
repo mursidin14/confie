@@ -45,7 +45,7 @@ export default function OpenJobVacancy() {
       label: 'Max. Pengalaman',
       type: 'number',
       min: 0,
-      required: true,
+      required: false,
     },
   ];
   const handleChange = (e) => {

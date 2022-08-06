@@ -64,7 +64,7 @@ export default function UpdateJobVacancy() {
       label: 'Max. Pengalaman',
       type: 'number',
       min: 0,
-      required: true,
+      required: false,
     },
   ];
   const handleChange = (e) => {
