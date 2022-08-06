@@ -5,7 +5,7 @@ import InputForm from 'components/Widgets/InputForm';
 import {
   updateTeamMember,
 } from 'services/Business/TeamMember/TeamMember';
-import utils from 'utils/utils';
+import utils, { getFullDate } from 'utils/utils';
 
 export default function UpdateTeamMember({ dataItem }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function UpdateTeamMember({ dataItem }) {
   const [data, setData] = useState({
     email: dataItem.email,
     position: dataItem.current_job.position,
-    assigned_at: utils.getYearMonthDay(dataItem.current_job.assigned_at),
+    assigned_at: getFullDate(dataItem.current_job.assigned_at),
   });
   const [isAssigned, setIsAssigned] = useState(false);
   async function handleUpdate() {
@@ -27,7 +27,7 @@ export default function UpdateTeamMember({ dataItem }) {
       return;
     }
     data['assigned_at'] = utils.timeEpoch(data['assigned_at']);
-    const response = await updateTeamMember(dataItem.id, data);
+    const response = await updateTeamMember(dataItem.current_job.id, data);
     if (response.data.meta.status === 'error') {
       if (response.data.meta.code === 400) {
         setError(['User is already a member of this company']);
@@ -45,6 +45,7 @@ export default function UpdateTeamMember({ dataItem }) {
       setError(errors);
       return;
     }
+	window.location.reload();
   }
   // const handleInviteMember = async () => {
   //   delete data['position'];
@@ -64,7 +65,7 @@ export default function UpdateTeamMember({ dataItem }) {
     {
       label: 'Email',
       name: 'email',
-      required: true,
+	  disabled: true,
       type: 'email',
     },
     {
