@@ -48,11 +48,11 @@ export default function Information() {
     <BasicCard>
       <section className="text-left">
         <div className="flex items-center justify-between px-8">
-          <h3 className="text-base font-semibold ">Informasi Lengkap</h3>
+          <h3 className="text-base font-semibold ">Informasi Tambahan</h3>
           <ModalInformation
             data={data}
             action={'Edit'}
-            title={'Informasi Lengkap'}
+            title={'Informasi Tambahan'}
           ></ModalInformation>
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
