@@ -376,7 +376,7 @@ export default function UpdateJobVacancy() {
               className="relative z-10 overflow-y-auto"
               onClose={() => {
                 setModalSuccess(false);
-                window.location.reload();
+				window.location.href = '/business/job';
               }}
             >
               <Transition.Child
