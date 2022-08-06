@@ -223,7 +223,7 @@ export default function OpenJobVacancy() {
                 <label
                   className={`text-xs font-medium text-[#3F4254] lg:text-base `}
                 >
-                  Batas Pekerjaan
+                  Batas Pendaftaran
                 </label>
               </div>
               <div className="lg:w-7/12 ">
