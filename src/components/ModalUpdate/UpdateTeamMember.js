@@ -195,7 +195,7 @@ export default function UpdateTeamMember({ dataItem }) {
                         </svg>
                       </div>
                       <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                        Member ini belum terdaftar dalam sistem
+                        User belum terdaftar dalam Confie.id
                       </p>
                       <div className="flex justify-center">
                         <button
@@ -269,7 +269,7 @@ export default function UpdateTeamMember({ dataItem }) {
                       </svg>
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                      Member ini belum terdaftar dalam sistem
+                      User belum terdaftar dalam Confie.id
                     </p>
                     <div className="flex justify-center">
                       <button
