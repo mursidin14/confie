@@ -36,7 +36,7 @@ export default function GalleryCompany() {
         <h3 className="text-base font-semibold">Gallery Company</h3>
       </div>
       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-      <div className="my-5 grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-5 gap-5">
+      <div className="my-5 grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-5 pr-20 gap-5">
         {galleries !== undefined && (
           <>
             {galleries.map((img, index) => (
