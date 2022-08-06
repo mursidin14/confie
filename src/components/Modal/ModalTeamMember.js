@@ -58,8 +58,8 @@ export default function ModalTeamMember() {
   const handleInviteMember = async () => {
     setLoading(true);
     const response = await invitationMember(data);
-    console.log(response)
     setLoading(false);
+	window.location.reload();
   };
   // function handleAssignMember() {
   //   setIsOpenAccept(false);
