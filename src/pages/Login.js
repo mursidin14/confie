@@ -142,6 +142,7 @@ export default function Login() {
           closeModal={closeModal}
           error={error}
           error_msg={error_msg}
+		  title="Login Failed"
         ></ModalError>
       </main>
     </>
