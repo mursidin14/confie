@@ -666,7 +666,8 @@ function Table({ items, changeStatus, rejectCandidate }) {
                 <td className="w-[25%] text-left break-words">{item.email}</td>
                 <td className="w-[20%]">
                   <a
-                    href={item.slug}
+                    href={'/' + item.slug}
+					target="_blank"
                     className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
                   >
                     Lihat Profile
@@ -733,7 +734,8 @@ function TableTwo({ id, items, changeStatus, rejectCandidate }) {
                 </td>
                 <td className="w-[20%]">
                   <a
-                    href={item.link}
+                    href={'/' + item.slug}
+					target="_blank"
                     className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
                   >
                     Lihat Hasil Tes
@@ -792,7 +794,8 @@ function TableThree({ id, items, changeStatus, rejectCandidate }) {
                 <td className="w-[30%] text-left break-words">{item.email}</td>
                 <td className="w-[20%]">
                 <a
-                    href={item.slug}
+                    href={'/' + item.slug}
+					target="_blank"
                     className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
                   >
                     Lihat Profile
@@ -855,7 +858,8 @@ function TableFour({ id, items }) {
                 <td className="w-[20%] text-left">{item.email}</td>
                 <td className="w-[20%]">
                 <a
-                    href={item.slug}
+                    href={'/' + item.slug}
+					target="_blank"
                     className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
                   >
                     Lihat Profile
