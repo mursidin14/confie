@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import SearchTalent from 'components/SearchTalent';
-import Pagination from 'components/Widgets/Pagination';
 import { BusinessProvider, useBusinessContext } from 'context/business-context';
 import AlertNotPremiumUser from 'components/Modal/AlertNotPremiumUser';
 import useTalentPool from './useTalentPool';
-import SkeletonCard from 'components/SkeletonCard';
 import utils, { makeCapital } from 'utils/utils';
 import { getFilteredTalentPool, getNextTalentPool } from 'services/Business/TalentPool/TalentPool';
 export default function TalentPool() {

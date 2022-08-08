@@ -7,6 +7,7 @@ import Pagination from 'components/Widgets/Pagination';
 import { BusinessProvider, useBusinessContext } from 'context/business-context';
 import {
   changeApplicantJobVacancy,
+  changeArchiveJobVacany,
   deleteJobVacancy,
   getApplicantJobVacancy,
   getDetailJobVacancy,
@@ -45,6 +46,7 @@ export default function JobVacancyDetail() {
         {!loading && (
           <div className="py-5 lg:mx-5">
             <CardJobVacany
+              archive={detailJob.is_publish}
               applicants={applicants.filter(
                 (applicant) => applicant.pivot.is_reject === false,
               )}
@@ -142,15 +144,15 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                 </p>
                 <div
                   className={`${
-                    !archive ? 'bg-[#E8FFF3]' : 'bg-[#F5F8FA]'
+                    archive ? 'bg-[#E8FFF3]' : 'bg-[#F5F8FA]'
                   } rounded-md px-3 py-1 text-xs`}
                 >
                   <p
                     className={`${
-                      !archive ? 'text-[#50CD89]' : 'text-[#7E8299]'
+                      archive ? 'text-[#50CD89]' : 'text-[#7E8299]'
                     }`}
                   >
-                    {!archive ? 'Aktif' : 'Arsip'}
+                    {archive ? 'Aktif' : 'Arsip'}
                   </p>
                 </div>
                 <div className="relative flex flex-col items-center md:hidden">
@@ -187,7 +189,11 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                     >
                       Update
                     </a>
-                    <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
+                    <button onClick={async ()=> {
+                      const isPublish = detailJob.is_publish ? 0 : 1;
+                      const response = await changeArchiveJobVacany(detailJob.id, isPublish)
+                      window.location.href=  '/business/job/'
+                    }} className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                       Arsipkan
                     </button>
                   </div>
