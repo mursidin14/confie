@@ -430,7 +430,11 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                 >
                   Update
                 </a>
-                <button className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
+                <button onClick={async ()=> {
+                      const isPublish = detailJob.is_publish ? 0 : 1;
+                      const response = await changeArchiveJobVacany(detailJob.id, isPublish)
+                      window.location.href=  '/business/job/'
+                    }} className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
                   Arsipkan
                 </button>
               </div>
