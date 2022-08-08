@@ -11,7 +11,7 @@ export const addJobVacancy = (data) => {
     .catch((error) => error.response);
 };
 
-export const updateJobVacancy = (id ,data) => {
+export const updateJobVacancy = (id, data) => {
   return httpAuthClient
     .put(`/api/jobvacancy/${id}?_method=PUT`, data, {
       headers: {
@@ -20,7 +20,7 @@ export const updateJobVacancy = (id ,data) => {
     })
     .then((response) => response)
     .catch((error) => error.response);
-}
+};
 
 export const getJobVacancy = () => {
   return httpAuthClient
@@ -32,6 +32,23 @@ export const getJobVacancy = () => {
 export const getDetailJobVacancy = (id) => {
   return httpAuthClient
     .get(`/api/jobvacancy/${id}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+};
+
+export const changeArchiveJobVacany = (id, isPublish) => {
+  return httpAuthClient
+    .post(
+      `/api/jobvacancy/${id}?_method=PUT`,
+      {
+        is_publish: isPublish,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
     .then((response) => response)
     .catch((error) => error.response);
 };
@@ -59,14 +76,14 @@ export const rejectApplicant = (idJob, idApplicant) => {
     })
     .then((response) => response)
     .catch((error) => error.response);
-}
+};
 
 export const changeTimeInterview = (idJob, idApplicant, data) => {
   return httpAuthClient
     .post(`/api/jobvacancy/${idJob}/participant/interview/${idApplicant}`, data)
     .then((response) => response)
     .catch((error) => error.response);
-}
+};
 
 export const deleteJobVacancy = (id) => {
   return httpAuthClient

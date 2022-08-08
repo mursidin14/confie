@@ -3,7 +3,7 @@ import { Tab } from '@headlessui/react';
 import BasicCard from 'components/Widgets/BasicCard';
 import { useParams } from 'react-router-dom';
 import { useBusinessContext } from 'context/business-context';
-import { getDate } from 'utils/utils';
+import { getDate, getLocalStringRupiah } from 'utils/utils';
 import SweetAlert from './SweetAlert';
 import { deleteJobVacancy } from 'services/Business/JobVacancy/JobVacancy';
 import { Dialog, Transition } from '@headlessui/react';
@@ -171,7 +171,7 @@ function CardJobVacany({ archive, detailJob }) {
                   />
                 </svg>
                 <p>
-                  IDR {min_salary} - {max_salary}
+                  IDR {getLocalStringRupiah(min_salary)} - {getLocalStringRupiah(max_salary)}
                 </p>
               </div>
               <div className="flex items-center gap-3">
