@@ -1,3 +1,4 @@
+import ModalError from 'components/Modal/ModalError';
 import { httpAuthClient } from 'utils/http-common';
 
 export const getAllTalentPool = async () => {
@@ -5,7 +6,17 @@ export const getAllTalentPool = async () => {
     const response = await httpAuthClient.get('/api/talents');
     return {items: response.data.data.data, response: response};
   } catch (error) {
-    return error.response;
+	return (
+		<ModalError
+			title="Error"
+			error_msg={error.response.data.message}
+			error={true}
+			onClose={() => {
+				// back to previous page
+				window.history.back();
+			}}
+		/>
+	)
   }
 };
 
