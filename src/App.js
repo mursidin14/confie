@@ -54,6 +54,8 @@ function App() {
         <Route path="/reset-password" element={<NewPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/register" element={<Register />} />
+		<Route path='/company/:id' element={<CompanyDetail />} />
+		<Route path='/:id' element={ <ProfileCandidate /> } />
 
 		{/* <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cv/preview" element={<ResumeComplete />} />
@@ -77,7 +79,6 @@ function App() {
 		<Route path='/dashboard' element={ <PrivateRoute children={<Dashboard />} role='personal' /> } />
 		<Route path='/cv/preview' element={ <PrivateRoute children={<ResumeComplete />} role='personal' /> } />
 		<Route path='/profile' element={ <PrivateRoute children={<Profile />} role='personal' /> } />
-		<Route path='/:id' element={ <PrivateRoute children={<ProfileCandidate />} role='personal' /> } />
 		<Route path='/setting' element={ <PrivateRoute children={<AccountSetting />} role='personal' /> } />
 		<Route path='/pdp' element={ <PrivateRoute children={<PersonalDevelopment />} role='personal' /> } />
 		<Route path='/pdp/detail/:idDetail' element={ <PrivateRoute children={<PersonalDevelopmentDetail />} role='personal' /> } />
@@ -113,7 +114,6 @@ function App() {
 		<Route path='/business/job/update/:idJob' element={ <PrivateRoute children={<UpdateJobVacancy />} role='business' /> } />
 		<Route path='/setting-business' element={ <PrivateRoute children={<AccountSettingBusiness />} role='business' /> } />
 		<Route path='/business/talent' element={ <PrivateRoute children={<TalentPool />} role='business' /> } />
-		<Route path='/company/:id' element={ <PrivateRoute children={<CompanyDetail />} role='business' /> } />
 
 	   {/* Route for all users 
         <Route path="/notifications" element={<Notification />} />
