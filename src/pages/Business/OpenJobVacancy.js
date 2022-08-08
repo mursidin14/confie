@@ -316,7 +316,7 @@ export default function OpenJobVacancy() {
                 onClick={() => {
                   setJobVacancy({
                     ...jobVacancy,
-                    is_published: false,
+                    is_published: 0,
                   });
                   handleSubmit();
                 }}
@@ -328,7 +328,7 @@ export default function OpenJobVacancy() {
                 onClick={() => {
                   setJobVacancy({
                     ...jobVacancy,
-                    is_published: true,
+                    is_published: 1,
                   });
                   handleSubmit();
                 }}
@@ -515,6 +515,11 @@ function InputList({ label, data, name, onChange }) {
             className="input-form text-sm"
             onChange={(e) => {
               setInput(e.target.value);
+            }}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                addList();
+              }
             }}
             name="listRequirment"
             // onKeyDown={(e) => {
