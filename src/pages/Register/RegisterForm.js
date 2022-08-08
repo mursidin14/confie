@@ -42,10 +42,10 @@ export default function Register() {
         for (let key in msg_error) {
           message_error.push(msg_error[key]);
         }
-        setError_msg(message_error);
-        if (message_error.length === 0) {
-          setError_msg(['Your are not using a valid email address']);
+        if (dataAccount.skills) {
+          message_error.push(`Please select at least one ${dataAccount.role === 'personal' ? 'skill' : 'field'}'`);
         }
+        setError_msg(message_error);
         return setIsOpenFailed(true);
       }
     }
@@ -138,7 +138,7 @@ export default function Register() {
                             key={index}
                             className="mx-auto my-1 w-full text-left text-xs text-[#7E8299] lg:w-[400px]"
                           >
-                            {item}
+                            {item == 'The fields field is required when role is business.' ? 'Please select at least one fields' : item}
                           </p>
                         ))}
                       </div>

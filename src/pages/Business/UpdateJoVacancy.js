@@ -4,11 +4,15 @@ import { useParams } from 'react-router-dom';
 import InputForm from 'components/Widgets/InputForm';
 import BasicCard from 'components/Widgets/BasicCard';
 import { BusinessProvider } from 'context/business-context';
-import { getDetailJobVacancy, updateJobVacancy } from 'services/Business/JobVacancy/JobVacancy';
+import {
+  getDetailJobVacancy,
+  updateJobVacancy,
+} from 'services/Business/JobVacancy/JobVacancy';
 import utils, { getFullDate } from 'utils/utils';
 import SkillRequirmentBusiness from 'components/SkillRequirmentBusiness';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import UpdateSkillRequirmentBusiness from 'components/UpdateSkillRequirmentBusiness';
 
 export default function UpdateJobVacancy() {
   const { idJob } = useParams();
@@ -28,6 +32,7 @@ export default function UpdateJobVacancy() {
         registration_end_date: getFullDate(
           response.data.data.registration_end_date,
         ),
+        skills: [...response.data.data.requimentskill.map((item) => item.id)],
       });
       // setJobVacancy({
       //   ...jobVacancy,
@@ -85,7 +90,6 @@ export default function UpdateJobVacancy() {
       return;
     }
     setModalSuccess(true);
-    
   };
   return (
     <BusinessProvider>
@@ -294,7 +298,7 @@ export default function UpdateJobVacancy() {
                   </div>
                   <div className="lg:w-7/12 ">
                     <div className="my-2 flex items-center justify-between gap-2 lg:my-5 ">
-                      <SkillRequirmentBusiness
+                      <UpdateSkillRequirmentBusiness
                         data={jobVacancy}
                         onChange={setJobVacancy}
                       />
@@ -376,7 +380,7 @@ export default function UpdateJobVacancy() {
               className="relative z-10 overflow-y-auto"
               onClose={() => {
                 setModalSuccess(false);
-				window.location.href = '/business/job';
+                window.location.href = '/business/job';
               }}
             >
               <Transition.Child
@@ -499,6 +503,10 @@ function InputList({ label, data, name, onChange }) {
   function deleteList(item) {
     const indexItem = list.indexOf(item);
     setList([...list.filter((_, index) => index !== indexItem)]);
+    onChange({
+      ...data,
+      [name]: [...list.filter((_, index) => index !== indexItem)],
+    });
   }
 
   return (
