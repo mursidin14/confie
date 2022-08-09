@@ -565,7 +565,7 @@ function InputList({ label, data, name, onChange }) {
             className="my-2 flex items-center justify-between gap-2 first:mb-2 first:mt-0 lg:my-5"
           >
             <div
-              className="w-full rounded-md bg-soft-gray px-5 py-[0.65rem]"
+              className="w-full rounded-md bg-[#cbcbcc]/40 px-5 py-[0.65rem]"
               name="listRequirment"
             >
               <p className="text-sm">{item}</p>
@@ -597,6 +597,11 @@ function InputList({ label, data, name, onChange }) {
             className="input-form text-sm"
             onChange={(e) => {
               setInput(e.target.value);
+            }}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                addList();
+              }
             }}
             name="listRequirment"
             // onKeyDown={(e) => {

@@ -16,9 +16,9 @@ export default function ModalTeamMember() {
     position: '',
     assigned_at: '',
   });
-  const [isAssigned, setIsAssigned] = useState(false);
   const [openInvitation, setOpenInvitation] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [successInvite, setSuccessInvite] = useState(false);
   async function handleAssign() {
     // setIsAssigned(false);
     setLoading(true);
@@ -53,18 +53,26 @@ export default function ModalTeamMember() {
       setLoading(false);
       return;
     }
-    window.location.reload();
+    setSuccessInvite(true);
+    setLoading(false);
+    // window.location.reload();
   }
   const handleInviteMember = async () => {
     setLoading(true);
     const response = await invitationMember(data);
+    if (response.status === 201) {
+      setSuccessInvite(true);
+    }
     setLoading(false);
-	window.location.reload();
+    // window.location.reload();
   };
   // function handleAssignMember() {
   //   setIsOpenAccept(false);
   // }
   function closeModal() {
+    if (successInvite) {
+      window.location.reload();
+    }
     setIsOpen(false);
   }
   function openModal() {
@@ -128,7 +136,7 @@ export default function ModalTeamMember() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  {!isAssigned && !openInvitation && (
+                  {!openInvitation && !successInvite &&(
                     <>
                       <div className="flex items-center justify-between px-8">
                         <h3 className="text-base font-semibold ">
@@ -197,7 +205,7 @@ export default function ModalTeamMember() {
                       </div>
                     </>
                   )}
-                  {openInvitation && (
+                  {openInvitation && !successInvite && (
                     <>
                       <div className="flex items-center justify-center p-8">
                         <svg
@@ -253,16 +261,41 @@ export default function ModalTeamMember() {
                       </div>
                     </>
                   )}
-
-                  {/* {loading && (
+                  {successInvite && (
                     <>
-                      <div className="flex items-center justify-center gap-5 p-8">
-                        <span className="animate-bounceOne rounded-full bg-[#7E8299] p-3"></span>
-                        <span className="animate-bounceTwo rounded-full bg-[#7E8299] p-3"></span>
-                        <span className="animate-bounceOne rounded-full bg-[#7E8299] p-3"></span>
-                      </div>
+                      {openInvitation && (
+                        <div className="text-center">
+                          <img
+                            className="mx-auto mt-2"
+                            src="/email_alert.png"
+                            alt=""
+                          />
+                          <p className="mt-5 text-sm text-black">
+                            Success to sent an invitation to{' '}
+                            <span className="font-semibold text-black">
+                              {data.email}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                      {!openInvitation && (
+                        <div className="text-center">
+                          <img
+                            className="mx-auto mt-2"
+                            src="/email_approve.png"
+                            alt=""
+                          />
+                          <p className="mt-5 text-sm text-black">
+                            Success add{' '}
+                            <span className="font-semibold text-black">
+                              {data.email}
+                            </span>
+                            {' '}as a team member.
+                          </p>
+                        </div>
+                      )}
                     </>
-                  )} */}
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
