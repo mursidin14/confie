@@ -121,7 +121,7 @@ function App() {
         <Route path='/under' element={<UnderConstruction />} /> */}
 
 		<Route path='/notifications' element={ <ProtectedRoute children={<Notification />} /> } />
-		<Route path='/notifications-business' element={ <ProtectedRoute children={<NotificationBusiness />} /> } />
+		<Route path='/business/notifications' element={ <ProtectedRoute children={<NotificationBusiness />} /> } />
 		<Route path='/under' element={ <ProtectedRoute children={<UnderConstruction />} /> } />
 
         <Route path="*" element={<NotFound />} />
