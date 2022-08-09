@@ -10,7 +10,6 @@ export default function Header({data, handleNav, PageName }) {
   }
   async function clickLogout() {
     await AuthService.logout();
-    window.location.href = '/';
   }
   return (
     <header className="flex items-center justify-between bg-white px-9 shadow-md ">
