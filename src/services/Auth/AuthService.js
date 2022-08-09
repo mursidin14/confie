@@ -24,10 +24,10 @@ const login = (data) =>
       }),
   );
 
-const register = (data) =>
+const register = (url, data) =>
   registerClient.get('/sanctum/csrf-cookie').then((response) =>
     registerClient
-      .post('/api/register', data, {
+      .post(url, data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -66,6 +66,8 @@ const logout = () =>
     .post('/api/logout')
     .then((response) => {
       localStorage.removeItem('metadata');
+      localStorage.removeItem('user');
+      localStorage.removeItem('userComplete');
       return response;
     })
     .catch((error) => {
@@ -80,8 +82,31 @@ export const getCurrentUserComplete = () => {
 };
 
 const getMetadata = () => {
-  return localStorage.getItem('metadata');
+  return JSON.parse(localStorage.getItem('metadata'));
 };
+
+const getToken = () => {
+	  let metadata = JSON.parse(localStorage.getItem('metadata'));
+	  return metadata?.access_token;
+}
+
+const setMetadata = (meta) => {
+	  localStorage.setItem('metadata', JSON.stringify(meta));
+}
+
+const isAuthenticated = () => {
+	  return getToken() ? true : false;
+}
+
+const isAdmin = () => {
+	  let currentUser = getCurrentUser();
+	  return currentUser?.role === 'internal';
+}
+
+const isUser = (user) => {
+	  let currentUser = getCurrentUser();
+	  return currentUser?.role === user;
+}
 
 const AuthService = {
   login,
@@ -92,6 +117,11 @@ const AuthService = {
   logout,
   getCurrentUser,
   getMetadata,
+  setMetadata,
+  getToken,
+  isAuthenticated,
+  isAdmin,
+  isUser,
 };
 
 export default AuthService;

@@ -1,3 +1,4 @@
+import ModalError from 'components/Modal/ModalError'
 import React from 'react'
 import { getAllTalentPool } from 'services/Business/TalentPool/TalentPool'
 
@@ -8,9 +9,11 @@ export default function useTalentPool() {
   React.useEffect(() => {
     const getData = async () => {
       const response = await getAllTalentPool()
-      setPages(response.response.data.data)
-      setItems(response.items)
-      setLoading(false)
+	  setLoading(false)
+	  if(response.status === 200) {
+		setPages(response.response.data.data)
+		setItems(response.items)
+	  }
     }
     getData()
   }, [])
