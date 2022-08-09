@@ -33,20 +33,20 @@ export default function OpenJobVacancy() {
       type: 'text',
       required: true,
     },
-    {
-      name: 'min_experience',
-      label: 'Min. Pengalaman',
-      type: 'number',
-      min: 0,
-      required: true,
-    },
-    {
-      name: 'max_experience',
-      label: 'Max. Pengalaman',
-      type: 'number',
-      min: 0,
-      required: false,
-    },
+    // {
+    //   name: 'min_experience',
+    //   label: 'Min. Pengalaman',
+    //   type: 'number',
+    //   min: 0,
+    //   required: true,
+    // },
+    // {
+    //   name: 'max_experience',
+    //   label: 'Max. Pengalaman',
+    //   type: 'number',
+    //   min: 0,
+    //   required: true,
+    // },
   ];
   const handleChange = (e) => {
     setJobVacancy({ ...jobVacancy, [e.target.name]: e.target.value });
@@ -86,6 +86,48 @@ export default function OpenJobVacancy() {
                 {...input}
               />
             ))}
+            <div className=" items-center lg:flex">
+              <div className="w-5/12">
+                <label
+                  className={`text-xs font-medium text-[#3F4254] lg:text-base `}
+                >
+                  Pengalaman Kerja
+                </label>
+              </div>
+              <div className="lg:w-7/12 ">
+                <div className="my-2 items-center justify-between gap-3 sm:flex lg:my-5 ">
+                    <input
+                      className="input-form my-2 lg:my-3 lg:py-6 placeholder:text-sm"
+                      type="number"
+                      min="0"
+                      placeholder="Min. Pengalaman"
+                      name="min_experience"
+                      value={jobVacancy.min_experience ?? ''}
+                      onChange={(e) => {
+                        setJobVacancy({
+                          ...jobVacancy,
+                          min_experience: e.target.value,
+                        });
+                      }}
+                    />
+                  <p className="text-xs">sampai</p>
+                    <input
+                      className="input-form my-2 lg:my-3 lg:py-6 placeholder:text-sm"
+                      type="number"
+                      min="0"
+                      placeholder="Max. Pengalaman"
+                      name="max_experience"
+                      value={jobVacancy.max_experience ?? ''}
+                      onChange={(e) => {
+                        setJobVacancy({
+                          ...jobVacancy,
+                          max_experience: e.target.value,
+                        });
+                      }}
+                    />
+                </div>
+              </div>
+            </div>
             {/* <div className=" items-center lg:flex">
               <div className="w-5/12">
                 <label
