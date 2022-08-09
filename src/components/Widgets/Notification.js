@@ -1,35 +1,46 @@
 import React from 'react';
+import {
+  getNotification,
+  readNotifications,
+} from 'services/Profile/Notification';
+import { getTimeFromNow } from 'utils/utils';
 
-export default function Notification({isBusiness}) {
+export default function Notification({ isBusiness }) {
+  const [openFirstTime, setOpenFirstTime] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
+  const [notifications, setNotifications] = React.useState([]);
+  const handleClick = async () => {
     setOpen(!open);
+    if (!openFirstTime) {
+       await readNotifications();
+    }
+    setOpenFirstTime(true);
   };
-  const items = [
-    {
-      id: 1,
-      text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
-      time: '1 hour ago',
-    },
-    {
-      id: 2,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '1 hour ago',
-    },
-    {
-      id: 3,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '1 hour ago',
-    },
-    {
-      id: 4,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      time: '1 hour ago',
-    },
-  ]
+  React.useEffect(() => {
+    const getItemNotification = async () => {
+      const response = await getNotification();
+      const itemNotifcation = response.data.data.data.map((item) => {
+        return {
+          type: item.type,
+          message: item.data.message,
+          created_at: item.created_at,
+          read_at: item.read_at,
+          data: item.data,
+        };
+      });
+      setNotifications(itemNotifcation);
+    };
+    getItemNotification();
+  }, []);
+  const handleMarkRead = () => {};
   return (
     <>
-      <button className={`${open ? 'bg-[#FFE6BF]' : ''}  p-2 rounded-md transition-all`} onClick={handleClick}>
+      <button
+        className={`${
+          open ? 'bg-[#FFE6BF]' : ''
+        } rounded-md p-2 transition-all hover:bg-[#FFE6BF]`}
+        onClick={handleClick}
+      >
         <svg
           width="23"
           height="23"
@@ -58,27 +69,62 @@ export default function Notification({isBusiness}) {
         </svg>
       </button>
       <section
-        className={`absolute sm:right-36 right-10 top-14 z-10 rounded-md bg-white text-left shadow-mine ${
+        className={`absolute right-10 top-14 z-10 rounded-md bg-white text-left shadow-mine sm:right-36 ${
           !open
             ? 'hidden  translate-y-0 opacity-0'
             : ' block translate-y-1 opacity-100'
         } max-w-xs transition-all sm:w-[300px]`}
       >
         <div className="text-left">
-          <div className='bg-[#324AAF] px-5 py-3 rounded-t-md '>
-            <p className='text-white font-medium tracking-widest'>Notification</p>
+          <div className="rounded-t-md bg-[#324AAF] px-5 py-3 ">
+            <p className="font-medium tracking-widest text-white">
+              Notification
+            </p>
           </div>
-          <div className='px-5 py-2'>
-            {items.map((item, i) => {
+          {/* <button onClick={handleMarkRead}>
+            <p className="px-5 py-1 text-xs text-black">Mark all as read</p>
+          </button> */}
+          <div className="px-5 py-2">
+            {notifications.length === 0 && (
+              <p className="text-center text-gray-600 text-xs">
+                You have no notification
+              </p>
+            )}
+            {notifications.slice(0, 3).map((notification, i) => {
               return (
-                <div key={i} className='pb-1'>
-                  <p className='text-xs break-normal'>{item.text}</p>
-                  <p className='text-[10px] text-gray-400 '>{item.time}</p>
+                <div key={i} className="mb-1 last:mb-0">
+                  <div className="flex gap-5">
+                    <p className="break-normal text-xs">
+                      {notification.message}
+                    </p>
+                    {notification.read_at === null && (
+                      <>
+                        <svg
+                          className="mt-1 h-2 w-2"
+                          width="8"
+                          height="8"
+                          viewBox="0 0 8 8"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle cx="4" cy="4" r="4" fill="#FE9A00" />
+                        </svg>
+                      </>
+                    )}
+                  </div>
+                  <p className="text-[10px] text-gray-400 ">
+                    {getTimeFromNow(notification.created_at)}
+                  </p>
                 </div>
               );
             })}
           </div>
-          <a className='px-5 py-2 border-t w-full inline-block text-center text-gray-400 hover:text-black text-sm' href={isBusiness ? 'notifications-business' : "/notifications"}>View All</a>
+          <a
+            className="inline-block w-full border-t px-5 py-2 text-center text-sm text-gray-400 hover:text-black"
+            href={isBusiness ? 'notifications-business' : '/notifications'}
+          >
+            View All
+          </a>
         </div>
       </section>
     </>

@@ -17,7 +17,12 @@ import SkeletonCard from 'components/SkeletonCard';
 import SweetAlert from 'components/Widgets/SweetAlert';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { getDate, getLocalStringRupiah, getLocalTime, makeCapital } from 'utils/utils';
+import {
+  getDate,
+  getLocalStringRupiah,
+  getLocalTime,
+  makeCapital,
+} from 'utils/utils';
 import ModalUpdateInterviewTime from './ModalUpdateInterviewTime';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -189,11 +194,17 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                     >
                       Update
                     </a>
-                    <button onClick={async ()=> {
-                      const isPublish = detailJob.is_publish ? 0 : 1;
-                      const response = await changeArchiveJobVacany(detailJob.id, isPublish)
-                      window.location.href=  '/business/job/'
-                    }} className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
+                    <button
+                      onClick={async () => {
+                        const isPublish = detailJob.is_publish ? 0 : 1;
+                        const response = await changeArchiveJobVacany(
+                          detailJob.id,
+                          isPublish,
+                        );
+                        window.location.href = '/business/job/';
+                      }}
+                      className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]"
+                    >
                       Arsipkan
                     </button>
                   </div>
@@ -430,11 +441,17 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                 >
                   Update
                 </a>
-                <button onClick={async ()=> {
-                      const isPublish = detailJob.is_publish ? 0 : 1;
-                      const response = await changeArchiveJobVacany(detailJob.id, isPublish)
-                      window.location.href=  '/business/job/'
-                    }} className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]">
+                <button
+                  onClick={async () => {
+                    const isPublish = detailJob.is_publish ? 0 : 1;
+                    const response = await changeArchiveJobVacany(
+                      detailJob.id,
+                      isPublish,
+                    );
+                    window.location.href = '/business/job/';
+                  }}
+                  className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]"
+                >
                   Arsipkan
                 </button>
               </div>
@@ -672,13 +689,15 @@ function Table({ items, changeStatus, rejectCandidate }) {
             {items.map((item, index) => (
               <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
                 <td className="w-[5%] pl-3 text-left">{index + 1}</td>
-                <td className="w-[25%] pl-10 text-left break-words">{makeCapital(item.full_name)}</td>
-                <td className="w-[25%] text-left break-words">{item.email}</td>
+                <td className="w-[25%] break-words pl-10 text-left">
+                  {makeCapital(item.full_name)}
+                </td>
+                <td className="w-[25%] break-words text-left">{item.email}</td>
                 <td className="w-[20%]">
                   <a
                     href={'/' + item.slug}
-					target="_blank"
-                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
+                    target="_blank"
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]" rel="noreferrer"
                   >
                     Lihat Profile
                   </a>
@@ -688,7 +707,7 @@ function Table({ items, changeStatus, rejectCandidate }) {
                     onClick={() => {
                       changeStatus(item.id, 3);
                     }}
-                    className="mx-auto w-fit rounded bg-[#E8FFF3] hover:bg-[#50CD89]/90 px-5 py-3 text-[#50CD89] hover:text-white transition-all"
+                    className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89] transition-all hover:bg-[#50CD89]/90 hover:text-white"
                   >
                     Terima
                   </button>
@@ -696,7 +715,7 @@ function Table({ items, changeStatus, rejectCandidate }) {
                     onClick={() => {
                       rejectCandidate(item.id);
                     }}
-                    className="mx-auto w-fit rounded bg-[#FFF5F8] hover:bg-[#F1416C]/90 px-[1.8rem] py-3 text-[#F1416C] hover:text-white transition-all"
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C] transition-all hover:bg-[#F1416C]/90 hover:text-white"
                   >
                     Tolak
                   </button>
@@ -732,10 +751,12 @@ function TableTwo({ id, items, changeStatus, rejectCandidate }) {
             {items.map((item, index) => (
               <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
                 <td className="w-[5%] pl-3 text-left">{index + 1}</td>
-                <td className="w-[25%] pl-10 text-left break-words">{makeCapital(item.full_name)}</td>
-                <td className="w-[20%] text-left break-words">{item.email}</td>
+                <td className="w-[25%] break-words pl-10 text-left">
+                  {makeCapital(item.full_name)}
+                </td>
+                <td className="w-[20%] break-words text-left">{item.email}</td>
                 <td className="w-[20%]">
-                <a
+                  <a
                     href={item.slug}
                     className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
                   >
@@ -745,8 +766,8 @@ function TableTwo({ id, items, changeStatus, rejectCandidate }) {
                 <td className="w-[20%]">
                   <a
                     href={'/' + item.slug}
-					target="_blank"
-                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]"
+                    target="_blank"
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299]" rel="noreferrer"
                   >
                     Lihat Hasil Tes
                   </a>
@@ -756,7 +777,7 @@ function TableTwo({ id, items, changeStatus, rejectCandidate }) {
                     onClick={() => {
                       changeStatus(item.id, 4);
                     }}
-                    className="mx-auto w-fit rounded bg-[#E8FFF3] hover:bg-[#50CD89]/90 px-5 py-3 text-[#50CD89] hover:text-white transition-all"
+                    className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89] transition-all hover:bg-[#50CD89]/90 hover:text-white"
                   >
                     Terima
                   </button>
@@ -764,7 +785,7 @@ function TableTwo({ id, items, changeStatus, rejectCandidate }) {
                     onClick={() => {
                       rejectCandidate(item.id);
                     }}
-                    className="mx-auto w-fit rounded bg-[#FFF5F8] hover:bg-[#F1416C]/90 px-[1.8rem] py-3 text-[#F1416C] hover:text-white transition-all"
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C] transition-all hover:bg-[#F1416C]/90 hover:text-white"
                   >
                     Tolak
                   </button>
@@ -800,21 +821,31 @@ function TableThree({ id, items, changeStatus, rejectCandidate }) {
             {items.map((item, index) => (
               <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
                 <td className="w-[5%] pl-3 text-left">{index + 1}</td>
-                <td className="w-[25%] pl-10 text-left break-words">{makeCapital(item.full_name)}</td>
-                <td className="w-[30%] text-left break-words">{item.email}</td>
+                <td className="w-[25%] break-words pl-10 text-left">
+                  {makeCapital(item.full_name)}
+                </td>
+                <td className="w-[30%] break-words text-left">{item.email}</td>
                 <td className="w-[20%]">
-                <a
+                  <a
                     href={'/' + item.slug}
-					target="_blank"
-                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
+                    target="_blank"
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]" rel="noreferrer"
                   >
                     Lihat Profile
                   </a>
                 </td>
                 <td className="w-[20%]">
                   <div className="flex items-center justify-center gap-2">
-                    <p>{item.pivot.interview_time === null ? '-' : getLocalTime(item.pivot.interview_time.split('T')[0])}</p>
-                    <ModalUpdateInterviewTime idJob={id} idCandidate={item.id} data={item.pivot.interview_time.split('T')[0]} />
+                    <p>
+                      {item.pivot.interview_time === null
+                        ? '-'
+                        : getLocalTime(item.pivot.interview_time?.split('T')[0])}
+                    </p>
+                    <ModalUpdateInterviewTime
+                      idJob={id}
+                      idCandidate={item.id}
+                      data={item.pivot.interview_time?.split('T')[0]}
+                    />
                   </div>
                 </td>
                 <td className="mt-6 flex h-full flex-col items-center justify-center gap-2">
@@ -822,7 +853,7 @@ function TableThree({ id, items, changeStatus, rejectCandidate }) {
                     onClick={() => {
                       changeStatus(item.id, 5);
                     }}
-                    className="mx-auto w-fit rounded bg-[#E8FFF3] hover:bg-[#50CD89]/90 px-5 py-3 text-[#50CD89] hover:text-white transition-all"
+                    className="mx-auto w-fit rounded bg-[#E8FFF3] px-5 py-3 text-[#50CD89] transition-all hover:bg-[#50CD89]/90 hover:text-white"
                   >
                     Terima
                   </button>
@@ -830,7 +861,7 @@ function TableThree({ id, items, changeStatus, rejectCandidate }) {
                     onClick={() => {
                       rejectCandidate(item.id);
                     }}
-                    className="mx-auto w-fit rounded bg-[#FFF5F8] hover:bg-[#F1416C]/90 px-[1.8rem] py-3 text-[#F1416C] hover:text-white transition-all"
+                    className="mx-auto w-fit rounded bg-[#FFF5F8] px-[1.8rem] py-3 text-[#F1416C] transition-all hover:bg-[#F1416C]/90 hover:text-white"
                   >
                     Tolak
                   </button>
@@ -864,13 +895,15 @@ function TableFour({ id, items }) {
             {items.map((item, index) => (
               <tr className="mt-3 h-32 text-sm text-[#7E8299]" key={index}>
                 <td className="w-[5%] pl-3 text-left">{index + 1}</td>
-                <td className="w-[25%] pl-10 text-left">{makeCapital(item.full_name)}</td>
+                <td className="w-[25%] pl-10 text-left">
+                  {makeCapital(item.full_name)}
+                </td>
                 <td className="w-[20%] text-left">{item.email}</td>
                 <td className="w-[20%]">
-                <a
+                  <a
                     href={'/' + item.slug}
-					target="_blank"
-                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]"
+                    target="_blank"
+                    className="mx-auto w-fit rounded bg-[#F5F8FA] px-4 py-3 text-[#7E8299] transition-all hover:bg-[#d6d7d8]" rel="noreferrer"
                   >
                     Lihat Profile
                   </a>

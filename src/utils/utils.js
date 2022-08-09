@@ -235,6 +235,36 @@ export const getStatusApplication = (status) => {
   }
 };
 // formating function
+export const getTimeFromNow = (time) => {
+  const currentTime = new Date();
+  const timeFromNow = new Date(time);
+  const diff = currentTime - timeFromNow;
+  const diffInMinutes = Math.round(diff / 60000);
+  const diffInHours = Math.round(diff / 3600000);
+  const diffInDays = Math.round(diff / 86400000);
+  const diffInWeeks = Math.round(diff / 604800000);
+  const diffInMonths = Math.round(diff / 2628000000);
+  const diffInYears = Math.round(diff / 31536000000);
+  if (diffInMinutes < 1) {
+    return 'Just now';
+  }
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes} minutes ago`;
+  }
+  if (diffInHours < 24) {
+    return `${diffInHours} hours ago`;
+  }
+  if (diffInDays < 7) {
+    return `${diffInDays} days ago`;
+  }
+  if (diffInWeeks < 4) {
+    return `${diffInWeeks} weeks ago`;
+  }
+  if (diffInMonths < 12) {
+    return `${diffInMonths} months ago`;
+  }
+  return `${diffInYears} years ago`;
+}
 // sorting function
 export function sortWorkExperience(items) {
   return items.sort((a, b) => {
