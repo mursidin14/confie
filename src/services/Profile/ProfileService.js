@@ -37,11 +37,18 @@ const updateAbout = (data) =>
 
 export const updateCompanyInformation = (data) =>
   httpAuthClient
-    .put('/api/profile/information', data, {
-      headers: {
-        'Content-Type': 'application/json',
+    .post(
+      '/api/profile/information',
+      {
+        ...data,
+        _method: 'PUT',
       },
-    })
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
     .then((response) => response)
     .catch((error) => error.response);
 
@@ -144,7 +151,6 @@ const addJobExperience = (data) =>
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
-      
     })
     .then((response) => response)
     .catch((error) => error.response);
@@ -156,8 +162,7 @@ const updateJobExperience = (id, data) =>
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
-    }, 
-    )
+    })
     .then((response) => response)
     .catch((error) => error.response);
 

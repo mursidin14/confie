@@ -13,16 +13,11 @@ export default function Information() {
   });
   React.useEffect(() => {
     if (Array.isArray(businessProfile.businessData)) {
+      const field = businessProfile.businessFields.map((item) => item.name);
       setData(businessProfile.businessData[0]);
     }
   }, [businessProfile]);
-
   const inputs = [
-    {
-      label: 'Jenis Industri',
-      require: true,
-      value: data?.company_type || '-',
-    },
     {
       label: 'Company Size',
       require: false,
@@ -67,7 +62,7 @@ export default function Information() {
 }
 function DataPersonal({ label, require, value }) {
   return (
-    <div className=" items-center lg:flex my-4">
+    <div className=" my-4 items-center lg:flex">
       <div className="w-5/12">
         <label
           className={`text-xs after:content-['*'] lg:text-base ${

@@ -9,7 +9,6 @@ export default function ModalInformation({ action, title, data }) {
   const [error, setError] = useState([]);
   const [dataInformation, setDataInformation] = useState({
     ...businessProfile,
-    company_type: '',
     company_size: '',
     link_website: '',
     link_facebook_page:'',
@@ -17,7 +16,8 @@ export default function ModalInformation({ action, title, data }) {
   });
   React.useEffect(() => {
     if (Array.isArray(businessProfile.businessData)) {
-      setDataInformation(businessProfile.businessData[0]);
+      const field = businessProfile.businessFields.map((item) => item.name);
+      setDataInformation({...businessProfile.businessData[0], company_type: field});      
     }
   }, [businessProfile]);
 
@@ -30,20 +30,17 @@ export default function ModalInformation({ action, title, data }) {
   }
   const handleSubmit =  async () => {
     if (dataInformation.company_size === '' || dataInformation.company_type === '') {
-      setError(['Company size and company type is required'])
+      setError(['Company size is required'])
       return
     }
     const response = await updateCompanyInformation(dataInformation)
+    if(response.status === 422){
+      return
+    }
     window.location.reload()
   };
   const inputs = [
-    {
-      label: 'Jenis Industri',
-      type: 'text',
-      name: 'company_type',
-      required: true,
-	  value: dataInformation?.company_type || '-',
-    },
+   
     {
       label: 'Company Size',
       type: 'text',
