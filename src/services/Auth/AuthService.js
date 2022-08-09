@@ -68,6 +68,7 @@ const logout = () =>
       localStorage.removeItem('metadata');
       localStorage.removeItem('user');
       localStorage.removeItem('userComplete');
+      window.location.href = '/';
       return response;
     })
     .catch((error) => {

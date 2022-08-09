@@ -264,7 +264,7 @@ function PersonalCard({ id }) {
           </div>
         </div>
         <div className="block md:hidden">
-          <ProfileCompletion />
+          <ProfileCompletion profile={business}/>
         </div>
         <div className="block md:hidden">
           <ButtonDashboard />
