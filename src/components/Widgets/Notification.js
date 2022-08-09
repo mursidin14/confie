@@ -121,7 +121,7 @@ export default function Notification({ isBusiness }) {
           </div>
           <a
             className="inline-block w-full border-t px-5 py-2 text-center text-sm text-gray-400 hover:text-black"
-            href={isBusiness ? 'notifications-business' : '/notifications'}
+            href={isBusiness ? '/notifications-business' : '/notifications'}
           >
             View All
           </a>
