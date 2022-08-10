@@ -276,7 +276,6 @@ function PersonalCard({ id }) {
 
 function ProfileCompletion() {
   const { businessProfile } = useBusinessProfileContext();
-  console.log(businessProfile);
   return (
     <div className="mt-3 w-full ">
       <div className="flex justify-between text-xs sm:text-base">

@@ -34,6 +34,7 @@ export function BusinessProvider({ children }) {
   return (
     <BusinessContext.Provider value={businessContextValue}>
       {children}
+      
     </BusinessContext.Provider>
   );
 }
