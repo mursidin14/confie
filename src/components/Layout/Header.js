@@ -38,7 +38,7 @@ export default function Header({data, handleNav, PageName }) {
       <img className="block w-24 lg:hidden" src="/logo.png" alt="logo_config" />
       <div className="flex items-center gap-6 py-3">
         <Notification isBusiness={data?.roles[0]?.name === 'business'}/>
-        <svg
+        {/* <svg
           width="23"
           height="32"
           viewBox="0 0 23 32"
@@ -59,7 +59,7 @@ export default function Header({data, handleNav, PageName }) {
             fill="#A1A5B7"
           />
           <rect x="9" width="6" height="6" rx="3" fill="#50CD89" />
-        </svg>
+        </svg> */}
         <div className="">
           <img
             onClick={clickProfile}
