@@ -9,7 +9,13 @@ export default function Header({data, handleNav, PageName }) {
     setOpen(!open);
   }
   async function clickLogout() {
-    await AuthService.logout();
+    const response = await AuthService.logout();
+    if (response.status === 401) {
+      localStorage.removeItem('metadata');
+      localStorage.removeItem('user');
+      localStorage.removeItem('userComplete');
+      window.location.href = '/';
+    }
   }
   return (
     <header className="flex items-center justify-between bg-white px-9 shadow-md ">
