@@ -7,10 +7,14 @@ export default function ModalJobApplication({ item }) {
   console.log(item)
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isApply, setIsApply] = useState(true);
+  const [isApply, setIsApply] = useState(false);
   const [error, setError] = useState([]);
   function closeModal() {
+    if (isApply) {
+      return
+    }
     setIsOpen(false);
+    window.location.href = `/lamaran/detail/${item.id}`;
   }
   async function handleAccept() {
     setLoading(true);
@@ -20,6 +24,10 @@ export default function ModalJobApplication({ item }) {
       expected_salary: item.min_salary,
       start_date_expectation_work: item.registration_end_date
     });
+    if(response.status === 403){
+      error_respon.push('You have already applied for this job');
+      setError(error_respon);
+    }
     if (response.status === 422) {
       const error_apply = response.data.data;
       Object.keys(error_apply).forEach((key) => {
@@ -40,6 +48,7 @@ export default function ModalJobApplication({ item }) {
     setIsApply(false);
   }
   function openModal() {
+    setIsApply(true);
     setIsOpen(true);
   }
   return (

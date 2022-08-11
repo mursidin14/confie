@@ -82,7 +82,7 @@ function DescriptionCompany({
 		)}
 		{url_photo_profile !== null && (
 			<img
-			className="2-10"
+			className="w-10"
 			src={`${process.env.REACT_APP_API_URL}/${url_photo_profile}`}
 			alt=""
 			/>

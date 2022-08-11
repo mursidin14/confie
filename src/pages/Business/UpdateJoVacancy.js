@@ -5,6 +5,7 @@ import InputForm from 'components/Widgets/InputForm';
 import BasicCard from 'components/Widgets/BasicCard';
 import { BusinessProvider } from 'context/business-context';
 import {
+  changeArchiveJobVacany,
   getDetailJobVacancy,
   updateJobVacancy,
 } from 'services/Business/JobVacancy/JobVacancy';
@@ -389,12 +390,17 @@ export default function UpdateJobVacancy() {
                 </section>
                 <div className="mt-4 flex justify-end gap-4 ">
                   <button
-                    onClick={() => {
-                      setJobVacancy({
-                        ...jobVacancy,
-                        is_published: false,
-                      });
-                      handleSubmit();
+                    onClick={async () => {
+                      const response = await changeArchiveJobVacany(
+                        idJob,
+                        0,
+                      );
+                      window.location.href = '/business/job/';
+                      // setJobVacancy({
+                      //   ...jobVacancy,
+                      //   is_published: 0,
+                      // });
+                      // handleSubmit();
                     }}
                     className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
                   >
@@ -404,7 +410,7 @@ export default function UpdateJobVacancy() {
                     onClick={() => {
                       setJobVacancy({
                         ...jobVacancy,
-                        is_published: true,
+                        is_published: 1,
                       });
                       handleSubmit();
                     }}
