@@ -27,7 +27,7 @@ export default function JobApplicationCard({ isPublic, item }) {
               {!isPublic && (
                 <a
                   href={`company/${item.users.slug}`}
-                  className="block text-sm hover:underline"
+                  className="block text-sm hover:underline text-blue-400"
                 >
                   {makeCapital(item.users.full_name)}
                 </a>
