@@ -69,7 +69,7 @@ export default function ProfileCandidate() {
                 className="mx-auto w-16 rounded-full object-cover sm:w-24 lg:w-32"
                 src={
                   dataProfile.url_photo_profile
-                    ? `/backend/${dataProfile.url_photo_profile}`
+				    ? `${process.env.REACT_APP_API_URL}/${dataProfile.url_photo_profile}`
                     : dataProfile.gender == 'L'
                     ? '/male.jpg'
                     : '/female.jpg'
