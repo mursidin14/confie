@@ -8,7 +8,7 @@ export default function JobApplicationCard({ isPublic, item }) {
         <div className="flex items-center justify-start gap-2">
           {item?.users?.url_photo_profile === null && (
             <div className="h-fit rounded-md bg-[#F5F8FA] p-3 ">
-              <img className="w-5" src={`/job.png`} alt="" />
+              <img className="w-5" src={`/company_default.png`} alt="" />
             </div>
           )}
           {item?.users?.url_photo_profile !== null && (
