@@ -8,6 +8,21 @@ export default function Header({data, handleNav, PageName }) {
   function clickProfile() {
     setOpen(!open);
   }
+
+  React.useEffect(() => {
+  
+    const closeProfile = e => {
+      // console.log(e.path[0].tagName)
+      if (e.path[0].tagName !== 'IMG'){
+        setOpen(false);
+      }
+    }; 
+
+    document.body.addEventListener('click', closeProfile);
+    return () => document.body.removeEventListener('click', closeProfile);
+  
+  }, []);
+
   async function clickLogout() {
     const response = await AuthService.logout();
     if (response.status === 401) {

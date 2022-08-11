@@ -47,8 +47,21 @@ export default function Notification({ isBusiness }) {
       setNewNotifications(newNotifications.length);
       setNotifications(itemNotifcation);
     };
+
+    const closeNotification = e => {
+      if (e.path[0].tagName !== 'BUTTON' && e.path[0].tagName !== 'svg'  && e.path[0].tagName !== 'path'){
+        setOpen(false);
+      }
+    }; 
+
+    document.body.addEventListener('click', closeNotification);
+    return () => document.body.removeEventListener('click', closeNotification);
     getItemNotification();
+    
   }, []);
+
+ 
+
   const handleMarkRead = () => {};
   return (
     <>
