@@ -56,9 +56,9 @@ export const getJobVacancyStatusDetail = (id) => {
     .catch((error) => error.response);
 }
 
-export const getPublicJobVacancy = () => {
+export const getPublicJobVacancy = (id) => {
   return httpAuthClient
-    .get(`/api/public-jobvacancy/2`)
+    .get(`/api/public-jobvacancy/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 }

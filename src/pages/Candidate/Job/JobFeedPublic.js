@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import JobApplicationCard from 'pages/Candidate/Job/JobApplicationCard';
 import { getPublicJobVacancy } from 'services/Profile/JobVacancy';
-export default function JobFeedPublic() {
+export default function JobFeedPublic({ idCompany }) {
   const [items, setItems] = useState([]);
   React.useEffect(() => {
     const getJob = async () => {
-      const response = await getPublicJobVacancy()
-      setItems(response.data.data.data)
-    }
-    getJob()
-  },[])
+      if (idCompany !== undefined) {
+        const response = await getPublicJobVacancy(idCompany);
+        setItems(response.data.data.data);
+      }
+    };
+    getJob();
+  }, [idCompany]);
   return (
     <>
       {items.length === 0 && (
@@ -21,7 +23,11 @@ export default function JobFeedPublic() {
       )}
       <section className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => (
-          <JobApplicationCard isPublic key={index} item={item}></JobApplicationCard>
+          <JobApplicationCard
+            isPublic
+            key={index}
+            item={item}
+          ></JobApplicationCard>
         ))}
       </section>
     </>

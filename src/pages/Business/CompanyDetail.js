@@ -13,11 +13,13 @@ export default function CompanyDetail() {
     email: 'annas@gmail.com',
     gender: 'L',
   });
+  const [idCompany, setIdCompany] = useState(null);
   const [loading, setLoading] = useState(true);
   React.useEffect(() => {
     const getDataCompany = async () => {
       const response = await ProfileService.getOnlineProfileData(id);
       setData(response.data.data);
+      setIdCompany(response.data.data.businessData[0].user_id)
       setLoading(false);
     };
     getDataCompany();
@@ -108,7 +110,7 @@ export default function CompanyDetail() {
             </BasicCard>
             <BasicCard>
               <div className="px-5">
-                <BasicTab data={data}></BasicTab>
+                <BasicTab idCompany={idCompany} data={data}></BasicTab>
               </div>
             </BasicCard>
             <BasicCard>

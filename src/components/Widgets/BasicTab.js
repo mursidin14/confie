@@ -7,14 +7,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function BasicTab({data}) {
+export default function BasicTab({idCompany, data}) {
   const [jobVacancy, setJobVacancy] = useState([])
   const [categories] = useState({
     "Tentang Perusahaan": {
       content: <AboutCompany data={data} />, 
     },
     "Info Lowongan":  {
-      content: <JobFeedPublic />, 
+      content: <JobFeedPublic idCompany={idCompany} />, 
     }
   })
   React.useEffect(() => {
