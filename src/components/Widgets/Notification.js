@@ -14,7 +14,18 @@ export default function Notification({ isBusiness }) {
     setOpen(!open);
     if (!openFirstTime) {
       await readNotifications();
+	  setNewNotifications(0);
     }
+	// handle when close
+	if (open) {
+		// set all  item notifications is_read to true
+		setNotifications(notifications.map(item => {
+			return {
+				...item,
+				is_read: true
+			}
+		}))
+	}
     setOpenFirstTime(true);
   };
   React.useEffect(() => {
@@ -27,6 +38,7 @@ export default function Notification({ isBusiness }) {
           created_at: item.created_at,
           read_at: item.read_at,
           data: item.data,
+		  is_read: item.read_at ? true : false,
         };
       });
       const newNotifications = itemNotifcation.filter((item) => {
@@ -101,7 +113,7 @@ export default function Notification({ isBusiness }) {
                     <p className="break-normal text-xs">
                       {notification.message}
                     </p>
-                    {notification.read_at === null && (
+                    {notification.is_read === false && (
                       <>
                         <svg
                           className="mt-1 h-2 w-2"
