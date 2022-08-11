@@ -14,6 +14,7 @@ export default function ModalJobApplication({ item }) {
   }
   async function handleAccept() {
     setLoading(true);
+   
     const error_respon = [];
     const response = await applyJobVacancy(item.id, {
       expected_salary: item.min_salary,
@@ -26,6 +27,15 @@ export default function ModalJobApplication({ item }) {
       });
       setError(error_respon);
     }
+    // if (!localStorage.getItem('jobs')) {
+    //   localStorage.setItem('jobs', JSON.stringify({}));
+    // }
+    // const jobs = JSON.parse(localStorage.getItem('jobs'));
+    // if (jobs[item.users.id]){
+    //   jobs[item.users.id] = [...jobs[item.users.id], item.id];
+    // }else{
+    //   jobs[item.users.id] = [item.id]
+    // }
     setLoading(false);
     setIsApply(false);
   }

@@ -74,19 +74,40 @@ export default function JobDetail() {
 }
 
 function DescriptionCompany({
-  item: { full_name, address, cityname, provincename, date_of_birth, about },
+  item: {
+    full_name,
+    address,
+    cityname,
+    provincename,
+    date_of_birth,
+    about,
+    url_photo_profile,
+  },
 }) {
   return (
     <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">
-      <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
-        <img className="md:w-fit" src="/job.png" alt="" />
-      </div>
+      {url_photo_profile === null && (
+        <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
+          <img className="w-10" src={`/company_default.png`} alt="" />
+        </div>
+      )}
+      {url_photo_profile !== null && (
+        <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
+          <img
+            className="h-10 w-10 bg-cover"
+            src={`${process.env.REACT_APP_API_URL}/${url_photo_profile}`}
+            alt=""
+          />
+        </div>
+      )}
       <div className="w-[440px] text-left">
         <p className="mb-1 text-lg font-semibold">{full_name.toUpperCase()}</p>
         <p className="text-sm">{`${address} ${utils.makeCapital(
           cityname,
         )}, ${utils.makeCapital(provincename)}`}</p>
-        <p className="my-1 text-sm">Berdiri sejak tahun {date_of_birth.slice(0,4)}</p>
+        <p className="my-1 text-sm">
+          Berdiri sejak tahun {date_of_birth.slice(0, 4)}
+        </p>
         <p className="text-sm leading-7">{about}</p>
       </div>
     </div>
