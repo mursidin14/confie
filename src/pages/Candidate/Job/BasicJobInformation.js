@@ -61,8 +61,12 @@ export default function BasicJobInformation({item: {location, max_salary, min_sa
               fill="#4B5783"
             />
           </svg>
-
-          <p>{min_experience} - {max_experience} Tahun</p>
+          {max_experience === null && (
+            <p>Min {min_experience} Tahun</p>
+          )}
+          {max_experience && (
+            <p>{min_experience} - {max_experience} Tahun</p>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <svg
