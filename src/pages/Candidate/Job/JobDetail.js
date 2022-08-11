@@ -78,11 +78,11 @@ function DescriptionCompany({
     <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">
       <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
 		{url_photo_profile === null && (
-			<img className="md:w-fit" src={`/company_default.png`} alt="" />
+			<img className="w-10" src={`/company_default.png`} alt="" />
 		)}
 		{url_photo_profile !== null && (
 			<img
-			className="md:w-fit"
+			className="2-10"
 			src={`${process.env.REACT_APP_API_URL}/${url_photo_profile}`}
 			alt=""
 			/>
