@@ -32,9 +32,7 @@ export default function JobDetail() {
           <section className="mt-10 w-full  bg-white p-8 text-left text-[#3F4254] shadow-mine">
             <div className="w-full lg:w-[600px]">
               <p className=" text-sm">
-                First, a disclaimer – the entire process of writing a blog post
-                often takes more than a couple of hours, even if you can type
-                eighty words as per minute and your writing skills are sharp.
+                {item.description}
               </p>
               <div className="mt-10">
                 <ul>
