@@ -123,8 +123,11 @@ export default function Notification({ isBusiness }) {
               return (
                 <div key={i} className="mb-1 last:mb-0">
                   <div className="flex gap-5">
-                    <p className="break-normal text-xs">
-                      {notification.message}
+                    <p className="break-normal text-xs"
+						dangerouslySetInnerHTML={{
+							__html: notification.message
+						}}
+					>
                     </p>
                     {notification.is_read === false && (
                       <>

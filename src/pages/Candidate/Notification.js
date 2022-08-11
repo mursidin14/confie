@@ -56,7 +56,12 @@ export default function Notification() {
           {notifications.map((notification , i) => {
             return (
               <div className="pb-1 px-5 border-b border-solid border-gray-300 last:border-none">
-                <p className="break-normal text-sm">{notification.message}</p>
+                <p className="break-normal text-sm"
+				   dangerouslySetInnerHTML={{
+							__html: notification.message
+						}}
+				>
+				</p>
                 <p className="text-xs text-gray-400 mt-1">{getTimeFromNow(notification.created_at)}</p>
               </div>
             );
