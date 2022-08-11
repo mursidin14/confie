@@ -12,7 +12,7 @@ export default function Header({data, handleNav, PageName }) {
   React.useEffect(() => {
   
     const closeProfile = e => {
-      console.log(e.path[0].tagName)
+      // console.log(e.path[0].tagName)
       if (e.path[0].tagName !== 'IMG' && e.path[0].tagName !== 'SECTION' && e.path[0].tagName !== 'P' ){
         setOpen(false);
       }
