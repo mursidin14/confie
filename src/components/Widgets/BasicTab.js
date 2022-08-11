@@ -1,19 +1,30 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
-import JobFeed from 'pages/Candidate/Job/JobFeed'
+import JobFeedPublic from 'pages/Candidate/Job/JobFeedPublic'
+import React from 'react'
+import { getPublicJobVacancy } from 'services/Profile/JobVacancy'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function BasicTab({data}) {
-  let [categories] = useState({
+  const [jobVacancy, setJobVacancy] = useState([])
+  const [categories] = useState({
     "Tentang Perusahaan": {
       content: <AboutCompany data={data} />, 
     },
     "Info Lowongan":  {
-      content: <JobFeed items={[]}/>, 
+      content: <JobFeedPublic />, 
     }
   })
+  React.useEffect(() => {
+    const getJob = async () => {
+      const response = await getPublicJobVacancy()
+      setJobVacancy(response.data.data.data)
+      console.log(response.data.data.data)
+    }
+    getJob()
+  },[])
 
   return (
     <div className="w-full px-2 sm:px-0">

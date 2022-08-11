@@ -55,3 +55,10 @@ export const getJobVacancyStatusDetail = (id) => {
     .then((response) => response)
     .catch((error) => error.response);
 }
+
+export const getPublicJobVacancy = () => {
+  return httpAuthClient
+    .get(`/api/public-jobvacancy/2`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
