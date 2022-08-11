@@ -49,7 +49,7 @@ export default function Notification({ isBusiness }) {
     };
 
     const closeNotification = e => {
-      if (e.path[0].tagName !== 'BUTTON' && e.path[0].tagName !== 'svg'  && e.path[0].tagName !== 'path'){
+      if (e.path[0].tagName !== 'BUTTON' && e.path[0].tagName !== 'svg'  && e.path[0].tagName !== 'path'  && e.path[0].tagName !== 'P'){
         setOpen(false);
       }
     }; 
