@@ -7,13 +7,11 @@ export default function JobApplicationCard({ isPublic, item }) {
       <div>
         <div className="flex items-center justify-start gap-2">
           {item?.users?.url_photo_profile === null && (
-            <div className="h-fit rounded-md bg-[#F5F8FA] p-3 ">
-              <img className="w-5" src={`/company_default.png`} alt="" />
-            </div>
+			<img className="w-10" src={`/company_default.png`} alt="" />
           )}
           {item?.users?.url_photo_profile !== null && (
             <img
-              className="w-6"
+              className="w-10"
               src={`${process.env.REACT_APP_API_URL}/${item?.users?.url_photo_profile}`}
               alt=""
             />
