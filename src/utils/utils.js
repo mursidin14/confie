@@ -127,6 +127,42 @@ const getProfileCompletion = (my_profile) => {
   return Math.round((profile_completion / total_data) * 100);
 };
 
+export const getProfileCompletionBusiness = (my_profile) => {
+  let profile_completion = 0;
+  const profile = [
+    'full_name',
+    'date_of_birth',
+    'email',
+    'phone_number',
+    'gender',
+    'country',
+    'province_name',
+    'city_name',
+    'about',
+    'volunteers',
+    'businessData',
+    'galleries',
+    'email_verified_at',
+    'businessFields',
+    'url_photo_profile',
+  ];
+  profile.forEach((item) => {
+    if (Array.isArray(my_profile[item]) && my_profile[item].length > 0) {
+      profile_completion += 1;
+    }
+    if (
+      Array.isArray(my_profile[item]) === false &&
+      my_profile[item] !== '' &&
+      my_profile[item] !== null &&
+      my_profile[item] !== undefined
+    ) {
+      profile_completion += 1;
+    }
+  });
+  const total_data = profile.length;
+  return Math.round((profile_completion / total_data) * 100);
+}
+
 const isWork = (works_experience) => {
   return works_experience.some((work) => work.is_current === true);
 };
@@ -191,12 +227,44 @@ export const getStatusApplication = (status) => {
     case '3':
       return 'Tes Online';
       case '4':
-        return 'Wawancara'
+        return 'Wawancara';
+        case '5':
+          return 'Selesai'
     default:
       return 'Lamaran Ditolak';
   }
 };
 // formating function
+export const getTimeFromNow = (time) => {
+  const currentTime = new Date();
+  const timeFromNow = new Date(time);
+  const diff = currentTime - timeFromNow;
+  const diffInMinutes = Math.round(diff / 60000);
+  const diffInHours = Math.round(diff / 3600000);
+  const diffInDays = Math.round(diff / 86400000);
+  const diffInWeeks = Math.round(diff / 604800000);
+  const diffInMonths = Math.round(diff / 2628000000);
+  const diffInYears = Math.round(diff / 31536000000);
+  if (diffInMinutes < 1) {
+    return 'Just now';
+  }
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes} minutes ago`;
+  }
+  if (diffInHours < 24) {
+    return `${diffInHours} hours ago`;
+  }
+  if (diffInDays < 7) {
+    return `${diffInDays} days ago`;
+  }
+  if (diffInWeeks < 4) {
+    return `${diffInWeeks} weeks ago`;
+  }
+  if (diffInMonths < 12) {
+    return `${diffInMonths} months ago`;
+  }
+  return `${diffInYears} years ago`;
+}
 // sorting function
 export function sortWorkExperience(items) {
   return items.sort((a, b) => {
@@ -222,7 +290,37 @@ export function sortYear(items) {
   })
   return items.reverse();
 }
-
+// filter time 
+export const getTimeToday = () => {
+  const midnight = new Date();
+  midnight.setHours(0, 0, 0, 0);
+  const epoch = midnight.getTime() / 1000;
+  return epoch;
+};
+export const getTimeLastWeek = () => {
+  const lastWeek = new Date();
+  lastWeek.setDate(lastWeek.getDate() - 7);
+  const epoch = lastWeek.getTime() / 1000;
+  return epoch;
+}
+export const getTimeLastMonth = () => {
+  const lastMonth = new Date();
+  lastMonth.setMonth(lastMonth.getMonth() - 1);
+  const epoch = lastMonth.getTime() / 1000;
+  return epoch;
+}
+export const getEpochTime = (time) => {
+  const date = new Date(time);
+  return date.getTime() / 1000;
+}
+export const getLocalTime = (time) => {
+  const date = new Date(time);
+  return date.toLocaleString('id-ID', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
 const utils = {
   authHeader,
   makeCapital,

@@ -7,9 +7,23 @@ export const getAllJobVacancy = () => {
     .catch((error) => error.response);
 };
 
-export const getFilteredJobVacancy = ({ position, location }) => {
+export const nextPageJobVacancy = (page) => {
   return httpAuthClient
-    .get(`/api/listjobvacancy?title=${position}`)
+    .get(`/api/listjobvacancy?page=${page}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
+export const previousPageJobVacancy = (page) => {
+  return httpAuthClient
+    .get(`/api/listjobvacancy?page=${page}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
+export const getFilteredJobVacancy = (filterItem ) => {
+  return httpAuthClient
+    .get(`/api/listjobvacancy${filterItem}`)
     .then((response) => response)
     .catch((error) => error.response);
 };
@@ -38,6 +52,13 @@ export const getJobVacancyStatus = () => {
 export const getJobVacancyStatusDetail = (id) => {
   return httpAuthClient
     .get(`/api/listjobvacancy/checkstatus/${id}`)
+    .then((response) => response)
+    .catch((error) => error.response);
+}
+
+export const getPublicJobVacancy = (id) => {
+  return httpAuthClient
+    .get(`/api/public-jobvacancy/${id}`)
     .then((response) => response)
     .catch((error) => error.response);
 }

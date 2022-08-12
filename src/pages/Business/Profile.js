@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import GalleryCompany from 'components/ProfileBusiness/GalleryCompany';
 import BusinessProfileProvider from 'context/business-profile-context';
 import { BusinessProvider } from 'context/business-context';
+import FieldBusiness from 'components/ProfileBusiness/FieldBusiness';
 export default function Profile() {
   const { id } = useParams();
   return (
@@ -14,13 +15,11 @@ export default function Profile() {
         <LayoutBusiness userId={id} PageName={'Profile Perusahaan'}>
           <BasicProfileBusiness />
           <AboutCompany></AboutCompany>
+          <FieldBusiness />
           <InformationCompany></InformationCompany>
-          <GalleryCompany>
-          </GalleryCompany>
+          <GalleryCompany></GalleryCompany>
         </LayoutBusiness>
       </BusinessProvider>
     </BusinessProfileProvider>
   );
 }
-
-

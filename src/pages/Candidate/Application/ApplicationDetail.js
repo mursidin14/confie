@@ -11,7 +11,7 @@ export default function ApplicationDetail() {
         <>
           <JobDetail item={item} />
           <StepApplication
-            is_rejected={item.pivot.is_rejected}
+            is_rejected={item.pivot.is_reject}
             step={item.pivot.status}
           />
           <StepDescription />
@@ -104,9 +104,10 @@ function StepApplication({ is_rejected, step }) {
 }
 
 function JobDetail({ item }) {
+  console.log(item)
   return (
     <section className="w-full rounded-md bg-white p-8 text-left text-[#3F4254] shadow-mine">
-      <h3 className="top-3 text-2xl lg:relative">Junior React Developer</h3>
+      <h3 className="top-3 text-2xl lg:relative">{item.title}</h3>
       <div className="flex flex-col justify-between xl:flex-row">
         <BasicJobInformation item={item}></BasicJobInformation>
         <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">

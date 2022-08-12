@@ -34,14 +34,14 @@ export default function NavBarBusiness({ page, offCanvas, userId }) {
     {
       alias: 'kelas bisnis',
       name: 'Kelas Bisinis',
-      link: `/notcreateyet/${1}`,
+      link: `/under`,
       icon_active: '/nav_icon/applicant.png',
       icon_inactive: '/nav_icon/i_applicant.png',
     },
     {
       alias: 'talent pool',
       name: 'Talent Pool',
-      link: `/business/talent/${1}`,
+      link: `/business/talent`,
       icon_active: '/nav_icon/class.png',
       icon_inactive: '/nav_icon/i_class.png',
     },

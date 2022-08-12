@@ -1,7 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
 
-export default function ModalError({closeModal, error, error_msg }) {
+export default function ModalError({ closeModal, title, error, error_msg }) {
   return (
     <Transition appear show={error} as={Fragment}>
       <Dialog
@@ -34,23 +34,25 @@ export default function ModalError({closeModal, error, error_msg }) {
             >
               <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <div>
-                  <div className="flex items-center justify-center p-8">
-                    <svg
-                      className="h-24 w-24"
-                      width="8"
-                      height="8"
-                      viewBox="0 0 8 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M3.875 0.125C1.73438 0.125 0 1.85938 0 4C0 5.40781 0.753125 6.63594 1.875 7.31406V4.5C1.875 4.3625 1.9875 4.25 2.125 4.25C2.2625 4.25 2.375 4.3625 2.375 4.5V7.57344C2.83594 7.76719 3.34375 7.875 3.875 7.875C4.40625 7.875 4.91406 7.76719 5.375 7.57344V4.5C5.375 4.3625 5.4875 4.25 5.625 4.25C5.7625 4.25 5.875 4.3625 5.875 4.5V7.31406C6.99688 6.63594 7.75 5.40625 7.75 4C7.75 1.85938 6.01562 0.125 3.875 0.125ZM2.85156 3.50781C2.62031 3.30156 2.12969 3.30156 1.89844 3.50781L1.75 3.64062C1.69063 3.69219 1.60469 3.70313 1.53594 3.66563C1.46719 3.62813 1.42812 3.55 1.44062 3.47187C1.50312 3.07812 1.975 2.81406 2.37656 2.81406C2.77813 2.81406 3.25 3.07812 3.3125 3.47187C3.325 3.55 3.28594 3.62813 3.21719 3.66563C3.12656 3.71406 3.04219 3.67656 3.00312 3.64062L2.85156 3.50781V3.50781ZM3.875 6.5C3.46094 6.5 3.125 6.05156 3.125 5.5C3.125 4.94844 3.46094 4.5 3.875 4.5C4.28906 4.5 4.625 4.94844 4.625 5.5C4.625 6.05156 4.28906 6.5 3.875 6.5ZM6.21562 3.66406C6.125 3.7125 6.04063 3.675 6.00156 3.63906L5.85313 3.50625C5.62188 3.3 5.13125 3.3 4.9 3.50625L4.75 3.64062C4.69063 3.69219 4.60469 3.70313 4.53594 3.66563C4.46719 3.62813 4.42813 3.55 4.44063 3.47187C4.50313 3.07812 4.975 2.81406 5.37656 2.81406C5.77813 2.81406 6.25 3.07812 6.3125 3.47187C6.32188 3.54844 6.28437 3.62656 6.21562 3.66406Z"
-                        fill="#212223"
-                      />
-                    </svg>
+                  <div className="block w-full">
+                    <div className="float-right">
+                      <button type="button" onClick={closeModal}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.3" d="M12 10.6L14.8 7.8C15.2 7.4 15.8 7.4 16.2 7.8C16.6 8.2 16.6 8.80002 16.2 9.20002L13.4 12L12 10.6ZM10.6 12L7.8 14.8C7.4 15.2 7.4 15.8 7.8 16.2C8 16.4 8.3 16.5 8.5 16.5C8.7 16.5 8.99999 16.4 9.19999 16.2L12 13.4L10.6 12Z" fill="gray"/>
+                        <path d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM13.4 12L16.2 9.20001C16.6 8.80001 16.6 8.19999 16.2 7.79999C15.8 7.39999 15.2 7.39999 14.8 7.79999L12 10.6L9.2 7.79999C8.8 7.39999 8.2 7.39999 7.8 7.79999C7.4 8.19999 7.4 8.80001 7.8 9.20001L10.6 12L7.8 14.8C7.4 15.2 7.4 15.8 7.8 16.2C8 16.4 8.3 16.5 8.5 16.5C8.7 16.5 9 16.4 9.2 16.2L12 13.4L14.8 16.2C15 16.4 15.3 16.5 15.5 16.5C15.7 16.5 16 16.4 16.2 16.2C16.6 15.8 16.6 15.2 16.2 14.8L13.4 12Z" fill="gray"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="clear-both"></div>
                   </div>
-                  <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                   {error_msg}
+                  <div className="flex items-center justify-center p-8">
+
+                    <img src="/invalid-credential.svg" width="60%" />
+                  </div>
+                  <p className="mx-auto w-full text-center text-xl text-[#7E8299] lg:w-[400px]">
+				   	{"Oops!"} {title}
+					<br />
+                    <span className="text-base text-[#F1416C]">{error_msg}</span>
                   </p>
                 </div>
               </Dialog.Panel>

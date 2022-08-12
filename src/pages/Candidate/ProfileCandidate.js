@@ -19,10 +19,14 @@ export default function ProfileCandidate() {
     async function fetchData() {
       const response_profile = await ProfileService.getOnlineProfileData(id);
       // check if response profile object has galleries property
+      if (response_profile?.response?.status === 404) {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
       if (response_profile.data.data.businessFields) {
         window.location.href = `/company/${id}`;
       }
-        
       if (response_profile?.response?.status === 500) {
         setNotFound(true);
         setLoading(false);
@@ -47,6 +51,14 @@ export default function ProfileCandidate() {
         <main className="flex min-h-screen flex-col items-center justify-center">
           <p className="mb-5 text-9xl font-bold">😓</p>
           <p className="font-semibold">Profile Not Found!</p>
+          <button
+            onClick={() => {
+              window.history.back();
+            }}
+            className="mt-2 cursor-pointer text-xs font-bold underline"
+          >
+            Go back
+          </button>
         </main>
       ) : null}
       {!loading && !notFound ? (
@@ -54,8 +66,14 @@ export default function ProfileCandidate() {
           <section className="bg-dark-blue py-10 px-3 text-white sm:px-7 ">
             <div className="">
               <img
-                className="mx-auto w-16 rounded-full sm:w-24 lg:w-32 object-cover"
-                src={dataProfile.url_photo_profile ? `/backend/${dataProfile.url_photo_profile}` : dataProfile.gender == "L" ? "/male.jpg" : "/female.jpg"}
+                className="mx-auto w-16 rounded-full object-cover sm:w-24 lg:w-32"
+                src={
+                  dataProfile.url_photo_profile
+				    ? `${process.env.REACT_APP_API_URL}/${dataProfile.url_photo_profile}`
+                    : dataProfile.gender == 'L'
+                    ? '/male.jpg'
+                    : '/female.jpg'
+                }
                 alt=""
               />
               <div className="mt-5 flex items-center justify-center gap-1 sm:gap-3">
@@ -81,7 +99,13 @@ export default function ProfileCandidate() {
                 </svg>
               </div>
             </div>
-            <EmploymentStatus data={dataProfile.experiences.filter(exp => exp.is_current == true)[0]} />
+            <EmploymentStatus
+              data={
+                dataProfile.experiences.filter(
+                  (exp) => exp.is_current == true,
+                )[0]
+              }
+            />
             <BasicInformation data={dataProfile} />
             <SkillInfomation data={dataProfile.skills} />
             <CertificationInformation data={dataProfile.certificates} />

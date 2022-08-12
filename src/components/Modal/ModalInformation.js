@@ -1,61 +1,73 @@
-import React from 'react';
+import React, { useState }from 'react';
 import BasicModal from './BasicModal';
 import InputForm from 'components/Widgets/InputForm';
 import { updateCompanyInformation } from 'services/Profile/ProfileService';
+import { useBusinessProfileContext } from 'context/business-profile-context';
 
 export default function ModalInformation({ action, title, data }) {
-  const [dataInformation, setDataInformation] = React.useState({
-    company_type: data?.company_type ?? '',
-    company_size: data?.company_size ?? '',
-    link_website: data?.link_website ?? '',
-    link_facebook_page: data?.link_facebook_page ?? '',
-    link_instagram: data?.link_instagram ?? '',
+  const { businessProfile } = useBusinessProfileContext();
+  const [error, setError] = useState([]);
+  const [dataInformation, setDataInformation] = useState({
+    ...businessProfile,
+    company_size: '',
+    link_website: '',
+    link_facebook_page:'',
+    link_instagram: '',
   });
-  const [error, setError] = React.useState([])
+  React.useEffect(() => {
+    if (Array.isArray(businessProfile.businessData)) {
+      const field = businessProfile.businessFields.map((item) => item.name);
+      setDataInformation({...businessProfile.businessData[0], company_type: field});      
+    }
+  }, [businessProfile]);
+
   const handleChange = (e) => {
+	const { name, value } = e.target;
     setDataInformation({
       ...dataInformation,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   }
   const handleSubmit =  async () => {
     if (dataInformation.company_size === '' || dataInformation.company_type === '') {
-      setError(['Company size and company type is required'])
+      setError(['Company size is required'])
       return
     }
     const response = await updateCompanyInformation(dataInformation)
+    if(response.status === 422){
+      return
+    }
     window.location.reload()
   };
   const inputs = [
-    {
-      label: 'Jenis Industri',
-      type: 'text',
-      name: 'company_type',
-      required: true,
-    },
+   
     {
       label: 'Company Size',
       type: 'text',
       name: 'company_size',
       required: false,
+	  value: dataInformation?.company_size || '-',
     },
     {
       label: 'Link Website',
       type: 'text',
       name: 'link_website',
       required: false,
+	  value: dataInformation?.link_website || '-',
     },
     {
       label: 'Link Facebook Page',
       type: 'text',
       name: 'link_facebook_page',
       required: false,
+	  value: dataInformation?.link_facebook_page || '-',
     },
     {
       label: 'Link Instagram',
       type: 'text',
       name: 'link_instagram',
       required: false,
+	  value: data?.link_instagram || '-',
     },
   ];
   return (

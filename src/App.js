@@ -37,18 +37,26 @@ import FAQ from 'pages/Candidate/Help/FAQ';
 import Billing from 'pages/Candidate/Help/Billing';
 import AccountSettingBusiness from 'pages/Candidate/AccountSettingBusiness ';
 import UpdateJobVacancy from 'pages/Business/UpdateJoVacancy';
+import Home from 'pages/Home';
+import Notification from 'pages/Candidate/Notification';
+import NotificationBusiness from 'pages/Business/NotificationBusiness';
+import PrivateRoute from 'route/PrivateRoute';
+import ProtectedRoute from 'route/ProtectedRoute';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/reset-password" element={<NewPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
-
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/company/:id" element={<CompanyDetail />} />
+        <Route path="/:id" element={<ProfileCandidate />} />
+
+        {/* <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/cv/preview" element={<ResumeComplete />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/:id" element={<ProfileCandidate />} />
@@ -64,9 +72,90 @@ function App() {
         <Route path="/kelas" element={<Class />} />
         <Route path="/kelas/detailKelas/detail" element={<ClassDetail />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/billing" element={<Billing />} />
-        
-        <Route path="/business" element={<Business />} />
+        <Route path="/billing" element={<Billing />} /> */}
+
+        {/* Route for personal */}
+        <Route
+          path="/dashboard"
+          element={<PrivateRoute children={<Dashboard />} role="personal" />}
+        />
+        <Route
+          path="/cv/preview"
+          element={
+            <PrivateRoute children={<ResumeComplete />} role="personal" />
+          }
+        />
+        <Route
+          path="/profile"
+          element={<PrivateRoute children={<Profile />} role="personal" />}
+        />
+        <Route
+          path="/setting"
+          element={
+            <PrivateRoute children={<AccountSetting />} role="personal" />
+          }
+        />
+        <Route
+          path="/pdp"
+          element={
+            <PrivateRoute children={<PersonalDevelopment />} role="personal" />
+          }
+        />
+        <Route
+          path="/pdp/detail/:idDetail"
+          element={
+            <PrivateRoute
+              children={<PersonalDevelopmentDetail />}
+              role="personal"
+            />
+          }
+        />
+        <Route
+          path="/guide/map"
+          element={<PrivateRoute children={<CarrerMap />} role="personal" />}
+        />
+        <Route
+          path="/guide/exploration"
+          element={
+            <PrivateRoute children={<ExplorationCarrer />} role="personal" />
+          }
+        />
+        <Route
+          path="/lowongan"
+          element={<PrivateRoute children={<Jobs />} role="personal" />}
+        />
+        <Route
+          path="/lowongan/detail-job/:idDetail"
+          element={<PrivateRoute children={<JobDetail />} role="personal" />}
+        />
+        <Route
+          path="/lamaran/"
+          element={<PrivateRoute children={<Application />} role="personal" />}
+        />
+        <Route
+          path="/lamaran/detail/:id"
+          element={
+            <PrivateRoute children={<ApplicationDetail />} role="personal" />
+          }
+        />
+        <Route
+          path="/kelas"
+          element={<PrivateRoute children={<Class />} role="personal" />}
+        />
+        <Route
+          path="/kelas/detailKelas/detail"
+          element={<PrivateRoute children={<ClassDetail />} role="personal" />}
+        />
+        <Route
+          path="/faq"
+          element={<PrivateRoute children={<FAQ />} role="personal" />}
+        />
+        <Route
+          path="/billing"
+          element={<PrivateRoute children={<Billing />} role="personal" />}
+        />
+
+        {/* <Route path="/business" element={<Business />} />
         <Route path="/business/profile" element={<BusinessProfile />} />
         <Route path="/business/team" element={<TeamMember />} />
         <Route path="/business/job" element={<JobVacancy />} />
@@ -74,10 +163,78 @@ function App() {
         <Route path="/business/job/detail/:idJob" element={<JobVacancyDetail />} />
         <Route path="/business/job/update/:idJob" element={<UpdateJobVacancy />} />
         <Route path='/setting-business' element={<AccountSettingBusiness />} />
-        <Route path="/business/talent/" element={<TalentPool />} />
-        <Route path="/company/:id" element={<CompanyDetail />} />
+        <Route path="/business/talent" element={<TalentPool />} />
+        <Route path="/company/:id" element={<CompanyDetail />} /> */}
 
-        <Route path='/under' element={<UnderConstruction />} />
+        {/* Route for business */}
+        <Route
+          path="/business"
+          element={<PrivateRoute children={<Business />} role="business" />}
+        />
+        <Route
+          path="/business/profile"
+          element={
+            <PrivateRoute children={<BusinessProfile />} role="business" />
+          }
+        />
+        <Route
+          path="/business/team"
+          element={<PrivateRoute children={<TeamMember />} role="business" />}
+        />
+        <Route
+          path="/business/job"
+          element={<PrivateRoute children={<JobVacancy />} role="business" />}
+        />
+        <Route
+          path="/business/job/create"
+          element={
+            <PrivateRoute children={<OpenJobVacancy />} role="business" />
+          }
+        />
+        <Route
+          path="/business/job/detail/:idJob"
+          element={
+            <PrivateRoute children={<JobVacancyDetail />} role="business" />
+          }
+        />
+        <Route
+          path="/business/job/update/:idJob"
+          element={
+            <PrivateRoute children={<UpdateJobVacancy />} role="business" />
+          }
+        />
+        <Route
+          path="/setting-business"
+          element={
+            <PrivateRoute
+              children={<AccountSettingBusiness />}
+              role="business"
+            />
+          }
+        />
+        <Route
+          path="/business/talent"
+          element={<PrivateRoute children={<TalentPool />} role="business" />}
+        />
+
+        {/* Route for all users 
+        <Route path="/notifications" element={<Notification />} />
+        <Route path="/notifications-business" element={<NotificationBusiness />} />
+        <Route path='/under' element={<UnderConstruction />} /> */}
+
+        <Route
+          path="/notifications"
+          element={<ProtectedRoute children={<Notification />} />}
+        />
+        <Route
+          path="/business/notifications"
+          element={<ProtectedRoute children={<NotificationBusiness />} />}
+        />
+        <Route
+          path="/under"
+          element={<ProtectedRoute children={<UnderConstruction />} />}
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

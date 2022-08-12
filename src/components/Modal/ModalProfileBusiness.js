@@ -3,7 +3,7 @@ import BasicModal from './BasicModal';
 import InputForm from 'components/Widgets/InputForm';
 import { useBusinessProfileContext } from 'context/business-profile-context';
 import { useState } from 'react';
-import utils, { getYear } from 'utils/utils';
+import utils, { getFullDate } from 'utils/utils';
 import ProfileService from 'services/Profile/ProfileService';
 import {
   SearchCountryProfile,
@@ -15,7 +15,7 @@ export default function ModalProfileBusiness({ action, title }) {
   const [data, setData] = useState({
     ...businessProfile,
     city: businessProfile.city,
-    date_of_birth: getYear(businessProfile.date_of_birth)
+    date_of_birth: getFullDate(businessProfile.date_of_birth)
   });
   const [city, setCity] = useState([]);
   const [error, setError] = useState([]);
@@ -67,7 +67,7 @@ export default function ModalProfileBusiness({ action, title }) {
     },
     {
       label: 'Tahun Berdiri',
-      type: 'text',
+      type: 'date',
       name: 'date_of_birth',
       required: true,
       

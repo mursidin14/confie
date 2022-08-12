@@ -6,6 +6,8 @@ import UnderConstruction from 'pages/UnderConstruction';
 import {
   getAllJobVacancy,
   getFilteredJobVacancy,
+  nextPageJobVacancy,
+  previousPageJobVacancy,
 } from 'services/Profile/JobVacancy';
 import SkeletonCard from 'components/SkeletonCard';
 import CandidateProvider from 'context/candidate-context';
@@ -23,6 +25,8 @@ export default function Jobs() {
   });
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
+  const [page, setPage] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
   const [notVerified, setNotVerified] = useState(false);
   useEffect(() => {
     const getJobVacancy = async () => {
@@ -30,6 +34,7 @@ export default function Jobs() {
       if (response.data.meta.code === 403) {
         setNotVerified(true);
       }
+      setPage(response.data.data)
       setItems(response.data.data.data);
       setLoading(false);
     };
@@ -38,7 +43,6 @@ export default function Jobs() {
   const resetFilter = async () => {
     setisFilter(false);
     setFilter({
-      position: '',
       location: '',
     });
     setPagination({
@@ -52,13 +56,45 @@ export default function Jobs() {
     const { name, value } = e.target;
     setFilter({ ...filter, [name]: value });
   };
+  const handleFilterSalary = (min, max) => {
+    if (min === 10000000) {
+      setFilter({ position: filter.position, location: filter.location , min_salary: min });
+    } else {
+      setFilter({ ...filter, min_salary: min, max_salary: max });
+    }
+  };
   const handleFilter = async () => {
+    console.log(filter)
     setisFilter(true);
     setLoading(true);
-    const { data } = await getFilteredJobVacancy(filter);
+    const filteredItem = () => {
+      for (let key in filter) {
+        if (filter[key] === '') {
+          delete filter[key];
+        }
+      }
+      let filterName = '?';
+      for (let key in filter) {
+        filterName += `${key}=${filter[key]}&`;
+      }
+      return filterName;
+    };
+    
+    const filterItem = filteredItem();
+    const { data } = await getFilteredJobVacancy(filterItem);
     setItems(data.data.data);
     setLoading(false);
   };
+  const handleNext = async () => {
+    const response = await nextPageJobVacancy(currentPage + 1);
+    setItems(response.data.data.data);  
+    setCurrentPage(currentPage + 1);
+  }
+  const handlePrevious = async () => {
+    const response = await previousPageJobVacancy(currentPage - 1);
+    setItems(response.data.data.data);
+    setCurrentPage(currentPage - 1);
+  }
   return (
     <>
       {true && (
@@ -69,21 +105,18 @@ export default function Jobs() {
               <>
                 <SearchJob
                   handleFilter={handleFilter}
+                  handleFilterSalary={handleFilterSalary}
                   handleFilterChange={handleFilterChange}
                   handleResetFilter={resetFilter}
                   isFilter={isFilter}
                 ></SearchJob>
                 <JobFeed
-                  items={items.slice(pagination.sliceOne, pagination.sliceTwo)}
+                  items={items}
                 ></JobFeed>
-                <div className="mt-3 flex justify-center">
-                  <Pagination
-                    length={items.length}
-                    pagination={pagination}
-                    setPagination={setPagination}
-                    howMany={6}
-                  ></Pagination>
-                </div>
+                <div className='flex items-center mt-5'>
+                <button disabled={currentPage === 1} className={`${currentPage === 1 ? 'bg-gray-500 text-gray-300' : 'bg-orange text-white'}  py-2 px-3 rounded-l-md text-sm`} onClick={handlePrevious}>Previous</button>
+                <button disabled={currentPage === page.last_page} className={`${currentPage === page.last_page ? 'bg-gray-500 text-gray-300' : 'bg-orange text-white'} py-2 px-3 rounded-r-md text-sm`} onClick={handleNext}>Next</button>
+              </div>
               </>
             )}
           </CandidateProvider>

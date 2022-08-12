@@ -4,6 +4,7 @@ import BasicTab from 'components/Widgets/BasicTab';
 import { useParams } from 'react-router-dom';
 import ProfileService from 'services/Profile/ProfileService';
 import { getYear, makeCapital } from 'utils/utils';
+import { Helmet } from 'react-helmet';
 export default function CompanyDetail() {
   const { id } = useParams();
   const [data, setData] = useState({
@@ -12,11 +13,13 @@ export default function CompanyDetail() {
     email: 'annas@gmail.com',
     gender: 'L',
   });
+  const [idCompany, setIdCompany] = useState(null);
   const [loading, setLoading] = useState(true);
   React.useEffect(() => {
     const getDataCompany = async () => {
       const response = await ProfileService.getOnlineProfileData(id);
       setData(response.data.data);
+      setIdCompany(response.data.data.businessData[0].user_id)
       setLoading(false);
     };
     getDataCompany();
@@ -25,8 +28,13 @@ export default function CompanyDetail() {
     <>
       {loading && <p>Loading...</p>}
       {!loading && (
+        <>
+        <Helmet>
+          <title>Company | {data.full_name.toUpperCase()}</title>
+        </Helmet>
         <main>
           {/* <Header data={data} PageName={'Profile Perusahaan'} /> */}
+          
           <section
             className="relative h-[500px] bg-cover bg-no-repeat text-left text-white"
             style={{
@@ -102,7 +110,7 @@ export default function CompanyDetail() {
             </BasicCard>
             <BasicCard>
               <div className="px-5">
-                <BasicTab data={data}></BasicTab>
+                <BasicTab idCompany={idCompany} data={data}></BasicTab>
               </div>
             </BasicCard>
             <BasicCard>
@@ -110,11 +118,11 @@ export default function CompanyDetail() {
                 <h3 className="text-base font-semibold">Gallery Company</h3>
               </div>
               <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
-              <div className='grid px-5 gap-5 grid-flow-col'>
+              <div className='grid md:grid-cols-6 sm:grid-cols-1 md:gap-4 sm:gap-2 px-5 sm:text-center mx-auto'>
               {data.galleries.map((item, index) => (
                 <>
                   <img
-                    className="w-56 h-48 rounded-md object-cover"
+                    className="w-56 h-48 rounded-md object-cover mx-auto"
                     src={`${process.env.REACT_APP_API_URL}/${item.url}`}
                     alt=""
                   />
@@ -124,6 +132,7 @@ export default function CompanyDetail() {
             </BasicCard>
           </div>
         </main>
+        </>
       )}
     </>
   );

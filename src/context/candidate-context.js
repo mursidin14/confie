@@ -27,24 +27,27 @@ export default function CandidateProvider({
   const [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
+    localStorage.removeItem('metadata');
+    localStorage.removeItem('user');
+    localStorage.removeItem('userComplete');
     window.location.href = '/';
   }
 
   useEffect(() => {
     const getAllData = async () => {
       const responseProfile = await ProfileService.getProfileData();
-      if(responseProfile.status === 401) {
+      if (responseProfile.status === 401) {
         setIsOpen(true);
-        return
+        return;
       }
-      setProfile(responseProfile.data.data)
+      setProfile(responseProfile.data.data);
       if (needDashboard) {
-          const responseDashboard = await DashboardService.getDashboardData();
-          setDashboard(responseDashboard.data)
+        const responseDashboard = await DashboardService.getDashboardData();
+        setDashboard(responseDashboard.data);
       }
       if (needPlan) {
-          const responsePlan = await PersonalPlanService.getPersonalPlanData();
-          setPlan(responsePlan.data.data)
+        const responsePlan = await PersonalPlanService.getPersonalPlanData();
+        setPlan(responsePlan.data.data);
       }
       setLoading(false);
     };

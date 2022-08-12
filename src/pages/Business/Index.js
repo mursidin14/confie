@@ -3,8 +3,11 @@ import LayoutBusiness from 'components/Layout/LayoutBusiness';
 import ProgressBar from 'components/Widgets/ProgressBar';
 import { useParams } from 'react-router-dom';
 import { BusinessProvider, useBusinessContext } from 'context/business-context';
-import utils, { getYear } from 'utils/utils';
+import utils, { getProfileCompletionBusiness, getYear } from 'utils/utils';
 import EmailVerifiedCard from 'components/EmailVerifiedCard';
+import BusinessProfileProvider, {
+  useBusinessProfileContext,
+} from 'context/business-profile-context';
 
 export default function Index() {
   const { id } = useParams();
@@ -32,13 +35,15 @@ export default function Index() {
     },
   ];
   return (
-    <BusinessProvider>
-      <LayoutBusiness userId={id} PageName="Dashboard">
-        <PersonalCard id={id} />
-        <StatusApplication items={status_application} />
-        <StatusClass />
-      </LayoutBusiness>
-    </BusinessProvider>
+    <BusinessProfileProvider>
+      <BusinessProvider>
+        <LayoutBusiness userId={id} PageName="Dashboard">
+          <PersonalCard id={id} />
+          <StatusApplication items={status_application} />
+          <StatusClass />
+        </LayoutBusiness>
+      </BusinessProvider>
+    </BusinessProfileProvider>
   );
 }
 
@@ -211,7 +216,7 @@ function PersonalCard({ id }) {
         <div className="flex items-start gap-5 lg:items-stretch">
           <div className="hidden items-center md:flex">
             <img
-              className="md:h-40 md:w-48 rounded-md object-cover"
+              className="rounded-md object-cover md:h-40 md:w-48"
               src={
                 business.url_photo_profile
                   ? `${process.env.REACT_APP_API_URL}/${business.url_photo_profile}`
@@ -252,14 +257,14 @@ function PersonalCard({ id }) {
                   <ButtonDashboard />
                 </div>
                 <div className="hidden w-full md:block ">
-                  <ProfileCompletion />
+                  <ProfileCompletion profile={business} />
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="block md:hidden">
-          <ProfileCompletion />
+          <ProfileCompletion profile={business}/>
         </div>
         <div className="block md:hidden">
           <ButtonDashboard />
@@ -270,19 +275,26 @@ function PersonalCard({ id }) {
 }
 
 function ProfileCompletion() {
+  const { businessProfile } = useBusinessProfileContext();
   return (
     <div className="mt-3 w-full ">
       <div className="flex justify-between text-xs sm:text-base">
-        <p className="mb-2 text-left  text-[#B5B5C3]">Company Completion</p>
-        <p>80%</p>
+        <p className="mb-2 text-left  text-[#B5B5C3]">Profile Completion</p>
+        {businessProfile['id'] && (
+          <p>{getProfileCompletionBusiness(businessProfile)}%</p>
+        )}
       </div>
-      <ProgressBar progressPercentage={80} />
+      {businessProfile['id'] && (
+        <ProgressBar
+          progressPercentage={getProfileCompletionBusiness(businessProfile)}
+        />
+      )}
     </div>
   );
 }
 
 function ButtonDashboard() {
-  const {business} = useBusinessContext()
+  const { business } = useBusinessContext();
   return (
     <>
       <div className="my-3 flex w-full">

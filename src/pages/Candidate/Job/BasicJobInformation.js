@@ -1,7 +1,7 @@
 import React from 'react';
-import { getDate, getLocalStringRupiah } from 'utils/utils';
+import { getDate, getFullDate, getLocalStringRupiah } from 'utils/utils';
 
-export default function BasicJobInformation({item: {location, max_salary, min_salary, min_experience, max_experience, registration_end_date}}) {
+export default function BasicJobInformation({item: {location, max_salary, min_salary, min_experience, max_experience, registration_end_date, updated_at}}) {
   return (
     <div>
       <div className="mt-6 space-y-2">
@@ -61,8 +61,12 @@ export default function BasicJobInformation({item: {location, max_salary, min_sa
               fill="#4B5783"
             />
           </svg>
-
-          <p>{min_experience} - {max_experience} Tahun</p>
+          {max_experience === null && (
+            <p>Min {min_experience} Tahun</p>
+          )}
+          {max_experience && (
+            <p>{min_experience} - {max_experience} Tahun</p>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <svg
@@ -153,7 +157,7 @@ export default function BasicJobInformation({item: {location, max_salary, min_sa
         </svg>
 
         <p className="text-xs text-[#7E8299]">
-          Dipublish tanggal 22 Februari 2022
+          Dipublish tanggal {getDate(updated_at)}
         </p>
       </div>
     </div>

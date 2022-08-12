@@ -16,9 +16,9 @@ export default function ModalTeamMember() {
     position: '',
     assigned_at: '',
   });
-  const [isAssigned, setIsAssigned] = useState(false);
   const [openInvitation, setOpenInvitation] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [successInvite, setSuccessInvite] = useState(false);
   async function handleAssign() {
     // setIsAssigned(false);
     setLoading(true);
@@ -53,19 +53,30 @@ export default function ModalTeamMember() {
       setLoading(false);
       return;
     }
-    window.location.reload();
+    setSuccessInvite(true);
+    setLoading(false);
+    // window.location.reload();
   }
   const handleInviteMember = async () => {
     setLoading(true);
     const response = await invitationMember(data);
-    console.log(response)
+    if (response.status === 201) {
+      setSuccessInvite(true);
+    }
     setLoading(false);
+    // window.location.reload();
   };
   // function handleAssignMember() {
   //   setIsOpenAccept(false);
   // }
   function closeModal() {
     setIsOpen(false);
+    if (successInvite) {
+      window.location.reload();
+    }
+    if(openInvitation){
+      setOpenInvitation(false);
+    }
   }
   function openModal() {
     setIsOpen(true);
@@ -128,14 +139,42 @@ export default function ModalTeamMember() {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  {!isAssigned && !openInvitation && (
+                  {!openInvitation && !successInvite && (
                     <>
+                     
                       <div className="flex items-center justify-between px-8">
                         <h3 className="text-base font-semibold ">
                           Assign Team Member
                         </h3>
                       </div>
                       <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
+                      {error.length > 0 && (
+                        <section className="bg-[#FE3B00] px-4 text-left text-sm text-white py-2 rounded-md flex gap-8 my-2">
+                          <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 30 30"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15 1.875C7.75195 1.875 1.875 7.75195 1.875 15C1.875 22.248 7.75195 28.125 15 28.125C22.248 28.125 28.125 22.248 28.125 15C28.125 7.75195 22.248 1.875 15 1.875ZM15 25.8984C8.98242 25.8984 4.10156 21.0176 4.10156 15C4.10156 8.98242 8.98242 4.10156 15 4.10156C21.0176 4.10156 25.8984 8.98242 25.8984 15C25.8984 21.0176 21.0176 25.8984 15 25.8984Z"
+                              fill="white"
+                            />
+                            <path
+                              d="M13.5938 20.1562C13.5938 20.5292 13.7419 20.8869 14.0056 21.1506C14.2694 21.4143 14.627 21.5625 15 21.5625C15.373 21.5625 15.7306 21.4143 15.9944 21.1506C16.2581 20.8869 16.4062 20.5292 16.4062 20.1562C16.4062 19.7833 16.2581 19.4256 15.9944 19.1619C15.7306 18.8982 15.373 18.75 15 18.75C14.627 18.75 14.2694 18.8982 14.0056 19.1619C13.7419 19.4256 13.5938 19.7833 13.5938 20.1562ZM14.2969 16.875H15.7031C15.832 16.875 15.9375 16.7695 15.9375 16.6406V8.67188C15.9375 8.54297 15.832 8.4375 15.7031 8.4375H14.2969C14.168 8.4375 14.0625 8.54297 14.0625 8.67188V16.6406C14.0625 16.7695 14.168 16.875 14.2969 16.875Z"
+                              fill="white"
+                            />
+                          </svg>
+                          <ul className='mt-1'>
+                            {error.map((err, index) => (
+                              <li className='list-disc'>
+                                <p key={index}>{err}</p>
+                              </li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
                       {inputs.map((input, index) => (
                         <InputForm
                           key={index}
@@ -149,11 +188,6 @@ export default function ModalTeamMember() {
                           {...input}
                         />
                       ))}
-                      <section className="px-8 text-left text-sm text-red-500">
-                        {error.map((err, index) => (
-                          <p key={index}>{err}</p>
-                        ))}
-                      </section>
                       <div className="mt-4 flex justify-end gap-4 px-8">
                         <button
                           onClick={closeModal}
@@ -197,7 +231,7 @@ export default function ModalTeamMember() {
                       </div>
                     </>
                   )}
-                  {openInvitation && (
+                  {openInvitation && !successInvite && (
                     <>
                       <div className="flex items-center justify-center p-8">
                         <svg
@@ -214,7 +248,7 @@ export default function ModalTeamMember() {
                         </svg>
                       </div>
                       <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                        Member ini belum terdaftar dalam sistem
+                        User belum terdaftar dalam Confie.id
                       </p>
                       <div className="flex justify-center">
                         <button
@@ -253,16 +287,41 @@ export default function ModalTeamMember() {
                       </div>
                     </>
                   )}
-
-                  {/* {loading && (
+                  {successInvite && (
                     <>
-                      <div className="flex items-center justify-center gap-5 p-8">
-                        <span className="animate-bounceOne rounded-full bg-[#7E8299] p-3"></span>
-                        <span className="animate-bounceTwo rounded-full bg-[#7E8299] p-3"></span>
-                        <span className="animate-bounceOne rounded-full bg-[#7E8299] p-3"></span>
-                      </div>
+                      {openInvitation && (
+                        <div className="text-center">
+                          <img
+                            className="mx-auto mt-2"
+                            src="/email_alert.png"
+                            alt=""
+                          />
+                          <p className="mt-5 text-sm text-black">
+                            Success to sent an invitation to{' '}
+                            <span className="font-semibold text-black">
+                              {data.email}
+                            </span>
+                          </p>
+                        </div>
+                      )}
+                      {!openInvitation && (
+                        <div className="text-center">
+                          <img
+                            className="mx-auto mt-2"
+                            src="/email_approve.png"
+                            alt=""
+                          />
+                          <p className="mt-5 text-sm text-black">
+                            Success add{' '}
+                            <span className="font-semibold text-black">
+                              {data.email}
+                            </span>{' '}
+                            as a team member.
+                          </p>
+                        </div>
+                      )}
                     </>
-                  )} */}
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -315,7 +374,7 @@ export default function ModalTeamMember() {
                       </svg>
                     </div>
                     <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                      Member ini belum terdaftar dalam sistem
+                      User belum terdaftar dalam Confie.id
                     </p>
                     <div className="flex justify-center">
                       <button

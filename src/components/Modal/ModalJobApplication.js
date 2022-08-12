@@ -2,21 +2,32 @@ import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { applyJobVacancy } from 'services/Profile/JobVacancy';
+import { makeCapital } from 'utils/utils';
 export default function ModalJobApplication({ item }) {
+  console.log(item)
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isApply, setIsApply] = useState(true);
+  const [isApply, setIsApply] = useState(false);
   const [error, setError] = useState([]);
   function closeModal() {
+    if (isApply) {
+      return
+    }
     setIsOpen(false);
+    window.location.href = `/lamaran/detail/${item.id}`;
   }
   async function handleAccept() {
     setLoading(true);
+   
     const error_respon = [];
     const response = await applyJobVacancy(item.id, {
       expected_salary: item.min_salary,
       start_date_expectation_work: item.registration_end_date
     });
+    if(response.status === 403){
+      error_respon.push('You have already applied for this job');
+      setError(error_respon);
+    }
     if (response.status === 422) {
       const error_apply = response.data.data;
       Object.keys(error_apply).forEach((key) => {
@@ -24,10 +35,20 @@ export default function ModalJobApplication({ item }) {
       });
       setError(error_respon);
     }
+    // if (!localStorage.getItem('jobs')) {
+    //   localStorage.setItem('jobs', JSON.stringify({}));
+    // }
+    // const jobs = JSON.parse(localStorage.getItem('jobs'));
+    // if (jobs[item.users.id]){
+    //   jobs[item.users.id] = [...jobs[item.users.id], item.id];
+    // }else{
+    //   jobs[item.users.id] = [item.id]
+    // }
     setLoading(false);
     setIsApply(false);
   }
   function openModal() {
+    setIsApply(true);
     setIsOpen(true);
   }
   return (
@@ -101,12 +122,12 @@ export default function ModalJobApplication({ item }) {
                             </svg>
                           </div>
                           <p className="mx-auto w-full text-center text-[#7E8299] lg:w-[400px]">
-                            Dengan ini anda mengkonformasi bahwa anda akan
+                            Dengan ini anda mengkonfirmasi bahwa anda akan
                             melamar posisi{' '}
                             <span className="font-semibold">
-                              Junior React Developer
+                              {item.title}
                             </span>{' '}
-                            pada <span className="font-semibold">PT. Jaya</span>
+                            pada <span className="font-semibold">{makeCapital(item.users.full_name)}</span>
                           </p>
                           <div className="mt-10 flex items-center justify-center gap-4">
                             <button

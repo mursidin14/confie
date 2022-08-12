@@ -4,11 +4,16 @@ import { useParams } from 'react-router-dom';
 import InputForm from 'components/Widgets/InputForm';
 import BasicCard from 'components/Widgets/BasicCard';
 import { BusinessProvider } from 'context/business-context';
-import { getDetailJobVacancy, updateJobVacancy } from 'services/Business/JobVacancy/JobVacancy';
+import {
+  changeArchiveJobVacany,
+  getDetailJobVacancy,
+  updateJobVacancy,
+} from 'services/Business/JobVacancy/JobVacancy';
 import utils, { getFullDate } from 'utils/utils';
 import SkillRequirmentBusiness from 'components/SkillRequirmentBusiness';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
+import UpdateSkillRequirmentBusiness from 'components/UpdateSkillRequirmentBusiness';
 
 export default function UpdateJobVacancy() {
   const { idJob } = useParams();
@@ -28,6 +33,7 @@ export default function UpdateJobVacancy() {
         registration_end_date: getFullDate(
           response.data.data.registration_end_date,
         ),
+        skills: [...response.data.data.requimentskill.map((item) => item.id)],
       });
       // setJobVacancy({
       //   ...jobVacancy,
@@ -52,20 +58,20 @@ export default function UpdateJobVacancy() {
       type: 'text',
       required: true,
     },
-    {
-      name: 'min_experience',
-      label: 'Min. Pengalaman',
-      type: 'number',
-      min: 0,
-      required: true,
-    },
-    {
-      name: 'max_experience',
-      label: 'Max. Pengalaman',
-      type: 'number',
-      min: 0,
-      required: true,
-    },
+    // {
+    //   name: 'min_experience',
+    //   label: 'Min. Pengalaman',
+    //   type: 'number',
+    //   min: 0,
+    //   required: true,
+    // },
+    // {
+    //   name: 'max_experience',
+    //   label: 'Max. Pengalaman',
+    //   type: 'number',
+    //   min: 0,
+    //   required: false,
+    // },
   ];
   const handleChange = (e) => {
     setJobVacancy({ ...jobVacancy, [e.target.name]: e.target.value });
@@ -85,7 +91,6 @@ export default function UpdateJobVacancy() {
       return;
     }
     setModalSuccess(true);
-    
   };
   return (
     <BusinessProvider>
@@ -110,6 +115,48 @@ export default function UpdateJobVacancy() {
                     {...input}
                   />
                 ))}
+                <div className=" items-center lg:flex">
+                  <div className="w-5/12">
+                    <label
+                      className={`text-xs font-medium text-[#3F4254] lg:text-base `}
+                    >
+                      Pengalaman Kerja
+                    </label>
+                  </div>
+                  <div className="lg:w-7/12 ">
+                    <div className="my-2 items-center justify-between gap-3 sm:flex lg:my-5 ">
+                      <input
+                        className="input-form my-2 placeholder:text-sm lg:my-3 lg:py-6"
+                        type="number"
+                        min="0"
+                        placeholder="Min. Pengalaman"
+                        name="min_experience"
+                        value={jobVacancy.min_experience ?? ''}
+                        onChange={(e) => {
+                          setJobVacancy({
+                            ...jobVacancy,
+                            min_experience: e.target.value,
+                          });
+                        }}
+                      />
+                      <p className="text-xs">sampai</p>
+                      <input
+                        className="input-form my-2 placeholder:text-sm lg:my-3 lg:py-6"
+                        type="number"
+                        min="0"
+                        placeholder="Max. Pengalaman"
+                        name="max_experience"
+                        value={jobVacancy.max_experience ?? ''}
+                        onChange={(e) => {
+                          setJobVacancy({
+                            ...jobVacancy,
+                            max_experience: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
                 {/* <div className=" items-center lg:flex">
               <div className="w-5/12">
                 <label
@@ -253,7 +300,7 @@ export default function UpdateJobVacancy() {
                     <label
                       className={`text-xs font-medium text-[#3F4254] lg:text-base `}
                     >
-                      Batas Pekerjaan
+                      Batas Pendaftaran
                     </label>
                   </div>
                   <div className="lg:w-7/12 ">
@@ -294,7 +341,7 @@ export default function UpdateJobVacancy() {
                   </div>
                   <div className="lg:w-7/12 ">
                     <div className="my-2 flex items-center justify-between gap-2 lg:my-5 ">
-                      <SkillRequirmentBusiness
+                      <UpdateSkillRequirmentBusiness
                         data={jobVacancy}
                         onChange={setJobVacancy}
                       />
@@ -343,12 +390,17 @@ export default function UpdateJobVacancy() {
                 </section>
                 <div className="mt-4 flex justify-end gap-4 ">
                   <button
-                    onClick={() => {
-                      setJobVacancy({
-                        ...jobVacancy,
-                        is_published: false,
-                      });
-                      handleSubmit();
+                    onClick={async () => {
+                      const response = await changeArchiveJobVacany(
+                        idJob,
+                        0,
+                      );
+                      window.location.href = '/business/job/';
+                      // setJobVacancy({
+                      //   ...jobVacancy,
+                      //   is_published: 0,
+                      // });
+                      // handleSubmit();
                     }}
                     className="rounded-md bg-[#F5F8FA] px-4 py-2 text-sm"
                   >
@@ -358,7 +410,7 @@ export default function UpdateJobVacancy() {
                     onClick={() => {
                       setJobVacancy({
                         ...jobVacancy,
-                        is_published: true,
+                        is_published: 1,
                       });
                       handleSubmit();
                     }}
@@ -376,7 +428,7 @@ export default function UpdateJobVacancy() {
               className="relative z-10 overflow-y-auto"
               onClose={() => {
                 setModalSuccess(false);
-                window.location.reload();
+                window.location.href = '/business/job';
               }}
             >
               <Transition.Child
@@ -499,6 +551,10 @@ function InputList({ label, data, name, onChange }) {
   function deleteList(item) {
     const indexItem = list.indexOf(item);
     setList([...list.filter((_, index) => index !== indexItem)]);
+    onChange({
+      ...data,
+      [name]: [...list.filter((_, index) => index !== indexItem)],
+    });
   }
 
   return (
@@ -515,7 +571,7 @@ function InputList({ label, data, name, onChange }) {
             className="my-2 flex items-center justify-between gap-2 first:mb-2 first:mt-0 lg:my-5"
           >
             <div
-              className="w-full rounded-md bg-soft-gray px-5 py-[0.65rem]"
+              className="w-full rounded-md bg-[#cbcbcc]/40 px-5 py-[0.65rem]"
               name="listRequirment"
             >
               <p className="text-sm">{item}</p>
@@ -547,6 +603,11 @@ function InputList({ label, data, name, onChange }) {
             className="input-form text-sm"
             onChange={(e) => {
               setInput(e.target.value);
+            }}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                addList();
+              }
             }}
             name="listRequirment"
             // onKeyDown={(e) => {

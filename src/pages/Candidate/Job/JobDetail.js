@@ -5,6 +5,7 @@ import ModalJobApplication from 'components/Modal/ModalJobApplication';
 import { getJobVacancyDetail } from 'services/Profile/JobVacancy';
 import { useParams } from 'react-router-dom';
 import CandidateProvider from 'context/candidate-context';
+import utils from 'utils/utils';
 export default function JobDetail() {
   const [loading, setLoading] = useState(true);
   const [item, setItem] = useState([]);
@@ -25,29 +26,13 @@ export default function JobDetail() {
             <h3 className="top-3 text-2xl lg:relative">{item.title}</h3>
             <div className="flex flex-col justify-between xl:flex-row">
               <BasicJobInformation item={item}></BasicJobInformation>
-              <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">
-                <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
-                  <img className="md:w-fit" src="/job.png" alt="" />
-                </div>
-                <div className="w-[440px] text-left">
-                  <p className="mb-1 text-lg font-semibold">PT. Maju Jaya</p>
-                  <p className="text-sm">Jl. Alamat perusahaan pt jaya</p>
-                  <p className="my-1 text-sm">Berdiri sejak Mei 2012</p>
-                  <p className="text-sm leading-7">
-                    Company about Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.{' '}
-                  </p>
-                </div>
-              </div>
+              <DescriptionCompany item={item.users} />
             </div>
           </section>
           <section className="mt-10 w-full  bg-white p-8 text-left text-[#3F4254] shadow-mine">
             <div className="w-full lg:w-[600px]">
               <p className=" text-sm">
-                First, a disclaimer – the entire process of writing a blog post
-                often takes more than a couple of hours, even if you can type
-                eighty words as per minute and your writing skills are sharp.
+                {item.description}
               </p>
               <div className="mt-10">
                 <ul>
@@ -83,5 +68,39 @@ export default function JobDetail() {
         </>
       )}
     </CandidateProvider>
+  );
+}
+
+function DescriptionCompany({
+  item: { full_name, address, cityname, provincename, date_of_birth, about, url_photo_profile, slug},
+}) {
+  return (
+    <div className="top-4 mt-4 flex gap-4 lg:relative lg:mt-0 xl:justify-between">
+      <div className="h-fit rounded-md bg-[#F5F8FA] p-4 ">
+		{url_photo_profile === null && (
+			<img className="w-10" src={`/company_default.png`} alt="" />
+		)}
+		{url_photo_profile !== null && (
+			<img
+			className="w-10"
+			src={`${process.env.REACT_APP_API_URL}/${url_photo_profile}`}
+			alt=""
+			/>
+		)}
+      </div>
+      <div className="w-[440px] text-left">
+	  	<a
+			href={`/company/${slug}`}
+			className="mb-1 text-lg hover:underline font-semibold text-blue-400"
+		>
+			{full_name.toUpperCase()}
+		</a>
+        <p className="text-sm">- {`${address} ${utils.makeCapital(
+          cityname,
+        )}, ${utils.makeCapital(provincename)}`}</p>
+        <p className="my-1 text-sm">- Berdiri sejak tahun {date_of_birth.slice(0,4)}</p>
+        <p className="text-sm leading-7">- {about}</p>
+      </div>
+    </div>
   );
 }

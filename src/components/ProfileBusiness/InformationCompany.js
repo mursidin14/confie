@@ -13,16 +13,11 @@ export default function Information() {
   });
   React.useEffect(() => {
     if (Array.isArray(businessProfile.businessData)) {
+      const field = businessProfile.businessFields.map((item) => item.name);
       setData(businessProfile.businessData[0]);
     }
   }, [businessProfile]);
-
   const inputs = [
-    {
-      label: 'Jenis Industri',
-      require: true,
-      value: data?.company_type || '-',
-    },
     {
       label: 'Company Size',
       require: false,
@@ -48,11 +43,11 @@ export default function Information() {
     <BasicCard>
       <section className="text-left">
         <div className="flex items-center justify-between px-8">
-          <h3 className="text-base font-semibold ">Informasi Lengkap</h3>
+          <h3 className="text-base font-semibold ">Informasi Tambahan</h3>
           <ModalInformation
             data={data}
             action={'Edit'}
-            title={'Informasi Lengkap'}
+            title={'Informasi Tambahan'}
           ></ModalInformation>
         </div>
         <hr className=" my-2 w-full border-b-[1px] border-[#3F4254]/10" />
@@ -67,7 +62,7 @@ export default function Information() {
 }
 function DataPersonal({ label, require, value }) {
   return (
-    <div className=" items-center lg:flex my-4">
+    <div className=" my-4 items-center lg:flex">
       <div className="w-5/12">
         <label
           className={`text-xs after:content-['*'] lg:text-base ${

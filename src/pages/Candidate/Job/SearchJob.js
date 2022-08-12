@@ -3,6 +3,7 @@ import SalaryFilter from 'pages/Candidate/Job/SalaryFilter';
 
 export default function SearchJob({
   handleFilterChange,
+  handleFilterSalary,
   handleFilter,
   handleResetFilter,
   isFilter,
@@ -12,16 +13,18 @@ export default function SearchJob({
       <input
         className="w-full rounded-md bg-[#F5F8FA] p-3 placeholder:italic sm:px-5"
         type="text"
-        name="position"
+        name="title"
         placeholder="Developer..."
         onChange={handleFilterChange}
       />
       <input
         className="w-full rounded-md bg-[#F5F8FA] p-3 placeholder:italic sm:px-5"
         type="text"
+        name="location"
         placeholder="Makassar..."
+        onChange={handleFilterChange}
       />
-      <SalaryFilter></SalaryFilter>
+      <SalaryFilter handleFilterSalary={handleFilterSalary}></SalaryFilter>
       <button
         onClick={() => {
           if (isFilter) {

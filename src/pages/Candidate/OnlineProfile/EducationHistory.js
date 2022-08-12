@@ -3,7 +3,8 @@ import InformationTitle from './InformationTitle';
 import utils from 'utils/utils';
 
 export default function EducationHistory({data}) {
-    let educations = data
+    const educations = data
+    console.log(educations)
     return (
       <article>
         <InformationTitle title={'Education History'} />
@@ -13,7 +14,7 @@ export default function EducationHistory({data}) {
               <p className="text-base text-[#3F4254] sm:text-xl">
                 {education.major}
               </p>
-              <p className="my-1 text-[#3F4254]">{education.school} {utils.getMonthYear(education.start_date)}</p>
+              <p className="my-1 text-[#3F4254]">{education.school} {education.start_date}</p>
               <p>
                 {education.description}
               </p>

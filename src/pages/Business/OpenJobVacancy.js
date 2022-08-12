@@ -33,20 +33,20 @@ export default function OpenJobVacancy() {
       type: 'text',
       required: true,
     },
-    {
-      name: 'min_experience',
-      label: 'Min. Pengalaman',
-      type: 'number',
-      min: 0,
-      required: true,
-    },
-    {
-      name: 'max_experience',
-      label: 'Max. Pengalaman',
-      type: 'number',
-      min: 0,
-      required: true,
-    },
+    // {
+    //   name: 'min_experience',
+    //   label: 'Min. Pengalaman',
+    //   type: 'number',
+    //   min: 0,
+    //   required: true,
+    // },
+    // {
+    //   name: 'max_experience',
+    //   label: 'Max. Pengalaman',
+    //   type: 'number',
+    //   min: 0,
+    //   required: true,
+    // },
   ];
   const handleChange = (e) => {
     setJobVacancy({ ...jobVacancy, [e.target.name]: e.target.value });
@@ -86,6 +86,48 @@ export default function OpenJobVacancy() {
                 {...input}
               />
             ))}
+            <div className=" items-center lg:flex">
+              <div className="w-5/12">
+                <label
+                  className={`text-xs font-medium text-[#3F4254] lg:text-base `}
+                >
+                  Pengalaman Kerja
+                </label>
+              </div>
+              <div className="lg:w-7/12 ">
+                <div className="my-2 items-center justify-between gap-3 sm:flex lg:my-5 ">
+                    <input
+                      className="input-form my-2 lg:my-3 lg:py-6 placeholder:text-sm"
+                      type="number"
+                      min="0"
+                      placeholder="Min. Pengalaman"
+                      name="min_experience"
+                      value={jobVacancy.min_experience ?? ''}
+                      onChange={(e) => {
+                        setJobVacancy({
+                          ...jobVacancy,
+                          min_experience: e.target.value,
+                        });
+                      }}
+                    />
+                  <p className="text-xs">sampai</p>
+                    <input
+                      className="input-form my-2 lg:my-3 lg:py-6 placeholder:text-sm"
+                      type="number"
+                      min="0"
+                      placeholder="Max. Pengalaman"
+                      name="max_experience"
+                      value={jobVacancy.max_experience ?? ''}
+                      onChange={(e) => {
+                        setJobVacancy({
+                          ...jobVacancy,
+                          max_experience: e.target.value,
+                        });
+                      }}
+                    />
+                </div>
+              </div>
+            </div>
             {/* <div className=" items-center lg:flex">
               <div className="w-5/12">
                 <label
@@ -223,7 +265,7 @@ export default function OpenJobVacancy() {
                 <label
                   className={`text-xs font-medium text-[#3F4254] lg:text-base `}
                 >
-                  Batas Pekerjaan
+                  Batas Pendaftaran
                 </label>
               </div>
               <div className="lg:w-7/12 ">
@@ -278,7 +320,7 @@ export default function OpenJobVacancy() {
               onChange={setJobVacancy}
             />
             <InputList
-              label={'Akomodasi dan Keuantungan'}
+              label={'Akomodasi dan Keuntungan'}
               data={jobVacancy}
               name={'benefits'}
               onChange={setJobVacancy}
@@ -316,7 +358,7 @@ export default function OpenJobVacancy() {
                 onClick={() => {
                   setJobVacancy({
                     ...jobVacancy,
-                    is_published: false,
+                    is_published: 0,
                   });
                   handleSubmit();
                 }}
@@ -328,7 +370,7 @@ export default function OpenJobVacancy() {
                 onClick={() => {
                   setJobVacancy({
                     ...jobVacancy,
-                    is_published: true,
+                    is_published: 1,
                   });
                   handleSubmit();
                 }}
@@ -346,7 +388,7 @@ export default function OpenJobVacancy() {
           className="relative z-10 overflow-y-auto"
           onClose={() => {
             setModalSuccess(false);
-            window.location.reload();
+            window.location.href = '/business/job';
           }}
         >
           <Transition.Child
@@ -483,7 +525,7 @@ function InputList({ label, data, name, onChange }) {
             className="my-2 flex items-center justify-between gap-2 first:mb-2 first:mt-0 lg:my-5"
           >
             <div
-              className="w-full rounded-md bg-soft-gray px-5 py-[0.65rem]"
+              className="w-full rounded-md bg-[#cbcbcc]/40 px-5 py-[0.65rem]"
               name="listRequirment"
             >
               <p className="text-sm">{item}</p>
@@ -515,6 +557,11 @@ function InputList({ label, data, name, onChange }) {
             className="input-form text-sm"
             onChange={(e) => {
               setInput(e.target.value);
+            }}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                addList();
+              }
             }}
             name="listRequirment"
             // onKeyDown={(e) => {
