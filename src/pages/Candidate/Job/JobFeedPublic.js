@@ -22,7 +22,7 @@ export default function JobFeedPublic({ idCompany }) {
         </div>
       )}
       <section className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item, index) => (
+        {items.filter((item => item.is_publish === true)).map((item, index) => (
           <JobApplicationCard
             isPublic
             key={index}
