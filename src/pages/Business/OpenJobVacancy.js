@@ -320,7 +320,7 @@ export default function OpenJobVacancy() {
               onChange={setJobVacancy}
             />
             <InputList
-              label={'Akomodasi dan Keuantungan'}
+              label={'Akomodasi dan Keuntungan'}
               data={jobVacancy}
               name={'benefits'}
               onChange={setJobVacancy}
