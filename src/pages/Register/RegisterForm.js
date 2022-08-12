@@ -15,6 +15,7 @@ export default function Register() {
   const [error, setError] = React.useState(false)
   const [error_msg, setError_msg] = useState([]);
   const [page, setPage] = useState(1);
+  const [url, setUrl] = useState('/api/register');
   const [dataAccount, setDataAccount] = useState({
     role: 'personal',
     gender: 'L',
@@ -23,7 +24,6 @@ export default function Register() {
     fields: []
   });
   const [isOpen, setIsOpenFailed] = useState(false);
-  var url = useRef('/api/register');
 
   function closeModal() {
     setIsOpenFailed(false);
@@ -32,13 +32,13 @@ export default function Register() {
   useEffect(() => {
 	const queryString = window.location.search
 	// update url using queryString.slice(5);
-	url.current = queryString.slice(5);
-	if (url.current.split('?')[1]) {
+	let currentUrl = queryString.slice(5);
+	if (currentUrl.split('?')[1]) {
 		async function VerifyInvite() {
 		try {
 			await axios({
 			method: 'GET',
-			url: `${url.current}`,
+			url: `${currentUrl}`,
 			headers: {
 				'Content-Type': 'application/json',
 				Accept: 'application/json'
@@ -53,12 +53,14 @@ export default function Register() {
 		setDataAccount({
 			...dataAccount,
 			role: 'personal',
-			email: (decodeURIComponent(url.current).split('&')[1].split('=')[1])
+			email: (decodeURIComponent(currentUrl).split('&')[1].split('=')[1])
 		});
+		setUrl(currentUrl)
 		setLoading(false)
 		}
 		VerifyInvite()
 	}
+	console.log(url)
   }, []);
   // FUNCTION FOR REQUEST REGISTER
   async function nextPage() {
@@ -69,7 +71,8 @@ export default function Register() {
         delete dataAccount.skills;
       }
       setLoading(true);
-      const respon = await AuthService.register(url.current, dataAccount);
+	  console.log(url)
+      const respon = await AuthService.register(url, dataAccount);
       setLoading(false);
       if (respon.statusText !== 'Created') {
         let message_error = [];
