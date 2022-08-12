@@ -205,7 +205,7 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                       }}
                       className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]"
                     >
-                      Arsipkan
+                      {!archive ? 'Aktifkan' : 'Arsipkan'}
                     </button>
                   </div>
                 </div>
@@ -452,7 +452,7 @@ function CardJobVacany({ archive, detailJob, applicants }) {
                   }}
                   className="rounded-md bg-[#F5F8FA] px-4 py-2 text-[#7E8299]"
                 >
-                  Arsipkan
+                 {!archive ? 'Aktifkan' : 'Arsipkan'}
                 </button>
               </div>
             </div>
